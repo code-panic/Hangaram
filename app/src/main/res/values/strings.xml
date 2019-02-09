@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">HellgaramMobileApp</string>
+    <string name="developer_name">\n Hellgaram 개발자 \n
+                                    Tama \n</string>
+    <string name="designer_name">Hellgaram 디자이너 \n
+                                    Blume \n</string>
+    <string name="designer_admin">Collaborate with \n
+                                    유영 \n</string>
+    <string name="database_">Special Thanks To \n
+                                    박재온 \n
+                                    이영주 \n
+                                    정지영 \n
+                                    진유경 \n
+                                    한재상 \n
+                                    정민경 \n </string>
+</resources>
