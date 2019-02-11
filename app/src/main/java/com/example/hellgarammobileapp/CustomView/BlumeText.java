@@ -18,7 +18,7 @@ public class BlumeText extends View {
 
     private Paint squPaint;
 
-    private float strokeWidth = 3; //선 굵기
+    private int strokeWidth = 1; //선 굵기
 
     private int viewWidth;
     private int viewHeight;
@@ -58,7 +58,7 @@ public class BlumeText extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawRect(strokeWidth / 2, strokeWidth / 2, viewWidth - 40, viewHeight - 40, squPaint);
-        canvas.drawRect(40, 40, viewWidth - strokeWidth / 2, viewHeight - strokeWidth / 2, squPaint);
+        canvas.drawRect(strokeWidth, strokeWidth, viewWidth - 40, viewHeight - 40, squPaint);
+        canvas.drawRect(40, 40, viewWidth - strokeWidth, viewHeight - strokeWidth, squPaint);
     }
 }

@@ -3,25 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBase">
+    android:background="@color/colorWhite">
 
-    <TextView
-        android:id="@+id/lunchText"
+    <ImageView
+        android:id="@+id/mealtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="50sp"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="60dp"/>
+        android:layout_marginLeft="60dp"
+        android:src="@drawable/titlebar_bgoff"/>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/lunchText"
+        android:layout_below="@+id/mealtitle"
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
@@ -35,7 +33,10 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="hawawa"/>
+            android:text="hawawa"
+            android:textSize="20sp"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/f_nanum_myeongjo"/>
 
         <com.example.hellgarammobileapp.CustomView.BlumeText
             android:layout_width="match_parent"
