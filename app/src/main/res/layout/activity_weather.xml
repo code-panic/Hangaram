@@ -6,22 +6,12 @@
     android:background="@color/colorBase">
 
     <TextView
-        android:id="@+id/rainText"
+        android:id="@+id/pm10Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/snowText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/fineDustText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/temperatureText"
+        android:id="@+id/pm25Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

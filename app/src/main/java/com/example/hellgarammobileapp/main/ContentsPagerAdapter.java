@@ -7,13 +7,15 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.example.hellgarammobileapp.Fragment.MealFragment.MealFragment;
 import com.example.hellgarammobileapp.Fragment.TimeTableFragment.TimeTableFragment;
 import com.example.hellgarammobileapp.Fragment.TransportFragment.TransportFragment;
+import com.example.hellgarammobileapp.Fragment.WeatherFragment.WeatherFragment;
 
 public class ContentsPagerAdapter extends FragmentStatePagerAdapter {
     private MealFragment mealFragment = new MealFragment();
     private TimeTableFragment timeTableFragment = new TimeTableFragment();
     private TransportFragment transportFragment = new TransportFragment();
+    private WeatherFragment weatherFragment = new WeatherFragment();
 
-    private int pageCount = 3;
+    private int pageCount = 4;
 
     public ContentsPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -28,6 +30,8 @@ public class ContentsPagerAdapter extends FragmentStatePagerAdapter {
                 return timeTableFragment;
             case 2:
                 return transportFragment;
+            case 3:
+                return weatherFragment;
             default:
                 return null;
         }

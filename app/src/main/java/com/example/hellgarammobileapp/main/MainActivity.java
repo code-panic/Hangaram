@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("급식"));
         tabLayout.addTab(tabLayout.newTab().setText("시간표"));
         tabLayout.addTab(tabLayout.newTab().setText("버스"));
+        tabLayout.addTab(tabLayout.newTab().setText("날씨"));
 
         viewPager = findViewById(R.id.viewpager);
         contentsPagerAdapter = new ContentsPagerAdapter(getSupportFragmentManager());
