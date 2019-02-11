@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.util.Log;
 
+import com.example.hellgarammobileapp.support.Servicekey;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -15,8 +17,6 @@ import java.net.URL;
 
 public class BusArriveInfoTask extends AsyncTask<Void, Void, String> {
     public static String TransportActivityLog = "TransportActivityLog";
-
-    String SERVICE_KEY = "oMJ1n5M5PZvqvHTfSPehGbytfNmbgdwUDpD60PiYW7PWFf82YBRx25ryzUy4AXhxeJUdBqnQy5UVrVxuzhXk8g%3D%3D";
 
     boolean inarrmsg1 = false;
     boolean inrtNm = false;
@@ -36,7 +36,7 @@ public class BusArriveInfoTask extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... voids) {
         try {
             URL url = new URL("http://ws.bus.go.kr/api/rest/stationinfo/"
-                    + "getStationByUid?serviceKey=" + SERVICE_KEY
+                    + "getStationByUid?serviceKey=" + Servicekey.SERVICE_KEY
                     + "&arsId=15148");
 
             StrictMode.enableDefaults();

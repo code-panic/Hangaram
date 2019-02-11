@@ -33,12 +33,12 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="hawawa"
+            android:text="급식 정보가 없어요~"
             android:textSize="20sp"
             android:textColor="@color/colorBlack"
             android:fontFamily="@font/f_nanum_myeongjo"/>
 
-        <com.example.hellgarammobileapp.CustomView.BlumeText
+        <com.example.hellgarammobileapp.CustomView.BlumeBorder
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </RelativeLayout>
