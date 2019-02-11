@@ -65,8 +65,7 @@ public class MealTask extends AsyncTask<String, Void, JSONObject> {
                 lunchMenu = filterJsonArray(lunchJSONArray);
                 dinnerMenu = filterJsonArray(dinnerJSONArray);
 
-                mealFragment.setLunchMenu(lunchMenu);
-                mealFragment.setDinnerMenu(dinnerMenu);
+                mealFragment.setMenu(lunchMenu);
             } catch (JSONException ex) {
                 Log.e("MealTask", "Failure", ex);
             }

@@ -17,37 +17,30 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="60dp"/>
 
-    <TextView
-        android:id="@+id/lunchMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/lunchText"/>
 
-    <TextView
-        android:id="@+id/dinnerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lunchText"
+        android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/colorWhite"
-        android:textSize="50sp"
-        android:textStyle="bold"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="100dp">
 
-    <TextView
-        android:id="@+id/dinnerMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/dinnerText"/>
+        <TextView
+            android:id="@+id/menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="hawawa"/>
+
+        <com.example.hellgarammobileapp.CustomView.BlumeText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
 
 
 </RelativeLayout>

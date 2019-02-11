@@ -3,25 +3,23 @@ package com.example.hellgarammobileapp.Fragment.MealFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.hellgarammobileapp.CustomView.BlumeText;
 import com.example.hellgarammobileapp.R;
-import com.example.hellgarammobileapp.support.TimeGiver;
 
 
 public class MealFragment extends Fragment {
-    View view;
+    private String log = "MealFragment";
 
-    String Schoolcode = "B100000549"; //한가람고 학교코드
+    private String Schoolcode = "B100000549"; //한가람고 학교코드
 
-    TextView lunchText;
-    TextView dinnerText;
-
-    TextView lunchMenu;
-    TextView dinnerMenu;
+    private View view;
+    private TextView menu;
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
@@ -31,28 +29,24 @@ public class MealFragment extends Fragment {
     }
 
     public void init(Context context){
-        lunchText = view.findViewById(R.id.lunchText);
-        dinnerText = view.findViewById(R.id.dinnerText);
+        menu = view.findViewById(R.id.menu);
 
-        lunchMenu = view.findViewById(R.id.lunchMenu);
-        dinnerMenu = view.findViewById(R.id.dinnerMenu);
-
-        lunchText.setText("Lunch");
-        dinnerText.setText("Dinner");
+//        String str = "https://schoolmenukr.ml/api/high/" + Schoolcode
+//                + "?year=" + TimeGiver.getYear()
+//                + "&month=" + TimeGiver.getMonth()
+//                + "&date=" + TimeGiver.getDate();
 
         String str = "https://schoolmenukr.ml/api/high/" + Schoolcode
-                + "?year=" + TimeGiver.getYear()
-                + "&month=" + TimeGiver.getMonth()
-                + "&date=" + TimeGiver.getDate();
+                + "?year=" + "2019"
+                + "&month=" + "01"
+                + "&date=" + "24";
 
         MealTask mealTask = new MealTask(this);
         mealTask.execute(str);
     }
-    public void setLunchMenu(String str) {
-        this.lunchMenu.setText(str);
-    }
 
-    public void setDinnerMenu(String str) {
-        this.dinnerMenu.setText(str);
+    public void setMenu(String str) {
+        Log.d(log,str);
+        menu.setText(str);
     }
 }

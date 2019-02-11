@@ -15,14 +15,14 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.net.URL;
 
-public class WeatherActivity extends LinearLayout {
+public class WeatherFragment extends LinearLayout {
 
     TextView snowText;
     TextView rainText;
     TextView tempText;
     TextView fineText;
 
-    public WeatherActivity(Context context) {
+    public WeatherFragment(Context context) {
         super(context);
         init(context);
     }

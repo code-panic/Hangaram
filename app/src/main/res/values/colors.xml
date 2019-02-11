@@ -8,4 +8,5 @@
     <color name="colorGray">#aaaaaa</color>
     <color name="colorBlue">#aadddd</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorLine">#f29c99</color>
 </resources>
