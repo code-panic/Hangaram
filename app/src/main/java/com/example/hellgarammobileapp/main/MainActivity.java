@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
     private ContentsPagerAdapter contentsPagerAdapter;
     private TabLayout tabLayout;
 
-
 //    Typeface typeface = Typeface.createFromAsset(this.getResources().getAssets(), "fonts/DXRMbxB-KSCpc-EUC-H.mp3");
 
     @Override

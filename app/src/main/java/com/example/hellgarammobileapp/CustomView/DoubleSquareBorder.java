@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.hellgarammobileapp.R;
 
-public class BlumeBorder extends View {
+public class DoubleSquareBorder extends View {
 
     private Paint squPaint;
 
@@ -24,17 +24,17 @@ public class BlumeBorder extends View {
     private int viewHeight;
 
 
-    public BlumeBorder(Context context) {
+    public DoubleSquareBorder(Context context) {
         super(context);
         init(context);
     }
 
-    public BlumeBorder(Context context, AttributeSet attrs) {
+    public DoubleSquareBorder(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public BlumeBorder(Context context, AttributeSet attrs, int defStyleAttr) {
+    public DoubleSquareBorder(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }

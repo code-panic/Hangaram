@@ -3,11 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorWhite"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.example.hellgarammobileapp.CustomView.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"/>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/titlebar"
+        android:layout_above="@+id/bottomtablayout"/>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/bottomtablayout"
