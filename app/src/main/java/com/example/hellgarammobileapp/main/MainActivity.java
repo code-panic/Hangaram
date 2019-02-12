@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.hellgarammobileapp.CustomView.TitleBar;
 import com.example.hellgarammobileapp.R;
 
 
@@ -12,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private ContentsPagerAdapter contentsPagerAdapter;
+
+    private TitleBar titleBar;
     private TabLayout tabLayout;
 
 //    Typeface typeface = Typeface.createFromAsset(this.getResources().getAssets(), "fonts/DXRMbxB-KSCpc-EUC-H.mp3");
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        titleBar = findViewById(R.id.titlebar);
         tabLayout = findViewById(R.id.bottomtablayout);
 
         tabLayout.addTab(tabLayout.newTab().setText("급식"));
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(contentsPagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        viewPager.addOnPageChangeListener(titleBar);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

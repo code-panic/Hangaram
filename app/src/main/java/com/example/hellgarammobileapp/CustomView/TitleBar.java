@@ -4,12 +4,16 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.example.hellgarammobileapp.support.TimeGiver;
 
-public class TitleBar extends View {
+public class TitleBar extends View implements ViewPager.OnPageChangeListener {
+    private static String log = "TitleBar";
+
     private Paint noPaint;
     private Paint linePaint;
     private Paint textPaint;
@@ -29,6 +33,11 @@ public class TitleBar extends View {
     private int viewHeight;
 
     private char[] mealArr = {'급', '식', '정', '보'};
+    private char[] timetableArr = {'시', '간', '표'};
+    private char[] busArr = {'버', '스', '도', '착', '정', '보'};
+    private char[] weatherArr = {'오', '늘', '날', '씨'};
+
+    private char[] textarr = mealArr;
 
     public TitleBar(Context context) {
         super(context);
@@ -78,19 +87,50 @@ public class TitleBar extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawText(noText, viewWidth - noTextSize * noText.length()/2 - offsetBetweenNoAndParent, noTextSize, noPaint);  //No.01.02
+        canvas.drawText(noText, viewWidth - noTextSize * noText.length() / 2 - offsetBetweenNoAndParent, noTextSize, noPaint);  //No.01.02
         canvas.drawLine(0, noTextSize + offsetBetweenNoAndLine, viewWidth, noTextSize + offsetBetweenNoAndLine, linePaint); // ----------
 
-        int squSize = viewHeight - noTextSize -offsetBetweenNoAndLine - offsetBetweenLineAndSqu;
+        int squSize = viewHeight - noTextSize - offsetBetweenNoAndLine - offsetBetweenLineAndSqu;
 
         textPaint.setTextSize(squSize);
 
         for (int i = 0; i * squSize < viewWidth; i++) {
             canvas.drawRect(strokeWidth + squSize * i, noTextSize + offsetBetweenLineAndSqu, strokeWidth + squSize * (i + 1), viewHeight - strokeWidth, squPaint);
 
-            if (i < mealArr.length) {
-                canvas.drawText(mealArr,i,1,strokeWidth + squSize * i + gearTextX,viewHeight + strokeWidth - gearTextY,textPaint);
+            if (i < textarr.length) {
+                canvas.drawText(textarr, i, 1, strokeWidth + squSize * i + gearTextX, viewHeight + strokeWidth - gearTextY, textPaint);
             }
         }
+    }
+
+    @Override
+    public void onPageScrolled(int i, float v, int i1) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        switch (position) {
+            case 0:
+                textarr = mealArr;
+                break;
+            case 1:
+                textarr = timetableArr;
+                break;
+            case 2:
+                textarr = busArr;
+                break;
+            case 3:
+                textarr = weatherArr;
+            default:
+                break;
+        }
+        Log.d(log,textarr.length+"");
+        invalidate();
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {
+
     }
 }
