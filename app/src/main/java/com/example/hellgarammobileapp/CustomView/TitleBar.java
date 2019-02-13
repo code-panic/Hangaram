@@ -24,15 +24,17 @@ public class TitleBar extends View implements ViewPager.OnPageChangeListener {
     private Paint textPaint;
     private Paint squPaint;
 
-    private int noTextSize = 50;
+    private int noTextSize = 40;
     private String noText = "No." + TimeGiver.getMonth() + "." + TimeGiver.getDate();
-    private int offsetBetweenNoAndParent = 10; //No과 오른쪽 벽과의 거리
-    private int offsetBetweenNoAndLine = 15; //No과 Line 사이 거리
-    private int offsetBetweenLineAndSqu = 30; //Line과 Squares사이의 거리
+    private int offsetBetweenNoAndParent = 20; //No과 오른쪽 벽과의 거리
+    private int offsetBetweenNoAndLine = 10; //No과 Line 사이 거리
+    private int offsetBetweenLineAndSqu = 10; //Line과 Squares사이의 거리
     private int strokeWidth = 1; //선 굵기
 
-    private int gearTextX = 3;
-    private int gearTextY = 15;
+    private int gearTextX = 15;
+    private int gearTextY = 18;
+
+    private int gearTextSize  = 25; // (실제 사이즈) = (정사각형 변의 길이) - gearTextSizw
 
     private int viewWidth;
     private int viewHeight;
@@ -98,12 +100,12 @@ public class TitleBar extends View implements ViewPager.OnPageChangeListener {
         canvas.drawText(noText, viewWidth - noTextSize * noText.length() / 2 - offsetBetweenNoAndParent, noTextSize, noPaint);  //No.01.02
         canvas.drawLine(0, noTextSize + offsetBetweenNoAndLine, viewWidth, noTextSize + offsetBetweenNoAndLine, linePaint); // ----------
 
-        int squSize = viewHeight - noTextSize - offsetBetweenNoAndLine - offsetBetweenLineAndSqu;
+        int squSize = viewHeight - noTextSize - offsetBetweenNoAndLine - offsetBetweenLineAndSqu - strokeWidth;
 
-        textPaint.setTextSize(squSize);
+        textPaint.setTextSize(squSize - gearTextSize);
 
         for (int i = 0; i * squSize < viewWidth; i++) {
-            canvas.drawRect(strokeWidth + squSize * i, noTextSize + offsetBetweenLineAndSqu, strokeWidth + squSize * (i + 1), viewHeight - strokeWidth, squPaint);
+            canvas.drawRect(strokeWidth + (squSize + strokeWidth) * i, viewHeight - squSize, strokeWidth + (squSize + strokeWidth) * (i + 1), viewHeight - strokeWidth, squPaint);
 
             if (i < textarr.length) {
                 canvas.drawText(textarr, i, 1, strokeWidth + squSize * i + gearTextX, viewHeight + strokeWidth - gearTextY, textPaint);
