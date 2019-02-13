@@ -6,16 +6,46 @@
     android:background="@color/colorWhite">
 
 
+    <RelativeLayout
+        android:id="@+id/lunchOrdinner"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp">
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:text="점심"
+
+            android:textSize="30sp"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/f_nanum_myeongjo"/>
+
+        <com.example.hellgarammobileapp.CustomView.OverlapedSquareBorder
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/lunchOrdinner"
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginLeft="50dp">
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="50dp">
 
         <TextView
             android:id="@+id/menu"
