@@ -10,7 +10,7 @@
         android:layout_height="30dp"
         android:layout_weight="1"
         android:textColor="@color/colorBlack"
-        android:background="@color/colorBase"
+        android:background="@color/colorWhite"
         android:gravity="center"
         android:textSize="8sp"
         android:cursorVisible="false"/>

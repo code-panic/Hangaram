@@ -14,8 +14,9 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class MealTask extends AsyncTask<String, Void, JSONObject> {
+    private String log = "MealTask";
 
-    MealFragment mealFragment;
+    private MealFragment mealFragment;
 
     public MealTask(MealFragment mealFragment) {
         this.mealFragment = mealFragment;
@@ -59,13 +60,20 @@ public class MealTask extends AsyncTask<String, Void, JSONObject> {
                 JSONArray lunchJSONArray = (JSONArray) menu.get("lunch");
                 JSONArray dinnerJSONArray = (JSONArray) menu.get("dinner");
 
-                String lunchMenu = new String();
-                String dinnerMenu = new String();
+                String lunch = filterJsonArray(lunchJSONArray);
+                String dinner = filterJsonArray(dinnerJSONArray);
 
-                lunchMenu = filterJsonArray(lunchJSONArray);
-                dinnerMenu = filterJsonArray(dinnerJSONArray);
+                mealFragment.setLunch(lunch);
+                mealFragment.setDinner(dinner);
 
-                mealFragment.setMenu(lunchMenu);
+                Log.d(log,lunch);
+                Log.d(log,dinner);
+
+                if(mealFragment.getIslunchChecked()){
+                    mealFragment.setMenu(lunch);
+                }else{
+                    mealFragment.setMenu(dinner);
+                }
             } catch (JSONException ex) {
                 Log.e("MealTask", "Failure", ex);
             }

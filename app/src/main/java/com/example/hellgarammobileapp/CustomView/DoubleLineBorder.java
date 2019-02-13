@@ -7,8 +7,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class DoubleLineBorder extends View{
-    private Paint squPaint;
+public class DoubleLineBorder extends View {
+    private Paint linePaint;
 
     private int strokeWidth = 1; //선 굵기
 
@@ -17,6 +17,8 @@ public class DoubleLineBorder extends View{
 
     private int m = 5; // viewHeight를 m:n으로 내분
     private int n = 3; //
+
+    private int gap = 5; // 두 line 사이 간격
 
     public DoubleLineBorder(Context context) {
         super(context);
@@ -34,11 +36,11 @@ public class DoubleLineBorder extends View{
     }
 
     private void init(Context context) {
-        squPaint = new Paint();
-        squPaint.setAntiAlias(true);
-        squPaint.setColor(Color.RED);
-        squPaint.setStrokeWidth(strokeWidth);
-        squPaint.setStyle(Paint.Style.STROKE);
+        linePaint = new Paint();
+        linePaint.setAntiAlias(true);
+        linePaint.setColor(Color.RED);
+        linePaint.setStrokeWidth(strokeWidth);
+        linePaint.setStyle(Paint.Style.STROKE);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class DoubleLineBorder extends View{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawRect(strokeWidth, strokeWidth, viewWidth - 40, viewHeight - 40, squPaint);
-        canvas.drawRect(40, 40, viewWidth - strokeWidth, viewHeight - strokeWidth, squPaint);
+        canvas.drawLine(0, viewHeight * m / (m + n) + gap, viewWidth, viewHeight * n / (m + n) + gap, linePaint);
+        canvas.drawLine(0, viewHeight * m / (m + n) - gap, viewWidth, viewHeight * n / (m + n) - gap, linePaint);
     }
 }
