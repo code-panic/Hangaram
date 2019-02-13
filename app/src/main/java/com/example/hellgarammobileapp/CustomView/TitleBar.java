@@ -4,11 +4,16 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import com.example.hellgarammobileapp.R;
+import com.example.hellgarammobileapp.support.FontGiver;
 import com.example.hellgarammobileapp.support.TimeGiver;
 
 public class TitleBar extends View implements ViewPager.OnPageChangeListener {
@@ -26,13 +31,13 @@ public class TitleBar extends View implements ViewPager.OnPageChangeListener {
     private int offsetBetweenLineAndSqu = 30; //Line과 Squares사이의 거리
     private int strokeWidth = 1; //선 굵기
 
-    private int gearTextX = 4;
+    private int gearTextX = 3;
     private int gearTextY = 15;
 
     private int viewWidth;
     private int viewHeight;
 
-    private char[] mealArr = {'급', '식', '정', '보'};
+    private char[] mealArr = {'오','늘','급', '식'};
     private char[] timetableArr = {'시', '간', '표'};
     private char[] busArr = {'버', '스', '도', '착', '정', '보'};
     private char[] weatherArr = {'오', '늘', '날', '씨'};
@@ -55,10 +60,12 @@ public class TitleBar extends View implements ViewPager.OnPageChangeListener {
     }
 
     private void init(Context context) {
+
         noPaint = new Paint();
         noPaint.setAntiAlias(true);
         noPaint.setColor(Color.RED);
         noPaint.setTextSize(noTextSize);
+        noPaint.setTypeface(FontGiver.getNanumMyeongjo(this.getContext()));
 
         linePaint = new Paint();
         linePaint.setAntiAlias(true);
@@ -68,6 +75,7 @@ public class TitleBar extends View implements ViewPager.OnPageChangeListener {
         textPaint = new Paint();
         textPaint.setAntiAlias(true);
         textPaint.setColor(Color.BLACK);
+        textPaint.setTypeface(FontGiver.getNanumMyeongjo(this.getContext()));
 
         squPaint = new Paint();
         squPaint.setAntiAlias(true);

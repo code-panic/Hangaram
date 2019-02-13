@@ -25,7 +25,7 @@
             android:gravity="center"
             android:text="급식 정보가 없어요~"
             android:textSize="20sp"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorRed"
             android:fontFamily="@font/f_nanum_myeongjo"/>
 
         <com.example.hellgarammobileapp.CustomView.DoubleSquareBorder
