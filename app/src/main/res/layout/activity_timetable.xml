@@ -5,14 +5,84 @@
     android:background="@color/colorWhite">
 
 
-    <TableLayout
-        android:id="@+id/timeTableLayout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="100dp">
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="50dp">
 
-    </TableLayout>
+        <LinearLayout
+            android:id="@+id/weekView"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="월"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/f_nanum_myeongjo"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="화"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/f_nanum_myeongjo"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="수"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/f_nanum_myeongjo"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="목"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/f_nanum_myeongjo"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="금"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/f_nanum_myeongjo"/>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/contour"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorRed"
+            android:layout_below="@+id/weekView"/>
+
+        <TableLayout
+            android:id="@+id/timeTableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/contour"
+            android:layout_marginTop="10dp"/>
+
+
+    </RelativeLayout>
 </RelativeLayout>

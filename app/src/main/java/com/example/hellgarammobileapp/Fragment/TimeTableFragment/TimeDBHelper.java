@@ -20,7 +20,6 @@ public class TimeDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_SQL = "create table " + TABLE_NAME + "("
                 + "id integer PRIMARY KEY AUTOINCREMENT,"
-                + "period text,"
                 + "mon text,"
                 + "tue text,"
                 + "wed text,"
@@ -31,7 +30,7 @@ public class TimeDBHelper extends SQLiteOpenHelper {
         Log.d(TimeDBHelper, "create timeTable");
 
         for (int i = 0; i < 7; i++) {
-            String SQL = "insert into " + TABLE_NAME + "(period, mon, tue, wed, thu, fri) values ('' , '' , '', '', '', '');";
+            String SQL = "insert into " + TABLE_NAME + "(mon, tue, wed, thu, fri) values ('' , '', '', '', '');";
             db.execSQL(SQL);
         }
         Log.d(TimeDBHelper, "insert records");

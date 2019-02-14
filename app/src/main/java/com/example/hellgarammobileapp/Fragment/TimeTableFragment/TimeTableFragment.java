@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
@@ -11,7 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
@@ -19,124 +22,164 @@ import com.example.hellgarammobileapp.Fragment.TimeTableFragment.TimeDBHelper;
 import com.example.hellgarammobileapp.Fragment.TimeTableFragment.TimeTableItem;
 import com.example.hellgarammobileapp.R;
 
-public class TimeTableFragment extends Fragment{
-    private static final String TimeTableActivity = "TimeTableActivity";
+public class TimeTableFragment extends Fragment {
+    private static String log = "TimeTableActivity";
     private static final String TABLE_NAME = "timeTable";
 
-    View view;
+    private TimeDBHelper timeDbHelper;
+    private SQLiteDatabase db;
+    private Cursor cursor;
 
-    TimeTableItem[][] items = new TimeTableItem[7][6];
+    private View view;
+    private TableLayout timeTableLayout;
 
-    TimeDBHelper timeDbHelper;
-    SQLiteDatabase db;
+    private int rowCount = 6; //가로줄
+    private int columnCount = 5; //세로줄
 
-    Cursor cursor;
+    private TimeTableItem[][] items = new TimeTableItem[rowCount][columnCount];
+
+    private int width;
+    private int height;
+
+    private int strokeWidth = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_timetable, container, false);
-        init(view.getContext());
+        timeTableLayout = view.findViewById(R.id.timeTableLayout);
+        ViewTreeObserver viewTreeObserver = timeTableLayout.getViewTreeObserver();
+        viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    timeTableLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    width = ((int)(timeTableLayout.getMeasuredWidth() - strokeWidth * (columnCount + 1))/columnCount) * columnCount + strokeWidth *(columnCount + 1);
+                    height = (width - strokeWidth * (columnCount + 1)) / columnCount * rowCount + strokeWidth * (rowCount + 1);
+                    Log.d(log,"width: " + width);
+                    Log.d(log,"height: " + height);
+                    init(getContext());
+                }
+            }
+        });
         return view;
     }
 
     private void init(Context context) {
-        TableLayout tableLayout = view.findViewById(R.id.timeTableLayout);
+        timeTableLayout.setLayoutParams(new RelativeLayout.LayoutParams(width, height));
+        
 
-        cursor = openDataBase(context);
-        Log.d(TimeTableActivity, "func opendatabase");
+        openDataBase(context);
 
-        cursor.moveToNext();
+        contentTimeTable();
+        Log.d(log, "func contentTimeTable");
 
-        for (int i = 0; i < 7; i++) {
-            TableRow tableRow = new TableRow(context);
-            tableRow.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
-            tableLayout.addView(tableRow);
-
-            for (int j = 0; j < 6; j++) {
-                cursor.moveToPosition(i);
-
-                items[i][j] = new TimeTableItem(context);
-                items[i][j].editText.setText(cursor.getString(j+1));
-                tableRow.addView(items[i][j]);
-                Log.d(TimeTableActivity,"addview in tablerow");
-
-                if(j != 5) {
-                    View verticalLine = new View(context);
-                    verticalLine.setLayoutParams(new TableRow.LayoutParams(3, TableRow.LayoutParams.MATCH_PARENT));
-                    verticalLine.setBackgroundResource(R.drawable.timetable_line);
-                    verticalLine.setBackgroundColor(Color.BLACK);
-                    tableRow.addView(verticalLine);
-                }
-            }
-
-            if(i != 6) {
-                View horiaontalLine = new View(context);
-                horiaontalLine.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, 3));
-                horiaontalLine.setBackgroundResource(R.drawable.timetable_line);
-                horiaontalLine.setBackgroundColor(Color.BLACK);
-                tableLayout.addView(horiaontalLine);
-            }
-        }
-        cursor.close();
+        setEditTextLayoutParams();
     }
 
     private Cursor openDataBase(Context context) {
         timeDbHelper = new TimeDBHelper(context);
         db = timeDbHelper.getReadableDatabase();
-        Log.d(TimeTableActivity, "set db and dbhelper");
+        Log.d(log, "set db and dbhelper");
 
-        Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null, null);
+        cursor = db.query(TABLE_NAME, null, null, null, null, null, null, null);
         return cursor;
+    }
+
+    private void contentTimeTable() {
+        cursor.moveToNext();
+
+        for (int i = 0; i <= rowCount; i++) {
+            addHorizontalLine(timeTableLayout);
+            if (i == rowCount)
+                break;
+
+            TableRow tableRow = new TableRow(getContext());
+            tableRow.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
+            timeTableLayout.addView(tableRow);
+
+            cursor.moveToPosition(i);
+            for (int j = 0; j <= columnCount; j++) {
+                addVerticalLine(tableRow);
+                if (j == columnCount)
+                    break;
+
+                items[i][j] = new TimeTableItem(getContext());
+                items[i][j].editText.setText(cursor.getString(j + 1));
+                tableRow.addView(items[i][j]);
+            }
+        }
+        cursor.close();
+    }
+
+    private void addVerticalLine(TableRow tableRow) {
+        View verticalLine = new View(getContext());
+        verticalLine.setLayoutParams(new TableRow.LayoutParams(strokeWidth, TableRow.LayoutParams.MATCH_PARENT));
+        verticalLine.setBackgroundResource(R.drawable.timetable_line);
+        verticalLine.setBackgroundColor(Color.RED);
+        tableRow.addView(verticalLine);
+    }
+
+    private void addHorizontalLine(TableLayout tableLayout) {
+        View horiaontalLine = new View(getContext());
+        horiaontalLine.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, strokeWidth));
+        horiaontalLine.setBackgroundResource(R.drawable.timetable_line);
+        horiaontalLine.setBackgroundColor(Color.RED);
+        tableLayout.addView(horiaontalLine);
+    }
+
+    private void setEditTextLayoutParams() {
+        Log.d(log,"width of edittext: " + (width - strokeWidth * (columnCount + 1)) / columnCount);
+        Log.d(log,"height of edittext: " + (height - strokeWidth * (rowCount + 1)) / rowCount);
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 5; j++) {
+                items[i][j].editText.setLayoutParams(
+                        new LinearLayout.LayoutParams((width - strokeWidth * (columnCount + 1)) / columnCount, (height - strokeWidth * (rowCount + 1)) / rowCount));
+            }
+        }
     }
 
     public void saveTimeTableData() {
         db = timeDbHelper.getWritableDatabase();
 
-        for (int i = 0; i < 7; i++) {
-            Log.d(TimeTableActivity,"num:" + i);
+        for (int i = 0; i < 6; i++) {
+            Log.d(log, "num:" + i);
 
             CharSequence cs = new StringBuffer(items[i][0].editText.getText());
             String UPDATE_SQL = "UPDATE " + TABLE_NAME
-                    + " SET period = '" + cs.toString() + "'"
-                    + " WHERE id = " + (i + 1);
-            db.execSQL(UPDATE_SQL);
-            Log.d(TimeTableActivity, cs.toString());
-
-            cs = new StringBuffer(items[i][1].editText.getText());
-            UPDATE_SQL = "UPDATE " + TABLE_NAME
                     + " SET mon = '" + cs.toString() + "'"
                     + " WHERE id = " + (i + 1);
             db.execSQL(UPDATE_SQL);
-            Log.d(TimeTableActivity, cs.toString());
+            Log.d(log, cs.toString());
 
-            cs = new StringBuffer(items[i][2].editText.getText());
+            cs = new StringBuffer(items[i][1].editText.getText());
             UPDATE_SQL = "UPDATE " + TABLE_NAME
                     + " SET tue = '" + cs.toString() + "'"
                     + " WHERE id = " + (i + 1);
             db.execSQL(UPDATE_SQL);
-            Log.d(TimeTableActivity, cs.toString());
+            Log.d(log, cs.toString());
 
-            cs = new StringBuffer(items[i][3].editText.getText());
+            cs = new StringBuffer(items[i][2].editText.getText());
             UPDATE_SQL = "UPDATE " + TABLE_NAME
                     + " SET wed = '" + cs.toString() + "'"
                     + " WHERE id = " + (i + 1);
             db.execSQL(UPDATE_SQL);
-            Log.d(TimeTableActivity, cs.toString());
+            Log.d(log, cs.toString());
 
-            cs = new StringBuffer(items[i][4].editText.getText());
+            cs = new StringBuffer(items[i][3].editText.getText());
             UPDATE_SQL = "UPDATE " + TABLE_NAME
                     + " SET thu = '" + cs.toString() + "'"
                     + " WHERE id = " + (i + 1);
             db.execSQL(UPDATE_SQL);
-            Log.d(TimeTableActivity, cs.toString());
+            Log.d(log, cs.toString());
 
-            cs = new StringBuffer(items[i][5].editText.getText());
+            cs = new StringBuffer(items[i][4].editText.getText());
             UPDATE_SQL = "UPDATE " + TABLE_NAME
                     + " SET fri = '" + cs.toString() + "'"
                     + " WHERE id = " + (i + 1);
             db.execSQL(UPDATE_SQL);
-            Log.d(TimeTableActivity, cs.toString());
+            Log.d(log, cs.toString());
         }
-        Log.d(TimeTableActivity, "func. saveTimeTableData");
+        Log.d(log, "func. saveTimeTableData");
     }
+
 }
