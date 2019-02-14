@@ -32,6 +32,7 @@ public class TimeTableFragment extends Fragment {
 
     private View view;
     private TableLayout timeTableLayout;
+    private View contour;
 
     private int rowCount = 6; //가로줄
     private int columnCount = 5; //세로줄
@@ -47,6 +48,8 @@ public class TimeTableFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_timetable, container, false);
         timeTableLayout = view.findViewById(R.id.timeTableLayout);
+        contour = view.findViewById(R.id.contour);
+
         ViewTreeObserver viewTreeObserver = timeTableLayout.getViewTreeObserver();
         viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -65,8 +68,15 @@ public class TimeTableFragment extends Fragment {
     }
 
     private void init(Context context) {
-        timeTableLayout.setLayoutParams(new RelativeLayout.LayoutParams(width, height));
-        
+        RelativeLayout.LayoutParams contourLayoutParams = new RelativeLayout.LayoutParams(width, 1);
+        contourLayoutParams.addRule(RelativeLayout.BELOW,R.id.weekView);
+        contourLayoutParams.topMargin = 0;
+        contour.setLayoutParams(contourLayoutParams);
+
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width, height);
+        layoutParams.addRule(RelativeLayout.BELOW,R.id.contour);
+        layoutParams.topMargin = 15;
+        timeTableLayout.setLayoutParams(layoutParams);
 
         openDataBase(context);
 
