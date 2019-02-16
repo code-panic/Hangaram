@@ -10,13 +10,16 @@ import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 
 import com.example.hellgarammobileapp.Fragment.TimeTableFragment.TimeDBHelper;
 import com.example.hellgarammobileapp.Fragment.TimeTableFragment.TimeTableItem;
@@ -24,7 +27,7 @@ import com.example.hellgarammobileapp.R;
 
 public class TimeTableFragment extends Fragment {
     private static String log = "TimeTableActivity";
-    private static final String TABLE_NAME = "timeTable";
+    private final String TABLE_NAME = TimeDBHelper.TABLE_NAME;
 
     private TimeDBHelper timeDbHelper;
     private SQLiteDatabase db;
@@ -33,6 +36,7 @@ public class TimeTableFragment extends Fragment {
     private View view;
     private TableLayout timeTableLayout;
     private View contour;
+    private ImageView editButton;
 
     private int rowCount = 6; //가로줄
     private int columnCount = 5; //세로줄
@@ -44,11 +48,15 @@ public class TimeTableFragment extends Fragment {
 
     private int strokeWidth = 1;
 
+    private boolean isEditChecked = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_timetable, container, false);
+
         timeTableLayout = view.findViewById(R.id.timeTableLayout);
         contour = view.findViewById(R.id.contour);
+        editButton = view.findViewById(R.id.editButton);
 
         ViewTreeObserver viewTreeObserver = timeTableLayout.getViewTreeObserver();
         viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -56,10 +64,10 @@ public class TimeTableFragment extends Fragment {
             public void onGlobalLayout() {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     timeTableLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    width = ((int)(timeTableLayout.getMeasuredWidth() - strokeWidth * (columnCount + 1))/columnCount) * columnCount + strokeWidth *(columnCount + 1);
+                    width = ((int) (timeTableLayout.getMeasuredWidth() - strokeWidth * (columnCount + 1)) / columnCount) * columnCount + strokeWidth * (columnCount + 1);
                     height = (width - strokeWidth * (columnCount + 1)) / columnCount * rowCount + strokeWidth * (rowCount + 1);
-                    Log.d(log,"width: " + width);
-                    Log.d(log,"height: " + height);
+                    Log.d(log, "width: " + width);
+                    Log.d(log, "height: " + height);
                     init(getContext());
                 }
             }
@@ -67,16 +75,36 @@ public class TimeTableFragment extends Fragment {
         return view;
     }
 
-    private void init(Context context) {
+    private void init(final Context context) {
         RelativeLayout.LayoutParams contourLayoutParams = new RelativeLayout.LayoutParams(width, 1);
-        contourLayoutParams.addRule(RelativeLayout.BELOW,R.id.weekView);
+        contourLayoutParams.addRule(RelativeLayout.BELOW, R.id.weekView);
         contourLayoutParams.topMargin = 0;
         contour.setLayoutParams(contourLayoutParams);
 
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width, height);
-        layoutParams.addRule(RelativeLayout.BELOW,R.id.contour);
+        layoutParams.addRule(RelativeLayout.BELOW, R.id.contour);
         layoutParams.topMargin = 15;
         timeTableLayout.setLayoutParams(layoutParams);
+
+        editButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (isEditChecked) {
+                        editButton.setImageResource(R.drawable.edit_off);
+                        setEditableFalse();
+                        saveTimeTableData();
+                        Toast.makeText(context, "저장되었습니다", Toast.LENGTH_SHORT).show();
+                        isEditChecked = false;
+                    } else {
+                        editButton.setImageResource(R.drawable.edit_on);
+                        setEditableTrue();
+                        isEditChecked = true;
+                    }
+                }
+                return true;
+            }
+        });
 
         openDataBase(context);
 
@@ -138,8 +166,8 @@ public class TimeTableFragment extends Fragment {
     }
 
     private void setEditTextLayoutParams() {
-        Log.d(log,"width of edittext: " + (width - strokeWidth * (columnCount + 1)) / columnCount);
-        Log.d(log,"height of edittext: " + (height - strokeWidth * (rowCount + 1)) / rowCount);
+        Log.d(log, "width of edittext: " + (width - strokeWidth * (columnCount + 1)) / columnCount);
+        Log.d(log, "height of edittext: " + (height - strokeWidth * (rowCount + 1)) / rowCount);
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
                 items[i][j].editText.setLayoutParams(
@@ -148,7 +176,7 @@ public class TimeTableFragment extends Fragment {
         }
     }
 
-    public void saveTimeTableData() {
+    private void saveTimeTableData() {
         db = timeDbHelper.getWritableDatabase();
 
         for (int i = 0; i < 6; i++) {
@@ -192,4 +220,25 @@ public class TimeTableFragment extends Fragment {
         Log.d(log, "func. saveTimeTableData");
     }
 
+    private void setEditableTrue(){
+        for(int i = 0; i < rowCount; i++){
+            for(int j = 0; j < columnCount; j++){
+                items[i][j].editText.setFocusableInTouchMode(true);
+                items[i][j].editText.setFocusable(true);
+                items[i][j].editText.setClickable(true);
+                items[i][j].editText.setCursorVisible(true);
+            }
+        }
+    }
+
+    private void setEditableFalse(){
+        for(int i = 0; i < rowCount; i++){
+            for(int j = 0; j < columnCount; j++){
+                items[i][j].editText.setFocusableInTouchMode(false);
+                items[i][j].editText.setFocusable(false);
+                items[i][j].editText.setClickable(false);
+                items[i][j].editText.setCursorVisible(false);
+            }
+        }
+    }
 }

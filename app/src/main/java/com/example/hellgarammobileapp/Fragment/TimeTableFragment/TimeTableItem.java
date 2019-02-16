@@ -24,13 +24,6 @@ public class TimeTableItem extends LinearLayout {
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.item_timetable, this, true);
 
-//        DisplayMetrics dm = new DisplayMetrics();
-//        context.getWindowManager().getDefaultDisplay().getMetrics(dm);
-//        int width = dm.widthPixels;
-//        int height = width * mainImage.getHeight() / mainImage.getWidth(); //mainImage is the Bitmap I'm drawing
-//        addView(mainImageView,new LinearLayout.LayoutParams(
-//                width, height));
-
         editText = findViewById(R.id.edittext);
     }
 }

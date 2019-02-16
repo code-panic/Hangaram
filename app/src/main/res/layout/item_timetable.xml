@@ -11,5 +11,6 @@
     android:fontFamily="@font/f_nanum_myeongjo"
     android:focusable="false"
     android:clickable="false"
+    android:cursorVisible="false"
     android:background="@color/colorWhite"/>
 
