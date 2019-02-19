@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.hellgarammobileapp.R;
@@ -14,8 +13,10 @@ import com.example.hellgarammobileapp.R;
 public class WeatherFragment extends Fragment {
     private View view;
 
-    private TextView pm10Text;
-    private TextView pm25Text;
+    private TextView T1HText;
+    private TextView POPText;
+    private TextView pmValueText;
+    private TextView pmGradeText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -24,19 +25,48 @@ public class WeatherFragment extends Fragment {
         return view;
     }
 
-    public void init(Context context){
-        pm10Text = view.findViewById(R.id.pm10Text);
-        pm25Text = view.findViewById(R.id.pm25Text);
+    public void init(Context context) {
+        T1HText = view.findViewById(R.id.T1HText);
+        POPText = view.findViewById(R.id.POPText);
+        pmValueText = view.findViewById(R.id.pmValueText);
+        pmGradeText = view.findViewById(R.id.pmGradeText);
 
-        WeatherTask weatherTask = new WeatherTask(this);
-        weatherTask.execute();
+        AirTask airTask = new AirTask(this);
+        ForecastWeatherTask forecastWeatherTask = new ForecastWeatherTask(this);
+        CurrentWeatherTask currentWeatherTask = new CurrentWeatherTask(this);
+        airTask.execute();
+        forecastWeatherTask.execute();
+        currentWeatherTask.execute();
     }
 
-    public void setPm10Text(String str){
-        pm10Text.setText(str);
+    public void setT1HText(String T1HString){
+        T1HText.setText(T1HString + "°C");
     }
 
-    public void setPm25Text(String str){
-        pm25Text.setText(str);
+    public void setPOPText(String POPString){
+        POPText.setText(POPString + "%");
+    }
+
+    public void setPmText(String pm10String, String pm25String) {
+        pmValueText.setText("PM10 " + pm10String + "㎍/m³"  + "PM2.5 "+ pm25String + "㎍/m³");
+    }
+
+    public void setPmGradeText(String pm10Grade1h) {
+        switch (pm10Grade1h) {
+            case "1":
+                pmGradeText.setText("좋음");
+                break;
+            case "2":
+                pmGradeText.setText("보통");
+                break;
+            case "3":
+                pmGradeText.setText("나쁨");
+                break;
+            case "4":
+                pmGradeText.setText("매우 나쁨");
+                break;
+            default:
+                break;
+        }
     }
 }

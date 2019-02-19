@@ -33,8 +33,8 @@ public class LesDBAccess {
         }
     }
 
-    public Cursor getTodayQuote(){
 
+    public Cursor getTodayQuote(){
         String month = TimeGiver.getMonth();
         String date = TimeGiver.getDate();
 
