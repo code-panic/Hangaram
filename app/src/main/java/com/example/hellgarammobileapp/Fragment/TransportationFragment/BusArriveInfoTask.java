@@ -1,4 +1,4 @@
-package com.example.hellgarammobileapp.Fragment.TransportFragment;
+package com.example.hellgarammobileapp.Fragment.TransportationFragment;
 
 import android.os.AsyncTask;
 import android.os.StrictMode;
@@ -15,28 +15,34 @@ import java.net.URL;
 import java.util.ArrayList;
 
 
-public class BusArriveInfoTask extends AsyncTask<Void, Void, ArrayList<TransportItem>> {
+public class BusArriveInfoTask extends AsyncTask<String, Void, ArrayList<VehicleItem>> {
     public static String log = "BusArriveInfoTask";
 
     private boolean inarrmsg1 = false;
     private boolean inrtNm = false;
+    private boolean instNm = false;
 
     private String arrmsg1 = new String();
     private String rtNm = new String();
+    private String stNm = new String();
 
-    private ArrayList<TransportItem> transportItems = new ArrayList<TransportItem>();
-    private TransportFragment transportFragment;
+    private ArrayList<VehicleItem> vehicleItems = new ArrayList<VehicleItem>();
 
-    public BusArriveInfoTask(TransportFragment transportFragment){
-        this.transportFragment = transportFragment;
+    private StationItemView stationItemView;
+
+    private String minWord = "분";
+    private String secWord = "초";
+
+    public BusArriveInfoTask(StationItemView stationItemView){
+        this.stationItemView = stationItemView;
     }
 
     @Override
-    protected ArrayList<TransportItem> doInBackground(Void... voids) {
+    protected ArrayList<VehicleItem> doInBackground(String... arsId) {
         try {
             URL url = new URL("http://ws.bus.go.kr/api/rest/stationinfo/"
                     + "getStationByUid?serviceKey=" + Servicekey.SERVICE_KEY
-                    + "&arsId=15148");
+                    + "&arsId=" + arsId[0]);
 
             StrictMode.enableDefaults();
 
@@ -54,6 +60,8 @@ public class BusArriveInfoTask extends AsyncTask<Void, Void, ArrayList<Transport
                             inarrmsg1 = true;
                         if (parser.getName().equals("rtNm"))
                             inrtNm = true;
+                        if(parser.getName().equals("stNm"))
+                            instNm = true;
                         break;
                     case XmlPullParser.TEXT:
                         if (inarrmsg1) {
@@ -66,17 +74,21 @@ public class BusArriveInfoTask extends AsyncTask<Void, Void, ArrayList<Transport
                             inrtNm = false;
                             Log.d(log,rtNm);
                         }
+                        if(instNm){
+                            stNm = parser.getText();
+                            instNm = false;
+                        }
                         break;
                     case XmlPullParser.END_TAG:
                         if (parser.getName().equals("itemList")) {
-                            TransportItem transportItem = new TransportItem(rtNm,arrmsg1);
-                            transportItems.add(transportItem);
+                            VehicleItem vehicleItem = new VehicleItem(rtNm,filterArrmsg(arrmsg1));
+                            vehicleItems.add(vehicleItem);
                         }
                         break;
                 }
                 parserEvent = parser.next();
             }
-            return transportItems;
+            return vehicleItems;
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -86,9 +98,18 @@ public class BusArriveInfoTask extends AsyncTask<Void, Void, ArrayList<Transport
     }
 
     @Override
-    protected void onPostExecute(ArrayList<TransportItem> transportItems) {
-        super.onPostExecute(transportItems);
-        transportFragment.setBusInfo(transportItems);
-        Log.d(log,transportItems.get(1).getTransportName());
+    protected void onPostExecute(ArrayList<VehicleItem> vehicleItems) {
+        super.onPostExecute(vehicleItems);
+        stationItemView.setBusInfo(vehicleItems);
+        stationItemView.setStationNameText(stNm);
+        Log.d(log, vehicleItems.get(1).getTransportName());
+    }
+
+    private String filterArrmsg(String arrmsg1){
+        if(arrmsg1.contains("분")){
+            return arrmsg1.charAt(arrmsg1.indexOf("분") - 1) + "분";
+        }else{
+            return arrmsg1;
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.hellgarammobileapp.Fragment.TransportFragment;
+package com.example.hellgarammobileapp.Fragment.TransportationFragment;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,10 +11,10 @@ import com.example.hellgarammobileapp.R;
 
 import java.util.ArrayList;
 
-public class TransportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static String log = "TransportAdapter";
+public class VehicleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static String log = "VehicleItemAdapter";
 
-    ArrayList<TransportItem> TransportItems = new ArrayList<TransportItem>();
+    ArrayList<VehicleItem> vehicleItems = new ArrayList<VehicleItem>();
 
     public static class TransportHolder extends RecyclerView.ViewHolder{
         TextView transportNameText;
@@ -27,9 +27,9 @@ public class TransportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    public TransportAdapter(ArrayList<TransportItem> transportItems){
-        this.TransportItems = transportItems;
-        Log.d(log,"transportItem size: " + transportItems.size());
+    public VehicleItemAdapter(ArrayList<VehicleItem> vehicleItems){
+        this.vehicleItems = vehicleItems;
+        Log.d(log,"transportItem size: " + vehicleItems.size());
     }
 
     @Override
@@ -42,8 +42,8 @@ public class TransportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
        TransportHolder transportHolder = (TransportHolder) holder;
 
-       transportHolder.transportNameText.setText(TransportItems.get(position).transportName);
-       transportHolder.arrInfoText.setText(TransportItems.get(position).arrInfo);
+       transportHolder.transportNameText.setText(vehicleItems.get(position).transportName);
+       transportHolder.arrInfoText.setText(vehicleItems.get(position).arrInfo);
 
        Log.d(log,"transportItems" + position + ": " + transportHolder.transportNameText.getText());
         Log.d(log,"transportItems" + position + ": " + transportHolder.arrInfoText.getText());
@@ -51,6 +51,6 @@ public class TransportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
-        return TransportItems.size();
+        return vehicleItems.size();
     }
 }

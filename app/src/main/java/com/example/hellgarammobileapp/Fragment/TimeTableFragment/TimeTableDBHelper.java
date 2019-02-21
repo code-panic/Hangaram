@@ -5,14 +5,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class TimeDBHelper extends SQLiteOpenHelper {
+public class TimeTableDBHelper extends SQLiteOpenHelper {
     private static final String TimeDBHelper = "TimeDBHelper";
 
     private static final String DATABASE_NAME = "HellgaramDatabase.db";
     private static final int DATABASE_VERSION = 1;
     public static final String TABLE_NAME = "timetable";
 
-    public TimeDBHelper(Context context) {
+    public TimeTableDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

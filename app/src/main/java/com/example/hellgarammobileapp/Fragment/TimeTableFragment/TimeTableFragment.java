@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -21,15 +20,13 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
-import com.example.hellgarammobileapp.Fragment.TimeTableFragment.TimeDBHelper;
-import com.example.hellgarammobileapp.Fragment.TimeTableFragment.TimeTableItem;
 import com.example.hellgarammobileapp.R;
 
 public class TimeTableFragment extends Fragment {
     private static String log = "TimeTableActivity";
-    private final String TABLE_NAME = TimeDBHelper.TABLE_NAME;
+    private final String TABLE_NAME = TimeTableDBHelper.TABLE_NAME;
 
-    private TimeDBHelper timeDbHelper;
+    private TimeTableDBHelper timeTableDbHelper;
     private SQLiteDatabase db;
     private Cursor cursor;
 
@@ -115,8 +112,8 @@ public class TimeTableFragment extends Fragment {
     }
 
     private Cursor openDataBase(Context context) {
-        timeDbHelper = new TimeDBHelper(context);
-        db = timeDbHelper.getReadableDatabase();
+        timeTableDbHelper = new TimeTableDBHelper(context);
+        db = timeTableDbHelper.getReadableDatabase();
         Log.d(log, "set db and dbhelper");
 
         cursor = db.query(TABLE_NAME, null, null, null, null, null, null, null);
@@ -175,7 +172,7 @@ public class TimeTableFragment extends Fragment {
     }
 
     private void saveTimeTableData() {
-        db = timeDbHelper.getWritableDatabase();
+        db = timeTableDbHelper.getWritableDatabase();
 
         for (int i = 0; i < 6; i++) {
             Log.d(log, "num:" + i);

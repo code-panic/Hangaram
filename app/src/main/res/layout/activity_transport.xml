@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="50dp"
+    android:paddingTop="15dp"
     android:paddingLeft="50dp"
     android:paddingRight="50dp"
+    android:paddingBottom="15dp"
     android:background="@color/colorWhite">
 
-    <com.example.hellgarammobileapp.Fragment.TransportFragment.StationItemView
-        android:id="@+id/stationContainer"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/stationRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </ScrollView>

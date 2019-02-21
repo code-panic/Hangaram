@@ -1,10 +1,10 @@
-package com.example.hellgarammobileapp.Fragment.TransportFragment;
+package com.example.hellgarammobileapp.Fragment.TransportationFragment;
 
-public class TransportItem {
+public class VehicleItem {
     String transportName;
     String arrInfo;
 
-    public TransportItem(String transportName, String arrInfo) {
+    public VehicleItem(String transportName, String arrInfo) {
         this.transportName = transportName;
         this.arrInfo = arrInfo;
     }
