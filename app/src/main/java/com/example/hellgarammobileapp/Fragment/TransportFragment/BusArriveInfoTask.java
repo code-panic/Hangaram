@@ -11,29 +11,28 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 
-public class BusArriveInfoTask extends AsyncTask<Void, Void, String> {
-    public static String TransportActivityLog = "TransportActivityLog";
+public class BusArriveInfoTask extends AsyncTask<Void, Void, ArrayList<TransportItem>> {
+    public static String log = "BusArriveInfoTask";
 
-    boolean inarrmsg1 = false;
-    boolean inrtNm = false;
+    private boolean inarrmsg1 = false;
+    private boolean inrtNm = false;
 
-    String arrmsg1 = null;
-    String rtNm = null;
+    private String arrmsg1 = new String();
+    private String rtNm = new String();
 
-    String sumString = "";
-
-    TransportFragment transportFragment;
+    private ArrayList<TransportItem> transportItems = new ArrayList<TransportItem>();
+    private TransportFragment transportFragment;
 
     public BusArriveInfoTask(TransportFragment transportFragment){
         this.transportFragment = transportFragment;
     }
 
     @Override
-    protected String doInBackground(Void... voids) {
+    protected ArrayList<TransportItem> doInBackground(Void... voids) {
         try {
             URL url = new URL("http://ws.bus.go.kr/api/rest/stationinfo/"
                     + "getStationByUid?serviceKey=" + Servicekey.SERVICE_KEY
@@ -59,26 +58,25 @@ public class BusArriveInfoTask extends AsyncTask<Void, Void, String> {
                     case XmlPullParser.TEXT:
                         if (inarrmsg1) {
                             arrmsg1 = parser.getText();
-                            Log.d(TransportActivityLog, arrmsg1);
                             inarrmsg1 = false;
+                            Log.d(log,arrmsg1);
                         }
                         if (inrtNm) {
                             rtNm = parser.getText();
-                            Log.d(TransportActivityLog, rtNm);
                             inrtNm = false;
+                            Log.d(log,rtNm);
                         }
                         break;
                     case XmlPullParser.END_TAG:
                         if (parser.getName().equals("itemList")) {
-                            sumString = sumString.concat(arrmsg1 + "\t" + rtNm + "\n");
-                            Log.d(TransportActivityLog, sumString);
+                            TransportItem transportItem = new TransportItem(rtNm,arrmsg1);
+                            transportItems.add(transportItem);
                         }
                         break;
                 }
                 parserEvent = parser.next();
             }
-
-            return sumString;
+            return transportItems;
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -88,9 +86,9 @@ public class BusArriveInfoTask extends AsyncTask<Void, Void, String> {
     }
 
     @Override
-    protected void onPostExecute(String sumString) {
-        super.onPostExecute(sumString);
-        transportFragment.setBusInfo(sumString);
+    protected void onPostExecute(ArrayList<TransportItem> transportItems) {
+        super.onPostExecute(transportItems);
+        transportFragment.setBusInfo(transportItems);
+        Log.d(log,transportItems.get(1).getTransportName());
     }
-
 }

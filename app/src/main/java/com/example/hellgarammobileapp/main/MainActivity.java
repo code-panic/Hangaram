@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
         titleBar = findViewById(R.id.titlebar);
         tabLayout = findViewById(R.id.bottomtablayout);
 
-        tabLayout.addTab(tabLayout.newTab().setText("급식"));
-        tabLayout.addTab(tabLayout.newTab().setText("시간표"));
-        tabLayout.addTab(tabLayout.newTab().setText("버스"));
-        tabLayout.addTab(tabLayout.newTab().setText("날씨"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.tabicon_meal));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.tabicon_timetable));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.tabicon_bus));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.tabicon_weather));
 
         viewPager = findViewById(R.id.viewpager);
         contentsPagerAdapter = new ContentsPagerAdapter(getSupportFragmentManager());

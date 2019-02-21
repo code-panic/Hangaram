@@ -152,7 +152,6 @@ public class TimeTableFragment extends Fragment {
     private void addVerticalLine(TableRow tableRow) {
         View verticalLine = new View(getContext());
         verticalLine.setLayoutParams(new TableRow.LayoutParams(strokeWidth, TableRow.LayoutParams.MATCH_PARENT));
-        verticalLine.setBackgroundResource(R.drawable.timetable_line);
         verticalLine.setBackgroundColor(Color.RED);
         tableRow.addView(verticalLine);
     }
@@ -160,7 +159,6 @@ public class TimeTableFragment extends Fragment {
     private void addHorizontalLine(TableLayout tableLayout) {
         View horiaontalLine = new View(getContext());
         horiaontalLine.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, strokeWidth));
-        horiaontalLine.setBackgroundResource(R.drawable.timetable_line);
         horiaontalLine.setBackgroundColor(Color.RED);
         tableLayout.addView(horiaontalLine);
     }
