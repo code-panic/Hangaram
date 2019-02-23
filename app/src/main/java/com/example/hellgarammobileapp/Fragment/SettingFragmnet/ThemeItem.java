@@ -1,0 +1,29 @@
+package com.example.hellgarammobileapp.Fragment.SettingFragmnet;
+
+public class ThemeItem {
+    String themeName;
+    int themeImageresId;
+
+    public ThemeItem(){}
+
+    public ThemeItem(String themeName, int themeImageId) {
+        this.themeName = themeName;
+        this.themeImageresId = themeImageId;
+    }
+
+    public String getThemeName() {
+        return themeName;
+    }
+
+    public void setThemeName(String themeName) {
+        this.themeName = themeName;
+    }
+
+    public int getThemeImageId() {
+        return themeImageresId;
+    }
+
+    public void setThemeImageId(int themeImageId) {
+        this.themeImageresId = themeImageId;
+    }
+}

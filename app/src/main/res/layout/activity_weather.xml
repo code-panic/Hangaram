@@ -30,7 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/T1HText"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="50dp"
         android:textColor="@color/colorBlack"
         android:fontFamily="@font/f_nanum_myeongjo"/>

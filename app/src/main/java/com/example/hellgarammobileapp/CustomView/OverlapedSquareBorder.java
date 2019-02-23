@@ -35,13 +35,11 @@ public class OverlapedSquareBorder extends View {
 
     private void init(Context context) {
         squPaint = new Paint();
-        squPaint.setAntiAlias(true);
         squPaint.setColor(Color.RED);
         squPaint.setStrokeWidth(strokeWidth);
         squPaint.setStyle(Paint.Style.STROKE);
 
         overlapedPaint = new Paint();
-        overlapedPaint.setAntiAlias(true);
         overlapedPaint.setColor(Color.RED);
         overlapedPaint.setStrokeWidth(strokeWidth);
         overlapedPaint.setStyle(Paint.Style.STROKE);

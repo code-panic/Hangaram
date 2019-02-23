@@ -41,7 +41,6 @@ public class DoubleSquareBorder extends View {
 
     private void init(Context context) {
         squPaint = new Paint();
-        squPaint.setAntiAlias(true);
         squPaint.setColor(Color.RED);
         squPaint.setStrokeWidth(strokeWidth);
         squPaint.setStyle(Paint.Style.STROKE);

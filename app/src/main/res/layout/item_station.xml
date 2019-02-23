@@ -25,7 +25,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
+        android:paddingTop="2dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="2dp"
+        android:textSize="15sp"
         android:textColor="@color/colorBlack"
         android:fontFamily="@font/f_nanum_myeongjo"
         android:background="@drawable/border_red"/>

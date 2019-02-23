@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.tabicon_timetable));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.tabicon_bus));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.tabicon_weather));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.tabicon_setting));
 
         viewPager = findViewById(R.id.viewpager);
         contentsPagerAdapter = new ContentsPagerAdapter(getSupportFragmentManager());
