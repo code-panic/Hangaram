@@ -4,76 +4,84 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite">
 
-    <ImageView
-        android:id="@+id/rainIcon"
-        android:src="@drawable/weather_samplesun"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="50dp"
-        android:layout_marginLeft="50dp"/>
+        android:layout_marginLeft="50dp">
 
-    <TextView
-        android:id="@+id/T1HText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rainIcon"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="50dp"
-        android:textColor="@color/colorBlack"
-        android:textSize="20sp"
-        android:fontFamily="@font/f_nanum_myeongjo"/>
+        <ImageView
+            android:id="@+id/rainIcon"
+            android:src="@drawable/weather_samplesun"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"/>
 
-    <TextView
-        android:id="@+id/POPText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/T1HText"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="50dp"
-        android:textColor="@color/colorBlack"
-        android:textSize="20sp"
-        android:fontFamily="@font/f_nanum_myeongjo"/>
+        <TextView
+            android:id="@+id/T1HText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/f_nanum_myeongjo"/>
+
+        <TextView
+            android:id="@+id/POPText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/f_nanum_myeongjo"/>
+
+    </LinearLayout>
 
     <com.hangaram.hellgaram.CustomView.DoubleLineBorder
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <ImageView
-        android:id="@+id/pmIcon"
-        android:src="@drawable/finedust_normal"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentRight="true"
-        android:layout_above="@+id/pmValueText"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="10dp"/>
 
-    <TextView
-        android:id="@+id/pmValueText"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/pmGradeText"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="10dp"
-        android:textColor="@color/colorBlack"
-        android:textSize="20sp"
-        android:fontFamily="@font/f_nanum_myeongjo"/>
-
-    <TextView
-        android:id="@+id/pmGradeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="50dp"
-        android:layout_marginBottom="50dp"
-        android:textColor="@color/colorBlack"
-        android:textSize="20sp"
-        android:fontFamily="@font/f_nanum_myeongjo"/>
+        android:layout_marginBottom="50dp">
+
+        <ImageView
+            android:id="@+id/pmIcon"
+            android:src="@drawable/finedust_normal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/pmValueText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/f_nanum_myeongjo"/>
+
+        <TextView
+            android:id="@+id/pmGradeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/f_nanum_myeongjo"/>
+    </LinearLayout>
 
 </RelativeLayout>

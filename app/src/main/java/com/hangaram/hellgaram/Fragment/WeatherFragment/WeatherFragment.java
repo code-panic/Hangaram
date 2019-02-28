@@ -40,30 +40,30 @@ public class WeatherFragment extends Fragment {
     }
 
     public void setT1HText(String T1HString) {
-        T1HText.setText("현재 온도: " +T1HString + "°C");
+        T1HText.setText(T1HString + "°C");
     }
 
     public void setPOPText(String POPString) {
-        POPText.setText("강수확률: "+POPString + "%");
+        POPText.setText("오후 강수확률 " + POPString + "%");
     }
 
     public void setPmText(String pm10String, String pm25String) {
-        pmValueText.setText("미세먼지 농도: " + pm10String + "㎍/m³");
+        pmValueText.setText("PM10 " + pm10String + "㎍/m³" + "PM25 " + pm25String + "㎍/m³");
     }
 
     public void setPmGradeText(String pm10Grade1h) {
         switch (pm10Grade1h) {
             case "1":
-                pmGradeText.setText("미세먼지 등급: 좋음");
+                pmGradeText.setText("좋음");
                 break;
             case "2":
-                pmGradeText.setText("미세먼지 등금: 보통");
+                pmGradeText.setText("보통");
                 break;
             case "3":
-                pmGradeText.setText("미세먼지 등급: 나쁨");
+                pmGradeText.setText("나쁨");
                 break;
             case "4":
-                pmGradeText.setText("미세먼지 등급: 매우 나쁨");
+                pmGradeText.setText("매우 나쁨");
                 break;
             default:
                 break;

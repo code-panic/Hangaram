@@ -102,7 +102,7 @@ public class BusArriveInfoTask extends AsyncTask<String, Void, ArrayList<Vehicle
         super.onPostExecute(vehicleItems);
         stationItemView.setBusInfo(vehicleItems);
         stationItemView.setStationNameText(stNm);
-        Log.d(log, vehicleItems.get(1).getTransportName());
+//        Log.d(log, vehicleItems.get(1).getTransportName());
     }
 
     private String filterArrmsg(String arrmsg1){
