@@ -13,7 +13,6 @@ import com.hangaram.hellgaram.R;
 import java.util.ArrayList;
 
 public class StationItemView extends LinearLayout {
-    public BusArriveInfoTask busArriveInfoTask = new BusArriveInfoTask(this);
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter transportAdapter;
@@ -54,5 +53,10 @@ public class StationItemView extends LinearLayout {
 
     public void setStationNameText(String stationName){
         stationNameText.setText(stationName);
+    }
+
+    public void executeBusArriveInfo(String arsId){
+        BusArriveInfoTask busArriveInfoTask = new BusArriveInfoTask(this);
+        busArriveInfoTask.execute(arsId);
     }
 }

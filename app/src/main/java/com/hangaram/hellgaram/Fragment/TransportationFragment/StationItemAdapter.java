@@ -27,7 +27,7 @@ public class StationItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         StationItemAdapter.StationHolder stationHolder = (StationItemAdapter.StationHolder) holder;
         Log.d(log,arsIdItems[position]);
-        stationHolder.stationItemView.busArriveInfoTask.execute(arsIdItems[position]);
+        stationHolder.stationItemView.executeBusArriveInfo(arsIdItems[position]);
     }
 
     @Override
