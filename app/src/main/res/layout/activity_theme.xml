@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="30dp"
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp"
+    android:paddingBottom="30dp">
+
+    <TextView
+        android:id="@+id/themeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/colorBlack"
+        android:text="테마"
+        android:textSize="50dp"
+        android:gravity="center"
+        android:fontFamily="@font/f_nanum_myeongjo"/>
+
+    <RelativeLayout
+        android:id="@+id/themeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/themeText">
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/border_red"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/themeRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </ScrollView>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/buttonToCredit"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/themeContainer"
+        android:background="@drawable/edit_on"
+        android:layout_marginTop="20dp"/>
+</RelativeLayout>

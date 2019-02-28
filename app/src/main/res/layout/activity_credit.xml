@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBase">
+    android:background="@color/colorWhite">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,26 +14,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             android:textSize="30sp"
-            tools:text="@string/developer_name" />
+            android:text="유후~~"
+            android:fontFamily="@font/f_nanum_myeongjo"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30sp"
             android:gravity="center"
-            android:textColor="@color/colorWhite"
-            tools:text="@string/designer_name" />
+            android:textColor="@color/colorBlack"
+            tools:text="@string/designer_name"
+            android:fontFamily="@font/f_nanum_myeongjo"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30sp"
             android:gravity="center"
-            android:textColor="@color/colorWhite"
-            tools:text="@string/database_" />
+            android:textColor="@color/colorBlack"
+            tools:text="@string/database_"
+            android:fontFamily="@font/f_nanum_myeongjo"/>
 
     </LinearLayout>
-
-</ScrollView>
+</RelativeLayout>

@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="15dp"
-    android:paddingLeft="50dp"
-    android:paddingRight="50dp"
-    android:paddingBottom="15dp"
     android:background="@color/colorWhite">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/stationRecyclerView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</ScrollView>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="30dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/stationRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/bud_refresh_icon"
+        android:src="@drawable/bus_refresh_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="40dp"/>
+</RelativeLayout>
