@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="급식정보가 없어요~"
+            android:text="404 not found"
             android:textSize="20sp"
             android:textColor="@color/colorBlack"
             android:fontFamily="@font/f_nanum_myeongjo"/>

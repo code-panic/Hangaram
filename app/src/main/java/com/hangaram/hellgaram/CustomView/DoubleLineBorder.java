@@ -37,6 +37,7 @@ public class DoubleLineBorder extends View {
 
     private void init(Context context) {
         linePaint = new Paint();
+        linePaint.setAntiAlias(true);
         linePaint.setColor(Color.RED);
         linePaint.setStrokeWidth(strokeWidth);
         linePaint.setStyle(Paint.Style.STROKE);

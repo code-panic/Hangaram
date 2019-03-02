@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
         titleBar = findViewById(R.id.titlebar);
         tabLayout = findViewById(R.id.bottomtablayout);
 
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.tabicon_meal));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.tabicon_timetable));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.tabicon_bus));

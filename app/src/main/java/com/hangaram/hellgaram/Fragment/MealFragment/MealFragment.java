@@ -25,8 +25,8 @@ public class MealFragment extends Fragment {
     private TextView menu;
     private RelativeLayout mealToggle;
 
-    private String lunch = "급식 정보가 없어요~";
-    private String dinner = "급식 정보가 없어요~";
+    private String lunch = "404 not found";
+    private String dinner = "404 not found";
 
     private Boolean islunchChecked = true;
 
@@ -44,11 +44,6 @@ public class MealFragment extends Fragment {
         menu = view.findViewById(R.id.menu);
         mealToggle = view.findViewById(R.id.mealToggle);
         changedMealText = view.findViewById(R.id.chandedMealText);
-
-//        String str = "https://schoolmenukr.ml/api/high/" + Schoolcode
-//                + "?year=" + TimeGiver.getYear()
-//                + "&month=" + TimeGiver.getMonth()
-//                + "&date=" + TimeGiver.getDate();
 
         url = "https://schoolmenukr.ml/api/high/" + Schoolcode
                 + "?year=" + TimeGiver.getYear()

@@ -62,6 +62,7 @@ public class TitleBar extends View implements ViewPager.OnPageChangeListener {
     private void init(Context context) {
 
         noPaint = new Paint();
+        noPaint.setAntiAlias(true);
         noPaint.setColor(Color.RED);
         noPaint.setTextSize(noTextSize);
         noPaint.setTypeface(FontGiver.getNanumMyeongjo(this.getContext()));
@@ -71,6 +72,7 @@ public class TitleBar extends View implements ViewPager.OnPageChangeListener {
         linePaint.setStrokeWidth(strokeWidth);
 
         textPaint = new Paint();
+        textPaint.setAntiAlias(true);
         textPaint.setColor(Color.BLACK);
         textPaint.setTypeface(FontGiver.getNanumMyeongjo(this.getContext()));
 
