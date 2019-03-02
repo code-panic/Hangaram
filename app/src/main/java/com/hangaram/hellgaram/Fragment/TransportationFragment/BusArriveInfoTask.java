@@ -100,9 +100,10 @@ public class BusArriveInfoTask extends AsyncTask<String, Void, ArrayList<Vehicle
     @Override
     protected void onPostExecute(ArrayList<VehicleItem> vehicleItems) {
         super.onPostExecute(vehicleItems);
-        stationItemView.setBusInfo(vehicleItems);
-        stationItemView.setStationNameText(stNm);
-//        Log.d(log, vehicleItems.get(1).getTransportName());
+        if(vehicleItems != null) {
+            stationItemView.setBusInfo(vehicleItems);
+            stationItemView.setStationNameText(stNm);
+        }
     }
 
     private String filterArrmsg(String arrmsg1){

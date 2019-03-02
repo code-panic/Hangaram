@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class VehicleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static String log = "VehicleItemAdapter";
 
-    ArrayList<VehicleItem> vehicleItems = new ArrayList<VehicleItem>();
+    ArrayList<VehicleItem> vehicleItems;
 
     public static class TransportHolder extends RecyclerView.ViewHolder{
         TextView transportNameText;
@@ -29,7 +29,6 @@ public class VehicleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public VehicleItemAdapter(ArrayList<VehicleItem> vehicleItems){
         this.vehicleItems = vehicleItems;
-        Log.d(log,"transportItem size: " + vehicleItems.size());
     }
 
     @Override
@@ -46,7 +45,7 @@ public class VehicleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
        transportHolder.arrInfoText.setText(vehicleItems.get(position).arrInfo);
 
        Log.d(log,"transportItems" + position + ": " + transportHolder.transportNameText.getText());
-        Log.d(log,"transportItems" + position + ": " + transportHolder.arrInfoText.getText());
+       Log.d(log,"transportItems" + position + ": " + transportHolder.arrInfoText.getText());
     }
 
     @Override

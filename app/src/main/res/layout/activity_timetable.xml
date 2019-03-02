@@ -1,90 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="40dp"
-    android:paddingLeft="50dp"
-    android:paddingRight="50dp"
-    android:background="@color/colorWhite">
-
-    <LinearLayout
-        android:id="@+id/weekView"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/f_nanum_myeongjo"
-            android:gravity="center"
-            android:text="월"
-            android:textColor="@color/colorBlack" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/f_nanum_myeongjo"
-            android:gravity="center"
-            android:text="화"
-            android:textColor="@color/colorBlack" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/f_nanum_myeongjo"
-            android:gravity="center"
-            android:text="수"
-            android:textColor="@color/colorBlack" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/f_nanum_myeongjo"
-            android:gravity="center"
-            android:text="목"
-            android:textColor="@color/colorBlack" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/f_nanum_myeongjo"
-            android:gravity="center"
-            android:text="금"
-            android:textColor="@color/colorBlack" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/contour"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_below="@+id/weekView"
-        android:background="@color/colorRed" />
-
-    <TableLayout
-        android:id="@+id/timeTableLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/contour"
-        android:layout_marginTop="10dp" />
+    android:overScrollMode="never">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/timeTableLayout">
+        android:background="@color/colorWhite"
+        android:paddingTop="30dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <LinearLayout
+            android:id="@+id/weekView"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/f_nanum_myeongjo"
+                android:gravity="center"
+                android:text="월"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/f_nanum_myeongjo"
+                android:gravity="center"
+                android:text="화"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/f_nanum_myeongjo"
+                android:gravity="center"
+                android:text="수"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/f_nanum_myeongjo"
+                android:gravity="center"
+                android:text="목"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/f_nanum_myeongjo"
+                android:gravity="center"
+                android:text="금"
+                android:textColor="@color/colorBlack" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/contour"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/weekView"
+            android:background="@color/colorRed" />
+
+        <TableLayout
+            android:id="@+id/timeTableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/contour"
+            android:layout_marginTop="10dp" />
 
         <ImageView
             android:id="@+id/editButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="20dp"
+            android:layout_below="@+id/timeTableLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
             android:src="@drawable/edit_off" />
     </RelativeLayout>
-</RelativeLayout>
+</ScrollView>
 

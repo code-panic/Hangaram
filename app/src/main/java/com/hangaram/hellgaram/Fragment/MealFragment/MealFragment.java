@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hangaram.hellgaram.R;
+import com.hangaram.hellgaram.support.TimeGiver;
 
 
 public class MealFragment extends Fragment {
@@ -50,9 +51,9 @@ public class MealFragment extends Fragment {
 //                + "&date=" + TimeGiver.getDate();
 
         url = "https://schoolmenukr.ml/api/high/" + Schoolcode
-                + "?year=" + "2019"
-                + "&month=" + "01"
-                + "&date=" + "24";
+                + "?year=" + TimeGiver.getYear()
+                + "&month=" + TimeGiver.getMonth()
+                + "&date=" + TimeGiver.getDate();
 
         mealTask = new MealTask(this);
         mealTask.execute(url);

@@ -44,11 +44,11 @@ public class WeatherFragment extends Fragment {
     }
 
     public void setPOPText(String POPString) {
-        POPText.setText("오후 강수확률 " + POPString + "%");
+        POPText.setText("강수확률 " + POPString + "%");
     }
 
     public void setPmText(String pm10String, String pm25String) {
-        pmValueText.setText("PM10 " + pm10String + "㎍/m³" + "PM25 " + pm25String + "㎍/m³");
+        pmValueText.setText("PM10 " + pm10String + "㎍/㎥" + "\t" + "\t" +"PM25 " + pm25String + "㎍/㎥");
     }
 
     public void setPmGradeText(String pm10Grade1h) {

@@ -7,15 +7,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20dp"
+        android:overScrollMode="never">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/stationRecyclerView"
