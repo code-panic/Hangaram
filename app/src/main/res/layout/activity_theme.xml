@@ -4,12 +4,40 @@
     android:layout_height="match_parent"
     android:overScrollMode="never">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingLeft="50dp"
         android:paddingRight="50dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="50dp">
+
+            <TextView
+                android:id="@+id/quote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/f_nanum_myeongjo"/>
+
+            <TextView
+                android:id="@+id/hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/f_nanum_myeongjo"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/themeText"
