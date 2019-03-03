@@ -19,10 +19,20 @@
             android:layout_marginTop="50dp">
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="&quot;"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/f_nanum_myeongjo"/>
+
+
+            <TextView
                 android:id="@+id/quote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:textSize="15sp"
                 android:gravity="center"
                 android:textColor="@color/colorBlack"
                 android:fontFamily="@font/f_nanum_myeongjo"/>
@@ -32,7 +42,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:textSize="12sp"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/f_nanum_myeongjo"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="&quot;"
+                android:textSize="15sp"
                 android:gravity="center"
                 android:textColor="@color/colorBlack"
                 android:fontFamily="@font/f_nanum_myeongjo"/>
