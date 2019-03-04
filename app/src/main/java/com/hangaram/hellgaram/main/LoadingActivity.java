@@ -13,6 +13,7 @@ public class LoadingActivity extends Activity {
         setContentView(R.layout.activity_loading);
         startLoading();
     }
+
     private void startLoading() {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
