@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "45368101297",
+    "firebase_url": "https://hellgaram-8ce9c.firebaseio.com",
+    "project_id": "hellgaram-8ce9c",
+    "storage_bucket": "hellgaram-8ce9c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45368101297:android:a712a3677470a718",
+        "android_client_info": {
+          "package_name": "com.hangaram.hellgaram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45368101297-dctf2mlqea4lnf7kh8nunsl3oe1dcin2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-E6pBTBeXFiwV8rdikWNq1AiEU0v_Vm0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
