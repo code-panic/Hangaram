@@ -4,10 +4,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.content.Intent;
 
 import com.hangaram.hellgaram.CustomView.TitleBar;
 import com.hangaram.hellgaram.R;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = new Intent(this, LoadingActivity.class);
+        startActivity(intent);
 
         titleBar = findViewById(R.id.titlebar);
         tabLayout = findViewById(R.id.bottomtablayout);
