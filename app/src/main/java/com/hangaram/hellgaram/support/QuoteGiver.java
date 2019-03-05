@@ -22,7 +22,7 @@ public class QuoteGiver {
     private static final String DATABASE_NAME = "UpdateDatabase.db";
     private static final String TABLE_NAME = "quotes";
 
-    private static int VERSION_CODE = 3;
+    private static int VERSION_CODE = 4;
     SharedPreferences sharedPreferences;
 
     private static String log = "QuoteGiver";
