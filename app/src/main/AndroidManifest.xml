@@ -17,18 +17,20 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".main.LoadingActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-
-        <activity
-            android:name=".main.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:name=".main.SplashActivity"
+            android:theme="@style/SplashTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".main.MainActivity"
+
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
         </activity>
 
         <activity
