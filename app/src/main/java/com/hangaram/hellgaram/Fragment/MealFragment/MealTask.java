@@ -36,7 +36,6 @@ public class MealTask extends AsyncTask<String, Void, JSONObject> {
             while ((line = bufferedReader.readLine()) != null) {
                 stringBuffer.append(line);
             }
-
             return new JSONObject(stringBuffer.toString());
         } catch (Exception ex) {
             return null;
@@ -63,15 +62,21 @@ public class MealTask extends AsyncTask<String, Void, JSONObject> {
                 String lunch = filterJsonArray(lunchJSONArray);
                 String dinner = filterJsonArray(dinnerJSONArray);
 
+                if (lunch.isEmpty())
+                    lunch = "급식 없음";
+
+                if (dinner.isEmpty())
+                    dinner = "급식 없음";
+
+                Log.d(log, "lunch: " + lunch);
+                Log.d(log, "dinner: " + dinner);
+
                 mealFragment.setLunch(lunch);
                 mealFragment.setDinner(dinner);
 
-                Log.d(log,lunch);
-                Log.d(log,dinner);
-
-                if(mealFragment.getIslunchChecked()){
+                if (mealFragment.getIslunchChecked()) {
                     mealFragment.setMenu(lunch);
-                }else{
+                } else {
                     mealFragment.setMenu(dinner);
                 }
             } catch (JSONException ex) {
@@ -99,10 +104,12 @@ public class MealTask extends AsyncTask<String, Void, JSONObject> {
             }
             sumString = sumString + subString;
 
-            if(i != arr.length() - 1){
+            if (i != arr.length() - 1) {
                 sumString = sumString + "\n";
             }
         }
+        Log.d(log, sumString);
+
         return sumString;
     }
 }

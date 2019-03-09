@@ -22,13 +22,10 @@ public class QuoteGiver {
     private static final String DATABASE_NAME = "UpdateDatabase.db";
     private static final String TABLE_NAME = "quotes";
 
-    private static int VERSION_CODE = 4;
+    private static int VERSION_CODE = 5;
     SharedPreferences sharedPreferences;
 
     private static String log = "QuoteGiver";
-
-    private String quote;
-    private String hint;
 
     public QuoteGiver(Context context, SettingFragment settingFragment) {
         sharedPreferences = context.getSharedPreferences("setting", MODE_PRIVATE);

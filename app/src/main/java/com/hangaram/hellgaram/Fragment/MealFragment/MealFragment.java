@@ -41,6 +41,7 @@ public class MealFragment extends Fragment {
     }
 
     public void init(Context context){
+        Log.d(log,"dkdkfjdkf");
         menu = view.findViewById(R.id.menu);
         mealToggle = view.findViewById(R.id.mealToggle);
         changedMealText = view.findViewById(R.id.chandedMealText);
