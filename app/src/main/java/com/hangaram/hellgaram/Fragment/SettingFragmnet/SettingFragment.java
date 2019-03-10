@@ -2,15 +2,10 @@ package com.hangaram.hellgaram.Fragment.SettingFragmnet;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.AssetManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,26 +16,24 @@ import android.widget.TextView;
 import com.hangaram.hellgaram.R;
 import com.hangaram.hellgaram.main.CreditActivity;
 import com.hangaram.hellgaram.support.QuoteGiver;
-import com.hangaram.hellgaram.support.TimeGiver;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class SettingFragment extends Fragment {
     private static String log = "SettingFragment";
 
     private View view;
-    private RecyclerView recyclerView;
+
+    private RecyclerView themeRecyclerView;
     private RecyclerView.Adapter themeItemAdapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private ImageView buttonTocredit;
+    private RecyclerView.LayoutManager themeLayoutManager;
+
+    private RecyclerView linkRecyclerView;
+    private RecyclerView.Adapter linkItemAdapter;
+    private RecyclerView.LayoutManager linkLayoutManager;
 
     public TextView quote;
     public TextView hint;
+
+    private ImageView buttonTocredit;
 
     public static final int REQUEST_CODE_CREDIT = 101;
 
@@ -54,17 +47,34 @@ public class SettingFragment extends Fragment {
     }
 
     private void init(Context context) {
-        recyclerView = view.findViewById(R.id.themeRecyclerView);
         buttonTocredit = view.findViewById(R.id.buttonToCredit);
 
-        layoutManager = new LinearLayoutManager(context);
-        recyclerView.setLayoutManager(layoutManager);
+        //themeRecyclerView 세팅
+        themeRecyclerView = view.findViewById(R.id.themeRecyclerView);
+
+        themeLayoutManager = new LinearLayoutManager(context);
+        themeRecyclerView.setLayoutManager(themeLayoutManager);
 
         themeItemAdapter = new ThemeItemAdapter();
         ((ThemeItemAdapter) themeItemAdapter).add(new ThemeItem("기본", R.drawable.white_bg));
 
-        recyclerView.setAdapter(themeItemAdapter);
+        themeRecyclerView.setAdapter(themeItemAdapter);
 
+        //linkRecyclerView 세팅
+        linkRecyclerView = view.findViewById(R.id.linkRecyclerView);
+
+        linkLayoutManager = new LinearLayoutManager(context);
+        linkRecyclerView.setLayoutManager(linkLayoutManager);
+
+
+        linkItemAdapter = new LinkItemAdapter();
+        ((LinkItemAdapter) linkItemAdapter).add(new LinkItem("한가람 홈페이지", "http://www.hangaram.hs.kr",R.drawable.white_bg));
+        ((LinkItemAdapter) linkItemAdapter).add(new LinkItem("한가람 리로스쿨", "https://hangaram.riroschool.kr",R.drawable.white_bg));
+        ((LinkItemAdapter) linkItemAdapter).add(new LinkItem("한가람 나무위키", "https://namu.wiki/w/한가람고등학교",R.drawable.white_bg));
+
+        linkRecyclerView.setAdapter(linkItemAdapter);
+
+        //개발자 화면 버튼 세팅
         buttonTocredit.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -81,5 +91,4 @@ public class SettingFragment extends Fragment {
 
         quoteGiver = new QuoteGiver(context,this);
     }
-
 }

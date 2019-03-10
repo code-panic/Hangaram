@@ -40,7 +40,7 @@ public class WeatherFragment extends Fragment {
     }
 
     public void setT1HText(String T1HString) {
-        T1HText.setText(T1HString + "°C");
+        T1HText.setText(T1HString + "도");
     }
 
     public void setPOPText(String POPString) {
@@ -48,7 +48,7 @@ public class WeatherFragment extends Fragment {
     }
 
     public void setPmText(String pm10String, String pm25String) {
-        pmValueText.setText("PM10 " + pm10String + "㎍/㎥" + "\t" + "\t" +"PM25 " + pm25String + "㎍/㎥");
+        pmValueText.setText(pm10String + "㎍/㎥");
     }
 
     public void setPmGradeText(String pm10Grade1h) {

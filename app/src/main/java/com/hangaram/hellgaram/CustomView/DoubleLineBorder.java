@@ -15,8 +15,8 @@ public class DoubleLineBorder extends View {
     private int viewWidth;
     private int viewHeight;
 
-    private int m = 8; // viewHeight를 m:n으로 내분
-    private int n = 2; //
+    private int m = 1; // viewHeight를 m:n으로 내분
+    private int n = 1; //
 
     private int gap = 5; // 두 line 사이 간격
 
@@ -37,9 +37,7 @@ public class DoubleLineBorder extends View {
 
     private void init(Context context) {
         linePaint = new Paint();
-        linePaint.setAntiAlias(true);
         linePaint.setColor(Color.RED);
-        linePaint.setStrokeWidth(strokeWidth);
         linePaint.setStyle(Paint.Style.STROKE);
     }
 

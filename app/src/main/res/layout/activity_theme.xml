@@ -53,6 +53,39 @@
 
         </LinearLayout>
 
+
+        <TextView
+            android:id="@+id/linkText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/f_nanum_myeongjo"
+            android:gravity="center"
+            android:text="바로가기"
+            android:textColor="@color/colorBlack"
+            android:textSize="30sp" />
+
+        <RelativeLayout
+            android:id="@+id/linkContainer"
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:layout_below="@+id/themeText"
+            android:layout_marginTop="10dp">
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/border_red" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/linkRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+
         <TextView
             android:id="@+id/themeText"
             android:layout_width="match_parent"

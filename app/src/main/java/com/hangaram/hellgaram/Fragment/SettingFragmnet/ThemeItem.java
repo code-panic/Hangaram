@@ -1,8 +1,8 @@
 package com.hangaram.hellgaram.Fragment.SettingFragmnet;
 
 public class ThemeItem {
-    String themeName;
-    int themeImageresId;
+    private String themeName;
+    private int themeImageresId;
 
     public ThemeItem(){}
 

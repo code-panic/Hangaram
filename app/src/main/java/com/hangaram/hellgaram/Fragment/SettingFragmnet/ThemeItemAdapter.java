@@ -41,8 +41,8 @@ public class ThemeItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ThemeItemAdapter.ThemeHolder themeHolder = (ThemeItemAdapter.ThemeHolder) holder;
 
-        themeHolder.themeNameTextView.setText(themeItems.get(position).themeName);
-        themeHolder.themeImageView.setImageResource(themeItems.get(position).themeImageresId);
+        themeHolder.themeNameTextView.setText(themeItems.get(position).getThemeName());
+        themeHolder.themeImageView.setImageResource(themeItems.get(position).getThemeImageId());
     }
 
     @Override
