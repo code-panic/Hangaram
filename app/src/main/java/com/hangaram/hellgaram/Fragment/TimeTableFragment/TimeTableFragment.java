@@ -112,6 +112,18 @@ public class TimeTableFragment extends Fragment {
         setEditTextLayoutParams();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (isEditChecked) {
+            editButton.setImageResource(R.drawable.edit_off);
+            setEditableFalse();
+            saveTimeTableData();
+            Toast.makeText(view.getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
+            isEditChecked = false;
+        }
+    }
+
     private Cursor openDataBase(Context context) {
         timeTableDbHelper = new TimeTableDBHelper(context);
         db = timeTableDbHelper.getReadableDatabase();
