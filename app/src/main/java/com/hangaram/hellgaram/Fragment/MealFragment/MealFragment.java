@@ -17,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,13 +34,16 @@ public class MealFragment extends Fragment {
     private TextView menuTextView;
     private TextView changedMealText;
     private RelativeLayout mealToggle;
+    private ImageView leftButton;
+    private ImageView rightButton;
 
+    private int gap = 0;
     private String menuString;
 
     private DataBaseHelper dataBaseHelper;
     private SQLiteDatabase sqLiteDatabase;
 
-    private Boolean islunchChecked = true;
+    private Boolean islunchChecked;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +56,8 @@ public class MealFragment extends Fragment {
         menuTextView = view.findViewById(R.id.menu);
         mealToggle = view.findViewById(R.id.mealToggle);
         changedMealText = view.findViewById(R.id.chandedMealText);
+        leftButton = view.findViewById(R.id.button_meal_left);
+        rightButton = view.findViewById(R.id.button_meal_right);
 
         openDataBase(context);
 
@@ -86,12 +93,37 @@ public class MealFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    islunchChecked = !islunchChecked;
                     if (islunchChecked) {
-                        showLunch();
-                    } else {
                         showDinner();
+                    } else {
+                        showLunch();
                     }
+                }
+                return true;
+            }
+        });
+
+        rightButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (checkMealIs(gap + 1))
+                        gap++;
+                    showLunch();
+                    setButtonState();
+                }
+                return true;
+            }
+        });
+
+        leftButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if(checkMealIs(gap - 1))
+                        gap--;
+                    showLunch();
+                    setButtonState();
                 }
                 return true;
             }
@@ -131,14 +163,42 @@ public class MealFragment extends Fragment {
 //
 //        // 위에서 설정한 인텐트필터+리시버정보로 리시버 등록
 //        context.registerReceiver(receiver, intentFilter);
-
     }
 
-    public void showLunch() {
+    private boolean checkMealIs(int gap) {
+        String[] args = {TimeGiver.getYear(gap), TimeGiver.getMonth(gap), TimeGiver.getDate(gap)};
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT lunch From " + DataBaseHelper.TABLE_NAME_meal + " WHERE year = ? AND month = ? AND date = ?", args);
+
+        if (cursor.getCount() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void setButtonState() {
+        if (checkMealIs(gap + 1)) {
+            rightButton.setImageResource(R.drawable.edit_on);
+            rightButton.setClickable(true);
+        } else {
+            rightButton.setImageResource(R.drawable.edit_off);
+            rightButton.setClickable(false);
+        }
+
+        if (checkMealIs(gap - 1)) {
+            leftButton.setImageResource(R.drawable.edit_on);
+            leftButton.setClickable(true);
+        } else {
+            leftButton.setImageResource(R.drawable.edit_off);
+            leftButton.setClickable(false);
+        }
+    }
+
+    private void showLunch() {
         //점심메뉴 보여주기
         changedMealText.setText("점심");
 
-        String[] args = {TimeGiver.getYear(0), TimeGiver.getMonth(0), TimeGiver.getDate(0)};
+        String[] args = {TimeGiver.getYear(gap), TimeGiver.getMonth(gap), TimeGiver.getDate(gap)};
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT lunch From " + DataBaseHelper.TABLE_NAME_meal + " WHERE year = ? AND month = ? AND date = ?", args);
 
         if (cursor.getCount() == 1) {
@@ -148,6 +208,8 @@ public class MealFragment extends Fragment {
         }
 
         cursor.close();
+
+        islunchChecked = true;
         menuTextView.setText(menuString);
     }
 
@@ -155,7 +217,7 @@ public class MealFragment extends Fragment {
         //저녁 메뉴 보여주기
         changedMealText.setText("저녁");
 
-        String[] args = {TimeGiver.getYear(0), TimeGiver.getMonth(0), TimeGiver.getDate(0)};
+        String[] args = {TimeGiver.getYear(gap), TimeGiver.getMonth(gap), TimeGiver.getDate(gap)};
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT dinner From " + DataBaseHelper.TABLE_NAME_meal + " WHERE year = ? AND month = ? AND date = ?", args);
 
         if (cursor.getCount() == 1) {
@@ -165,6 +227,8 @@ public class MealFragment extends Fragment {
         }
 
         cursor.close();
+
+        islunchChecked = false;
         menuTextView.setText(menuString);
     }
 
