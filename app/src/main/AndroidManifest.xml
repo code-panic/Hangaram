@@ -18,18 +18,28 @@
 
         <activity
             android:name=".main.SplashActivity"
-            android:theme="@style/SplashTheme" >
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
             android:name=".main.MainActivity"
-
             android:theme="@style/Theme.AppCompat.NoActionBar">
+
+            <intent-filter android:label="htc">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="xn--o39ai969f8llbkv0lb.xn--3e0b707e"
+                    android:pathPrefix="/hgrapp"
+                    android:scheme="https" />
+            </intent-filter>
 
         </activity>
 
@@ -37,7 +47,6 @@
             android:name=".main.CreditActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-
         </activity>
 
         <service android:name=".support.FireBaseMessagingService">
@@ -51,6 +60,18 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-</application>
 
-    </manifest>
+        <receiver
+            android:name=".Fragment.MealFragment.MealReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter >
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.DATE_CHANGED" />
+                <action android:name="android.intent.action.SCREEN_ON"/>
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>

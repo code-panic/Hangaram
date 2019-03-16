@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="404 not found"
+            android:text="최근 4일동안 인터넷 접속이 없습니다."
             android:textSize="20sp"
             android:textColor="@color/colorBlack"
             android:fontFamily="@font/f_nanum_myeongjo"/>

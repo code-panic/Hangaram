@@ -9,6 +9,10 @@ import android.content.Intent;
 import com.hangaram.hellgaram.CustomView.TitleBar;
 import com.hangaram.hellgaram.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
@@ -16,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TitleBar titleBar;
     private TabLayout tabLayout;
+
+    private TimeTableGeneratorItem[][] items = new TimeTableGeneratorItem[5][6];
 
 //    Typeface typeface = Typeface.createFromAsset(this.getResources().getAssets(), "fonts/DXRMbxB-KSCpc-EUC-H.mp3");
 
@@ -55,11 +61,23 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-    }
 
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        timeTableFragement.saveTimeTableData();
-//    }
+//        if (getIntent().getData().getScheme().equals("htc")) {
+//            try {
+//                JSONArray timetable = new JSONArray(getIntent().getData().getQueryParameter("data"));
+//
+//                for (int i = 0; i < 5; i++) {
+//                    for (int j = 0; j < 6; j++) {
+//                        JSONObject jsonObject = timetable.getJSONArray(i).getJSONObject(j);
+//                        items[i][j].setSubjectWithClassIdentifier(jsonObject.get("subjectWithClassIdentifier").toString());
+//                        items[i][j].setTeacher(jsonObject.get("teacher").toString());
+//                        items[i][j].setRoom(jsonObject.get("room").toString());
+//                    }
+//                }
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+    }
 }

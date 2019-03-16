@@ -22,12 +22,14 @@ import android.widget.Toast;
 
 import com.hangaram.hellgaram.R;
 import com.hangaram.hellgaram.support.ConvertUnit;
+import com.hangaram.hellgaram.support.DataBaseHelper;
 
 public class TimeTableFragment extends Fragment {
-    private static String log = "TimeTableActivity";
-    private final String TABLE_NAME = TimeTableDBHelper.TABLE_NAME;
+    private static final String Tag = "TimeTableActivity";
 
-    private TimeTableDBHelper timeTableDbHelper;
+    private final String TABLE_NAME = "timetable";
+
+    private DataBaseHelper dataBaseHelper;
     private SQLiteDatabase db;
     private Cursor cursor;
 
@@ -64,8 +66,8 @@ public class TimeTableFragment extends Fragment {
                     timeTableLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     width = ((int) (timeTableLayout.getMeasuredWidth() - strokeWidth * (columnCount + 1)) / columnCount) * columnCount + strokeWidth * (columnCount + 1);
                     height = (width - strokeWidth * (columnCount + 1)) / columnCount * rowCount + strokeWidth * (rowCount + 1);
-                    Log.d(log, "width: " + width);
-                    Log.d(log, "height: " + height);
+                    Log.d(Tag, "width: " + width);
+                    Log.d(Tag, "height: " + height);
                     init(getContext());
                 }
             }
@@ -107,7 +109,7 @@ public class TimeTableFragment extends Fragment {
         openDataBase(context);
 
         contentTimeTable();
-        Log.d(log, "func contentTimeTable");
+        Log.d(Tag, "func contentTimeTable");
 
         setEditTextLayoutParams();
     }
@@ -115,6 +117,8 @@ public class TimeTableFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+
+        //자동저장기능
         if (isEditChecked) {
             editButton.setImageResource(R.drawable.edit_off);
             setEditableFalse();
@@ -125,15 +129,17 @@ public class TimeTableFragment extends Fragment {
     }
 
     private Cursor openDataBase(Context context) {
-        timeTableDbHelper = new TimeTableDBHelper(context);
-        db = timeTableDbHelper.getReadableDatabase();
-        Log.d(log, "set db and dbhelper");
+        //데이터 베이스 준비
+        dataBaseHelper = new DataBaseHelper(context);
+        db = dataBaseHelper.getReadableDatabase();
+        Log.d(Tag, "set db and dbhelper");
 
         cursor = db.query(TABLE_NAME, null, null, null, null, null, null, null);
         return cursor;
     }
 
     private void contentTimeTable() {
+        //EditText 배치하기
         cursor.moveToNext();
 
         for (int i = 0; i <= rowCount; i++) {
@@ -160,6 +166,7 @@ public class TimeTableFragment extends Fragment {
     }
 
     private void addVerticalLine(TableRow tableRow) {
+        //가로줄 추가
         View verticalLine = new View(getContext());
         verticalLine.setLayoutParams(new TableRow.LayoutParams(strokeWidth, TableRow.LayoutParams.MATCH_PARENT));
         verticalLine.setBackgroundColor(Color.RED);
@@ -167,6 +174,7 @@ public class TimeTableFragment extends Fragment {
     }
 
     private void addHorizontalLine(TableLayout tableLayout) {
+        //세로줄 추가
         View horiaontalLine = new View(getContext());
         horiaontalLine.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, strokeWidth));
         horiaontalLine.setBackgroundColor(Color.RED);
@@ -174,8 +182,9 @@ public class TimeTableFragment extends Fragment {
     }
 
     private void setEditTextLayoutParams() {
-        Log.d(log, "width of edittext: " + (width - strokeWidth * (columnCount + 1)) / columnCount);
-        Log.d(log, "height of edittext: " + (height - strokeWidth * (rowCount + 1)) / rowCount);
+        //EditText 크기 계산
+        Log.d(Tag, "width of edittext: " + (width - strokeWidth * (columnCount + 1)) / columnCount);
+        Log.d(Tag, "height of edittext: " + (height - strokeWidth * (rowCount + 1)) / rowCount);
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
                 items[i][j].editText.setLayoutParams(
@@ -185,50 +194,52 @@ public class TimeTableFragment extends Fragment {
     }
 
     private void saveTimeTableData() {
-        db = timeTableDbHelper.getWritableDatabase();
+        //데이터 저장
+        db = dataBaseHelper.getWritableDatabase();
 
         for (int i = 0; i < 6; i++) {
-            Log.d(log, "num:" + i);
+            Log.d(Tag, "num:" + i);
 
             CharSequence cs = new StringBuffer(items[i][0].editText.getText());
             String UPDATE_SQL = "UPDATE " + TABLE_NAME
                     + " SET mon = '" + cs.toString() + "'"
                     + " WHERE id = " + (i + 1);
             db.execSQL(UPDATE_SQL);
-            Log.d(log, cs.toString());
+            Log.d(Tag, cs.toString());
 
             cs = new StringBuffer(items[i][1].editText.getText());
             UPDATE_SQL = "UPDATE " + TABLE_NAME
                     + " SET tue = '" + cs.toString() + "'"
                     + " WHERE id = " + (i + 1);
             db.execSQL(UPDATE_SQL);
-            Log.d(log, cs.toString());
+            Log.d(Tag, cs.toString());
 
             cs = new StringBuffer(items[i][2].editText.getText());
             UPDATE_SQL = "UPDATE " + TABLE_NAME
                     + " SET wed = '" + cs.toString() + "'"
                     + " WHERE id = " + (i + 1);
             db.execSQL(UPDATE_SQL);
-            Log.d(log, cs.toString());
+            Log.d(Tag, cs.toString());
 
             cs = new StringBuffer(items[i][3].editText.getText());
             UPDATE_SQL = "UPDATE " + TABLE_NAME
                     + " SET thu = '" + cs.toString() + "'"
                     + " WHERE id = " + (i + 1);
             db.execSQL(UPDATE_SQL);
-            Log.d(log, cs.toString());
+            Log.d(Tag, cs.toString());
 
             cs = new StringBuffer(items[i][4].editText.getText());
             UPDATE_SQL = "UPDATE " + TABLE_NAME
                     + " SET fri = '" + cs.toString() + "'"
                     + " WHERE id = " + (i + 1);
             db.execSQL(UPDATE_SQL);
-            Log.d(log, cs.toString());
+            Log.d(Tag, cs.toString());
         }
-        Log.d(log, "func. saveTimeTableData");
+        Log.d(Tag, "func. saveTimeTableData");
     }
 
     private void setEditableTrue(){
+        //수정 가능하게 만들기
         for(int i = 0; i < rowCount; i++){
             for(int j = 0; j < columnCount; j++){
                 items[i][j].editText.setFocusableInTouchMode(true);
@@ -240,6 +251,7 @@ public class TimeTableFragment extends Fragment {
     }
 
     private void setEditableFalse(){
+        //수정 불가능하게 만들기
         for(int i = 0; i < rowCount; i++){
             for(int j = 0; j < columnCount; j++){
                 items[i][j].editText.setFocusableInTouchMode(false);

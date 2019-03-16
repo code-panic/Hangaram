@@ -1,7 +1,13 @@
 package com.hangaram.hellgaram.Fragment.MealFragment;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.hangaram.hellgaram.support.DataBaseHelper;
+import com.hangaram.hellgaram.support.TimeGiver;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,29 +19,50 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class MealTask extends AsyncTask<String, Void, JSONObject> {
-    private String log = "MealTask";
+public class MealTask extends AsyncTask<Void, Void, JSONObject> {
+    private static final String Tag = "MealTask";
+    private static final String Schoolcode = "B100000549"; //한가람고 학교코드
 
-    private MealFragment mealFragment;
+    private String urlText;
 
-    public MealTask(MealFragment mealFragment) {
-        this.mealFragment = mealFragment;
+    private DataBaseHelper dataBaseHelper;
+    private SQLiteDatabase sqLiteDatabase;
+
+    private int gap;
+    private Context context;
+
+    public MealTask(int gap, Context context) {
+        this.gap = gap;
+        this.context = context;
+
+        Log.d(Tag, "TimeGiver.getYear: " + TimeGiver.getYear(gap));
+        Log.d(Tag, "TimeGiver.getMonth: " + TimeGiver.getMonth(gap));
+        Log.d(Tag, "TimeGiver.getDate: " + TimeGiver.getDate(gap));
+
+        urlText = "https://schoolmenukr.ml/api/high/" + Schoolcode
+                + "?year=" + TimeGiver.getYear(gap)
+                + "&month=" + TimeGiver.getMonth(gap)
+                + "&date=" + TimeGiver.getDate(gap);
     }
 
+
     @Override
-    protected JSONObject doInBackground(String... str) {
-        URLConnection urlConn;
+    protected JSONObject doInBackground(Void... voids) {
         BufferedReader bufferedReader = null;
+
+        //급식 api에 연결시도
         try {
-            URL url = new URL(str[0]);
-            urlConn = url.openConnection();
-            bufferedReader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+            URL url = new URL(urlText);
+            URLConnection urlConnectionn = url.openConnection();
+            bufferedReader = new BufferedReader(new InputStreamReader(urlConnectionn.getInputStream()));
 
             StringBuffer stringBuffer = new StringBuffer();
             String line;
+
             while ((line = bufferedReader.readLine()) != null) {
                 stringBuffer.append(line);
             }
+
             return new JSONObject(stringBuffer.toString());
         } catch (Exception ex) {
             return null;
@@ -54,6 +81,7 @@ public class MealTask extends AsyncTask<String, Void, JSONObject> {
     protected void onPostExecute(JSONObject response) {
         if (response != null) {
             try {
+                //Json 파일내용 정리
                 JSONObject menu = (JSONObject) response.get("menu");
 
                 JSONArray lunchJSONArray = (JSONArray) menu.get("lunch");
@@ -62,54 +90,61 @@ public class MealTask extends AsyncTask<String, Void, JSONObject> {
                 String lunch = filterJsonArray(lunchJSONArray);
                 String dinner = filterJsonArray(dinnerJSONArray);
 
+                //급식이 없을 때 문자열 설정
                 if (lunch.isEmpty())
                     lunch = "급식 없음";
 
                 if (dinner.isEmpty())
                     dinner = "급식 없음";
 
-                Log.d(log, "lunch: " + lunch);
-                Log.d(log, "dinner: " + dinner);
+                Log.d(Tag, "lunch: " + lunch);
+                Log.d(Tag, "dinner: " + dinner);
 
-                mealFragment.setLunch(lunch);
-                mealFragment.setDinner(dinner);
+                openDataBase(context);
 
-                if (mealFragment.getIslunchChecked()) {
-                    mealFragment.setMenu(lunch);
-                } else {
-                    mealFragment.setMenu(dinner);
-                }
+                String SQL = "insert into " + DataBaseHelper.TABLE_NAME_meal + " values (" +
+                        TimeGiver.getYear(gap) + ", " +
+                        TimeGiver.getMonth(gap) + ", " +
+                        TimeGiver.getDate(gap) + ", " +
+                        "'" + lunch + "', " +
+                        "'" + dinner + "')";
+
+                sqLiteDatabase.execSQL(SQL);
             } catch (JSONException ex) {
                 Log.e("MealTask", "Failure", ex);
             }
         }
     }
 
-    public String filterJsonArray(JSONArray arr) throws JSONException { //알레르기 정보를 걸러주느 함수
-        String subString = new String();
+    public String filterJsonArray(JSONArray arr) {
+        //정보 추출하기
         String sumString = new String();
 
-        for (int i = 0; i < arr.length(); i++) {
-            Log.e("MealTask", "Success: " + arr.getString(i));
+        try {
+            for (int i = 0; i < arr.length(); i++) {
+                for (int j = 0; j < arr.getString(i).length(); j++) {
+                    char charAt = arr.getString(i).charAt(j);
 
-            for (int j = 0; j < arr.getString(i).length(); j++) {
-                char charAt = arr.getString(i).charAt(j);
-                if ((charAt >= '1' && charAt <= '9') || charAt == '.' || charAt == '*') {
-                    subString = arr.getString(i).substring(0, j);
-                    break;
-                } else if (j == arr.getString(i).length() - 1) {
-                    subString = arr.getString(i).substring(0, j + 1);
-                    break;
+                    if ((charAt >= '1' && charAt <= '9') || charAt == '.' || charAt == '*') {
+                        sumString += arr.getString(i).substring(0, j) + "\n";
+                        break;
+                    } else if (j == arr.getString(i).length() - 1) {
+                        sumString += arr.getString(i);
+                        break;
+                    }
+
                 }
             }
-            sumString = sumString + subString;
-
-            if (i != arr.length() - 1) {
-                sumString = sumString + "\n";
-            }
+        } catch (JSONException e) {
+            Log.d(Tag, e.getMessage());
         }
-        Log.d(log, sumString);
 
         return sumString;
+    }
+
+    private void openDataBase(Context context) {
+        //데이터 베이스 준비
+        dataBaseHelper = new DataBaseHelper(context);
+        sqLiteDatabase = dataBaseHelper.getReadableDatabase();
     }
 }

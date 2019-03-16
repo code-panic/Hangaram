@@ -117,7 +117,7 @@ public class CurrentWeatherTask extends AsyncTask<Void, Void, Void>{
         }
 
         if(base_time == null){
-            base_date = TimeGiver.getYesterdayYear() + TimeGiver.getYesterdayMonth() + TimeGiver.getYesterdayDate();
+            base_date = TimeGiver.getYear(-1) + TimeGiver.getMonth(-1) + TimeGiver.getDate(-1);
             return "2300";
         }
 

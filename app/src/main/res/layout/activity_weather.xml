@@ -50,7 +50,7 @@
                 android:fontFamily="@font/f_nanum_myeongjo"
                 android:gravity="center"
                 android:textColor="@color/colorBlack"
-                android:textSize="15sp" />
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/POPText"
@@ -97,7 +97,7 @@
                 android:fontFamily="@font/f_nanum_myeongjo"
                 android:gravity="center"
                 android:textColor="@color/colorBlack"
-                android:textSize="15sp" />
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/pmValueText"

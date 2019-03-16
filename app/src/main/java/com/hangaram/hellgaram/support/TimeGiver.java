@@ -10,14 +10,10 @@ import java.util.GregorianCalendar;
 public class TimeGiver {
     static long mNow;
     static Date mDate;
-    static Calendar calendar;
 
     static {
         mNow = System.currentTimeMillis();
         mDate = new Date(mNow);
-
-        calendar = new GregorianCalendar();
-        calendar.add(Calendar.DATE, -1);
     }
 
     public static String getYear() {
@@ -51,15 +47,30 @@ public class TimeGiver {
     }
 
 
-    public static String getYesterdayYear(){
+    public static String getYear(int num){
+        Calendar calendar;
+
+        calendar = new GregorianCalendar();
+        calendar.add(Calendar.DATE, num);
+
         return calendar.get(Calendar.YEAR) + "";
     }
 
-    public static String getYesterdayMonth(){
-        return calendar.get(Calendar.MONTH + 1) + "";
+    public static String getMonth(int num){
+        Calendar calendar;
+
+        calendar = new GregorianCalendar();
+        calendar.add(Calendar.DATE, num);
+
+        return calendar.get(Calendar.MONTH) + 1 + "";
     }
 
-    public static String getYesterdayDate(){
+    public static String getDate(int num){
+        Calendar calendar;
+
+        calendar = new GregorianCalendar();
+        calendar.add(Calendar.DATE, num);
+
         return calendar.get(Calendar.DAY_OF_MONTH) + "";
     }
 

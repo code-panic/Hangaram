@@ -71,6 +71,7 @@ public class SettingFragment extends Fragment {
         ((LinkItemAdapter) linkItemAdapter).add(new LinkItem("한가람 홈페이지", "http://www.hangaram.hs.kr",R.drawable.white_bg));
         ((LinkItemAdapter) linkItemAdapter).add(new LinkItem("한가람 리로스쿨", "https://hangaram.riroschool.kr",R.drawable.white_bg));
         ((LinkItemAdapter) linkItemAdapter).add(new LinkItem("한가람 나무위키", "https://namu.wiki/w/한가람고등학교",R.drawable.white_bg));
+        ((LinkItemAdapter) linkItemAdapter).add(new LinkItem("한가람 시간표", "https://xn--o39ai969f8llbkv0lb.xn--3e0b707e/",R.drawable.white_bg));
 
         linkRecyclerView.setAdapter(linkItemAdapter);
 
