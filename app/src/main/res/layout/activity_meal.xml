@@ -74,12 +74,23 @@
             android:layout_toLeftOf="@id/button_meal_right">
 
             <TextView
-                android:id="@+id/menu"
+                android:id="@+id/mealDayTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="30dp"
+                android:textSize="26dp"
                 android:gravity="center"
-                android:text="최근 4일동안 인터넷 접속이 없습니다."
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/f_nanum_myeongjo"/>
+
+            <TextView
+                android:id="@+id/menu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/mealDayTextView"
+                android:gravity="center"
+                android:text="@string/android_name"
                 android:textSize="20sp"
                 android:textColor="@color/colorBlack"
                 android:fontFamily="@font/f_nanum_myeongjo"/>

@@ -4,67 +4,158 @@
     android:id="@+id/creditActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="@color/colorBlack">
+    android:background="@color/colorBlack"
+    android:gravity="center">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="40dp"
+        android:fontFamily="@font/f_nanum_myeongjo"
         android:gravity="center"
         android:text="Credits"
-        android:textSize="30dp"
         android:textColor="@color/colorWhite"
-        android:fontFamily="@font/f_nanum_myeongjo"/>
+        android:textSize="30dp" />
 
     <RelativeLayout
+        android:id="@+id/specialThanks"
         android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="30dp">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/credits_orange"/>
+            android:src="@drawable/credits_black" />
 
         <TextView
-            android:id="@+id/programmerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="110dp"
-            android:layout_marginLeft="50dp"
-            android:text="Programmer"
-            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="165dp"
+            android:fontFamily="@font/f_nanum_myeongjo"
+            android:text="Special Thanks"
             android:textColor="@color/colorWhite"
-            android:fontFamily="@font/f_nanum_myeongjo"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/programmerText"
-            android:layout_alignLeft="@+id/programmerText"
-            android:text="박현수"
-            android:textSize="30sp"
-            android:textColor="@color/colorWhite"
-            android:fontFamily="@font/f_nanum_myeongjo"/>
+            android:textSize="20sp" />
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/specialThanks"
+        android:layout_marginTop="-40dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/f_nanum_myeongjo"
+                android:gravity="center"
+                android:text="이민식"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/f_nanum_myeongjo"
+                android:gravity="center"
+                android:text="박재온"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/f_nanum_myeongjo"
+                android:gravity="center"
+                android:text="이영주"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/f_nanum_myeongjo"
+                android:gravity="center"
+                android:text="정민경"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/f_nanum_myeongjo"
+                android:gravity="center"
+                android:text="황승혁"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/f_nanum_myeongjo"
+                android:gravity="center"
+                android:text="정지영"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/f_nanum_myeongjo"
+                android:gravity="center"
+                android:text="진유경"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/f_nanum_myeongjo"
+                android:gravity="center"
+                android:text="정영우"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="100dp">
+        android:layout_marginTop="120dp">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/credits_blue"/>
+            android:src="@drawable/credits_blue" />
 
         <TextView
             android:id="@+id/designerText"
@@ -74,187 +165,56 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="100dp"
             android:layout_marginRight="60dp"
+            android:fontFamily="@font/f_nanum_myeongjo"
             android:text="Designer"
-            android:textSize="20sp"
             android:textColor="@color/colorWhite"
-            android:fontFamily="@font/f_nanum_myeongjo"/>
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/designerText"
             android:layout_alignLeft="@+id/designerText"
+            android:fontFamily="@font/f_nanum_myeongjo"
             android:text="박민호"
-            android:textSize="30sp"
             android:textColor="@color/colorWhite"
-            android:fontFamily="@font/f_nanum_myeongjo"/>
+            android:textSize="30sp" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="200dp">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/credits_green"/>
-
-        <TextView
-            android:id="@+id/managerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="50dp"
-            android:text="Manager"
-            android:textSize="20sp"
-            android:textColor="@color/colorWhite"
-            android:fontFamily="@font/f_nanum_myeongjo"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/managerText"
-            android:layout_alignLeft="@+id/managerText"
-            android:text="정영우"
-            android:textSize="30sp"
-            android:textColor="@color/colorWhite"
-            android:fontFamily="@font/f_nanum_myeongjo"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/specialThanks"
-        android:layout_width="300dp"
-        android:layout_height="250dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp">
+        android:layout_marginTop="30dp">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/credits_black"/>
+            android:src="@drawable/credits_orange" />
+
+        <TextView
+            android:id="@+id/programmerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="110dp"
+            android:fontFamily="@font/f_nanum_myeongjo"
+            android:text="Programmer"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="165dp"
-            android:text="Special Thanks"
-            android:textSize="20sp"
+            android:layout_below="@+id/programmerText"
+            android:layout_alignLeft="@+id/programmerText"
+            android:fontFamily="@font/f_nanum_myeongjo"
+            android:text="박현수"
             android:textColor="@color/colorWhite"
-            android:fontFamily="@font/f_nanum_myeongjo"/>
+            android:textSize="30sp" />
     </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/specialThanks"
-        android:layout_marginTop="-40dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="이민식"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/colorWhite"
-                android:fontFamily="@font/f_nanum_myeongjo"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="박재온"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/colorWhite"
-                android:fontFamily="@font/f_nanum_myeongjo"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="이영주"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/colorWhite"
-                android:fontFamily="@font/f_nanum_myeongjo"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="정민경"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/colorWhite"
-                android:fontFamily="@font/f_nanum_myeongjo"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="황승혁"
-                android:layout_marginBottom="5dp"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/colorWhite"
-                android:fontFamily="@font/f_nanum_myeongjo"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="정지영"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/colorWhite"
-                android:fontFamily="@font/f_nanum_myeongjo"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="진유경"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/colorWhite"
-                android:fontFamily="@font/f_nanum_myeongjo"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="히라사와 유이"
-                android:gravity="center"
-                android:textSize="30sp"
-                android:textColor="@color/colorWhite"
-                android:fontFamily="@font/f_nanum_myeongjo"/>
-
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-
 
 </RelativeLayout>

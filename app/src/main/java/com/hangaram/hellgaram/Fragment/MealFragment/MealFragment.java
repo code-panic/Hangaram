@@ -26,6 +26,8 @@ import com.hangaram.hellgaram.R;
 import com.hangaram.hellgaram.support.DataBaseHelper;
 import com.hangaram.hellgaram.support.TimeGiver;
 
+import java.sql.Time;
+
 
 public class MealFragment extends Fragment {
     private static final String Tag = "MealFragment";
@@ -36,8 +38,12 @@ public class MealFragment extends Fragment {
     private RelativeLayout mealToggle;
     private ImageView leftButton;
     private ImageView rightButton;
+    private TextView dayTextView;
 
     private int gap = 0;
+    private int maxGap = 4;
+    private int minGap = -4;
+
     private String menuString;
 
     private DataBaseHelper dataBaseHelper;
@@ -58,17 +64,16 @@ public class MealFragment extends Fragment {
         changedMealText = view.findViewById(R.id.chandedMealText);
         leftButton = view.findViewById(R.id.button_meal_left);
         rightButton = view.findViewById(R.id.button_meal_right);
+        dayTextView = view.findViewById(R.id.mealDayTextView);
 
         openDataBase(context);
-
-        String[] args = {TimeGiver.getYear(0), TimeGiver.getMonth(0), TimeGiver.getDate(0)};
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * From " + DataBaseHelper.TABLE_NAME_meal + " WHERE year = ? AND month = ? AND date = ?", args);
-
-        Log.d(Tag, "cursor: " + cursor.getCount());
 
         //인터넷이 연결되어 있다면 정보 가져오기
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        String[] args = {TimeGiver.getYear(gap + maxGap), TimeGiver.getMonth(gap + maxGap), TimeGiver.getDate(gap + maxGap)};
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT lunch From " + DataBaseHelper.TABLE_NAME_meal + " WHERE year = ? AND month = ? AND date = ?", args);
 
         //인터넷이 연결되어 있고 오늘 급식이 데이터 베이스에 없을 때
         if (networkInfo != null && cursor.getCount() != 1) {
@@ -77,7 +82,7 @@ public class MealFragment extends Fragment {
             sqLiteDatabase.execSQL(DELETE_ALL_meal);
 
             //데이터 베이스 정보 추가
-            for (int gap = -4; gap < 5; gap++) {
+            for (int gap = -minGap; gap <= maxGap; gap++) {
                 MealTask mealTask = new MealTask(gap, context);
                 mealTask.execute();
             }
@@ -86,6 +91,7 @@ public class MealFragment extends Fragment {
         cursor.close();
 
         //첫 시작화면에 오늘 점심 메뉴 보여주기
+        setDayTextView();
         showLunch();
 
         //점심 저녁 바꿔보기 이벤트 설정
@@ -109,6 +115,7 @@ public class MealFragment extends Fragment {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     if (checkMealIs(gap + 1))
                         gap++;
+                    setDayTextView();
                     showLunch();
                     setButtonState();
                 }
@@ -120,8 +127,9 @@ public class MealFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if(checkMealIs(gap - 1))
+                    if (checkMealIs(gap - 1))
                         gap--;
+                    setDayTextView();
                     showLunch();
                     setButtonState();
                 }
@@ -201,6 +209,9 @@ public class MealFragment extends Fragment {
         String[] args = {TimeGiver.getYear(gap), TimeGiver.getMonth(gap), TimeGiver.getDate(gap)};
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT lunch From " + DataBaseHelper.TABLE_NAME_meal + " WHERE year = ? AND month = ? AND date = ?", args);
 
+        Log.d(Tag, "cursor: " + cursor.getCount());
+        Log.d(Tag,"showLunch");
+
         if (cursor.getCount() == 1) {
             cursor.moveToFirst();
             Log.d(Tag, cursor.getString(0));
@@ -236,5 +247,16 @@ public class MealFragment extends Fragment {
         //데이터 베이스 준비
         dataBaseHelper = new DataBaseHelper(context);
         sqLiteDatabase = dataBaseHelper.getReadableDatabase();
+    }
+
+    private void setDayTextView() {
+        if (gap == 0)
+            dayTextView.setText("오늘");
+        else if (gap == 1)
+            dayTextView.setText("내일");
+        else if (gap == -1)
+            dayTextView.setText("어제");
+        else
+            dayTextView.setText(TimeGiver.getMonth(gap) + "/" + TimeGiver.getDate(gap));
     }
 }
