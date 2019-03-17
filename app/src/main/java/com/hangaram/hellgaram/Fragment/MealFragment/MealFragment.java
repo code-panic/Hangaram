@@ -41,8 +41,8 @@ public class MealFragment extends Fragment {
     private TextView dayTextView;
 
     private int gap = 0;
-    private int maxGap = 4;
-    private int minGap = -4;
+    private int maxGap = 7;
+    private int minGap = -7;
 
     private String menuString;
 
@@ -72,23 +72,22 @@ public class MealFragment extends Fragment {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
-        String[] args = {TimeGiver.getYear(gap + maxGap), TimeGiver.getMonth(gap + maxGap), TimeGiver.getDate(gap + maxGap)};
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT lunch From " + DataBaseHelper.TABLE_NAME_meal + " WHERE year = ? AND month = ? AND date = ?", args);
-
         //인터넷이 연결되어 있고 오늘 급식이 데이터 베이스에 없을 때
-        if (networkInfo != null && cursor.getCount() != 1) {
+        if (networkInfo != null && !checkMealIs(gap + maxGap)) {
             //데이터 베이스 정보 삭제
             String DELETE_ALL_meal = "DELETE FROM " + DataBaseHelper.TABLE_NAME_meal;
             sqLiteDatabase.execSQL(DELETE_ALL_meal);
+            Log.d(Tag,"Delete Database meal data");
 
             //데이터 베이스 정보 추가
-            for (int gap = -minGap; gap <= maxGap; gap++) {
+            for (int gap = minGap; gap <= maxGap; gap++) {
                 MealTask mealTask = new MealTask(gap, context);
                 mealTask.execute();
             }
+            Log.d(Tag,"Add meal data in Database");
         }
 
-        cursor.close();
+        Log.d(Tag,"gap -" + gap);
 
         //첫 시작화면에 오늘 점심 메뉴 보여주기
         setDayTextView();
@@ -178,8 +177,10 @@ public class MealFragment extends Fragment {
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT lunch From " + DataBaseHelper.TABLE_NAME_meal + " WHERE year = ? AND month = ? AND date = ?", args);
 
         if (cursor.getCount() == 0) {
+            cursor.close();
             return false;
         } else {
+            cursor.close();
             return true;
         }
     }
@@ -257,6 +258,6 @@ public class MealFragment extends Fragment {
         else if (gap == -1)
             dayTextView.setText("어제");
         else
-            dayTextView.setText(TimeGiver.getMonth(gap) + "/" + TimeGiver.getDate(gap));
+            dayTextView.setText(TimeGiver.getMonth(gap) + "/" + TimeGiver.getDate(gap) + "(" + TimeGiver.getWeek(gap) + ")");
     }
 }
