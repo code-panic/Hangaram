@@ -26,7 +26,7 @@ public class BusArriveInfoTask extends AsyncTask<String, Void, ArrayList<Vehicle
     private String rtNm = new String();
     private String stNm = new String();
 
-    private ArrayList<VehicleItem> vehicleItems = new ArrayList<VehicleItem>();
+    private ArrayList<VehicleItem> vehicleItems = new ArrayList<>();
 
     private StationItemView stationItemView;
 

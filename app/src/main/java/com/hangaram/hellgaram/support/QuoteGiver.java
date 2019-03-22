@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.hangaram.hellgaram.Fragment.SettingFragmnet.SettingFragment;
-import com.hangaram.hellgaram.R;
 
 import java.io.File;
 import java.io.FileOutputStream;

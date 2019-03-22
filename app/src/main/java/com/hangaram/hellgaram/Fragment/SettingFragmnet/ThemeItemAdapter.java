@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class ThemeItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static String log = "ThemeItemAdapter";
 
-    ArrayList<ThemeItem> themeItems = new ArrayList<ThemeItem>();
+    ArrayList<ThemeItem> themeItems = new ArrayList<>();
 
     public static class ThemeHolder extends RecyclerView.ViewHolder{
         TextView themeNameTextView;

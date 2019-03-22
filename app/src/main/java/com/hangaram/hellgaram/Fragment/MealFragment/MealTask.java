@@ -1,7 +1,6 @@
 package com.hangaram.hellgaram.Fragment.MealFragment;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -56,7 +55,7 @@ public class MealTask extends AsyncTask<Void, Void, JSONObject> {
             URLConnection urlConnectionn = url.openConnection();
             bufferedReader = new BufferedReader(new InputStreamReader(urlConnectionn.getInputStream()));
 
-            StringBuffer stringBuffer = new StringBuffer();
+            StringBuilder stringBuffer = new StringBuilder();
             String line;
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -129,7 +128,10 @@ public class MealTask extends AsyncTask<Void, Void, JSONObject> {
                         sumString += arr.getString(i).substring(0, j) + "\n";
                         break;
                     } else if (j == arr.getString(i).length() - 1) {
-                        sumString += arr.getString(i);
+                        if(i == arr.length() - 1)
+                            sumString += arr.getString(i);
+                        else
+                            sumString += arr.getString(i) + "\n";
                         break;
                     }
 

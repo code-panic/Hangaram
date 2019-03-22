@@ -2,5 +2,4 @@
     <string name="app_name">헬가람</string>
     <string name="default_notification_channel_id">android</string>
     <string name="default_notification_channel_name">android</string>
-    <string name="android_name">저장해 놓은\n급식정보가 없습니다.\n인터넷에 접속하여\n다시 접속해주세요. </string>
 </resources>

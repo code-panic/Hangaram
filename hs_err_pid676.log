@@ -1,0 +1,159 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 1048576 bytes for AllocateHeap
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (memory/allocation.inline.hpp:61), pid=676, tid=0x00000000000028a8
+#
+# JRE version:  (8.0_152-b01) (build )
+# Java VM: OpenJDK 64-Bit Server VM (25.152-b01 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000000002ae2800):  JavaThread "Unknown thread" [_thread_in_vm, id=10408, stack(0x0000000002940000,0x0000000002a40000)]
+
+Stack: [0x0000000002940000,0x0000000002a40000]
+[error occurred during error reporting (printing stack bounds), id 0xc0000005]
+
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x0000000002ae2800 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=10408, stack(0x0000000002940000,0x0000000002a40000)]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap:
+ PSYoungGen      total 2048K, used 30K [0x00000000eb200000, 0x00000000eb480000, 0x0000000100000000)
+  eden space 1536K, 2% used [0x00000000eb200000,0x00000000eb207af0,0x00000000eb380000)
+  from space 512K, 0% used [0x00000000eb400000,0x00000000eb400000,0x00000000eb480000)
+  to   space 512K, 0% used [0x00000000eb380000,0x00000000eb380000,0x00000000eb400000)
+ ParOldGen       total 5632K, used 0K [0x00000000c1600000, 0x00000000c1b80000, 0x00000000eb200000)
+  object space 5632K, 0% used [0x00000000c1600000,0x00000000c1600000,0x00000000c1b80000)
+ Metaspace       used 772K, capacity 4480K, committed 4480K, reserved 1056768K
+  class space    used 73K, capacity 384K, committed 384K, reserved 1048576K
+
+Card table byte_map: [0x0000000011fa0000,0x00000000121a0000] byte_map_base: 0x0000000011995000
+
+Marking Bits: (ParMarkBitMap*) 0x0000000070635aa0
+ Begin Bits: [0x00000000126f0000, 0x0000000013698000)
+ End Bits:   [0x0000000013698000, 0x0000000014640000)
+
+Polling page: 0x00000000003f0000
+
+CodeCache: size=245760Kb used=328Kb max_used=328Kb free=245431Kb
+ bounds [0x0000000002be0000, 0x0000000002e50000, 0x0000000011be0000]
+ total_blobs=57 nmethods=0 adapters=38
+ compilation: enabled
+
+Compilation events (0 events):
+No events
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.094 loading class java/lang/Short
+Event: 0.094 loading class java/lang/Short done
+Event: 0.094 loading class java/lang/Integer
+Event: 0.095 loading class java/lang/Integer done
+Event: 0.095 loading class java/lang/Long
+Event: 0.096 loading class java/lang/Long done
+Event: 0.097 loading class java/lang/NullPointerException
+Event: 0.097 loading class java/lang/NullPointerException done
+Event: 0.097 loading class java/lang/ArithmeticException
+Event: 0.097 loading class java/lang/ArithmeticException done
+
+
+Dynamic libraries:
+0x00007ff616dc0000 - 0x00007ff616dc7000 	C:\Program Files\Android\Android Studio\jre\bin\jarsigner.exe
+0x00007ff9080e0000 - 0x00007ff9082c1000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ff905a00000 - 0x00007ff905ab2000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ff904630000 - 0x00007ff9048a3000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ff8ff2f0000 - 0x00007ff8ff31f000 	C:\Program Files\Android\Android Studio\jre\bin\jli.dll
+0x000000006fbd0000 - 0x000000006fca2000 	C:\Program Files\Android\Android Studio\jre\bin\MSVCR100.dll
+0x00007ff9055e0000 - 0x00007ff905681000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ff907790000 - 0x00007ff90782e000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ff905690000 - 0x00007ff9056eb000 	C:\WINDOWS\System32\sechost.dll
+0x00007ff905770000 - 0x00007ff905894000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ff907830000 - 0x00007ff9079c0000 	C:\WINDOWS\System32\USER32.dll
+0x00007ff9054f0000 - 0x00007ff905510000 	C:\WINDOWS\System32\win32u.dll
+0x00007ff9055b0000 - 0x00007ff9055d8000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ff9050c0000 - 0x00007ff905252000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ff905260000 - 0x00007ff9052ff000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ff904fc0000 - 0x00007ff9050b8000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ff8f74a0000 - 0x00007ff8f7709000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.17134.648_none_fb45a0e93062a6d2\COMCTL32.dll
+0x00007ff905bf0000 - 0x00007ff905f12000 	C:\WINDOWS\System32\combase.dll
+0x00007ff9045b0000 - 0x00007ff90462a000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ff905570000 - 0x00007ff90559d000 	C:\WINDOWS\System32\IMM32.DLL
+0x000000006fcb0000 - 0x000000006fd82000 	C:\Program Files\Android\Android Studio\jre\jre\bin\msvcr100.dll
+0x000000006fe70000 - 0x00000000706b1000 	C:\Program Files\Android\Android Studio\jre\jre\bin\server\jvm.dll
+0x00007ff905760000 - 0x00007ff905768000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ff8f6500000 - 0x00007ff8f650a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ff8fe1f0000 - 0x00007ff8fe213000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ff8f2f60000 - 0x00007ff8f2f69000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ff9056f0000 - 0x00007ff90575c000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ff8fe1c0000 - 0x00007ff8fe1ea000 	C:\WINDOWS\SYSTEM32\WINMMBASE.dll
+0x00007ff9044b0000 - 0x00007ff9044f9000 	C:\WINDOWS\System32\cfgmgr32.dll
+0x00007ff8e9150000 - 0x00007ff8e915f000 	C:\Program Files\Android\Android Studio\jre\jre\bin\verify.dll
+0x00007ff8d9440000 - 0x00007ff8d9469000 	C:\Program Files\Android\Android Studio\jre\jre\bin\java.dll
+0x00007ff8e17e0000 - 0x00007ff8e17f6000 	C:\Program Files\Android\Android Studio\jre\jre\bin\zip.dll
+
+VM Arguments:
+jvm_args: -Dapplication.home=C:\Program Files\Android\Android Studio\jre -Xms8m 
+java_command: sun.security.tools.jarsigner.Main -keystore C:\Users\Administrator\HELLGARAM\hellgaram.jks -storepass:file C:\Users\ADMINI~1\AppData\Local\Temp\store4520012072942087644prv --keypass:file C:\Users\ADMINI~1\AppData\Local\Temp\alias8296555790665553625prv C:\Users\Administrator\Desktop\hellgaram_version\release\app.aab hellgaram
+java_class_path (initial): C:\Program Files\Android\Android Studio\jre/lib/tools.jar;C:\Program Files\Android\Android Studio\jre/classes
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_191
+PATH=C:\Program Files (x86)\NAT Service;C:\Program Files\Java\jdk1.8.0_191\bin;C:\oraclexe\app\oracle\product\11.2.0\server\bin;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x64;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\WINDOWS\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Local\GitHubDesktop\bin;C:\Users\Administrator\AppData\Roaming\npm;C:\Users\Administrator\AppData\Local\Programs\Microsoft VS Code\bin
+USERNAME=Administrator
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 69 Stepping 1, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10.0 , 64 bit Build 17134 (10.0.17134.648)
+
+CPU:total 4 (initial active 4) (2 cores per cpu, 2 threads per core) family 6 model 69 stepping 1, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2
+
+Memory: 4k page, physical 4099872k(312240k free), swap 6197024k(5796k free)
+
+vm_info: OpenJDK 64-Bit Server VM (25.152-b01) for windows-amd64 JRE (1.8.0_152-release-1248-b01), built by "builder" with MS VC++ 10.0 (VS2010)
+
+time: Fri Mar 22 15:12:39 2019
+elapsed time: 0 seconds (0d 0h 0m 0s)
+

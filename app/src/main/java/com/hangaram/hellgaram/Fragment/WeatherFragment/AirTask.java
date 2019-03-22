@@ -31,20 +31,20 @@ public class AirTask extends AsyncTask<Void, Void, Void> {
     private boolean inkahiValue = false;
     private boolean inkahiGrade = false;
 
-    private String so2Value = new String(); //아황산가스 농도
-    private String coValue = new String(); //일산화탄소 농도
-    private String o3Value = new String(); //오존 농도
-    private String no2Value = new String(); //이산화질소 농도
-    private String pm10Value = new String(); //미세먼지 농도
-    private String pm25Value = new String(); //초미세먼지 농도
-    private String KhaiValue = new String(); //통합대기환경 수치
-    private String so2Grade = new String(); //아황산가스 농도
-    private String coGrade = new String(); //일산화탄소 농도
-    private String o3Grade = new String(); //오존 농도
-    private String no2Grade = new String(); //이산화질소 농도
-    private String pm10Grade1h = new String(); //미세먼진 지수
-    private String pm25Grade1h = new String(); //초미세먼지 지수
-    private String KhaiGrade = new String(); //통합대기환경 지수
+    private String so2Value = ""; //아황산가스 농도
+    private String coValue = ""; //일산화탄소 농도
+    private String o3Value = ""; //오존 농도
+    private String no2Value = ""; //이산화질소 농도
+    private String pm10Value = ""; //미세먼지 농도
+    private String pm25Value = ""; //초미세먼지 농도
+    private String KhaiValue = ""; //통합대기환경 수치
+    private String so2Grade = ""; //아황산가스 농도
+    private String coGrade = ""; //일산화탄소 농도
+    private String o3Grade = ""; //오존 농도
+    private String no2Grade = ""; //이산화질소 농도
+    private String pm10Grade1h = ""; //미세먼진 지수
+    private String pm25Grade1h = ""; //초미세먼지 지수
+    private String KhaiGrade = ""; //통합대기환경 지수
 
     private WeatherFragment weatherFragment;
 

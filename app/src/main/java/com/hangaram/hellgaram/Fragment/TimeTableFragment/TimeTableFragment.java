@@ -64,7 +64,7 @@ public class TimeTableFragment extends Fragment {
             public void onGlobalLayout() {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     timeTableLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    width = ((int) (timeTableLayout.getMeasuredWidth() - strokeWidth * (columnCount + 1)) / columnCount) * columnCount + strokeWidth * (columnCount + 1);
+                    width = ((timeTableLayout.getMeasuredWidth() - strokeWidth * (columnCount + 1)) / columnCount) * columnCount + strokeWidth * (columnCount + 1);
                     height = (width - strokeWidth * (columnCount + 1)) / columnCount * rowCount + strokeWidth * (rowCount + 1);
                     Log.d(Tag, "width: " + width);
                     Log.d(Tag, "height: " + height);

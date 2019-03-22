@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class LinkItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static String log = "LinkItemAdapter";
 
-    ArrayList<LinkItem> linkItems = new ArrayList<LinkItem>();
+    ArrayList<LinkItem> linkItems = new ArrayList<>();
 
     public static class LinkHolder extends RecyclerView.ViewHolder{
         TextView linkTextView;
@@ -52,7 +52,7 @@ public class LinkItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         linkHolder.linkTextView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                if(event.getAction() == MotionEvent.ACTION_UP){
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkHolder.url));
                     v.getContext().startActivity(intent);
                 }

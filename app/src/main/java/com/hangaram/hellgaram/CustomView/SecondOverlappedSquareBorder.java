@@ -55,7 +55,7 @@ public class SecondOverlappedSquareBorder extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawRect(viewWidth * 1 / 4,  viewHeight/8, viewWidth - strokeWidth, viewHeight, squPaint);
-        canvas.drawRect(viewWidth * 1 / 4, viewHeight/8, viewWidth, viewHeight - strokeWidth, borderPaint);
+        canvas.drawRect(viewWidth / 4,  viewHeight/8, viewWidth - strokeWidth, viewHeight, squPaint);
+        canvas.drawRect(viewWidth / 4, viewHeight/8, viewWidth, viewHeight - strokeWidth, borderPaint);
     }
 }
