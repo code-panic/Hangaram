@@ -18,7 +18,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="50dp">
 
             <com.hangaram.hellgaram.CustomView.SecondOverlappedSquareBorder
@@ -50,8 +50,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp">
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
 
             <ImageView
                 android:id="@+id/button_meal_left"
@@ -83,7 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="40dp"
                     android:fontFamily="@font/f_nanum_myeongjo"
                     android:gravity="center"
                     android:textColor="@color/colorBlack"

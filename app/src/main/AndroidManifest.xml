@@ -14,7 +14,7 @@
         android:icon="@drawable/hellgaram_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <activity
             android:name=".main.SplashActivity"
@@ -26,9 +26,7 @@
         </activity>
 
         <activity
-            android:name=".main.MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
+            android:name=".main.MainActivity">
             <intent-filter android:label="htc">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -38,15 +36,19 @@
                 <data
                     android:host="xn--o39ai969f8llbkv0lb.xn--3e0b707e"
                     android:pathPrefix="/hgrapp"
-                    android:scheme="https" />
+                    android:scheme="htc" />
             </intent-filter>
 
         </activity>
 
         <activity
             android:name=".main.CreditActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".main.CautionActivity"
+            android:screenOrientation="portrait">
         </activity>
 
         <service android:name=".support.FireBaseMessagingService">
@@ -60,18 +62,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
-        <receiver
-            android:name=".Fragment.MealFragment.MealReceiver"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter >
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="android.intent.action.DATE_CHANGED" />
-                <action android:name="android.intent.action.SCREEN_ON"/>
-            </intent-filter>
-        </receiver>
-
     </application>
 
 </manifest>

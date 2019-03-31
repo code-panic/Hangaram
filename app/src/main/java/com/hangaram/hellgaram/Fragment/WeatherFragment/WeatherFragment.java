@@ -4,8 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hangaram.hellgaram.R;
@@ -17,6 +19,8 @@ public class WeatherFragment extends Fragment {
     private TextView POPText;
     private TextView pmValueText;
     private TextView pmGradeText;
+    private LinearLayout weatherButton;
+    private LinearLayout airButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,13 +35,32 @@ public class WeatherFragment extends Fragment {
         pmValueText = view.findViewById(R.id.pmValueText);
         pmGradeText = view.findViewById(R.id.pmGradeText);
 
+        weatherButton = view.findViewById(R.id.weatherButton);
+        airButton = view.findViewById(R.id.airButton);
+
         AirTask airTask = new AirTask(this);
         ForecastWeatherTask forecastWeatherTask = new ForecastWeatherTask(this);
         CurrentWeatherTask currentWeatherTask = new CurrentWeatherTask(this);
         airTask.execute();
         forecastWeatherTask.execute();
         currentWeatherTask.execute();
+
+        weatherButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+        });
+
+        airButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+        });
     }
+
+
 
     public void setT1HText(String T1HString) {
         T1HText.setText(T1HString + "도");

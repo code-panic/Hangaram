@@ -74,7 +74,7 @@ public class MealFragment extends Fragment {
         mealToggle.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (islunchChecked) {
                         showDinner();
                     } else {
@@ -88,7 +88,7 @@ public class MealFragment extends Fragment {
         rightButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (checkMealIs(gap + 1))
                         gap++;
                     setDayTextView();
@@ -102,7 +102,7 @@ public class MealFragment extends Fragment {
         leftButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (checkMealIs(gap - 1))
                         gap--;
                     setDayTextView();
@@ -120,12 +120,12 @@ public class MealFragment extends Fragment {
                 ConnectivityManager connectivityManager = (ConnectivityManager) view.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
-                //인터넷이 연결되어 있고 오늘 급식이 데이터 베이스에 없을 때
-                if (checkMealIs(gap + maxGap)) {
+                //다운받을 급식 정보가 없을 때
+                if (checkMealIs(maxGap)) {
                     if (swipeNum < 10)
-                        Toast.makeText(view.getContext(), "급식 정보를 모두 가져왔습니다", Toast.LENGTH_SHORT);
+                        Toast.makeText(view.getContext(), "급식 정보를 모두 가져왔습니다", Toast.LENGTH_SHORT).show();
                     else
-                        Toast.makeText(view.getContext(), "확씨... 작작해! 이 급식충아!", Toast.LENGTH_SHORT);
+                        Toast.makeText(view.getContext(), "확씨... 작작해! 이 급식충아!", Toast.LENGTH_SHORT).show();
                 } else if (networkInfo != null) {
                     //데이터 베이스 정보 삭제
                     String DELETE_ALL_meal = "DELETE FROM " + DataBaseHelper.TABLE_NAME_meal;
@@ -138,11 +138,12 @@ public class MealFragment extends Fragment {
                         mealTask.execute();
                     }
                     Log.d(Tag, "Add meal data in Database");
+                    Toast.makeText(view.getContext(), "로딩중...", Toast.LENGTH_SHORT).show();
                 } else {
                     if (swipeNum < 10)
-                        Toast.makeText(view.getContext(), "인터넷을 연결하여 다시 시도해주세요 ", Toast.LENGTH_SHORT);
+                        Toast.makeText(view.getContext(), "인터넷을 연결하여 다시 시도해주세요 ", Toast.LENGTH_SHORT).show();
                     else
-                        Toast.makeText(view.getContext(), "느그 집엔 와이파이도 없지?", Toast.LENGTH_SHORT);
+                        Toast.makeText(view.getContext(), "느그 집엔 와이파이도 없지?", Toast.LENGTH_SHORT).show();
                 }
                 swipeNum++;
                 swipeRefreshLayout.setRefreshing(false);
@@ -150,7 +151,14 @@ public class MealFragment extends Fragment {
         });
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorRed);
+
+//        checkCount();
     }
+
+//    private void checkCount(){
+//        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * From " + DataBaseHelper.TABLE_NAME_meal , null);
+//        Log.d(Tag,"cursorCount: "+ cursor.getCount());
+//    }
 
     private boolean checkMealIs(int gap) {
         String[] args = {TimeGiver.getYear(gap), TimeGiver.getMonth(gap), TimeGiver.getDate(gap)};
@@ -193,7 +201,7 @@ public class MealFragment extends Fragment {
         Log.d(Tag, "cursor: " + cursor.getCount());
         Log.d(Tag, "showLunch");
 
-        if (cursor.getCount() == 1) {
+        if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             Log.d(Tag, cursor.getString(0));
             menuString = cursor.getString(0);
@@ -212,7 +220,7 @@ public class MealFragment extends Fragment {
         String[] args = {TimeGiver.getYear(gap), TimeGiver.getMonth(gap), TimeGiver.getDate(gap)};
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT dinner From " + DataBaseHelper.TABLE_NAME_meal + " WHERE year = ? AND month = ? AND date = ?", args);
 
-        if (cursor.getCount() == 1) {
+        if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             Log.d(Tag, cursor.getString(0));
             menuString = cursor.getString(0);
@@ -240,4 +248,5 @@ public class MealFragment extends Fragment {
         else
             dayTextView.setText(TimeGiver.getMonth(gap) + "/" + TimeGiver.getDate(gap) + "(" + TimeGiver.getWeek(gap) + ")");
     }
+
 }

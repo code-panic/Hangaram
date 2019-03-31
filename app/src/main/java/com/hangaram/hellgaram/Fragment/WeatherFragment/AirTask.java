@@ -69,7 +69,6 @@ public class AirTask extends AsyncTask<Void, Void, Void> {
             XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
             XmlPullParser parser = parserCreator.newPullParser();
 
-
             parser.setInput(url.openStream(), null);
 
             int parserEvent = parser.getEventType();
