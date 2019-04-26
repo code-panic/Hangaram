@@ -15,7 +15,7 @@ import com.hangaram.hellgaram.R;
 import java.util.ArrayList;
 
 public class LinkItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static String log = "LinkItemAdapter";
+    private static final String Tag = "LinkItemAdapter";
 
     ArrayList<LinkItem> linkItems = new ArrayList<>();
 

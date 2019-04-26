@@ -36,8 +36,8 @@ public class MealFragment extends Fragment {
     private TextView dayTextView;
 
     private int gap = 0;
-    private int maxGap = 7;
-    private int minGap = -7;
+    private int maxGap = 7; //다음주 급식까지 가져오기
+    private int minGap = -7; //저번주 급식까지 가져오기
 
     private String menuString = "저장해 놓은\n급식정보가 없습니다\n인터넷에 연결하여\n다시 접속해주세요";
 

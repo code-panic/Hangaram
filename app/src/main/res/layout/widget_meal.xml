@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="[  점심  ]"
+    android:gravity="center"
+    android:textSize="20dp"
+    android:textColor="@color/colorWhite"
+    android:fontFamily="@font/f_nanum_myeongjo"/>
+
+
+    <TextView
+        android:id="@+id/mealWidgetLunchTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/f_nanum_myeongjo"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="[  저녁  ]"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/f_nanum_myeongjo"/>
+
+
+    <TextView
+        android:id="@+id/mealWidgetDinnerTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/f_nanum_myeongjo"/>
+</LinearLayout>
