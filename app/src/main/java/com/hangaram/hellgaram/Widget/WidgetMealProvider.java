@@ -13,7 +13,7 @@ import com.hangaram.hellgaram.R;
 import com.hangaram.hellgaram.support.DataBaseHelper;
 import com.hangaram.hellgaram.support.TimeGiver;
 
-public class WidgetProvider extends AppWidgetProvider{
+public class WidgetMealProvider extends AppWidgetProvider{
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {

@@ -60,14 +60,14 @@
             </intent-filter>
         </service>
 
-        <receiver android:name=".Widget.WidgetProvider">
+        <receiver android:name=".Widget.WidgetMealProvider">
 
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data android:name="android.appwidget.provider"
-                android:resource="@xml/widget_provider" />
+                android:resource="@xml/widget_meal_provider" />
 
         </receiver>
         
