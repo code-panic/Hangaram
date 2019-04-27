@@ -3,6 +3,7 @@ package com.hangaram.hellgaram.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -32,6 +33,7 @@ public class CautionActivity extends AppCompatActivity {
                     intent.putExtra("result",false);
                     setResult(RESULT_OK,intent);
                     finish();
+                    Log.d("test","jdklajdklfajlajfdlkafj");
                 }
                 return true;
             }
@@ -49,7 +51,6 @@ public class CautionActivity extends AppCompatActivity {
                 return true;
             }
         });
-
     }
 
     //액티비티 꺼질 때 애니메이션 효과 없애기

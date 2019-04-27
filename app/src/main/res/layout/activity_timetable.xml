@@ -3,13 +3,13 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     android:overScrollMode="never">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
-        android:paddingTop="30dp"
+        android:layout_gravity="center"
         android:paddingLeft="30dp"
         android:paddingRight="30dp">
 
@@ -77,16 +77,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/contour"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="5dp" />
 
-        <ImageView
-            android:id="@+id/editButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
             android:layout_below="@+id/timeTableLayout"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/edit_off" />
+            android:layout_marginTop="5dp">
+
+            <Button
+                android:id="@+id/editButton"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/border_gray"
+                android:fontFamily="@font/f_nanum_myeongjo"
+                android:gravity="center"
+                android:text="편집하기"
+                android:textColor="@color/colorBlack" />
+
+            <Button
+                android:id="@+id/toFinalChild"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:background="@drawable/border_gray"
+                android:gravity="center"
+                android:text="자동생성"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/f_nanum_myeongjo"/>
+        </LinearLayout>
     </RelativeLayout>
 </ScrollView>
 

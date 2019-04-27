@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -43,7 +45,8 @@ public class TimeTableFragment extends Fragment {
 
     private View view;
     private TableLayout timeTableLayout;
-    private static ImageView editButton;
+    private Button editButton;
+    private Button toFinalChild;
 
     private int rowCount = 6; //가로줄
     private int columnCount = 5; //세로줄
@@ -64,6 +67,7 @@ public class TimeTableFragment extends Fragment {
 
         timeTableLayout = view.findViewById(R.id.timeTableLayout);
         editButton = view.findViewById(R.id.editButton);
+        toFinalChild = view.findViewById(R.id.toFinalChild);
 
         ViewTreeObserver viewTreeObserver = timeTableLayout.getViewTreeObserver();
         viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -92,18 +96,29 @@ public class TimeTableFragment extends Fragment {
         editButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (isEditChecked) {
-                        editButton.setImageResource(R.drawable.edit_off);
+                        editButton.setBackgroundResource(R.drawable.border_gray);
                         setEditableFalse();
                         saveTimeTableData();
                         Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
                         isEditChecked = false;
                     } else {
-                        editButton.setImageResource(R.drawable.edit_on);
+                        editButton.setBackgroundResource(R.drawable.border_red);
                         setEditableTrue();
                         isEditChecked = true;
                     }
+                }
+                return true;
+            }
+        });
+
+        toFinalChild.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://xn--o39ai969f8llbkv0lb.xn--3e0b707e/"));
+                    v.getContext().startActivity(intent);
                 }
                 return true;
             }
@@ -125,7 +140,7 @@ public class TimeTableFragment extends Fragment {
 
         //자동저장기능
         if (isEditChecked) {
-            editButton.setImageResource(R.drawable.edit_off);
+            editButton.setBackgroundResource(R.drawable.border_gray);
             setEditableFalse();
             saveTimeTableData();
             Toast.makeText(view.getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
@@ -222,7 +237,7 @@ public class TimeTableFragment extends Fragment {
     //한가람 시간표와 연동
     public void linkWithFinalChild(JSONArray jsonArray) {
         //기존 내용 삭제
-        editButton.setImageResource(R.drawable.edit_on);
+        editButton.setBackgroundResource(R.drawable.border_red);
         setEditableTrue();
         isEditChecked = true;
         isLinkFinalChild = true;
