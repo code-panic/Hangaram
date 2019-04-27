@@ -18,7 +18,7 @@ import com.hangaram.hellgaram.main.CreditActivity;
 import com.hangaram.hellgaram.support.QuoteGiver;
 
 public class SettingFragment extends Fragment {
-    private static String log = "SettingFragment";
+    private static final String Tag = "SettingFragment";
 
     private View view;
 
