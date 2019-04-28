@@ -254,13 +254,13 @@ public class TimeTableFragment extends Fragment {
                             + jsonObject.getString("room"));
 
                     if (jsonObject.getString("subject") != "null")
-                        sumString += jsonObject.getString("subject") + "\n";
+                        sumString += jsonObject.getString("subject");
 
                     if (jsonObject.getString("teacher") != "null")
-                        sumString += jsonObject.getString("teacher") + "\n";
+                        sumString += "\n" + jsonObject.getString("teacher");
 
                     if (jsonObject.getString("room") != "null")
-                        sumString += jsonObject.getString("room");
+                        sumString += "\n" + jsonObject.getString("room");
 
                     items[j][i].editText.setText(sumString);
                 }

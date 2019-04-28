@@ -1,8 +1,7 @@
-package com.hangaram.hellgaram.Widget;
+package com.hangaram.hellgaram.widget;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.database.Cursor;
@@ -43,8 +42,5 @@ public class WidgetMealProvider extends AppWidgetProvider{
         updateViews.setTextViewText(R.id.mealWidgetDinnerTextView, cursor.getString(1));
         appWidgetManager.updateAppWidget(appWidgetId,updateViews);
     }
-
-
-
 }
 
