@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/mThisSubjectPeriod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/f_nanum_myeongjo"/>
+
+    <TextView
+        android:id="@+id/mThisSubjectName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/f_nanum_myeongjo"/>
+
+    <TextView
+        android:id="@+id/mThisSubjectHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textSize="10dp"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/f_nanum_myeongjo"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="다음시간"
+            android:textSize="10dp"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/f_nanum_myeongjo"/>
+
+        <TextView
+            android:id="@+id/mNextSubjectName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textSize="10dp"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/f_nanum_myeongjo"/>
+
+    </LinearLayout>
+</LinearLayout>
