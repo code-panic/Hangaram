@@ -18,9 +18,8 @@
         android:id="@+id/mThisSubjectName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="30dp"
         android:textColor="@color/colorWhite"
         android:fontFamily="@font/f_nanum_myeongjo"/>
 
@@ -28,9 +27,8 @@
         android:id="@+id/mThisSubjectHint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:gravity="center"
-        android:textSize="10dp"
+        android:textSize="15dp"
         android:textColor="@color/colorWhite"
         android:fontFamily="@font/f_nanum_myeongjo"/>
 
@@ -43,10 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="10dp"
             android:gravity="center"
             android:text="다음시간"
-            android:textSize="10dp"
+            android:textSize="15dp"
             android:textColor="@color/colorWhite"
             android:fontFamily="@font/f_nanum_myeongjo"/>
 
@@ -55,9 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="10dp"
             android:gravity="center"
-            android:textSize="10dp"
+            android:textSize="15dp"
             android:textColor="@color/colorWhite"
             android:fontFamily="@font/f_nanum_myeongjo"/>
 

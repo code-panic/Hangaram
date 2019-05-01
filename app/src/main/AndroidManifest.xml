@@ -60,7 +60,7 @@
             </intent-filter>
         </service>
 
-        <receiver android:name=".widget.WidgetMealProvider">
+        <receiver android:name=".widget.MealProvider">
 
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -71,14 +71,14 @@
 
         </receiver>
 
-        <receiver android:name=".widget.WidgetTimetableEachProvider">
+        <receiver android:name=".widget.TimetableEachProvider">
 
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data android:name="android.appwidget.provider"
-                android:resource="@xml/widget_meal_provider" />
+                android:resource="@xml/widget_timetable_each_provider" />
 
         </receiver>
         

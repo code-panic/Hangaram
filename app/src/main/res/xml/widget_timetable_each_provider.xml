@@ -2,7 +2,7 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialLayout="@layout/widget_meal"
     android:minWidth="146dp"
-    android:minHeight="216dp"
+    android:minHeight="72dp"
     android:updatePeriodMillis="1800000">
 
 </appwidget-provider>
