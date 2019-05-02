@@ -33,7 +33,6 @@ public class CautionActivity extends AppCompatActivity {
                     intent.putExtra("result",false);
                     setResult(RESULT_OK,intent);
                     finish();
-                    Log.d("test","jdklajdklfajlajfdlkafj");
                 }
                 return true;
             }

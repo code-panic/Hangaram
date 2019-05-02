@@ -84,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
         AlarmManager mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent mIntent = new Intent(this, TimetableEachProvider.class);
 
-        PendingIntent mPendingIntent = PendingIntent.getBroadcast(this, 0, mIntent, 0);
-
         //위젯 업데이트 시간 설정
         Calendar[] mCalendarArray = new Calendar[6];
 
@@ -104,9 +102,11 @@ public class MainActivity extends AppCompatActivity {
 
             mIntent.putExtra("period", period + 1);
 
+            PendingIntent mPendingIntent = PendingIntent.getBroadcast(this, 0, mIntent, 0);
+
             mCalendarArray[period].set(mCalendarArray[period].get(Calendar.YEAR), mCalendarArray[period].get(Calendar.MONTH), mCalendarArray[period].get(Calendar.DATE),
                     mWidgetUpdateTimeArray[period][0], mWidgetUpdateTimeArray[period][1], 0);
-            mAlarmManager.set(AlarmManager.RTC, mCalendarArray[1].getTimeInMillis(), mPendingIntent);
+            mAlarmManager.set(AlarmManager.RTC, mCalendarArray[period].getTimeInMillis(), mPendingIntent);
         }
     }
 }

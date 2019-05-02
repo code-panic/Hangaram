@@ -1,6 +1,5 @@
 package com.hangaram.hellgaram.widget;
 
-import android.app.AlarmManager;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -35,7 +34,7 @@ public class TimetableEachProvider extends AppWidgetProvider {
         //위젯 모두 업데이트
         mAppWidgetIds = mAppWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
         for (int i = 0; i < mAppWidgetIds.length; i++) {
-            updateAppWidget(context, mAppWidgetManager, mAppWidgetIds[i],period);
+            updateAppWidget(context, mAppWidgetManager, mAppWidgetIds[i], period);
         }
     }
 
@@ -78,8 +77,12 @@ public class TimetableEachProvider extends AppWidgetProvider {
         //현재 과목열로 이동
         cursor.moveToPosition(period - 1);
 
+
         //현재 과목정보 가져오기
-        String[] mThisSubjectArray = cursor.getString(calendar.get(Calendar.DAY_OF_WEEK) - 1).split("\n");
+        String[] mThisSubjectArray = new String[0];
+
+        if (calendar.get(Calendar.DAY_OF_WEEK) > 0 && calendar.get(Calendar.DAY_OF_WEEK) < 6)
+            mThisSubjectArray = cursor.getString(calendar.get(Calendar.DAY_OF_WEEK) - 1).split("\n");
 
         //현재 과목이름 보여주기
         if (mThisSubjectArray.length > 0) {
@@ -93,7 +96,7 @@ public class TimetableEachProvider extends AppWidgetProvider {
         for (int i = 1; i < mThisSubjectArray.length; i++) {
             mThisSubjectHintString += mThisSubjectArray[i];
 
-            if(i != mThisSubjectArray.length - 1)
+            if (i != mThisSubjectArray.length - 1)
                 mThisSubjectHintString += "/";
         }
 
