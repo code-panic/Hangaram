@@ -19,7 +19,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-
     public void onCreate(SQLiteDatabase db) {
         //시간표 테이블 생성
         String TABLE_CREATE_timetable = "create table " + TABLE_NAME_timetable + "("
@@ -45,7 +44,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             String SQL = "insert into " + TABLE_NAME_timetable + "(mon, tue, wed, thu, fri) values ('' , '', '', '', '');";
             db.execSQL(SQL);
         }
-
     }
 
     @Override
