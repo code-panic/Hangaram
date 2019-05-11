@@ -14,7 +14,7 @@ import com.hangaram.hellgaram.support.FontGiver;
 import com.hangaram.hellgaram.support.TimeGiver;
 
 public class TitleBar extends View implements ViewPager.OnPageChangeListener {
-    private static String log = "TitleBar";
+    private static String TAG = "TitleBar";
 
     private Paint noPaint;
     private Paint linePaint;
@@ -135,7 +135,8 @@ public class TitleBar extends View implements ViewPager.OnPageChangeListener {
             default:
                 break;
         }
-        Log.d(log,textarr.length+"");
+
+        Log.d(TAG,textarr.length+"");
         invalidate();
     }
 

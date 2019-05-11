@@ -13,25 +13,23 @@ import com.hangaram.hellgaram.R;
 
 public class CautionActivity extends AppCompatActivity {
 
-    Button cancelButton;
-    Button downloadButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_caution);
 
-        cancelButton = findViewById(R.id.cancelButton);
-        downloadButton = findViewById(R.id.downloadButton);
+        //뷰 정의하기
+        Button cancelButton = findViewById(R.id.cancelButton);
+        Button downloadButton = findViewById(R.id.downloadButton);
 
         cancelButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_UP){
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     Intent intent = new Intent();
-                    intent.putExtra("result",false);
-                    setResult(RESULT_OK,intent);
+                    intent.putExtra("result", false);
+                    setResult(RESULT_OK, intent);
                     finish();
                 }
                 return true;
@@ -41,10 +39,10 @@ public class CautionActivity extends AppCompatActivity {
         downloadButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_UP){
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     Intent intent = new Intent();
-                    intent.putExtra("result",true);
-                    setResult(RESULT_OK,intent);
+                    intent.putExtra("result", true);
+                    setResult(RESULT_OK, intent);
                     finish();
                 }
                 return true;
@@ -52,10 +50,11 @@ public class CautionActivity extends AppCompatActivity {
         });
     }
 
-    //액티비티 꺼질 때 애니메이션 효과 없애기
     @Override
     protected void onPause() {
         super.onPause();
-        overridePendingTransition(0,0);
+
+        //액티비티 꺼질 때 애니메이션 효과 없애기
+        overridePendingTransition(0, 0);
     }
 }

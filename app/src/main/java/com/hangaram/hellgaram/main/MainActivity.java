@@ -85,28 +85,26 @@ public class MainActivity extends AppCompatActivity {
         Intent mIntent = new Intent(this, TimetableEachProvider.class);
 
         //위젯 업데이트 시간 설정
-        Calendar[] mCalendarArray = new Calendar[6];
-
         int[][] mWidgetUpdateTimeArray = {
+                {0, 0},
                 {9, 15},
                 {10, 40},
                 {12, 5},
                 {14, 25},
                 {15, 50},
-                {17, 10}
         };
 
         //위젯 알람 설정하기
-        for (int period = 0; period < mCalendarArray.length; period++) {
-            mCalendarArray[period] = Calendar.getInstance();
+        Calendar mCalendar = Calendar.getInstance();
 
+        for (int period = 0; period < 6; period++) {
             mIntent.putExtra("period", period + 1);
 
             PendingIntent mPendingIntent = PendingIntent.getBroadcast(this, 0, mIntent, 0);
 
-            mCalendarArray[period].set(mCalendarArray[period].get(Calendar.YEAR), mCalendarArray[period].get(Calendar.MONTH), mCalendarArray[period].get(Calendar.DATE),
+            mCalendar.set(mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DATE),
                     mWidgetUpdateTimeArray[period][0], mWidgetUpdateTimeArray[period][1], 0);
-            mAlarmManager.set(AlarmManager.RTC, mCalendarArray[period].getTimeInMillis(), mPendingIntent);
+            mAlarmManager.set(AlarmManager.RTC, mCalendar.getTimeInMillis(), mPendingIntent);
         }
     }
 }

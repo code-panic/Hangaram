@@ -16,7 +16,7 @@ public class DoubleLineBorder extends View {
     private int viewHeight;
 
     private int m = 1; // viewHeight를 m:n으로 내분
-    private int n = 1; //
+    private int n = 1;
 
     private int gap = 5; // 두 line 사이 간격
 
