@@ -5,7 +5,12 @@
     <string name="menu_timetable">시간표</string>
     <string name="menu_settings">설정</string>
 
-    <string name="timetable_caution">한가람 시간표의 정보를 가져오시겠습니까?\n기존의 정보는 삭제됩니다.</string>
+    <string name="timetable_title">당신을 위한 한가람 시간표</string>
+    <string name="timetable_hint">2019년 1학기 기준</string>
     <string name="timetable_edit">편집하기</string>
     <string name="timetable_auto">자동으로 만들기</string>
+
+    <string name="settings_link">바로가기</string>
+
+    <string name="timetable_caution">한가람 시간표의 정보를 가져오시겠습니까?\n기존의 정보는 삭제됩니다.</string>
 </resources>

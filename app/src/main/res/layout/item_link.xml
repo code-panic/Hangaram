@@ -4,11 +4,6 @@
     android:layout_height="60dp"
     android:layout_marginTop="10dp">
 
-    <ImageView
-        android:id="@+id/linkItemImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
