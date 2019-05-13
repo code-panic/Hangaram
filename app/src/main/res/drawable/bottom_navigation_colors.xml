@@ -3,12 +3,10 @@
 
     <item
         android:state_checked="true"
-        android:color="@color/colorWhite"
-        android:scale="">
-    </item>
+        android:color="@color/colorWhite"/>
 
     <item
-        android:state_checked="false" android:color="@color/colorGray">
-    </item>
+        android:state_checked="false"
+        android:color="@color/colorGray"/>
 
 </selector>

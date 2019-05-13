@@ -95,7 +95,7 @@ public class TimeTableFragment extends Fragment {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (isEditChecked) {
-                        editButton.setBackgroundResource(R.drawable.border_gray);
+                        editButton.setBackgroundResource(R.drawable.border_black);
                         setEditableFalse();
                         saveTimeTableData();
                         Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
@@ -137,7 +137,7 @@ public class TimeTableFragment extends Fragment {
 
         //자동저장기능
         if (isEditChecked) {
-            editButton.setBackgroundResource(R.drawable.border_gray);
+            editButton.setBackgroundResource(R.drawable.border_black);
             setEditableFalse();
             saveTimeTableData();
             Toast.makeText(view.getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();

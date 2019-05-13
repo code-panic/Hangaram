@@ -4,14 +4,21 @@
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
-    <style name="BlackBaseTextView" parent="@android:style/Widget.TextView">
+    <style name="GrayText" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorGray</item>
+        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
+    </style>
+
+    <style name="BlackText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
     </style>
 
-    <style name="SettingsTextView" parent="@android:style/Widget.TextView">
+    <style name="QuoteText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">8dp</item>
@@ -21,14 +28,7 @@
         <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
     </style>
 
-    <style name="GrayBaseTextView" parent="@android:style/Widget.TextView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorGray</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
-    </style>
-
-    <style name="TimetableButton" parent="@android:style/Widget.Button">
+    <style name="TimetableButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_weight">1</item>
@@ -36,6 +36,12 @@
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
         <item name="android:background">@drawable/timetable_button_colors</item>
+    </style>
+
+    <style name="QuoteMarkImage">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
 </resources>

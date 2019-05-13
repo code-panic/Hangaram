@@ -61,7 +61,7 @@ public class SettingFragment extends Fragment {
         themeRecyclerView.setAdapter(themeItemAdapter);
 
         //linkRecyclerView 세팅
-        linkRecyclerView = view.findViewById(R.id.linkRecyclerView);
+        linkRecyclerView = view.findViewById(R.id.link_recycler);
 
         linkLayoutManager = new LinearLayoutManager(context);
         linkRecyclerView.setLayoutManager(linkLayoutManager);
