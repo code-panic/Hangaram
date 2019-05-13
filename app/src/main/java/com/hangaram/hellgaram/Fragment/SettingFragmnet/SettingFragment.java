@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hangaram.hellgaram.R;
-import com.hangaram.hellgaram.main.CreditActivity;
+import com.hangaram.hellgaram.Activity.CreditActivity;
 import com.hangaram.hellgaram.support.QuoteGiver;
 
 public class SettingFragment extends Fragment {
@@ -41,7 +41,7 @@ public class SettingFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.activity_theme, container, false);
+        view = inflater.inflate(R.layout.fragment_settings, container, false);
         init(view.getContext());
         return view;
     }

@@ -50,7 +50,7 @@ public class MealFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.activity_meal, container, false);
+        view = inflater.inflate(R.layout.fragment_cafeteria, container, false);
         init(view.getContext());
         return view;
     }

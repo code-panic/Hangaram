@@ -17,7 +17,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <activity
-            android:name=".main.SplashActivity"
+            android:name=".Activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".main.MainActivity">
+        <activity android:name=".Activity.MainActivity">
             <intent-filter android:label="htc">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -41,24 +41,12 @@
         </activity>
 
         <activity
-            android:name=".main.CreditActivity"
+            android:name=".Activity.CreditActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".main.CautionActivity"
+            android:name=".Activity.CautionActivity"
             android:screenOrientation="portrait"/>
-
-        <service android:name=".support.FireBaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
-        <service android:name=".support.FirebaseInstanceIDService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
 
         <receiver android:name=".widget.MealProvider">
 
@@ -80,12 +68,6 @@
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/widget_timetable_each_provider" />
 
-        </receiver>
-        
-        <receiver android:name=".support.DateBroadcast">
-            <intent-filter>
-                <action android:name="android.intent.action.DATE_CHANGED"/>
-            </intent-filter>
         </receiver>
 
     </application>

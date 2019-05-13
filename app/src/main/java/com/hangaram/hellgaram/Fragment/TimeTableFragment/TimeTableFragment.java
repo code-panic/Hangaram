@@ -16,16 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.hangaram.hellgaram.R;
-import com.hangaram.hellgaram.main.CautionActivity;
-import com.hangaram.hellgaram.support.ConvertUnit;
+import com.hangaram.hellgaram.Activity.CautionActivity;
 import com.hangaram.hellgaram.support.DataBaseHelper;
 
 import org.json.JSONArray;
@@ -63,7 +60,7 @@ public class TimeTableFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.activity_timetable, container, false);
+        view = inflater.inflate(R.layout.fragment_timetable, container, false);
 
         timeTableLayout = view.findViewById(R.id.timeTableLayout);
         editButton = view.findViewById(R.id.editButton);

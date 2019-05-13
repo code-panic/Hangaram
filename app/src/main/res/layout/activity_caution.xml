@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="@string/caution_string"
+                android:text="@string/timetable_caution"
                 android:textSize="15sp"
                 android:gravity="center"
                 android:textColor="@color/colorBlack"
@@ -51,10 +51,5 @@
 
             </LinearLayout>
         </LinearLayout>
-
-        <com.hangaram.hellgaram.CustomView.DoubleSquareBorder
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
     </RelativeLayout>
 </RelativeLayout>
