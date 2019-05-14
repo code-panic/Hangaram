@@ -3,34 +3,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorWhite">
 
     <TextView
         android:id="@+id/mThisSubjectPeriod"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="20dp"
-        android:textColor="@color/colorWhite"
-        android:fontFamily="@font/f_nanum_myeongjo"/>
+        android:textSize="24sp"
+        style="@style/BlackText"/>
 
     <TextView
         android:id="@+id/mThisSubjectName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="30dp"
-        android:textColor="@color/colorWhite"
-        android:fontFamily="@font/f_nanum_myeongjo"/>
+        android:textSize="32sp"
+        style="@style/BlackText"/>
 
     <TextView
         android:id="@+id/mThisSubjectHint"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="15dp"
-        android:textColor="@color/colorWhite"
-        android:fontFamily="@font/f_nanum_myeongjo"/>
+        android:textSize="16sp"
+        style="@style/BlackText"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +35,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="다음시간"
-            android:textSize="15dp"
+            android:textSize="16sp"
             android:textColor="@color/colorWhite"
             android:fontFamily="@font/f_nanum_myeongjo"/>
 
@@ -53,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="15dp"
+            android:textSize="16sp"
             android:textColor="@color/colorWhite"
             android:fontFamily="@font/f_nanum_myeongjo"/>
 

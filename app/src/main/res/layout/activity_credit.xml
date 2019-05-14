@@ -1,220 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/creditActivity"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlack"
-    android:gravity="center">
+    android:orientation="vertical"
+    android:background="@color/colorBlack">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/f_nanum_myeongjo"
+        android:layout_marginTop="64dp"
         android:gravity="center"
-        android:text="Credits"
-        android:textColor="@color/colorWhite"
-        android:textSize="30dp" />
-
-    <RelativeLayout
-        android:id="@+id/specialThanks"
-        android:layout_width="300dp"
-        android:layout_height="250dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/credits_black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="165dp"
-            android:fontFamily="@font/f_nanum_myeongjo"
-            android:text="Special Thanks"
-            android:textColor="@color/colorWhite"
-            android:textSize="20sp" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/specialThanks"
-        android:layout_marginTop="-40dp"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/f_nanum_myeongjo"
-                android:gravity="center"
-                android:text="이민식"
-                android:textColor="@color/colorWhite"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/f_nanum_myeongjo"
-                android:gravity="center"
-                android:text="박재온"
-                android:textColor="@color/colorWhite"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/f_nanum_myeongjo"
-                android:gravity="center"
-                android:text="이영주"
-                android:textColor="@color/colorWhite"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/f_nanum_myeongjo"
-                android:gravity="center"
-                android:text="정민경"
-                android:textColor="@color/colorWhite"
-                android:textSize="20sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/f_nanum_myeongjo"
-                android:gravity="center"
-                android:text="황승혁"
-                android:textColor="@color/colorWhite"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/f_nanum_myeongjo"
-                android:gravity="center"
-                android:text="정지영"
-                android:textColor="@color/colorWhite"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/f_nanum_myeongjo"
-                android:gravity="center"
-                android:text="진유경"
-                android:textColor="@color/colorWhite"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/f_nanum_myeongjo"
-                android:gravity="center"
-                android:text="정영우"
-                android:textColor="@color/colorWhite"
-                android:textSize="20sp" />
-        </LinearLayout>
-    </LinearLayout>
+        android:text="@string/credit_credit"
+        android:textSize="40sp"
+        style="@style/WhiteText"/>
 
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="120dp">
+        android:layout_marginTop="-80dp">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/credits_blue" />
+            android:src="@drawable/credits_orange"/>
 
         <TextView
-            android:id="@+id/designerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="100dp"
-            android:layout_marginRight="60dp"
-            android:fontFamily="@font/f_nanum_myeongjo"
-            android:text="Designer"
-            android:textColor="@color/colorWhite"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/designerText"
-            android:layout_alignLeft="@+id/designerText"
-            android:fontFamily="@font/f_nanum_myeongjo"
-            android:text="박민호"
-            android:textColor="@color/colorWhite"
-            android:textSize="30sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="30dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/credits_orange" />
-
-        <TextView
-            android:id="@+id/programmerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="50dp"
+            android:id="@+id/programmer_text"
             android:layout_marginTop="110dp"
-            android:fontFamily="@font/f_nanum_myeongjo"
-            android:text="Programmer"
-            android:textColor="@color/colorWhite"
-            android:textSize="20sp" />
+            android:layout_marginStart="42dp"
+            android:layout_marginLeft="42dp"
+            android:text="@string/credit_programmer"
+            android:textSize="24sp"
+            style="@style/CreditText"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/programmerText"
-            android:layout_alignLeft="@+id/programmerText"
-            android:fontFamily="@font/f_nanum_myeongjo"
-            android:text="박현수"
-            android:textColor="@color/colorWhite"
-            android:textSize="30sp" />
+            android:layout_below="@+id/programmer_text"
+            android:layout_alignStart="@+id/programmer_text"
+            android:layout_alignLeft="@+id/programmer_text"
+            android:layout_marginTop="-16dp"
+            android:text="@string/first_programmer"
+            android:textSize="32sp"
+            style="@style/CreditText"/>
     </RelativeLayout>
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="-196dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/credits_blue"/>
+
+        <TextView
+            android:id="@+id/designer_text"
+            android:layout_marginTop="110dp"
+            android:layout_marginStart="160dp"
+            android:layout_marginLeft="160dp"
+            android:text="@string/credit_designer"
+            android:textSize="24sp"
+            style="@style/CreditText"/>
+
+        <TextView
+            android:layout_below="@+id/designer_text"
+            android:layout_alignStart="@+id/designer_text"
+            android:layout_alignLeft="@+id/designer_text"
+            android:layout_marginTop="-16dp"
+            android:text="@string/first_designer"
+            android:textSize="32sp"
+            style="@style/CreditText"/>
+    </RelativeLayout>
+</LinearLayout>
