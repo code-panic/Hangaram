@@ -6,10 +6,10 @@
     android:background="@color/colorBlack">
 
     <TextView
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="48dp"
         android:gravity="center"
         android:text="@string/credit_credit"
-        android:textSize="40sp"
+        android:textSize="32sp"
         style="@style/WhiteText"/>
 
     <RelativeLayout

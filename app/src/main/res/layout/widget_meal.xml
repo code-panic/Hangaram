@@ -5,40 +5,40 @@
     android:background="@drawable/widget_meal_background"
     android:orientation="vertical">
 
+    <TextView
+        android:textSize="24sp"
+        android:gravity="center"
+        style="@style/BlackText" />
+
+    <View style="@style/GrayVerticalDivider"/>
+
+    <TextView
+        android:padding="16dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        style="@style/BlackText"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_gravity="center"
-            android:textSize="24sp"
-            android:text="@string/app_name"
-            android:textColor="@color/colorBlack"
-            android:fontFamily="@font/spoqa_han_sans_regular"/>
+        <Button
+            android:text="@string/widget_previous_cafeteria"
+            style="@style/WhiteButton"/>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:padding="8dp"
-            android:layout_gravity="center"
-            android:textSize="24sp"
+            android:layout_weight="1"
+            android:textSize="16sp"
             android:textColor="@color/colorBlack"
-            android:background="@drawable/cyan_button"/>
+            android:background="@drawable/button_cyan"
+            style="?android:attr/borderlessButtonStyle"/>
+
+        <Button
+            android:text="@string/widget_next_cafeteria"
+            style="@style/WhiteButton"/>
+
     </LinearLayout>
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fontFamily="@font/f_nanum_myeongjo"
-        android:gravity="center"
-        android:padding="8dp"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp" />
 </LinearLayout>

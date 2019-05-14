@@ -12,6 +12,8 @@
         android:textSize="24sp"
         style="@style/BlackText"/>
 
+    <View style="@style/GrayVerticalDivider"/>
+
     <TextView
         android:id="@+id/mThisSubjectName"
         android:gravity="center"
@@ -21,7 +23,7 @@
     <TextView
         android:id="@+id/mThisSubjectHint"
         android:gravity="center"
-        android:textSize="16sp"
+        android:textSize="24sp"
         style="@style/BlackText"/>
 
     <LinearLayout
@@ -30,24 +32,14 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="다음시간"
-            android:textSize="16sp"
-            android:textColor="@color/colorWhite"
-            android:fontFamily="@font/f_nanum_myeongjo"/>
+            android:text="@string/widget_next_time"
+            style="@style/widgetText"/>
+
+        <View style="@style/GrayHorizontalDivider"/>
 
         <TextView
             android:id="@+id/mNextSubjectName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="@color/colorWhite"
-            android:fontFamily="@font/f_nanum_myeongjo"/>
+            style="@style/widgetText"/>
 
     </LinearLayout>
 </LinearLayout>

@@ -18,6 +18,20 @@
         <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
     </style>
 
+    <style name="YellowText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorYellow</item>
+        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
+    </style>
+
+    <style name="CyanText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorCyan</item>
+        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
+    </style>
+
     <style name="BlackText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -42,20 +56,55 @@
         <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
     </style>
 
-    <style name="TimetableButton">
-        <item name="android:layout_width">wrap_content</item>
+    <style name="widgetText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
+    </style>
+
+    <style name="CyanButton">
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
-        <item name="android:background">@drawable/cyan_button</item>
+        <item name="android:background">@drawable/button_cyan</item>
+    </style>
+
+    <style name="WhiteButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:background">@color/colorWhite</item>
     </style>
 
     <style name="QuoteMarkImage">
         <item name="android:layout_width">24dp</item>
         <item name="android:layout_height">24dp</item>
         <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="GrayVerticalDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:background">@color/colorGray</item>
+    </style>
+
+    <style name="GrayHorizontalDivider">
+        <item name="android:layout_width">2dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:background">@color/colorGray</item>
     </style>
 
 </resources>
