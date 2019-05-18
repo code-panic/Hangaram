@@ -21,9 +21,6 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    //각 메뉴를 바꿔줄 FragmentManager 객체 선언하기
-    private FragmentManager mFragmentManager = getSupportFragmentManager();
-
     //메뉴에 들어갈 Fragment 선언하기
     private CafeMainFragment mCafeteriaFragment = new CafeMainFragment();
     private TimeTableFragment mTimeTableFragment = new TimeTableFragment();
@@ -36,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         //필요한 객체 선언하기
         final BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        final FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         //첫 화면 지정하기
         /* 한가람 시간표에서 호출할 경우에는 시간표 화면으로 넘어가기
@@ -50,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
                 switch (menuItem.getItemId()){
                     case R.id.action_cafeteria:
                         fragmentTransaction.replace(R.id.frame_layout, mCafeteriaFragment).commitAllowingStateLoss();

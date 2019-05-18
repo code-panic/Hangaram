@@ -38,9 +38,7 @@ public class MealProvider extends AppWidgetProvider{
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT lunch,dinner From " + DataBaseHelper.TABLE_NAME_meal + " WHERE year = ? AND month = ? AND date = ?", args);
 
         cursor.moveToFirst();
-
-        updateViews.setTextViewText(R.id.mealWidgetLunchTextView, cursor.getString(0));
-        updateViews.setTextViewText(R.id.mealWidgetDinnerTextView, cursor.getString(1));
+        
         appWidgetManager.updateAppWidget(appWidgetId,updateViews);
     }
 

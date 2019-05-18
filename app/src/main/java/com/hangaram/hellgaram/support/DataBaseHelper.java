@@ -1,5 +1,6 @@
 package com.hangaram.hellgaram.support;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -31,6 +32,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         //시간표 테이블 생성
         String TABLE_CREATE_timetable = "create table " + TABLE_NAME_timetable + "("
+                + "id integer PRIMARY KEY AUTOINCREMENT,"
                 + "period text,"
                 + "mon text,"
                 + "tue text,"
@@ -42,17 +44,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(TABLE_CREATE_timetable);
 
 
-        Cursor cursor = db.rawQuery("SELECT  * FROM " + TABLE_NAME_timetable, null);
+        String[] arr = {"period", "mon", "tue", "wen", "thu", "fri"};
 
-        //시간표 테이블 생성 시 null 지우기
+        //시간표 테이블 값 초기화
         for (int row = 0; row < 7; row++) {
-            cursor.moveToPosition(row);
+            ContentValues contentValues = new ContentValues();
+
             for (int column = 0; column < 6; column++) {
-
-                if (row == 0 && column == 0){
-
+                if (row == 0 && column == 0) {
+                    contentValues.put(arr[column], "");
+                } else if (row == 0) {
+                    contentValues.put(arr[column], arr[column]);
+                } else if (column == 0) {
+                    contentValues.put(arr[column], row);
+                } else {
+                    contentValues.put(arr[column], "");
                 }
             }
+
+            /*id는 1부터 시작하기 때문에 row 에 1을 더해주어야 한다.*/
+            String[] args = {row + 1 + ""};
+            db.update(TABLE_NAME_timetable, contentValues, "id = ?", args);
         }
     }
 

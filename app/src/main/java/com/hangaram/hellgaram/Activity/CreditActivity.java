@@ -18,19 +18,19 @@ public class CreditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credit);
 
-        creditActivity = findViewById(R.id.creditActivity);
-        creditActivity.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                    Intent intent = new Intent();
-                    setResult(RESULT_OK,intent);
-
-                    finish();
-                }
-                return true;
-            }
-        });
+//        creditActivity = findViewById(R.id.creditActivity);
+//        creditActivity.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if(event.getAction() == MotionEvent.ACTION_DOWN) {
+//                    Intent intent = new Intent();
+//                    setResult(RESULT_OK,intent);
+//
+//                    finish();
+//                }
+//                return true;
+//            }
+//        });
 
         int newUiOptions = getWindow().getDecorView().getSystemUiVisibility();
         newUiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;

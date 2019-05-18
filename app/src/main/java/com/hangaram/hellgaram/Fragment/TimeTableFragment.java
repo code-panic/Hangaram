@@ -1,46 +1,38 @@
 package com.hangaram.hellgaram.Fragment;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.hangaram.hellgaram.R;
-import com.hangaram.hellgaram.Activity.CautionActivity;
 import com.hangaram.hellgaram.support.DataBaseHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static android.app.Activity.RESULT_OK;
-
 public class TimeTableFragment extends Fragment {
     private static final String TAG = "TimeTableActivity";
-
-    private final String TABLE_NAME = "timetable";
+    private static final String TABLE_NAME = "timetable";
 
     private DataBaseHelper mDataBaseHelper;
     private SQLiteDatabase mDatabase;
-    private Cursor mCursor;
 
     private View mView;
-
     private TableLayout mTableLayout;
 
     private int mRowCount = 7; //가로줄(행)
@@ -57,23 +49,37 @@ public class TimeTableFragment extends Fragment {
     public void onPause() {
         super.onPause();
 
+        String[] arr = {"period", "mon", "tue", "wen", "thu", "fri"};
+
         //꺼졌을 때 자동으로 저장하기
         for (int row = 0; row < mRowCount; row++) {
             TableRow tableRow = (TableRow) mTableLayout.getChildAt(row);
-            for (int column = 0; column < mColumnCount; column++){
-                String text = ((EditText)tableRow.getChildAt(column)).getText().toString();
 
+            ContentValues contentValues = new ContentValues();
+
+            for (int column = 0; column < mColumnCount; column++) {
+                //
+                String text = ((EditText) tableRow.getChildAt(column)).getText().toString();
+                contentValues.put(arr[column], text);
             }
+
+            /*id는 1부터 시작하기 때문에 row 에 1을 더해주어야 한다.*/
+            String[] args = {row + 1 + ""};
+            mDatabase.update(TABLE_NAME, contentValues, "id = ?", args);
         }
+
+        //완료됨을 알려주는 Toast 메세지 보내기
+        Toast.makeText(getContext(), "시간표가 저장되었습니다", Toast.LENGTH_SHORT).show();
     }
 
     private void init() {
-        final Button editButton = mView.findViewById(R.id.edit_button);
-        final Button toHangaramTimetable = mView.findViewById(R.id.to_hangaram_timetable);
+        mTableLayout = mView.findViewById(R.id.table_layout);
+
+        Button editButton = mView.findViewById(R.id.edit_button);
+        Button toHangaramTimetable = mView.findViewById(R.id.to_hangaram_timetable);
 
         mDataBaseHelper = new DataBaseHelper(getContext());
         mDatabase = mDataBaseHelper.getReadableDatabase();
-
 
 
         //EditText 배치 및 초기화
@@ -83,14 +89,15 @@ public class TimeTableFragment extends Fragment {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //모든 editText 편집 가능한 상태로 바꾸기
                 for (int row = 0; row < mRowCount; row++) {
                     TableRow tableRow = (TableRow) mTableLayout.getChildAt(row);
-                    for (int column = 0; column < mColumnCount; column++){
-                       EditText editText = (EditText)tableRow.getChildAt(column);
+                    for (int column = 0; column < mColumnCount; column++) {
+                        EditText editText = (EditText) tableRow.getChildAt(column);
 
-                       editText.setFocusable(true);
-                       editText.setClickable(true);
-                       editText.setCursorVisible(true);
+                        editText.setFocusable(true);
+                        editText.setClickable(true);
+                        editText.setCursorVisible(true);
                     }
                 }
             }
@@ -100,6 +107,7 @@ public class TimeTableFragment extends Fragment {
         toHangaramTimetable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //한가람 시간표로 이동하기
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://xn--o39ai969f8llbkv0lb.xn--3e0b707e/"));
                 v.getContext().startActivity(intent);
             }
@@ -107,24 +115,38 @@ public class TimeTableFragment extends Fragment {
     }
 
     private void setEditTexts() {
+        //editText 를 인스턴스할 LayoutInflater 객체 생성하기
         LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        //데이터베이스에서 값을 읽어올 Cursor 가져오기
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+
+        Log.d(TAG,"count of cursor: " + cursor.getCount());
 
         for (int row = 0; row < mRowCount; row++) {
             TableRow tableRow = new TableRow(getContext());
+            cursor.moveToPosition(row);
+
             for (int column = 0; column < mColumnCount; column++) {
-                View editText;
+                EditText editText;
 
+                //editText 위치에 따라 인스턴스화 하기
+                /*
+                item_timetable1 : 채우기 용 editText
+                item_timetable2 : 요일 editText
+                item_timetable3 : 교시 editText
+                item_timetable4 : 과목 정보 editText
+                */
                 if (row == 0 && column == 0)
-                    editText = layoutInflater.inflate(R.layout.item_timetable1, tableRow, false);
+                    editText = (EditText) layoutInflater.inflate(R.layout.item_timetable1, tableRow, false);
                 else if (row == 0)
-                    editText = layoutInflater.inflate(R.layout.item_timetable2, tableRow, false);
+                    editText = (EditText) layoutInflater.inflate(R.layout.item_timetable2, tableRow, false);
                 else if (column == 1)
-                    editText = layoutInflater.inflate(R.layout.item_timetable3, tableRow, false);
+                    editText = (EditText) layoutInflater.inflate(R.layout.item_timetable3, tableRow, false);
                 else
-                    editText = layoutInflater.inflate(R.layout.item_timetable4, tableRow, false);
+                    editText = (EditText) layoutInflater.inflate(R.layout.item_timetable4, tableRow, false);
 
-
-
+                editText.setText(cursor.getString(column));
                 tableRow.addView(editText);
             }
         }
@@ -153,7 +175,7 @@ public class TimeTableFragment extends Fragment {
                     if (jsonObject.getString("room") != "null")
                         sumString += "\n" + jsonObject.getString("room");
 
-                    EditText editText = (EditText)tableRow.getChildAt(column);
+                    EditText editText = (EditText) tableRow.getChildAt(column);
                     editText.setText(sumString);
                 }
             }

@@ -6,7 +6,7 @@
         android:width="150dp"
         android:height="650dp"
         android:gravity="center">
-        <bitmap
-            android:src="@drawable/splash_image" />
+        <!--<bitmap-->
+            <!--android:src="@drawable/splash_image" />-->
     </item>
 </layer-list>

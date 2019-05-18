@@ -19,32 +19,26 @@ public class CautionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_caution);
 
         //뷰 정의하기
-        Button cancelButton = findViewById(R.id.cancelButton);
-        Button downloadButton = findViewById(R.id.downloadButton);
+        Button cancelButton = findViewById(R.id.cancel_button);
+        Button downloadButton = findViewById(R.id.download_button);
 
-        cancelButton.setOnTouchListener(new View.OnTouchListener() {
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    Intent intent = new Intent();
-                    intent.putExtra("result", false);
-                    setResult(RESULT_OK, intent);
-                    finish();
-                }
-                return true;
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("result", false);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 
-        downloadButton.setOnTouchListener(new View.OnTouchListener() {
+        downloadButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    Intent intent = new Intent();
-                    intent.putExtra("result", true);
-                    setResult(RESULT_OK, intent);
-                    finish();
-                }
-                return true;
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("result", true);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }
