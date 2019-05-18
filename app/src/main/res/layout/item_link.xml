@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/link"
     android:layout_marginTop="10dp"
     android:textSize="25sp"
     android:background="@drawable/item_link_colors"

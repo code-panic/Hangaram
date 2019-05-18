@@ -7,7 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.hangaram.hellgaram.Fragment.SettingFragmnet.SettingFragment;
+import com.hangaram.hellgaram.Fragment.SettingFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -45,8 +45,8 @@ public class QuoteGiver {
             Log.d(log,"quote: " + cursor.getString(2));
             Log.d(log,"hint: " + cursor.getString(3));
 
-            settingFragment.quote.setText(cursor.getString(2));
-            settingFragment.hint.setText(cursor.getString(3));
+//            settingFragment.quote.setText(cursor.getString(2));
+//            settingFragment.hint.setText(cursor.getString(3));
 
             cursor.close();
         } catch (Exception e) {

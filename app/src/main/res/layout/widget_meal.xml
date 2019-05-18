@@ -25,7 +25,7 @@
 
         <Button
             android:text="@string/widget_previous_cafeteria"
-            style="@style/WhiteButton"/>
+            style="@style/WidgetButton"/>
 
         <Button
             android:layout_width="0dp"
@@ -38,7 +38,7 @@
 
         <Button
             android:text="@string/widget_next_cafeteria"
-            style="@style/WhiteButton"/>
+            style="@style/WidgetButton"/>
 
     </LinearLayout>
 </LinearLayout>

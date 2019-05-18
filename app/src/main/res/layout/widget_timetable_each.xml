@@ -33,13 +33,13 @@
 
         <TextView
             android:text="@string/widget_next_time"
-            style="@style/widgetText"/>
+            style="@style/WidgetText"/>
 
         <View style="@style/GrayHorizontalDivider"/>
 
         <TextView
             android:id="@+id/mNextSubjectName"
-            style="@style/widgetText"/>
+            style="@style/WidgetText"/>
 
     </LinearLayout>
 </LinearLayout>

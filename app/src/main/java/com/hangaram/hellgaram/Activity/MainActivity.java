@@ -11,9 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.hangaram.hellgaram.Fragment.MealFragment.MealFragment;
-import com.hangaram.hellgaram.Fragment.SettingFragmnet.SettingFragment;
-import com.hangaram.hellgaram.Fragment.TimeTableFragment.TimeTableFragment;
+import com.hangaram.hellgaram.Fragment.CafeMainFragment;
+import com.hangaram.hellgaram.Fragment.SettingFragment;
+import com.hangaram.hellgaram.Fragment.TimeTableFragment;
 import com.hangaram.hellgaram.R;
 import com.hangaram.hellgaram.widget.TimetableEachProvider;
 
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager mFragmentManager = getSupportFragmentManager();
 
     //메뉴에 들어갈 Fragment 선언하기
-    private MealFragment mMealFragment = new MealFragment();
+    private CafeMainFragment mCafeteriaFragment = new CafeMainFragment();
     private TimeTableFragment mTimeTableFragment = new TimeTableFragment();
     private SettingFragment mSettingFragment = new SettingFragment();
 
@@ -34,10 +34,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //BottomNavigationView 선언하기
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
-        //FragmentTransaction 선언하기
+        //필요한 객체 선언하기
+        final BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         final FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 
         //첫 화면 지정하기
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         if (getIntent().getData() != null && getIntent().getData().getScheme().equals("htc"))
             fragmentTransaction.replace(R.id.frame_layout, mTimeTableFragment).commitAllowingStateLoss();
         else
-            fragmentTransaction.replace(R.id.frame_layout, mMealFragment).commitAllowingStateLoss();
+            fragmentTransaction.replace(R.id.frame_layout, mCafeteriaFragment).commitAllowingStateLoss();
 
         //bottomNavigationView의 아이템이 선택될 때 리스너 호출
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -54,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.action_cafeteria:
-                        fragmentTransaction.replace(R.id.frame_layout,mMealFragment).commitAllowingStateLoss();
+                        fragmentTransaction.replace(R.id.frame_layout, mCafeteriaFragment).commitAllowingStateLoss();
                         break;
                     case R.id.action_timetable:
                         fragmentTransaction.replace(R.id.frame_layout,mTimeTableFragment).commitAllowingStateLoss();

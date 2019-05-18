@@ -56,7 +56,7 @@
         <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
     </style>
 
-    <style name="widgetText">
+    <style name="WidgetText">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
@@ -66,7 +66,7 @@
         <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
     </style>
 
-    <style name="CyanButton">
+    <style name="TimetableButton">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_weight">1</item>
@@ -76,7 +76,7 @@
         <item name="android:background">@drawable/button_cyan</item>
     </style>
 
-    <style name="WhiteButton">
+    <style name="WidgetButton">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
@@ -84,6 +84,17 @@
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
         <item name="android:stateListAnimator">@null</item>
+        <item name="android:background">@color/colorWhite</item>
+    </style>
+
+    <style name="TimetableEditText">
+        <item name="android:layout_margin">1dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:cursorVisible">false</item>
         <item name="android:background">@color/colorWhite</item>
     </style>
 
