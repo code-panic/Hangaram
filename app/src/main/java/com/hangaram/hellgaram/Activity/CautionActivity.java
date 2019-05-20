@@ -26,8 +26,7 @@ public class CautionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.putExtra("result", false);
-                setResult(RESULT_OK, intent);
+                setResult(RESULT_CANCELED, intent);
                 finish();
             }
         });
@@ -36,7 +35,6 @@ public class CautionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.putExtra("result", true);
                 setResult(RESULT_OK, intent);
                 finish();
             }

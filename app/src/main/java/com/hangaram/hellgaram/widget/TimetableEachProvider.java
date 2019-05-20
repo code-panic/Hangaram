@@ -30,23 +30,23 @@ public class TimetableEachProvider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        Log.d(TAG, "onReceive -> mPeriod - 1 = " + (mPeriod - 1));
-
-        //과목 교시 정보 가져오기
-        mPeriod = intent.getExtras().getInt("period");
-
-        Log.d(TAG, "onReceive -> mPeriod - 1 = " + (mPeriod - 1));
-
-
-        //위젯 모두 업데이트
-        /* 위젯을 처음 만들 때 onReceive 함수가 호출되고 그 때 intent의 period는 0으로 초기화 된다.
-           이 후 setUpdateView 함수에서 mPeriod - 1로 연산을 진행해 cursor의 인덱스가 -1로 오버플로우 된다.
-           이런 예상치 못한 상황에서 mPeriod의 값이 바뀔 수 있어 if문 처리를 해 놓았다. */
-        if (mPeriod > 0 && mPeriod < 7) {
-            mAppWidgetIds = mAppWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
-            for (int i = 0; i < mAppWidgetIds.length; i++)
-                updateAppWidget(context, mAppWidgetManager, mAppWidgetIds[i]);
-        }
+//        Log.d(TAG, "onReceive -> mPeriod - 1 = " + (mPeriod - 1));
+//
+//        //과목 교시 정보 가져오기
+//        mPeriod = intent.getExtras().getInt("period");
+//
+//        Log.d(TAG, "onReceive -> mPeriod - 1 = " + (mPeriod - 1));
+//
+//
+//        //위젯 모두 업데이트
+//        /* 위젯을 처음 만들 때 onReceive 함수가 호출되고 그 때 intent의 period는 0으로 초기화 된다.
+//           이 후 setUpdateView 함수에서 mPeriod - 1로 연산을 진행해 cursor의 인덱스가 -1로 오버플로우 된다.
+//           이런 예상치 못한 상황에서 mPeriod의 값이 바뀔 수 있어 if문 처리를 해 놓았다. */
+//        if (mPeriod > 0 && mPeriod < 7) {
+//            mAppWidgetIds = mAppWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
+//            for (int i = 0; i < mAppWidgetIds.length; i++)
+//                updateAppWidget(context, mAppWidgetManager, mAppWidgetIds[i]);
+//        }
     }
 
 

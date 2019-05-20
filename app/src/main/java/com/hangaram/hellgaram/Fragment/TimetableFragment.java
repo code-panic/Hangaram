@@ -25,8 +25,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class TimeTableFragment extends Fragment {
-    private static final String TAG = "TimeTableActivity";
+public class TimetableFragment extends Fragment {
+    private static final String TAG = "TimetableFragment";
     private static final String TABLE_NAME = "timetable";
 
     private DataBaseHelper mDataBaseHelper;
@@ -38,38 +38,39 @@ public class TimeTableFragment extends Fragment {
     private int mRowCount = 7; //가로줄(행)
     private int mColumnCount = 6; //세로줄(열)
 
+    private boolean mIsEditTextSetCheked = false;
+    private boolean mIsEditedChecked = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_timetable, container, false);
+
+        //뷰 초기화 및 버튼 리스너 설정
         init();
+
         return mView;
+    }
+
+    /* onCreateVIew 에 setEditTexts() 함수를 두면
+    editText 의 값들이 시스템에 의해 onResume 전에 바뀌므로
+    여기서 editText 의 텍스트들을 초기화한다. */
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        //EditText 배치 및 초기화
+        if (!mIsEditTextSetCheked)
+            setEditTexts();
+
+        mIsEditTextSetCheked = true;
     }
 
     @Override
     public void onPause() {
         super.onPause();
 
-        String[] arr = {"period", "mon", "tue", "wen", "thu", "fri"};
-
-        //꺼졌을 때 자동으로 저장하기
-        for (int row = 0; row < mRowCount; row++) {
-            TableRow tableRow = (TableRow) mTableLayout.getChildAt(row);
-
-            ContentValues contentValues = new ContentValues();
-
-            for (int column = 0; column < mColumnCount; column++) {
-                //
-                String text = ((EditText) tableRow.getChildAt(column)).getText().toString();
-                contentValues.put(arr[column], text);
-            }
-
-            /*id는 1부터 시작하기 때문에 row 에 1을 더해주어야 한다.*/
-            String[] args = {row + 1 + ""};
-            mDatabase.update(TABLE_NAME, contentValues, "id = ?", args);
-        }
-
-        //완료됨을 알려주는 Toast 메세지 보내기
-        Toast.makeText(getContext(), "시간표가 저장되었습니다", Toast.LENGTH_SHORT).show();
+        //저장하기
+        saveData();
     }
 
     private void init() {
@@ -80,10 +81,6 @@ public class TimeTableFragment extends Fragment {
 
         mDataBaseHelper = new DataBaseHelper(getContext());
         mDatabase = mDataBaseHelper.getReadableDatabase();
-
-
-        //EditText 배치 및 초기화
-        setEditTexts();
 
         //편집 버튼 리스너
         editButton.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +95,9 @@ public class TimeTableFragment extends Fragment {
                         editText.setFocusable(true);
                         editText.setClickable(true);
                         editText.setCursorVisible(true);
+                        editText.setFocusableInTouchMode(true);
+
+                        mIsEditedChecked = true;
                     }
                 }
             }
@@ -121,8 +121,6 @@ public class TimeTableFragment extends Fragment {
         //데이터베이스에서 값을 읽어올 Cursor 가져오기
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 
-        Log.d(TAG,"count of cursor: " + cursor.getCount());
-
         for (int row = 0; row < mRowCount; row++) {
             TableRow tableRow = new TableRow(getContext());
             cursor.moveToPosition(row);
@@ -141,25 +139,54 @@ public class TimeTableFragment extends Fragment {
                     editText = (EditText) layoutInflater.inflate(R.layout.item_timetable1, tableRow, false);
                 else if (row == 0)
                     editText = (EditText) layoutInflater.inflate(R.layout.item_timetable2, tableRow, false);
-                else if (column == 1)
+                else if (column == 0)
                     editText = (EditText) layoutInflater.inflate(R.layout.item_timetable3, tableRow, false);
                 else
                     editText = (EditText) layoutInflater.inflate(R.layout.item_timetable4, tableRow, false);
 
                 editText.setText(cursor.getString(column));
+
                 tableRow.addView(editText);
+            }
+            mTableLayout.addView(tableRow);
+        }
+
+        //안드로이드 권장사항! 지우지 말자
+        cursor.close();
+    }
+
+    //꺼졌을 때 자동으로 저장하기
+    private void saveData() {
+        if (mIsEditedChecked) {
+            String[] arr = {"period", "mon", "tue", "wed", "thu", "fri"};
+
+            for (int row = 0; row < mRowCount; row++) {
+                TableRow tableRow = (TableRow) mTableLayout.getChildAt(row);
+                ContentValues contentValues = new ContentValues();
+
+                for (int column = 0; column < mColumnCount; column++) {
+                    String text = ((EditText) tableRow.getChildAt(column)).getText().toString();
+                    contentValues.put(arr[column], text);
+                }
+
+                /*id는 1부터 시작하기 때문에 row 에 1을 더해주어야 한다.*/
+                String[] args = {row + 1 + ""};
+                mDatabase.update(TABLE_NAME, contentValues, "id = ?", args);
+
+                //완료됨을 알려주는 Toast 메세지 보내기
+                Toast.makeText(getContext(), "시간표가 저장되었습니다", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    //한가람 시간표와 연동
-    public void linkWithFinalChild(JSONArray jsonArray) {
-        //
+    //한가람 시간표와 연동하기
+    public void linkWithHangaramTimetable(JSONArray jsonArray) {
+
         try {
             for (int row = 1; row < mRowCount; row++) {
                 TableRow tableRow = (TableRow) mTableLayout.getChildAt(row);
                 for (int column = 1; column < mColumnCount; column++) {
-                    JSONObject jsonObject = jsonArray.getJSONArray(row).getJSONObject(column);
+                    JSONObject jsonObject = jsonArray.getJSONArray(column - 1).getJSONObject(row - 1);
                     String sumString = "";
 
                     Log.d("linkWithFinalChild", jsonObject.getString("subject") + "\n"
@@ -178,6 +205,8 @@ public class TimeTableFragment extends Fragment {
                     EditText editText = (EditText) tableRow.getChildAt(column);
                     editText.setText(sumString);
                 }
+
+                mIsEditedChecked = true;
             }
         } catch (JSONException e) {
             e.printStackTrace();

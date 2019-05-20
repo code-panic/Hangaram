@@ -11,7 +11,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String Tag = "DataBaseHelper";
 
     private static final String DATABASE_NAME = "HellgaramDatabase.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 18;
 
     public static final String TABLE_NAME_meal = "meal";
     public static final String TABLE_NAME_timetable = "timetable";
@@ -32,19 +32,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         //시간표 테이블 생성
         String TABLE_CREATE_timetable = "create table " + TABLE_NAME_timetable + "("
-                + "id integer PRIMARY KEY AUTOINCREMENT,"
                 + "period text,"
                 + "mon text,"
                 + "tue text,"
                 + "wed text,"
                 + "thu text,"
-                + "fri text)";
+                + "fri text,"
+                + "id integer PRIMARY KEY AUTOINCREMENT)";
 
         db.execSQL(TABLE_CREATE_meal);
         db.execSQL(TABLE_CREATE_timetable);
 
 
-        String[] arr = {"period", "mon", "tue", "wen", "thu", "fri"};
+        String[] arr = {"period", "mon", "tue", "wed", "thu", "fri"};
+        String[] week = {"", "월", "화", "수", "목", "금"};
 
         //시간표 테이블 값 초기화
         for (int row = 0; row < 7; row++) {
@@ -54,7 +55,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 if (row == 0 && column == 0) {
                     contentValues.put(arr[column], "");
                 } else if (row == 0) {
-                    contentValues.put(arr[column], arr[column]);
+                    contentValues.put(arr[column], week[column]);
                 } else if (column == 0) {
                     contentValues.put(arr[column], row);
                 } else {
@@ -62,9 +63,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 }
             }
 
-            /*id는 1부터 시작하기 때문에 row 에 1을 더해주어야 한다.*/
-            String[] args = {row + 1 + ""};
-            db.update(TABLE_NAME_timetable, contentValues, "id = ?", args);
+            db.insert(TABLE_NAME_timetable, null, contentValues);
         }
     }
 

@@ -2,6 +2,6 @@
 <EditText xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/edit_text2"
     android:layout_width="0dp"
-    android:layout_height="24dp"
+    android:layout_height="32dp"
     android:layout_weight="1"
     style="@style/TimetableEditText" />
