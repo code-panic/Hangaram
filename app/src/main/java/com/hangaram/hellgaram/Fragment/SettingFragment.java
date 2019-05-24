@@ -1,21 +1,16 @@
 package com.hangaram.hellgaram.Fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hangaram.hellgaram.R;
-import com.hangaram.hellgaram.Activity.CreditActivity;
-import com.hangaram.hellgaram.support.QuoteGiver;
 
 public class SettingFragment extends Fragment {
     private static final String TAG = "SettingFragment";
@@ -32,6 +27,9 @@ public class SettingFragment extends Fragment {
     private void init(Context context) {
         RecyclerView linkRecyclerView = mView.findViewById(R.id.link_recycler);
 
+        TextView quote = mView.findViewById(R.id.quote);
+        TextView hint = mView.findViewById(R.id.hint);
+
         //Link recyclerView 세팅하기
         LinearLayoutManager linkLayoutManager = new LinearLayoutManager(context);
         linkRecyclerView.setLayoutManager(linkLayoutManager);
@@ -46,7 +44,10 @@ public class SettingFragment extends Fragment {
         //Adapter 설정하기
         linkRecyclerView.setAdapter(linkItemAdapter);
 
-        TextView quote = mView.findViewById(R.id.quote);
-        TextView hint = mView.findViewById(R.id.hint);
+        //오늘 명언 가져오기
+        QuoteGiver quoteGiver = new QuoteGiver(mView.getContext());
+
+        quote.setText(quoteGiver.getQuote());
+        hint.setText(quoteGiver.getHint());
     }
 }

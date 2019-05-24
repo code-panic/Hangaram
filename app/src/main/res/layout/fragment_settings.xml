@@ -2,39 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorWhite">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="40dp">
-
-        <ImageView
-            android:src="@drawable/mark_quote_left"
-            style="@style/QuoteMarkImage"/>
-
-        <TextView
-            android:id="@+id/quote"
-            style="@style/QuoteText"/>
-
-        <TextView
-            android:id="@+id/hint"
-            style="@style/QuoteText"/>
-
-        <ImageView
-            android:layout_marginTop="8dp"
-            android:src="@drawable/mark_quote_right"
-            style="@style/QuoteMarkImage"/>
-    </LinearLayout>
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
 
     <TextView
+        android:layout_marginTop="40dp"
+        android:text="@string/settings_quote"
+        android:textSize="32sp"
+        style="@style/QuoteText" />
+
+    <TextView
+        android:id="@+id/quote"
+        android:layout_marginTop="24dp"
+        style="@style/QuoteText" />
+
+    <TextView
+        android:id="@+id/hint"
+        style="@style/QuoteText" />
+
+
+    <TextView
+        style="@style/BlackText"
         android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="@string/settings_link"
-        android:textSize="32sp"
-        style="@style/BlackText"/>
+        android:textSize="32sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"

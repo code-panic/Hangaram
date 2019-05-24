@@ -11,8 +11,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.hangaram.hellgaram.R;
-import com.hangaram.hellgaram.support.DataBaseHelper;
-import com.hangaram.hellgaram.support.TimeGiver;
+import com.hangaram.hellgaram.Fragment.DataBaseHelper;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

@@ -27,7 +27,6 @@ public class LinkItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         //추가한 View 마다 정보 부여하기
-
         final LinkHolder linkHolder = (LinkItemAdapter.LinkHolder) holder;
 
         //view 의 이름과 주소를 설정하기
@@ -63,6 +62,5 @@ public class LinkItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             mLinkButton = view.findViewById(R.id.link);
         }
     }
-
 }
 

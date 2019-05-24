@@ -2,7 +2,6 @@ package com.hangaram.hellgaram.widget;
 
         import android.appwidget.AppWidgetManager;
         import android.appwidget.AppWidgetProvider;
-        import android.content.BroadcastReceiver;
         import android.content.ComponentName;
         import android.content.Context;
         import android.database.Cursor;
@@ -10,7 +9,7 @@ package com.hangaram.hellgaram.widget;
         import android.widget.RemoteViews;
 
         import com.hangaram.hellgaram.R;
-        import com.hangaram.hellgaram.support.DataBaseHelper;
+        import com.hangaram.hellgaram.Fragment.DataBaseHelper;
         import com.hangaram.hellgaram.support.TimeGiver;
 
 public class MealProvider extends AppWidgetProvider{

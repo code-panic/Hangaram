@@ -33,5 +33,4 @@ public class CafeAdapter extends FragmentStatePagerAdapter {
         //Integer 최대 범위까지
         return Integer.MAX_VALUE;
     }
-
 }

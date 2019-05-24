@@ -19,7 +19,6 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.hangaram.hellgaram.R;
-import com.hangaram.hellgaram.support.DataBaseHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,8 +37,8 @@ public class TimetableFragment extends Fragment {
     private int mRowCount = 7; //가로줄(행)
     private int mColumnCount = 6; //세로줄(열)
 
-    private boolean mIsEditTextSetCheked = false;
-    private boolean mIsEditedChecked = false;
+    private boolean mHangaramTimetableSet = false;
+    private boolean mEdited = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,22 +46,21 @@ public class TimetableFragment extends Fragment {
 
         //뷰 초기화 및 버튼 리스너 설정
         init();
+        locateEditTexts();
 
         return mView;
     }
 
-    /* onCreateVIew 에 setEditTexts() 함수를 두면
-    editText 의 값들이 시스템에 의해 onResume 전에 바뀌므로
-    여기서 editText 의 텍스트들을 초기화한다. */
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
 
-        //EditText 배치 및 초기화
-        if (!mIsEditTextSetCheked)
-            setEditTexts();
+        /* EditText 값 설정하기 */
+        /* 한가람 시간표에서 가져온 정보가 덮어질 염려가 있으므로 첫번째 데이터베이스 세팅인지 검사한다 */
+        if (!mHangaramTimetableSet)
+            setEditTextInfo();
 
-        mIsEditTextSetCheked = true;
+        mHangaramTimetableSet = false;
     }
 
     @Override
@@ -97,7 +95,7 @@ public class TimetableFragment extends Fragment {
                         editText.setCursorVisible(true);
                         editText.setFocusableInTouchMode(true);
 
-                        mIsEditedChecked = true;
+                        mEdited = true;
                     }
                 }
             }
@@ -114,16 +112,13 @@ public class TimetableFragment extends Fragment {
         });
     }
 
-    private void setEditTexts() {
+    private void locateEditTexts() {
         //editText 를 인스턴스할 LayoutInflater 객체 생성하기
         LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        //데이터베이스에서 값을 읽어올 Cursor 가져오기
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-
         for (int row = 0; row < mRowCount; row++) {
             TableRow tableRow = new TableRow(getContext());
-            cursor.moveToPosition(row);
+            tableRow.setBaselineAligned(false);
 
             for (int column = 0; column < mColumnCount; column++) {
                 EditText editText;
@@ -144,20 +139,32 @@ public class TimetableFragment extends Fragment {
                 else
                     editText = (EditText) layoutInflater.inflate(R.layout.item_timetable4, tableRow, false);
 
-                editText.setText(cursor.getString(column));
-
                 tableRow.addView(editText);
             }
             mTableLayout.addView(tableRow);
+        }
+    }
+
+    private void setEditTextInfo() {
+        //데이터베이스에서 값을 읽어올 Cursor 가져오기
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+
+        for (int row = 0; row < mRowCount; row++) {
+            TableRow tableRow = (TableRow) mTableLayout.getChildAt(row);
+            cursor.moveToPosition(row);
+
+            for (int column = 0; column < mColumnCount; column++) {
+                EditText editText = (EditText) tableRow.getChildAt(column);
+                editText.setText(cursor.getString(column));
+            }
         }
 
         //안드로이드 권장사항! 지우지 말자
         cursor.close();
     }
 
-    //꺼졌을 때 자동으로 저장하기
     private void saveData() {
-        if (mIsEditedChecked) {
+        if (mEdited) {
             String[] arr = {"period", "mon", "tue", "wed", "thu", "fri"};
 
             for (int row = 0; row < mRowCount; row++) {
@@ -179,7 +186,6 @@ public class TimetableFragment extends Fragment {
         }
     }
 
-    //한가람 시간표와 연동하기
     public void linkWithHangaramTimetable(JSONArray jsonArray) {
 
         try {
@@ -206,7 +212,8 @@ public class TimetableFragment extends Fragment {
                     editText.setText(sumString);
                 }
 
-                mIsEditedChecked = true;
+                mEdited = true;
+                mHangaramTimetableSet = true;
             }
         } catch (JSONException e) {
             e.printStackTrace();

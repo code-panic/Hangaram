@@ -1,13 +1,12 @@
-package com.hangaram.hellgaram.support;
+package com.hangaram.hellgaram.Fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import com.hangaram.hellgaram.Fragment.SettingFragment;
+import com.hangaram.hellgaram.support.TimeGiver;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -17,36 +16,33 @@ import java.io.InputStream;
 import static android.content.Context.MODE_PRIVATE;
 
 public class QuoteGiver {
-    private static final String PACKAGE_DIR = "/data/data/com.hangaram.hellgaram/";
+    private static final String TAG = "QuoteGiver";
+
+    private static final String PACKAGE_DIR = "data/com.hangaram.hellgaram/";
     private static final String DATABASE_NAME = "UpdateDatabase.db";
     private static final String TABLE_NAME = "quotes";
 
     private static int VERSION_CODE = 5;
-    SharedPreferences sharedPreferences;
+    private SharedPreferences mCurrentVersion;
 
-    private static String log = "QuoteGiver";
+    private String mQuote;
+    private String mHint;
 
-    public QuoteGiver(Context context, SettingFragment settingFragment) {
-        sharedPreferences = context.getSharedPreferences("setting", MODE_PRIVATE);
-        initialize(context);
+    public QuoteGiver(Context context) {
+        mCurrentVersion = context.getSharedPreferences("setting", MODE_PRIVATE);
+        init(context);
 
         try {
             SQLiteDatabase db = context.openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
-
             String[] args = {TimeGiver.getMonth(), TimeGiver.getDate()};
 
             Cursor cursor = db.rawQuery("SELECT month,date,quote,hint From " + TABLE_NAME +
                     " where month = ? AND date = ?", args);
 
-            Log.d(log, "cursor Count: " + cursor.getCount());
-
             cursor.moveToFirst();
 
-            Log.d(log,"quote: " + cursor.getString(2));
-            Log.d(log,"hint: " + cursor.getString(3));
-
-//            settingFragment.quote.setText(cursor.getString(2));
-//            settingFragment.hint.setText(cursor.getString(3));
+            mQuote = cursor.getString(cursor.getColumnIndex("quote"));
+            mHint = cursor.getString(cursor.getColumnIndex("hint"));
 
             cursor.close();
         } catch (Exception e) {
@@ -54,46 +50,54 @@ public class QuoteGiver {
         }
     }
 
-    private void initialize(Context context) {
+    private void init(Context context) {
+
+        //데이터베이스 폴더 없을 시 만들기
         File folder = new File(PACKAGE_DIR + "databases");
 
         if (!folder.exists())
             folder.mkdirs();
 
+        //데이터베이스 있는지 확인하기
         File outfile = new File(PACKAGE_DIR + "databases/" + DATABASE_NAME);
 
-        Log.d(log, "current VersionCode = " + sharedPreferences.getInt("versionCode", 1));
-        Log.d(log, "VERSION_CODE = " + VERSION_CODE);
-
-        if (outfile.length() <= 0 || sharedPreferences.getInt("versionCode", 1) != VERSION_CODE) {
+        //처음 데이터베이스를 깔거나 버전코드 변경시 실행
+        if (outfile.length() <= 0 || mCurrentVersion.getInt("VERSION_CODE", 1) != VERSION_CODE) {
             AssetManager assetManager = context.getResources().getAssets();
-            try {
-                InputStream inputStream = assetManager.open(DATABASE_NAME, AssetManager.ACCESS_BUFFER);
-                long filesize = inputStream.available();
-                byte[] tempdata = new byte[(int) filesize];
 
-                inputStream.read(tempdata);
+            try {
+                //asset 폴더에서 데이터베이스 InputStream 으로 가져오기
+                InputStream inputStream = assetManager.open(DATABASE_NAME, AssetManager.ACCESS_BUFFER);
+                long fileSize = inputStream.available();
+                byte[] tempData = new byte[(int) fileSize];
+
+                inputStream.read(tempData);
                 inputStream.close();
 
+                //파일이 없을 시 생성하고 있을 경우 덮어쓴다.
                 outfile.createNewFile();
 
+                //OutStream 으로 보내기
                 FileOutputStream fileOutputStream = new FileOutputStream(outfile);
-                fileOutputStream.write(tempdata);
+                fileOutputStream.write(tempData);
                 fileOutputStream.close();
 
-                SharedPreferences.Editor ed = sharedPreferences.edit();
-                ed.putInt("versionCode", VERSION_CODE);
-                ed.commit();
+                //현재 버전 저장하기
+                SharedPreferences.Editor editor = mCurrentVersion.edit();
+                editor.putInt("VERSION_CODE", VERSION_CODE);
+                editor.apply();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
 
-        File list[] = folder.listFiles();
+    public String getQuote() {
+        return mQuote;
+    }
 
-        for(File file: list){
-            Log.d(log,"file list: " + file.getName() + "\n");
-        }
-
+    public String getHint() {
+        return mHint;
     }
 }
