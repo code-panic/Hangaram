@@ -19,8 +19,8 @@ public class MealProvider extends AppWidgetProvider{
         super.onUpdate(context, appWidgetManager, appWidgetIds);
 
         appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
-        for (int i = 0; i < appWidgetIds.length; i++) {
-            updateAppWidget(context, appWidgetManager, appWidgetIds[i]);
+        for (int appWidgetId : appWidgetIds) {
+            updateAppWidget(context, appWidgetManager, appWidgetId);
         }
     }
 
@@ -40,7 +40,4 @@ public class MealProvider extends AppWidgetProvider{
         
         appWidgetManager.updateAppWidget(appWidgetId,updateViews);
     }
-
-
-
 }

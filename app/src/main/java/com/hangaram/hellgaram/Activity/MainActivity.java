@@ -77,34 +77,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-        //위젯 알람 매니저 및 인텐트 설정하기
-        AlarmManager mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent mIntent = new Intent(this, TimetableEachProvider.class);
-
-        //위젯 업데이트 시간 설정
-        int[][] mWidgetUpdateTimeArray = {
-                {0, 0},
-                {9, 15},
-                {10, 40},
-                {12, 5},
-                {14, 25},
-                {15, 50},
-        };
-
-        //위젯 알람 설정하기
-        Calendar mCalendar = Calendar.getInstance();
-
-        for (int period = 0; period < 6; period++) {
-            mIntent.putExtra("period", period + 1);
-
-            PendingIntent mPendingIntent = PendingIntent.getBroadcast(this, 0, mIntent, 0);
-
-            mCalendar.set(mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DATE),
-                    mWidgetUpdateTimeArray[period][0], mWidgetUpdateTimeArray[period][1], 0);
-            mAlarmManager.set(AlarmManager.RTC, mCalendar.getTimeInMillis(), mPendingIntent);
-        }
     }
 
     @Override
@@ -115,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_CAUTION){
             if (resultCode == RESULT_OK){
                 try {
-                    Log.d(TAG,"Ahhhh");
                     mTimeTableFragment.linkWithHangaramTimetable(new JSONArray(getIntent().getData().getQueryParameter("data")));
                 } catch (JSONException e) {
                     e.printStackTrace();

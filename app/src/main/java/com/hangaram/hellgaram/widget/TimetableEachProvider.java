@@ -1,5 +1,7 @@
 package com.hangaram.hellgaram.widget;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -19,67 +21,66 @@ import java.util.GregorianCalendar;
 public class TimetableEachProvider extends AppWidgetProvider {
     private static final String TAG = "TimetableEachProvider";
 
-    private AppWidgetManager mAppWidgetManager;
-    private int[] mAppWidgetIds;
-    private int mPeriod = 1;    //과목 교시
+    private final String action = "UPDATE_WIDGET_TIMETABLE_EACH";
 
-    private RemoteViews updateViews;
+    @Override
+    public void onEnabled(Context context) {
+        super.onEnabled(context);
+
+        //위젯 업데이트 시간 배열
+        int[][] timeArray = {
+                {0, 0},
+                {9, 15},
+                {10, 40},
+                {12, 5},
+                {14, 25},
+                {15, 50},
+        };
+
+        for (int period = 0; period < 6; period++) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, timeArray[period][0]);
+            calendar.set(Calendar.MINUTE, timeArray[period][1]);
+
+            //보낼 인텐트 생성하기
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(action), PendingIntent.FLAG_UPDATE_CURRENT);
+
+            //알람매니저 설정하기
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        }
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-//        Log.d(TAG, "onReceive -> mPeriod - 1 = " + (mPeriod - 1));
-//
-//        //과목 교시 정보 가져오기
-//        mPeriod = intent.getExtras().getInt("period");
-//
-//        Log.d(TAG, "onReceive -> mPeriod - 1 = " + (mPeriod - 1));
-//
-//
-//        //위젯 모두 업데이트
-//        /* 위젯을 처음 만들 때 onReceive 함수가 호출되고 그 때 intent의 period는 0으로 초기화 된다.
-//           이 후 setUpdateView 함수에서 mPeriod - 1로 연산을 진행해 cursor의 인덱스가 -1로 오버플로우 된다.
-//           이런 예상치 못한 상황에서 mPeriod의 값이 바뀔 수 있어 if문 처리를 해 놓았다. */
-//        if (mPeriod > 0 && mPeriod < 7) {
-//            mAppWidgetIds = mAppWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
-//            for (int i = 0; i < mAppWidgetIds.length; i++)
-//                updateAppWidget(context, mAppWidgetManager, mAppWidgetIds[i]);
-//        }
+        if (intent.getAction().equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
+            AppWidgetManager manager = AppWidgetManager.getInstance(context);
+        }
     }
-
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
 
-        Log.d(TAG, "onUpdate -> mPeriod - 1 = " + (mPeriod - 1));
+        appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
+        for (int mAppWidgetId : appWidgetIds)
+            updateAppWidget(context, appWidgetManager, mAppWidgetId);
+    }
 
-        //위젯들 정보 업데이트하기
-        this.mAppWidgetManager = appWidgetManager;
-        this.mAppWidgetIds = appWidgetIds;
+    @Override
+    public void onDisabled(Context context) {
+        super.onDisabled(context);
 
-        //위젯 모두 업데이트
-        if (mPeriod > 0 && mPeriod < 7) {
-            mAppWidgetIds = mAppWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
-            for (int i = 0; i < mAppWidgetIds.length; i++)
-                updateAppWidget(context, mAppWidgetManager, mAppWidgetIds[i]);
-        }
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(PendingIntent.getBroadcast(context, 0, new Intent(action), PendingIntent.FLAG_UPDATE_CURRENT));
     }
 
     public void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         //xml 파일 설정하기
-        updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_timetable_each);
+        RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_timetable_each);
 
-        //시간에 맞추어 업데이트 설정 바꾸기
-        setUpdateViewInfo(context);
-
-        //위젯 텍스트뷰 정보 업데이트 하기
-        appWidgetManager.updateAppWidget(appWidgetId, updateViews);
-    }
-
-    //위젯 텍스트뷰의 업데이트 정보 설정하기
-    void setUpdateViewInfo(Context context) {
         //현재 시간 설정하기
         Calendar calendar = new GregorianCalendar();
         calendar.add(Calendar.DATE, 0);
@@ -96,7 +97,6 @@ public class TimetableEachProvider extends AppWidgetProvider {
         //현재 과목열로 이동
         Log.d(TAG, "mPeriod - 1 = " + (mPeriod - 1));
         cursor.moveToPosition(mPeriod - 1);
-
 
         //현재 과목정보 가져오기
         String[] mThisSubjectArray = new String[0];
@@ -135,6 +135,9 @@ public class TimetableEachProvider extends AppWidgetProvider {
         if (mNextSubjectArray.length > 0) {
             updateViews.setTextViewText(R.id.mNextSubjectName, mNextSubjectArray[0]);
         }
+
+        //위젯 텍스트뷰 정보 업데이트 하기
+        appWidgetManager.updateAppWidget(appWidgetId, updateViews);
     }
 }
 

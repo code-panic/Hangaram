@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">가람</string>
+    <string name="app_name">한가람</string>
 
     <string name="menu_cafeteria">급식</string>
     <string name="menu_timetable">시간표</string>
