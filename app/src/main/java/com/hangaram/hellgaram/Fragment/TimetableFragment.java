@@ -68,7 +68,10 @@ public class TimetableFragment extends Fragment {
         super.onPause();
 
         //저장하기
-        saveData();
+        if (mEdited)
+            saveData();
+
+        mEdited = false;
     }
 
     private void init() {
@@ -164,25 +167,23 @@ public class TimetableFragment extends Fragment {
     }
 
     private void saveData() {
-        if (mEdited) {
-            String[] arr = {"period", "mon", "tue", "wed", "thu", "fri"};
+        String[] arr = {"period", "mon", "tue", "wed", "thu", "fri"};
 
-            for (int row = 0; row < mRowCount; row++) {
-                TableRow tableRow = (TableRow) mTableLayout.getChildAt(row);
-                ContentValues contentValues = new ContentValues();
+        for (int row = 0; row < mRowCount; row++) {
+            TableRow tableRow = (TableRow) mTableLayout.getChildAt(row);
+            ContentValues contentValues = new ContentValues();
 
-                for (int column = 0; column < mColumnCount; column++) {
-                    String text = ((EditText) tableRow.getChildAt(column)).getText().toString();
-                    contentValues.put(arr[column], text);
-                }
-
-                /*id는 1부터 시작하기 때문에 row 에 1을 더해주어야 한다.*/
-                String[] args = {row + 1 + ""};
-                mDatabase.update(TABLE_NAME, contentValues, "id = ?", args);
-
-                //완료됨을 알려주는 Toast 메세지 보내기
-                Toast.makeText(getContext(), "시간표가 저장되었습니다", Toast.LENGTH_SHORT).show();
+            for (int column = 0; column < mColumnCount; column++) {
+                String text = ((EditText) tableRow.getChildAt(column)).getText().toString();
+                contentValues.put(arr[column], text);
             }
+
+            /*id는 1부터 시작하기 때문에 row 에 1을 더해주어야 한다.*/
+            String[] args = {row + 1 + ""};
+            mDatabase.update(TABLE_NAME, contentValues, "id = ?", args);
+
+            //완료됨을 알려주는 Toast 메세지 보내기
+            Toast.makeText(getContext(), "시간표가 저장되었습니다", Toast.LENGTH_SHORT).show();
         }
     }
 
