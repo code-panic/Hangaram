@@ -20,8 +20,14 @@ import java.util.GregorianCalendar;
 
 public class TimetableEachProvider extends AppWidgetProvider {
     private static final String TAG = "TimetableEachProvider";
+    private static final String TABLE_NAME = "timetable";
 
     private final String action = "UPDATE_WIDGET_TIMETABLE_EACH";
+
+    private AppWidgetManager mManager;
+    private int[] mwidgetIds;
+
+    private int period = 0;
 
     @Override
     public void onEnabled(Context context) {
@@ -42,6 +48,9 @@ public class TimetableEachProvider extends AppWidgetProvider {
             calendar.set(Calendar.HOUR_OF_DAY, timeArray[period][0]);
             calendar.set(Calendar.MINUTE, timeArray[period][1]);
 
+            Intent intent = new Intent(action);
+            intent.putExtra("period", period);
+
             //보낼 인텐트 생성하기
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(action), PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -55,18 +64,22 @@ public class TimetableEachProvider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        if (intent.getAction().equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
-            AppWidgetManager manager = AppWidgetManager.getInstance(context);
-        }
+        //period = intent.getExtras().getInt("period");
+
+        if (intent.getAction().equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE))
+            onUpdate(context, mManager, mwidgetIds);
     }
 
     @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
+    public void onUpdate(Context context, AppWidgetManager manager, int[] widgetIds) {
+        super.onUpdate(context, manager, widgetIds);
 
-        appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
-        for (int mAppWidgetId : appWidgetIds)
-            updateAppWidget(context, appWidgetManager, mAppWidgetId);
+        mManager = manager;
+        mwidgetIds = widgetIds;
+
+        widgetIds = manager.getAppWidgetIds(new ComponentName(context, getClass()));
+        for (int id : widgetIds)
+            updateAppWidget(context, manager, id, period);
     }
 
     @Override
@@ -77,9 +90,9 @@ public class TimetableEachProvider extends AppWidgetProvider {
         alarmManager.cancel(PendingIntent.getBroadcast(context, 0, new Intent(action), PendingIntent.FLAG_UPDATE_CURRENT));
     }
 
-    public void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+    public void updateAppWidget(Context context, AppWidgetManager manager, int widgetId, int period) {
         //xml 파일 설정하기
-        RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_timetable_each);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_timetable_each);
 
         //현재 시간 설정하기
         Calendar calendar = new GregorianCalendar();
@@ -89,55 +102,48 @@ public class TimetableEachProvider extends AppWidgetProvider {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         SQLiteDatabase sqLiteDatabase = dataBaseHelper.getReadableDatabase();
 
-        Cursor cursor = sqLiteDatabase.query(DataBaseHelper.TABLE_NAME_timetable, null, null, null, null, null, null, null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 
         //현재 과목교시 보여주기
-        updateViews.setTextViewText(R.id.mThisSubjectPeriod, "|\t" + mPeriod + "교시" + "\t|");
+        views.setTextViewText(R.id.this_subject_period, "|\t" + period + 1 + "교시" + "\t|");
 
         //현재 과목열로 이동
-        Log.d(TAG, "mPeriod - 1 = " + (mPeriod - 1));
-        cursor.moveToPosition(mPeriod - 1);
+        cursor.moveToPosition(period);
 
         //현재 과목정보 가져오기
-        String[] mThisSubjectArray = new String[0];
-
-        if (calendar.get(Calendar.DAY_OF_WEEK) > 0 && calendar.get(Calendar.DAY_OF_WEEK) < 6) {
-            Log.d(TAG, calendar.get(Calendar.DAY_OF_WEEK) + "");
-
-            mThisSubjectArray = cursor.getString(calendar.get(Calendar.DAY_OF_WEEK) - 1).split("\n");
-        }
+        String[] thisSubjectArray = cursor.getString(calendar.get(Calendar.DAY_OF_WEEK) - 1).split("\n");
 
         //현재 과목이름 보여주기
-        if (mThisSubjectArray.length > 0) {
-            updateViews.setTextViewText(R.id.mThisSubjectName, mThisSubjectArray[0]);
-            Log.d(TAG, "mThisSubjectName : " + mThisSubjectArray[0]);
+        if (thisSubjectArray.length > 0) {
+            views.setTextViewText(R.id.this_subject_name, thisSubjectArray[1]);
+            Log.d(TAG, "mThisSubjectName : " + thisSubjectArray[0]);
         }
 
         //현재 과목에 대한 힌트 보여주기
-        String mThisSubjectHintString = "";
+        String thisSubjectHint = "";
 
-        for (int i = 1; i < mThisSubjectArray.length; i++) {
-            mThisSubjectHintString += mThisSubjectArray[i];
+        for (int i = 1; i < thisSubjectArray.length; i++) {
+            thisSubjectHint += thisSubjectArray[i];
 
-            if (i != mThisSubjectArray.length - 1)
-                mThisSubjectHintString += "/";
+            if (i != thisSubjectArray.length - 1)
+                thisSubjectHint += "/";
         }
 
-        updateViews.setTextViewText(R.id.mThisSubjectHint, mThisSubjectHintString);
+        views.setTextViewText(R.id.this_subject_hint, thisSubjectHint);
 
         //다음 과목열로 이동
-        cursor.moveToPosition(mPeriod);
+        cursor.moveToPosition(period + 1);
 
         //다음 과목정보 가져오기
-        String[] mNextSubjectArray = cursor.getString(calendar.get(Calendar.DAY_OF_WEEK) - 1).split("\n");
+        String[] nextSubjectArray = cursor.getString(calendar.get(Calendar.DAY_OF_WEEK) - 1).split("\n");
 
         //다음 과목이름 보여주기
-        if (mNextSubjectArray.length > 0) {
-            updateViews.setTextViewText(R.id.mNextSubjectName, mNextSubjectArray[0]);
+        if (nextSubjectArray.length > 0) {
+            views.setTextViewText(R.id.next_subject_name, nextSubjectArray[0]);
         }
 
         //위젯 텍스트뷰 정보 업데이트 하기
-        appWidgetManager.updateAppWidget(appWidgetId, updateViews);
+        manager.updateAppWidget(widgetId, views);
     }
 }
 
