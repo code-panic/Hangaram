@@ -13,7 +13,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.hangaram.hellgaram.R;
-import com.hangaram.hellgaram.Fragment.DataBaseHelper;
+import com.hangaram.hellgaram.datebase.DataBaseHelper;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

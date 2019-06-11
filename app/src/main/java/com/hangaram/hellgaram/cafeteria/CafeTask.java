@@ -1,10 +1,12 @@
-package com.hangaram.hellgaram.Fragment;
+package com.hangaram.hellgaram.cafeteria;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.hangaram.hellgaram.datebase.DataBaseHelper;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

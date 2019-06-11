@@ -8,10 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.hangaram.hellgaram.Fragment.CafeFragment;
-import com.hangaram.hellgaram.Fragment.CafeTask;
-import com.hangaram.hellgaram.Fragment.SettingFragment;
-import com.hangaram.hellgaram.Fragment.TimetableFragment;
+import com.hangaram.hellgaram.cafeteria.CafeFragment;
+import com.hangaram.hellgaram.cafeteria.CafeTask;
+import com.hangaram.hellgaram.setting.SettingFragment;
+import com.hangaram.hellgaram.timetable.TimetableFragment;
 import com.hangaram.hellgaram.R;
 
 import org.json.JSONArray;
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         CafeTask cafeTask = new CafeTask(this);
-        cafeTask.execute(2019,6);
+        cafeTask.execute(2019, 6);
     }
 
     @Override

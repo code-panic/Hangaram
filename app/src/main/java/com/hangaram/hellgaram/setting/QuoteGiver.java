@@ -1,4 +1,4 @@
-package com.hangaram.hellgaram.Fragment;
+package com.hangaram.hellgaram.setting;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,7 +6,7 @@ import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.hangaram.hellgaram.support.TimeGiver;
+import com.hangaram.hellgaram.time.TimeGiver;
 
 import java.io.File;
 import java.io.FileOutputStream;

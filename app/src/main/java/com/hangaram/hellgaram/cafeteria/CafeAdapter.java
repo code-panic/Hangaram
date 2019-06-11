@@ -1,4 +1,4 @@
-package com.hangaram.hellgaram.Fragment;
+package com.hangaram.hellgaram.cafeteria;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -16,7 +16,7 @@ public class CafeAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int dateGap) {
-        return new CardFrame(mContext, dateGap);
+        return new FrameCard(mContext, dateGap);
     }
 
     @Override

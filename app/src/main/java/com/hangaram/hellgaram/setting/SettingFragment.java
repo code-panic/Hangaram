@@ -1,4 +1,4 @@
-package com.hangaram.hellgaram.Fragment;
+package com.hangaram.hellgaram.setting;
 
 import android.content.Context;
 import android.os.Bundle;

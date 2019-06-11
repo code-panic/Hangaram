@@ -1,4 +1,4 @@
-package com.hangaram.hellgaram.Fragment;
+package com.hangaram.hellgaram.timetable;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -18,6 +18,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
+import com.hangaram.hellgaram.datebase.DataBaseHelper;
 import com.hangaram.hellgaram.R;
 
 import org.json.JSONArray;

@@ -1,4 +1,4 @@
-package com.hangaram.hellgaram.support;
+package com.hangaram.hellgaram.time;
 
 import android.util.Log;
 

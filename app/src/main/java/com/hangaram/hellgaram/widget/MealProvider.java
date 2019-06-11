@@ -9,8 +9,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.RemoteViews;
 
 import com.hangaram.hellgaram.R;
-import com.hangaram.hellgaram.Fragment.DataBaseHelper;
-import com.hangaram.hellgaram.support.TimeGiver;
+import com.hangaram.hellgaram.datebase.DataBaseHelper;
+import com.hangaram.hellgaram.time.TimeGiver;
 
 public class MealProvider extends AppWidgetProvider {
 

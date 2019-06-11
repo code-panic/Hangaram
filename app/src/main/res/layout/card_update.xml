@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:background="@color/colorWhite"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        style="@style/BlackText"
+        android:gravity="center"
+        android:id="@+id/date_text"
+        android:textSize="32sp" />
+
+    <TextView
+        style="@style/BlackText"
+        android:id="@+id/cafeteria_text"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textSize="16sp" />
+
+</LinearLayout>
+

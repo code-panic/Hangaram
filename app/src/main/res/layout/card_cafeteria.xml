@@ -1,50 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout android:background="@color/colorWhite"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite">
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/tools"
+    <TextView
+        style="@style/BlackText"
+        android:gravity="center"
+        android:id="@+id/date_text"
+        android:textSize="32sp" />
+
+    <TextView
+        style="@style/BlackText"
+        android:id="@+id/cafeteria_text"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textSize="16sp" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="48dp"
-        card_view:cardCornerRadius="8dp">
+        app:tabTextColor="@color/colorGray"
+        app:tabSelectedTextColor="@color/colorBlack"
+        app:tabIndicatorColor="@color/colorCyan">
 
-        <LinearLayout
+        <android.support.design.widget.TabItem
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/colorWhite">
+            android:text="@string/cafeteria_lunch" />
 
-            <TextView
-                android:id="@+id/date_text"
-                style="@style/BlackText"
-                android:gravity="center"
-                android:textSize="32sp" />
+        <android.support.design.widget.TabItem
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/cafeteria_dinner" />
 
-            <TextView
-                android:id="@+id/cafeteria_text"
-                style="@style/BlackText"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:textSize="16sp" />
+    </android.support.design.widget.TabLayout>
+</LinearLayout>
 
-            <android.support.design.widget.TabLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <android.support.design.widget.TabItem
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cafeteria_lunch" />
-
-                <android.support.design.widget.TabItem
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cafeteria_dinner" />
-
-            </android.support.design.widget.TabLayout>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-</RelativeLayout>

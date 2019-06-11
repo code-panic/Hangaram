@@ -1,4 +1,4 @@
-package com.hangaram.hellgaram.Fragment;
+package com.hangaram.hellgaram.setting;
 
 public class LinkItem {
     private String mLinkName;
