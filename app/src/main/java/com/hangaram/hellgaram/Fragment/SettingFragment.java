@@ -35,7 +35,7 @@ public class SettingFragment extends Fragment {
         linkRecyclerView.setLayoutManager(linkLayoutManager);
 
         //Link 아이템 설정하기
-        LinkItemAdapter linkItemAdapter = new LinkItemAdapter();
+        LinkAdapter linkItemAdapter = new LinkAdapter();
 
         linkItemAdapter.add(new LinkItem("한가람 홈페이지", "http://www.hangaram.hs.kr"));
         linkItemAdapter.add(new LinkItem("한가람 리로스쿨", "https://hangaram.riroschool.kr"));

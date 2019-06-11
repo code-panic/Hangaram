@@ -2,10 +2,8 @@ package com.hangaram.hellgaram.Fragment;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String Tag = "DataBaseHelper";
@@ -13,8 +11,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "HellgaramDatabase.db";
     private static final int DATABASE_VERSION = 18;
 
-    public static final String TABLE_NAME_meal = "meal";
-    public static final String TABLE_NAME_timetable = "timetable";
+    public static final String TABLE_NAME_MEAL = "meal";
+    public static final String TABLE_NAME_TIMETABLE = "timetable";
 
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -23,7 +21,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String TABLE_CREATE_meal = "create table " + TABLE_NAME_meal + "("
+        String TABLE_CREATE_meal = "create table " + TABLE_NAME_MEAL + "("
                 + "year integer,"
                 + "month integer,"
                 + "date integer,"
@@ -31,7 +29,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "dinner text)";
 
         //시간표 테이블 생성
-        String TABLE_CREATE_timetable = "create table " + TABLE_NAME_timetable + "("
+        String TABLE_CREATE_timetable = "create table " + TABLE_NAME_TIMETABLE + "("
                 + "period text,"
                 + "mon text,"
                 + "tue text,"
@@ -63,14 +61,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 }
             }
 
-            db.insert(TABLE_NAME_timetable, null, contentValues);
+            db.insert(TABLE_NAME_TIMETABLE, null, contentValues);
         }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_meal);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_timetable);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_MEAL);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_TIMETABLE);
         onCreate(db);
     }
 }

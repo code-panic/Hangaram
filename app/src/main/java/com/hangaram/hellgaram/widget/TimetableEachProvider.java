@@ -89,14 +89,14 @@ public class TimetableEachProvider extends AppWidgetProvider {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         SQLiteDatabase sqLiteDatabase = dataBaseHelper.getReadableDatabase();
 
-        Cursor cursor = sqLiteDatabase.query(DataBaseHelper.TABLE_NAME_timetable, null, null, null, null, null, null, null);
+        Cursor cursor = sqLiteDatabase.query(DataBaseHelper.TABLE_NAME_TIMETABLE, null, null, null, null, null, null, null);
 
-        //현재 과목교시 보여주기
-        updateViews.setTextViewText(R.id.mThisSubjectPeriod, "|\t" + mPeriod + "교시" + "\t|");
-
-        //현재 과목열로 이동
-        Log.d(TAG, "mPeriod - 1 = " + (mPeriod - 1));
-        cursor.moveToPosition(mPeriod - 1);
+//        //현재 과목교시 보여주기
+//        updateViews.setTextViewText(R.id.mThisSubjectPeriod, "|\t" + mPeriod + "교시" + "\t|");
+//
+//        //현재 과목열로 이동
+//        Log.d(TAG, "mPeriod - 1 = " + (mPeriod - 1));
+//        cursor.moveToPosition(mPeriod - 1);
 
         //현재 과목정보 가져오기
         String[] mThisSubjectArray = new String[0];
@@ -125,8 +125,8 @@ public class TimetableEachProvider extends AppWidgetProvider {
 
         updateViews.setTextViewText(R.id.mThisSubjectHint, mThisSubjectHintString);
 
-        //다음 과목열로 이동
-        cursor.moveToPosition(mPeriod);
+//        //다음 과목열로 이동
+//        cursor.moveToPosition(mPeriod);
 
         //다음 과목정보 가져오기
         String[] mNextSubjectArray = cursor.getString(calendar.get(Calendar.DAY_OF_WEEK) - 1).split("\n");

@@ -11,23 +11,18 @@ import android.view.ViewGroup;
 import com.hangaram.hellgaram.R;
 
 
-public class CafeMainFragment extends Fragment {
+public class CafeFragment extends Fragment {
     private static final String Tag = "CafeteriaFragment";
-
-    private ViewPager mViewPager;
-
-    private View mView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //
-        mView = inflater.inflate(R.layout.fragment_cafeteria, container, false);
+        View view = inflater.inflate(R.layout.fragment_cafeteria, container, false);
 
-        mViewPager = mView.findViewById(R.id.viewpager);
+        ViewPager viewPager = view.findViewById(R.id.viewpager);
 
-        mViewPager.setAdapter(new CafeAdapter(getFragmentManager()));
-        mViewPager.setCurrentItem(0);
+        viewPager.setAdapter(new CafeAdapter(getContext()));
+        viewPager.setCurrentItem(0);
 
-        return mView;
+        return view;
     }
 }

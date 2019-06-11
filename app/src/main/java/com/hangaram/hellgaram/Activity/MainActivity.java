@@ -1,27 +1,21 @@
 package com.hangaram.hellgaram.Activity;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
-import com.hangaram.hellgaram.Fragment.CafeMainFragment;
+import com.hangaram.hellgaram.Fragment.CafeFragment;
+import com.hangaram.hellgaram.Fragment.CafeTask;
 import com.hangaram.hellgaram.Fragment.SettingFragment;
 import com.hangaram.hellgaram.Fragment.TimetableFragment;
 import com.hangaram.hellgaram.R;
-import com.hangaram.hellgaram.widget.TimetableEachProvider;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -29,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_CAUTION = 101;
 
     //메뉴에 들어갈 Fragment 선언하기
-    private CafeMainFragment mCafeteriaFragment = new CafeMainFragment();
+    private CafeFragment mCafeteriaFragment = new CafeFragment();
     private TimetableFragment mTimeTableFragment = new TimetableFragment();
     private SettingFragment mSettingFragment = new SettingFragment();
 
@@ -77,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        CafeTask cafeTask = new CafeTask(this);
+        cafeTask.execute(2019,6);
     }
 
     @Override

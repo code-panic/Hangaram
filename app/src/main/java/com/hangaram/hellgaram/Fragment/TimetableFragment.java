@@ -26,7 +26,6 @@ import org.json.JSONObject;
 
 public class TimetableFragment extends Fragment {
     private static final String TAG = "TimetableFragment";
-    private static final String TABLE_NAME = "timetable";
 
     private DataBaseHelper mDataBaseHelper;
     private SQLiteDatabase mDatabase;
@@ -150,7 +149,7 @@ public class TimetableFragment extends Fragment {
 
     private void setEditTextInfo() {
         //데이터베이스에서 값을 읽어올 Cursor 가져오기
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + DataBaseHelper.TABLE_NAME_TIMETABLE, null);
 
         for (int row = 0; row < mRowCount; row++) {
             TableRow tableRow = (TableRow) mTableLayout.getChildAt(row);
@@ -180,7 +179,7 @@ public class TimetableFragment extends Fragment {
 
             /*id는 1부터 시작하기 때문에 row 에 1을 더해주어야 한다.*/
             String[] args = {row + 1 + ""};
-            mDatabase.update(TABLE_NAME, contentValues, "id = ?", args);
+            mDatabase.update(DataBaseHelper.TABLE_NAME_TIMETABLE, contentValues, "id = ?", args);
 
             //완료됨을 알려주는 Toast 메세지 보내기
             Toast.makeText(getContext(), "시간표가 저장되었습니다", Toast.LENGTH_SHORT).show();
