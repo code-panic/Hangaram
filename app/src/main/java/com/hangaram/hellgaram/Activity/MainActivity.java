@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.hangaram.hellgaram.cafeteria.CafeFragment;
-import com.hangaram.hellgaram.cafeteria.CafeTask;
 import com.hangaram.hellgaram.setting.SettingFragment;
 import com.hangaram.hellgaram.timetable.TimetableFragment;
 import com.hangaram.hellgaram.R;
@@ -70,9 +69,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        CafeTask cafeTask = new CafeTask(this);
-        cafeTask.execute(2019, 6);
     }
 
     @Override

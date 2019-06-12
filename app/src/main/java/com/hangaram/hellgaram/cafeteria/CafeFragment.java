@@ -3,6 +3,7 @@ package com.hangaram.hellgaram.cafeteria;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import com.hangaram.hellgaram.R;
 
 
 public class CafeFragment extends Fragment {
-    private static final String Tag = "CafeteriaFragment";
+    private static final String TAG = "CafeteriaFragment";
 
     public static boolean sIsLunch = true;
 
@@ -21,7 +22,8 @@ public class CafeFragment extends Fragment {
 
         ViewPager viewPager = view.findViewById(R.id.viewpager);
 
-        viewPager.setAdapter(new CafeAdapter(getContext()));
+        Log.d(TAG,"1");
+        viewPager.setAdapter(new CafeAdapter(getFragmentManager()));
         viewPager.setCurrentItem(0);
 
         return view;

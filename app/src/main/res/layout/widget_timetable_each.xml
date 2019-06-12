@@ -7,7 +7,7 @@
     android:background="@color/colorWhite">
 
     <TextView
-        android:id="@+id/mThisSubjectPeriod"
+        android:id="@+id/this_subject_period"
         android:gravity="center"
         android:textSize="24sp"
         style="@style/BlackText"/>
@@ -15,13 +15,13 @@
     <View style="@style/GrayVerticalDivider"/>
 
     <TextView
-        android:id="@+id/mThisSubjectName"
+        android:id="@+id/this_subject_name"
         android:gravity="center"
         android:textSize="32sp"
         style="@style/BlackText"/>
 
     <TextView
-        android:id="@+id/mThisSubjectHint"
+        android:id="@+id/this_subject_hint"
         android:gravity="center"
         android:textSize="24sp"
         style="@style/BlackText"/>
@@ -38,7 +38,7 @@
         <View style="@style/GrayHorizontalDivider"/>
 
         <TextView
-            android:id="@+id/mNextSubjectName"
+            android:id="@+id/next_subject_name"
             style="@style/WidgetText"/>
 
     </LinearLayout>

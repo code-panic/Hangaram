@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,29 +15,35 @@ import com.hangaram.hellgaram.R;
 import com.hangaram.hellgaram.time.TimeGiver;
 
 public class ShowCard extends Fragment {
+    private static final String TAG = "ShowCard";
+
+    private TextView mDateText;
+    private TextView mCafeText;
+    private TabLayout mTabLayout;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle bundle) {
-        View view = inflater.inflate(R.layout.card_cafeteria, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle bundle) {
+        View view = inflater.inflate(R.layout.card_show, container, false);
 
-        int dateGap = bundle.getInt("dateGap");
+        int dateGap = getArguments().getInt("dateGap");
 
-        TextView dateText = view.findViewById(R.id.date_text);
-        TextView cafeText = view.findViewById(R.id.cafeteria_text);
-        TabLayout tabLayout = view.findViewById(R.id.tab_layout);
+        mDateText = view.findViewById(R.id.date_text);
+        mCafeText = view.findViewById(R.id.cafeteria_text);
+        mTabLayout = view.findViewById(R.id.tab_layout);
 
-        dateText.setText(TimeGiver.getYear(dateGap) + "." + TimeGiver.getMonth(dateGap) + "." + TimeGiver.getDate(dateGap));
+        mDateText.setText(TimeGiver.getYear(dateGap) + "." + TimeGiver.getMonth(dateGap) + "." + TimeGiver.getDate(dateGap));
+        setCafeText();
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0)
                     CafeFragment.sIsLunch = true;
-                 else
+                else
                     CafeFragment.sIsLunch = false;
 
-
+                setCafeText();
             }
 
             @Override
@@ -50,13 +57,16 @@ public class ShowCard extends Fragment {
             }
         });
 
-        if (CafeFragment.sIsLunch) {
-            cafeText.setText(bundle.getString("lunch"));
-            tabLayout.getTabAt(0).select();
-        } else {
-            cafeText.setText(bundle.getString("dinner"));
-            tabLayout.getTabAt(1).select();
-        }
         return view;
+    }
+
+    private void setCafeText() {
+        if (CafeFragment.sIsLunch) {
+            mCafeText.setText(getArguments().getString("lunch"));
+            mTabLayout.getTabAt(0).select();
+        } else {
+            mCafeText.setText(getArguments().getString("dinner"));
+            mTabLayout.getTabAt(1).select();
+        }
     }
 }

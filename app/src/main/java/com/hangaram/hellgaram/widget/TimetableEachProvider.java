@@ -109,7 +109,7 @@ public class TimetableEachProvider extends AppWidgetProvider {
 
         //현재 과목이름 보여주기
         if (mThisSubjectArray.length > 0) {
-            updateViews.setTextViewText(R.id.mThisSubjectName, mThisSubjectArray[0]);
+            updateViews.setTextViewText(R.id.this_subject_name, mThisSubjectArray[0]);
             Log.d(TAG, "mThisSubjectName : " + mThisSubjectArray[0]);
         }
 
@@ -123,7 +123,7 @@ public class TimetableEachProvider extends AppWidgetProvider {
                 mThisSubjectHintString += "/";
         }
 
-        updateViews.setTextViewText(R.id.mThisSubjectHint, mThisSubjectHintString);
+        updateViews.setTextViewText(R.id.this_subject_hint, mThisSubjectHintString);
 
 //        //다음 과목열로 이동
 //        cursor.moveToPosition(mPeriod);
@@ -133,7 +133,7 @@ public class TimetableEachProvider extends AppWidgetProvider {
 
         //다음 과목이름 보여주기
         if (mNextSubjectArray.length > 0) {
-            updateViews.setTextViewText(R.id.mNextSubjectName, mNextSubjectArray[0]);
+            updateViews.setTextViewText(R.id.next_subject_name, mNextSubjectArray[0]);
         }
 
         //위젯 텍스트뷰 정보 업데이트 하기

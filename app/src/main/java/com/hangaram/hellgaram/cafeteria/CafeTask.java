@@ -16,7 +16,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 
 public class CafeTask extends AsyncTask<Integer, Integer, Void> {
-    private static final String TAG = "조성은 좋아해";
+    private static final String TAG = "CafeTask";
 
     private Context mContext;
 

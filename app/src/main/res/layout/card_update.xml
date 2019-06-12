@@ -13,10 +13,18 @@
 
     <TextView
         style="@style/BlackText"
-        android:id="@+id/cafeteria_text"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:gravity="center"
+        android:text="급식정보가 없습니다\n 정보를 가져올까요?"
         android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/download_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="급식정보 다운로드"
+        android:textSize="16sp"
+        android:layout_gravity="center"
+        android:background="@color/colorCyan"/>
 
 </LinearLayout>
 
