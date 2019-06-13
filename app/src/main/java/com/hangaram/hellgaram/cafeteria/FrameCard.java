@@ -48,9 +48,7 @@ public class FrameCard extends Fragment {
 
             showCard.setArguments(bundle);
 
-            BlankFragment blankFragment = new BlankFragment();
-
-            ((AppCompatActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.card_frame_layout, blankFragment).commit();
+            ((AppCompatActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.card_frame_layout, showCard).commit();
         } else {
             UpdateCard updateCard = new UpdateCard();
 
