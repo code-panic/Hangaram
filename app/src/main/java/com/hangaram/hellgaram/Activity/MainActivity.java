@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.hangaram.hellgaram.cafeteria.CafeFragment;
 import com.hangaram.hellgaram.setting.SettingFragment;
+import com.hangaram.hellgaram.timetable.CautionActivity;
 import com.hangaram.hellgaram.timetable.TimetableFragment;
 import com.hangaram.hellgaram.R;
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.main_bottom_navigation);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         //첫 화면 지정하기
@@ -41,13 +42,13 @@ public class MainActivity extends AppCompatActivity {
             //하단바 시간표 아이콘으로 설정하기
             bottomNavigationView.setSelectedItemId(R.id.action_timetable);
 
-            fragmentTransaction.replace(R.id.frame_layout, mTimeTableFragment).commitAllowingStateLoss();
+            fragmentTransaction.replace(R.id.main_frame_layout, mTimeTableFragment).commitAllowingStateLoss();
 
             Intent intent = new Intent(this, CautionActivity.class);
             startActivityForResult(intent,REQUEST_CODE_CAUTION);
         }
         else
-            fragmentTransaction.replace(R.id.frame_layout, mCafeteriaFragment).commitAllowingStateLoss();
+            fragmentTransaction.replace(R.id.main_frame_layout, mCafeteriaFragment).commitAllowingStateLoss();
 
         //bottomNavigationView의 아이템이 선택될 때 리스너 호출
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -57,13 +58,13 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (menuItem.getItemId()){
                     case R.id.action_cafeteria:
-                        fragmentTransaction.replace(R.id.frame_layout, mCafeteriaFragment).commitAllowingStateLoss();
+                        fragmentTransaction.replace(R.id.main_frame_layout, mCafeteriaFragment).commitAllowingStateLoss();
                         break;
                     case R.id.action_timetable:
-                        fragmentTransaction.replace(R.id.frame_layout,mTimeTableFragment).commitAllowingStateLoss();
+                        fragmentTransaction.replace(R.id.main_frame_layout,mTimeTableFragment).commitAllowingStateLoss();
                         break;
                     case R.id.action_settings:
-                        fragmentTransaction.replace(R.id.frame_layout,mSettingFragment).commitAllowingStateLoss();
+                        fragmentTransaction.replace(R.id.main_frame_layout,mSettingFragment).commitAllowingStateLoss();
                         break;
                 }
                 return true;

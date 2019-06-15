@@ -8,21 +8,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
-        style="@style/BlackText"
         android:gravity="center"
-        android:id="@+id/date_text"
-        android:textSize="24sp" />
+        android:id="@+id/card_show_date_text"
+        android:textSize="24sp"
+        style="@style/BlackText"/>
 
     <TextView
-        style="@style/BlackText"
-        android:id="@+id/cafeteria_text"
+        android:id="@+id/card_show_cafe_text"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:textSize="16sp"
-        android:gravity="center"/>
+        android:gravity="center"
+        style="@style/BlackText"/>
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout"
+        android:id="@+id/card_show_tab_layout"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         app:tabTextColor="@color/colorGray"

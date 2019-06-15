@@ -14,6 +14,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME_MEAL = "meal";
     public static final String TABLE_NAME_TIMETABLE = "timetable";
 
+
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

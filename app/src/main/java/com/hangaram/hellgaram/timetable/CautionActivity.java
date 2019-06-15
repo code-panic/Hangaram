@@ -1,9 +1,8 @@
-package com.hangaram.hellgaram.Activity;
+package com.hangaram.hellgaram.timetable;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -19,8 +18,8 @@ public class CautionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_caution);
 
         //뷰 정의하기
-        Button cancelButton = findViewById(R.id.cancel_button);
-        Button downloadButton = findViewById(R.id.download_button);
+        Button cancelButton = findViewById(R.id.caution_cancel_button);
+        Button downloadButton = findViewById(R.id.caution_download_button);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override

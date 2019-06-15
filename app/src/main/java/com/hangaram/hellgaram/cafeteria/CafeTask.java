@@ -23,12 +23,15 @@ public class CafeTask extends AsyncTask<Integer, Integer, Void> {
     private DataBaseHelper mDataBaseHelper;
     private SQLiteDatabase mDatabase;
 
-    public CafeTask(Context context) {
+    public CafeTask(Context context){
         this.mContext = context;
     }
 
     @Override
     protected Void doInBackground(Integer... params) {
+
+        mDataBaseHelper = new DataBaseHelper(mContext);
+        mDatabase = mDataBaseHelper.getReadableDatabase();
 
         /*
          * 교육청 (ex. 서울 -> sen.go.kr/ )
@@ -38,9 +41,6 @@ public class CafeTask extends AsyncTask<Integer, Integer, Void> {
          * schulKndScCode: 학교종류 (ex. 고등학교 -> 04)
          * schYm: 요청하는 달 (ex. 201906)
          */
-
-        mDataBaseHelper = new DataBaseHelper(mContext);
-        mDatabase = mDataBaseHelper.getReadableDatabase();
 
         String urlString = "https://stu."
                 + "sen.go.kr/"
@@ -56,8 +56,8 @@ public class CafeTask extends AsyncTask<Integer, Integer, Void> {
 
             int date = 1;
 
+            /* 1 [중식] 토마토스파게티*1.4.6 크림스프5.6.9 ... [석식] 찹쌀밥 ... */
             for (Element td : tds) {
-                /*td 태그 중 일부는 비어 있어 의미 없는 태그가 있으므로 걸러준다*/
                 if (!td.text().equals("")) {
                     String[] spilts = td.text().split(" ");
 
@@ -78,9 +78,9 @@ public class CafeTask extends AsyncTask<Integer, Integer, Void> {
                         }
 
                         if (isLunch && !isDinner) {
-                            lunchText.append(split).append("\n");
+                            lunchText.append(filterAllergyInfo(split)).append("\n");
                         } else if (isLunch && isDinner) {
-                            dinnerText.append(split).append("\n");
+                            dinnerText.append(filterAllergyInfo(split)).append("\n");
                         }
                     }
 
@@ -101,7 +101,20 @@ public class CafeTask extends AsyncTask<Integer, Integer, Void> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return null;
+    }
+
+    private String filterAllergyInfo(String split) {
+        if(!split.equals("")) {
+            /*알레르기 정보가 있으면 잘라서 반환하고 없으면 그대로 반환한다*/
+            for (int index = 0; index < split.length(); index++) {
+                if ((split.charAt(index) >= '1' && split.charAt(index) <= '9') || split.charAt(index) == '*') {
+                    return split.substring(0, index);
+                }
+            }
+            return split;
+        } else
+            /*급식정보가 비어 있으면 특정 문자열을 반환한다*/
+            return "급식이 없어요~";
     }
 }

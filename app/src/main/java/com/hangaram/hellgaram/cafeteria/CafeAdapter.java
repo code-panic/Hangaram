@@ -1,35 +1,29 @@
 package com.hangaram.hellgaram.cafeteria;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
 
 public class CafeAdapter extends FragmentPagerAdapter {
     private static final String TAG = "CafeAdapter";
 
-    CafeAdapter(FragmentManager fm) {
-        super(fm);
+    CafeAdapter(FragmentManager fragmentManager) {
+        super(fragmentManager);
     }
-
 
     @Override
     public Fragment getItem(int dateGap) {
         Log.d(TAG, "dateGap: " + dateGap);
 
-        FrameCard frameCard = new FrameCard();
+        CardFrame cardFrame = new CardFrame();
         Bundle bundle = new Bundle();
 
         bundle.putInt("dateGap", dateGap);
 
-        frameCard.setArguments(bundle);
-        return frameCard;
+        cardFrame.setArguments(bundle);
+        return cardFrame;
     }
 
     @Override
