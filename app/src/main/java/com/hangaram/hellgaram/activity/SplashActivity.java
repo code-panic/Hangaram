@@ -1,4 +1,4 @@
-package com.hangaram.hellgaram.Activity;
+package com.hangaram.hellgaram.activity;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -2,13 +2,16 @@ package com.hangaram.hellgaram.setting;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.hangaram.hellgaram.R;
+import com.hangaram.hellgaram.widget.TimetableEachProvider;
 
 import java.util.ArrayList;
 
@@ -29,12 +32,12 @@ public class LinkAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         //추가한 View 마다 정보 부여하기
         final LinkHolder linkHolder = (LinkAdapter.LinkHolder) holder;
 
-        //view 의 이름과 주소를 설정하기
-        linkHolder.mLinkButton.setText(mLinkItems.get(position).getLinkName());
         linkHolder.mUrl = mLinkItems.get(position).getUrl();
+        linkHolder.mLinkText.setText(mLinkItems.get(position).getLinkName());
+        linkHolder.mLinkUrl.setText(linkHolder.mUrl);
 
         //누르면 URL 주소로 이동하기
-        linkHolder.mLinkButton.setOnClickListener(new View.OnClickListener() {
+        linkHolder.mLinkCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkHolder.mUrl));
@@ -54,12 +57,16 @@ public class LinkAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private static class LinkHolder extends RecyclerView.ViewHolder{
-        Button mLinkButton;
+        CardView mLinkCard;
+        TextView mLinkText;
+        TextView mLinkUrl;
         String mUrl;
 
         public LinkHolder(View view){
             super(view);
-            mLinkButton = view.findViewById(R.id.link);
+            mLinkCard = view.findViewById(R.id.link_card);
+            mLinkText = view.findViewById(R.id.link_text);
+            mLinkUrl = view.findViewById(R.id.link_url);
         }
     }
 }

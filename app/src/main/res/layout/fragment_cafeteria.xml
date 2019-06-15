@@ -2,12 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorCyanLight">
+    android:orientation="vertical">
 
    <android.support.v4.view.ViewPager
        android:id="@+id/viewpager"
        android:layout_width="match_parent"
-       android:layout_height="match_parent">
+       android:layout_height="0dp"
+       android:layout_weight="1">
 
+
+      <com.sackcentury.shinebuttonlib.ShineButton
+          android:id="@+id/shine_button"
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          xmlns:app="http://schemas.android.com/apk/res-auto"
+          app:siShape="@drawable/heart"
+          app:shine_count="5"
+          app:btn_color="@color/colorGray"
+          app:btn_fill_color="@color/colorYellow"
+          app:big_shine_color="@color/colorCyan"
+          app:small_shine_color="@color/colorCyanLight"
+          app:enable_flashing="true"
+          app:shine_turn_angle="0"
+          app:click_animation_duration="10"/>
    </android.support.v4.view.ViewPager>
 </LinearLayout>

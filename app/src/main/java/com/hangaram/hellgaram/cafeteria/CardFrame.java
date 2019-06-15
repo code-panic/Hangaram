@@ -42,25 +42,43 @@ public class CardFrame extends Fragment {
         Cursor cursor = mDatabase.rawQuery("select * from " + DataBaseHelper.TABLE_NAME_MEAL + " where year = ? and month = ? and date = ?", args);
 
         RelativeLayout cardContainer = view.findViewById(R.id.card_layout_container);
-        String dateString = TimeGiver.getYear(dateGap) + "." + TimeGiver.getMonth(dateGap) + "." + TimeGiver.getDate(dateGap);
 
+        /* card 맨 위의 날짜 텍스트 내용 정하기*/
+        String dateString = "";
+
+        if(dateGap == 0) {
+            dateString = "오늘" ;
+        } else if(dateGap == 1){
+            dateString = "내일";
+        } else {
+            dateString = TimeGiver.getYear(dateGap) + "." + TimeGiver.getMonth(dateGap) + "." + TimeGiver.getDate(dateGap) + " (" + TimeGiver.getWeek(dateGap) + ")";
+        }
+
+        /*급식정보를 받아온 경우 card_show 를 로드한다
+        * 받지 못한 경우 card_update 를 로드한다*/
         if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-
-            Log.d(TAG, dateGap + "번째 CardContainer 에 레이아웃 Inflate 하기");
             View cardContent = inflater.inflate(R.layout.card_show, cardContainer,  true);
 
+            cursor.moveToFirst();
+
             TextView dateText = cardContent.findViewById(R.id.card_show_date_text);
-            TextView cafeText = cardContent.findViewById(R.id.card_show_cafe_text);
+            final TextView cafeText = cardContent.findViewById(R.id.card_show_cafe_text);
             TabLayout tabLayout = cardContent.findViewById(R.id.card_show_tab_layout);
+
+            final String lunch = cursor.getString(cursor.getColumnIndex("lunch"));
+            final String dinner = cursor.getString(cursor.getColumnIndex("dinner"));
+
+            dateText.setText(dateString);
+
+            cafeText.setText(lunch);
 
             tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override
                 public void onTabSelected(TabLayout.Tab tab) {
-                    if (tab.getPosition() == 0)
-                        CafeFragment.sIsLunch = true;
+                    if(tab.getPosition() == 0)
+                        cafeText.setText(lunch);
                     else
-                        CafeFragment.sIsLunch = false;
+                        cafeText.setText(dinner);
                 }
 
                 @Override
@@ -73,28 +91,21 @@ public class CardFrame extends Fragment {
 
                 }
             });
-
-            dateText.setText(dateString);
-            if(CafeFragment.sIsLunch)
-                cafeText.setText(cursor.getString(cursor.getColumnIndex("lunch")));
-            else
-                cafeText.setText(cursor.getString(cursor.getColumnIndex("dinner")));
-
         } else {
-            View cardContent = inflater.inflate(R.layout.card_update, cardContainer, true);
+            final View cardContent = inflater.inflate(R.layout.card_update, cardContainer, true);
 
             TextView dateText = cardContent.findViewById(R.id.card_update_date_text);
             Button downloadButton = cardContainer.findViewById(R.id.card_update_download_button);
 
+            dateText.setText(dateString);
+
             downloadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CafeTask cafeTask = new CafeTask();
+                    CafeTask cafeTask = new CafeTask(getContext());
                     cafeTask.execute(Integer.parseInt(TimeGiver.getYear(dateGap)), Integer.parseInt(TimeGiver.getMonth(dateGap)));
                 }
             });
-
-            dateText.setText(dateString);
         }
 
         return view;

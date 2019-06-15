@@ -17,7 +17,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <activity
-            android:name=".Activity.SplashActivity"
+            android:name=".activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Activity.MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter android:label="htc">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -41,7 +41,7 @@
         </activity>
 
         <activity
-            android:name=".Activity.CreditActivity"
+            android:name=".activity.CreditActivity"
             android:screenOrientation="portrait"/>
 
         <activity

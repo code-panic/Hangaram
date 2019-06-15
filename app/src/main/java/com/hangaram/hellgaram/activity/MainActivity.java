@@ -1,6 +1,7 @@
-package com.hangaram.hellgaram.Activity;
+package com.hangaram.hellgaram.activity;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -22,8 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_CAUTION = 101;
 
-    //메뉴에 들어갈 Fragment 선언하기
-    private CafeFragment mCafeteriaFragment = new CafeFragment();
     private TimetableFragment mTimeTableFragment = new TimetableFragment();
     private SettingFragment mSettingFragment = new SettingFragment();
 
@@ -35,38 +34,42 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.main_bottom_navigation);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
-        //첫 화면 지정하기
-        /* 한가람 시간표에서 호출할 경우에는 시간표 화면으로 넘어가기
-           그 외에는 급식화면으로 넘어가기 */
+        /*
+         첫화면 지정하기
+        * 한가람 시간표에서 호출할 경우에는 시간표 화면으로 넘어가기
+        * 그 외에는 급식화면으로 넘어가기
+        * */
+
         if (getIntent().getData() != null && getIntent().getData().getScheme().equals("htc")) {
             //하단바 시간표 아이콘으로 설정하기
             bottomNavigationView.setSelectedItemId(R.id.action_timetable);
 
-            fragmentTransaction.replace(R.id.main_frame_layout, mTimeTableFragment).commitAllowingStateLoss();
+            fragmentTransaction.add(R.id.main_frame_layout, mTimeTableFragment).commit();
 
             Intent intent = new Intent(this, CautionActivity.class);
             startActivityForResult(intent,REQUEST_CODE_CAUTION);
         }
         else
-            fragmentTransaction.replace(R.id.main_frame_layout, mCafeteriaFragment).commitAllowingStateLoss();
+            fragmentTransaction.add(R.id.main_frame_layout, CafeFragment.getInstance()).commit();
 
-        //bottomNavigationView의 아이템이 선택될 때 리스너 호출
+        /*bottomNavigationView의 아이템이 선택될 때 리스너 호출*/
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
                 switch (menuItem.getItemId()){
                     case R.id.action_cafeteria:
-                        fragmentTransaction.replace(R.id.main_frame_layout, mCafeteriaFragment).commitAllowingStateLoss();
+                        fragmentTransaction.replace(R.id.main_frame_layout, CafeFragment.getInstance()).commit();
                         break;
                     case R.id.action_timetable:
-                        fragmentTransaction.replace(R.id.main_frame_layout,mTimeTableFragment).commitAllowingStateLoss();
+                        fragmentTransaction.replace(R.id.main_frame_layout,mTimeTableFragment).commit();
                         break;
                     case R.id.action_settings:
-                        fragmentTransaction.replace(R.id.main_frame_layout,mSettingFragment).commitAllowingStateLoss();
+                        fragmentTransaction.replace(R.id.main_frame_layout,mSettingFragment).commit();
                         break;
                 }
+
                 return true;
             }
         });
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        //경고 액티비티에서 실행 신호를 보냈을 때
+        /*경고 액티비티에서 실행 신호를 보냈을 때*/
         if (requestCode == REQUEST_CODE_CAUTION){
             if (resultCode == RESULT_OK){
                 try {

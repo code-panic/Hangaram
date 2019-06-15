@@ -6,10 +6,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
-    private static final String Tag = "DataBaseHelper";
+    private static final String TAG = "DataBaseHelper";
 
     private static final String DATABASE_NAME = "HellgaramDatabase.db";
-    private static final int DATABASE_VERSION = 18;
+    private static final int DATABASE_VERSION = 32;
 
     public static final String TABLE_NAME_MEAL = "meal";
     public static final String TABLE_NAME_TIMETABLE = "timetable";

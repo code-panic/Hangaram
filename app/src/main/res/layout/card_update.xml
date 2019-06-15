@@ -8,23 +8,34 @@
     <TextView
         android:gravity="center"
         android:id="@+id/card_update_date_text"
-        android:textSize="32sp"
-        style="@style/BlackText" />
+        android:textSize="24sp"
+        android:padding="16dp"
+        style="@style/BlackText"/>
 
-    <TextView
-        style="@style/BlackText"
-        android:gravity="center"
-        android:text="급식정보가 없습니다\n 정보를 가져올까요?"
-        android:textSize="16sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <Button
-        android:id="@+id/card_update_download_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="급식정보 다운로드"
-        android:textSize="16sp"
-        android:layout_gravity="center"
-        android:background="@color/colorCyan"/>
+        <TextView
+            style="@style/BlackText"
+            android:gravity="center"
+            android:text="급식정보가 없습니다.\n 급식 정보를 가져올까요?"
+            android:padding="8dp"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/card_update_download_button"
+            android:layout_width="160dp"
+            android:layout_height="80dp"
+            android:text="다운로드"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:stateListAnimator="@null"
+            android:background="@drawable/cyan_round_button"/>
+
+    </LinearLayout>
 
 </LinearLayout>
 
