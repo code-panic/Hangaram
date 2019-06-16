@@ -1,5 +1,6 @@
 package com.hangaram.hellgaram.widget;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -7,8 +8,10 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -17,12 +20,14 @@ import com.hangaram.hellgaram.datebase.DataBaseHelper;
 import com.hangaram.hellgaram.time.TimeGiver;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 public class MealProvider extends AppWidgetProvider {
     private static final String TAG = "MealProvider";
 
-    private final String action = "UPDATE_WIDGET_MEAL";
+    public static final String ACTION_CLICK = "CLICK_WIDGET_MEAL";
+    private static final String ACTION_UPDATE = "UPDATE_WIDGET_MEAL";
+
+    private static boolean sIsLunch = true;
 
     private AppWidgetManager mAppWidgetManager;
     private int[] mAppWidgetIds;
@@ -36,20 +41,23 @@ public class MealProvider extends AppWidgetProvider {
         calendar.set(Calendar.MINUTE, 0);
 
         /*보낼 인텐트 생성하기*/
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(action), PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(ACTION_UPDATE), PendingIntent.FLAG_UPDATE_CURRENT);
 
         /*알람매니저 설정하기*/
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        if (intent.getAction().equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
+        if (intent.getAction().equals(ACTION_UPDATE)) {
             updateAllWidgets(context);
+        } else if(intent.getAction().equals(ACTION_CLICK)) {
+            Log.d(TAG,"Uuuu");
+            sIsLunch = !sIsLunch;
+            //updateAllWidgets(context);
         }
     }
 
@@ -58,7 +66,7 @@ public class MealProvider extends AppWidgetProvider {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
 
         this.mAppWidgetManager = appWidgetManager;
-        this.mAppWidgetIds = appWidgetIds;
+        this.mAppWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
 
         updateAllWidgets(context);
     }
@@ -68,18 +76,17 @@ public class MealProvider extends AppWidgetProvider {
         super.onDisabled(context);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(PendingIntent.getBroadcast(context, 0, new Intent(action), PendingIntent.FLAG_UPDATE_CURRENT));
+        alarmManager.cancel(PendingIntent.getBroadcast(context, 0, new Intent(ACTION_UPDATE), PendingIntent.FLAG_UPDATE_CURRENT));
     }
 
     /*모든 위젯 업데이트 하기*/
     private void updateAllWidgets(Context context) {
-        mAppWidgetIds = mAppWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
         for (int mAppWidgetId : mAppWidgetIds)
-            updateWidget(context, mAppWidgetManager, mAppWidgetId);
+            updateWidget(context, mAppWidgetId);
     }
 
-    private void updateWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
-
+    private void updateWidget(Context context, int appWidgetId) {
+        Log.d(TAG,"Working");
         RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_meal);
 
         /*데이터베이스 준비하기*/
@@ -92,12 +99,20 @@ public class MealProvider extends AppWidgetProvider {
 
         cursor.moveToFirst();
 
-        updateViews.setTextViewText(R.id.lunch_or_dinner_text, "점심");
+        if(sIsLunch) {
+            updateViews.setTextViewText(R.id.lunch_or_dinner_text, "점심");
+            updateViews.setTextViewText(R.id.meal_widget_cafe_text, cursor.getString(cursor.getColumnIndex("lunch")));
+        } else {
+            updateViews.setTextViewText(R.id.lunch_or_dinner_text, "저녁");
+            updateViews.setTextViewText(R.id.meal_widget_cafe_text, cursor.getString(cursor.getColumnIndex("dinner")));
+        }
 
-        Log.d(TAG,  cursor.getString(cursor.getColumnIndex("lunch")));
-        updateViews.setTextViewText(R.id.meal_widget_cafe_text, cursor.getString(cursor.getColumnIndex("lunch")));
+        Intent intent = new Intent(context, MealProvider.class);
+        intent.setAction(ACTION_CLICK);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        updateViews.setOnClickPendingIntent(R.id.meal_widget_layout, pendingIntent);
 
         /*변동사항 저장하기*/
-        appWidgetManager.updateAppWidget(appWidgetId, updateViews);
+        mAppWidgetManager.updateAppWidget(appWidgetId, updateViews);
     }
 }

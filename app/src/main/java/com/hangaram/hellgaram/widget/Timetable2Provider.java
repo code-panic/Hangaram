@@ -20,9 +20,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Timetable2Provider extends AppWidgetProvider {
-    private static final String TAG = "TimetableEachProvider";
+    private static final String TAG = "Timetable2Provider";
 
-    private final String action = "UPDATE_WIDGET_TIMETABLE_EACH";
+    private static final String ACTION_UPDATE = "UPDATE_WIDGET_TIMETABLE2";
 
     private AppWidgetManager mAppWidgetManager;
     private int[] mAppWidgetIds;
@@ -48,9 +48,9 @@ public class Timetable2Provider extends AppWidgetProvider {
             calendar.set(Calendar.MINUTE, mUpdateTimeArray[period][1]);
 
             /*보낼 인텐트 생성하기*/
-            Intent intent = new Intent(action);
+            Intent intent = new Intent(ACTION_UPDATE);
             intent.putExtra("period", period + 1);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(action), PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(ACTION_UPDATE), PendingIntent.FLAG_UPDATE_CURRENT);
 
             /*알람매니저 설정하기*/
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -62,7 +62,7 @@ public class Timetable2Provider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        if (intent.getAction().equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
+        if (intent.getAction().equals(ACTION_UPDATE)) {
             updateAllWidgets(context, intent.getIntExtra("period", getCurrentPeriod()));
         }
     }
@@ -82,7 +82,7 @@ public class Timetable2Provider extends AppWidgetProvider {
         super.onDisabled(context);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(PendingIntent.getBroadcast(context, 0, new Intent(action), PendingIntent.FLAG_UPDATE_CURRENT));
+        alarmManager.cancel(PendingIntent.getBroadcast(context, 0, new Intent(ACTION_UPDATE), PendingIntent.FLAG_UPDATE_CURRENT));
     }
 
     /*모든 위젯 업데이트 하기*/
