@@ -1,4 +1,5 @@
 package com.hangaram.hellgaram.widget;
 
-public class TimetableAllProvider {
+public class Timetable1Provider {
+    
 }

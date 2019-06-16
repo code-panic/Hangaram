@@ -48,7 +48,7 @@
             android:name=".timetable.CautionActivity"
             android:screenOrientation="portrait"/>
 
-        <receiver android:name=".widget.MealProvider">
+        <receiver android:name=".widget.MealProvider" android:label="@string/widget_meal_name">
 
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -59,14 +59,14 @@
 
         </receiver>
 
-        <receiver android:name=".widget.TimetableEachProvider">
+        <receiver android:name=".widget.Timetable2Provider" android:label="@string/widget_timetable2_name">
 
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data android:name="android.appwidget.provider"
-                android:resource="@xml/widget_timetable_each_provider" />
+                android:resource="@xml/widget_timetable2_provider" />
 
         </receiver>
 

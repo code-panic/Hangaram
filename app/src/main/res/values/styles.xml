@@ -105,18 +105,11 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
-    <style name="GrayVerticalDivider">
+    <style name="WhiteVerticalDivider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">2dp</item>
         <item name="android:layout_margin">8dp</item>
-        <item name="android:background">@color/colorGray</item>
-    </style>
-
-    <style name="GrayHorizontalDivider">
-        <item name="android:layout_width">2dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_margin">4dp</item>
-        <item name="android:background">@color/colorGray</item>
+        <item name="android:background">@color/colorWhite</item>
     </style>
 
 </resources>

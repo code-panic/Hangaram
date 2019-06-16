@@ -43,8 +43,4 @@ public class CafeFragment extends Fragment {
         cafeAdapter.notifyDataSetChanged();
         mViewPager.setAdapter(cafeAdapter);
     }
-
-    public void setViewpagerItem(int pos){
-        mViewPager.setCurrentItem(pos);
-    }
 }

@@ -107,7 +107,6 @@ public class CardFrame extends Fragment {
                 }
             });
         }
-
         return view;
     }
 }
