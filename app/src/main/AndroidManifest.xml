@@ -74,17 +74,14 @@
         <!--</receiver>-->
 
         <receiver android:name=".widget.Timetable2Provider" android:label="@string/widget_timetable2_name">
-
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="UPDATE_WIDGET_MEAL" />
+                <action android:name="UPDATE_WIDGET_TIMETABLE2" />
             </intent-filter>
 
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/widget_timetable2_provider" />
-
         </receiver>
 
     </application>
-
 </manifest>

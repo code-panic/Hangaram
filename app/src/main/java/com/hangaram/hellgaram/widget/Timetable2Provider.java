@@ -21,15 +21,10 @@ import java.util.GregorianCalendar;
 
 public class Timetable2Provider extends AppWidgetProvider {
     private static final String TAG = "Timetable2Provider";
-
     private static final String ACTION_UPDATE = "UPDATE_WIDGET_TIMETABLE2";
-
-    private AppWidgetManager mAppWidgetManager;
-    private int[] mAppWidgetIds;
 
     /*위젯 업데이트 시간 배열*/
     int[][] mUpdateTimeArray = {
-            {0, 0},
             {9, 15},
             {10, 40},
             {12, 5},
@@ -42,20 +37,21 @@ public class Timetable2Provider extends AppWidgetProvider {
     public void onEnabled(Context context) {
         super.onEnabled(context);
 
-        for (int period = 0; period < 6; period++) {
+        /*특정 시간마다 인텐트 보내기*/
+        for (int period = 0; period < mUpdateTimeArray.length; period++) {
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.HOUR_OF_DAY, mUpdateTimeArray[period][0]);
             calendar.set(Calendar.MINUTE, mUpdateTimeArray[period][1]);
 
             /*보낼 인텐트 생성하기*/
-            Intent intent = new Intent(ACTION_UPDATE);
-            intent.putExtra("period", period + 1);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(ACTION_UPDATE), PendingIntent.FLAG_UPDATE_CURRENT);
 
             /*알람매니저 설정하기*/
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
         }
+
+        updateAllWidgets(context);
     }
 
     @Override
@@ -63,7 +59,7 @@ public class Timetable2Provider extends AppWidgetProvider {
         super.onReceive(context, intent);
 
         if (intent.getAction().equals(ACTION_UPDATE)) {
-            updateAllWidgets(context, intent.getIntExtra("period", getCurrentPeriod()));
+            updateAllWidgets(context);
         }
     }
 
@@ -71,10 +67,7 @@ public class Timetable2Provider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
 
-        this.mAppWidgetManager = appWidgetManager;
-        this.mAppWidgetIds = appWidgetIds;
-
-        updateAllWidgets(context, getCurrentPeriod());
+        updateAllWidgets(context);
     }
 
     @Override
@@ -86,10 +79,10 @@ public class Timetable2Provider extends AppWidgetProvider {
     }
 
     /*모든 위젯 업데이트 하기*/
-    private void updateAllWidgets(Context context, int period) {
-        mAppWidgetIds = mAppWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
-        for (int mAppWidgetId : mAppWidgetIds)
-            updateWidget(context, mAppWidgetManager, mAppWidgetId, period);
+    private void updateAllWidgets(Context context) {
+        int[] appWidgetIds = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, getClass()));
+        for (int appWidgetId : appWidgetIds)
+            updateWidget(context, AppWidgetManager.getInstance(context), appWidgetId, getCurrentPeriod());
     }
 
     /*
@@ -99,9 +92,8 @@ public class Timetable2Provider extends AppWidgetProvider {
     private int getCurrentPeriod() {
         for (int period = 0; period < mUpdateTimeArray.length; period++) {
             if (Integer.parseInt(TimeGiver.getHour() + TimeGiver.getMinuate()) < (mUpdateTimeArray[period][0] * 100 + mUpdateTimeArray[period][1]))
-                return period;
+                return period + 1;
         }
-
         return 7;
     }
 
@@ -140,8 +132,12 @@ public class Timetable2Provider extends AppWidgetProvider {
         updateViews.setTextViewText(R.id.this_subject_name, getPeriodName(subjectArray));
         updateViews.setTextViewText(R.id.this_subject_hint, getPeriodHint(subjectArray));
 
+
+        dayOfWeek = getDayOfWeek(tmpPeriod + 1);
+        period = getPeriod(tmpPeriod + 1);
+
         /*다음 과목 보여주기*/
-        cursor.moveToPosition(period + 1);
+        cursor.moveToPosition(period);
         subjectArray = cursor.getString(dayOfWeek).split("\n");
 
         updateViews.setTextViewText(R.id.next_subject_name, getPeriodName(subjectArray));
