@@ -42,9 +42,13 @@ public class Timetable2Provider extends AppWidgetProvider {
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.HOUR_OF_DAY, mUpdateTimeArray[period][0]);
             calendar.set(Calendar.MINUTE, mUpdateTimeArray[period][1]);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
 
             /*보낼 인텐트 생성하기*/
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(ACTION_UPDATE), PendingIntent.FLAG_UPDATE_CURRENT);
+            Intent intent = new Intent(context, Timetable2Provider.class);
+            intent.setAction(ACTION_UPDATE);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             /*알람매니저 설정하기*/
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -150,10 +154,10 @@ public class Timetable2Provider extends AppWidgetProvider {
         Calendar calendar = new GregorianCalendar();
         calendar.add(Calendar.DATE, 0);
 
-        if((period == 7 && calendar.get(Calendar.DAY_OF_WEEK) == 6) || !(calendar.get(Calendar.DAY_OF_WEEK) >= 2 || calendar.get(Calendar.DAY_OF_WEEK) <= 6)) {
+        if((period >= 7 && calendar.get(Calendar.DAY_OF_WEEK) == 6) || !(calendar.get(Calendar.DAY_OF_WEEK) >= 2 || calendar.get(Calendar.DAY_OF_WEEK) <= 6)) {
             /*금요일 6교시 이후나 토요일, 일요일일때*/
             return  1;
-        } else if(period == 7) {
+        } else if(period >= 7) {
             /*월,화,수,목 6교시 이후*/
             return calendar.get(Calendar.DAY_OF_WEEK);
         } else {
@@ -166,7 +170,7 @@ public class Timetable2Provider extends AppWidgetProvider {
         Calendar calendar = new GregorianCalendar();
         calendar.add(Calendar.DATE, 0);
 
-        if(period == 7 || !(calendar.get(Calendar.DAY_OF_WEEK) >= 2 || calendar.get(Calendar.DAY_OF_WEEK) <= 6)) {
+        if(period >= 7 || !(calendar.get(Calendar.DAY_OF_WEEK) >= 2 || calendar.get(Calendar.DAY_OF_WEEK) <= 6)) {
             /*6교시 이후나 토요일, 일요일일때*/
             return  1;
         } else {
