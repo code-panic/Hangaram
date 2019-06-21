@@ -14,7 +14,6 @@ import android.widget.RemoteViews;
 
 import com.hangaram.hellgaram.R;
 import com.hangaram.hellgaram.datebase.DataBaseHelper;
-import com.hangaram.hellgaram.time.TimeGiver;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -48,7 +47,7 @@ public class Timetable2Provider extends AppWidgetProvider {
             /*보낼 인텐트 생성하기*/
             Intent intent = new Intent(context, Timetable2Provider.class);
             intent.setAction(ACTION_UPDATE);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             /*알람매니저 설정하기*/
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -63,6 +62,7 @@ public class Timetable2Provider extends AppWidgetProvider {
         super.onReceive(context, intent);
 
         if (intent.getAction().equals(ACTION_UPDATE)) {
+            Log.d(TAG, "업데이트를 시작합니다.");
             updateAllWidgets(context);
         }
     }
@@ -90,13 +90,18 @@ public class Timetable2Provider extends AppWidgetProvider {
     }
 
     /*
-    * 1교시: 1
-    * 2교시: 2...
-    * */
+     * 1교시: 1
+     * 2교시: 2...
+     * */
     private int getCurrentPeriod() {
+        Log.d(TAG, "getCurrentPeriod 함수 작동하기");
+        Calendar calendar = Calendar.getInstance();
+
         for (int period = 0; period < mUpdateTimeArray.length; period++) {
-            if (Integer.parseInt(TimeGiver.getHour() + TimeGiver.getMinuate()) < (mUpdateTimeArray[period][0] * 100 + mUpdateTimeArray[period][1]))
+            if (calendar.get(Calendar.HOUR_OF_DAY) * 100 + calendar.get(Calendar.MINUTE) < (mUpdateTimeArray[period][0] * 100 + mUpdateTimeArray[period][1])) {
+                Log.d(TAG, "현재시간: " + (calendar.get(Calendar.HOUR_OF_DAY) * 100 + calendar.get(Calendar.MINUTE)) + " 비교시간: " + (mUpdateTimeArray[period][0] * 100 + mUpdateTimeArray[period][1]) + " 과목: " + period);
                 return period + 1;
+            }
         }
         return 7;
     }
@@ -150,14 +155,18 @@ public class Timetable2Provider extends AppWidgetProvider {
         appWidgetManager.updateAppWidget(appWidgetId, updateViews);
     }
 
-    private int getDayOfWeek (int period){
+    /*
+    * 월 1
+    * 화 2..
+    * */
+    private int getDayOfWeek(int period) {
         Calendar calendar = new GregorianCalendar();
         calendar.add(Calendar.DATE, 0);
 
-        if((period >= 7 && calendar.get(Calendar.DAY_OF_WEEK) == 6) || !(calendar.get(Calendar.DAY_OF_WEEK) >= 2 || calendar.get(Calendar.DAY_OF_WEEK) <= 6)) {
+        if ((period >= 7 && calendar.get(Calendar.DAY_OF_WEEK) == 6) || !(calendar.get(Calendar.DAY_OF_WEEK) >= 2 || calendar.get(Calendar.DAY_OF_WEEK) <= 6)) {
             /*금요일 6교시 이후나 토요일, 일요일일때*/
-            return  1;
-        } else if(period >= 7) {
+            return 1;
+        } else if (period >= 7) {
             /*월,화,수,목 6교시 이후*/
             return calendar.get(Calendar.DAY_OF_WEEK);
         } else {
@@ -166,13 +175,13 @@ public class Timetable2Provider extends AppWidgetProvider {
         }
     }
 
-    private int getPeriod (int period){
+    private int getPeriod(int period) {
         Calendar calendar = new GregorianCalendar();
         calendar.add(Calendar.DATE, 0);
 
-        if(period >= 7 || !(calendar.get(Calendar.DAY_OF_WEEK) >= 2 || calendar.get(Calendar.DAY_OF_WEEK) <= 6)) {
+        if (period >= 7 || !(calendar.get(Calendar.DAY_OF_WEEK) >= 2 || calendar.get(Calendar.DAY_OF_WEEK) <= 6)) {
             /*6교시 이후나 토요일, 일요일일때*/
-            return  1;
+            return period - 6;
         } else {
             /*그 밖의 경우*/
             return period;
