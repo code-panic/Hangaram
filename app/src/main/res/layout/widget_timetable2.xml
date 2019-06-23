@@ -7,32 +7,20 @@
 
     <TextView
         android:id="@+id/this_subject_period"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:gravity="center"
         android:textSize="20sp"
-        android:textColor="@color/colorWhite"
-        android:fontFamily="@font/nanum_myeongjo"/>
+        style="@style/WidgetTimetable2Text1"/>
 
     <TextView
         android:id="@+id/this_subject_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
         android:textSize="24sp"
-        android:textColor="@color/colorWhite"
-        android:fontFamily="@font/nanum_myeongjo"/>
+        style="@style/WidgetTimetable2Text1"/>
 
     <TextView
         android:id="@+id/this_subject_hint"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:gravity="center"
         android:textSize="16sp"
-        android:textColor="@color/colorWhite"
-        android:fontFamily="@font/nanum_myeongjo"/>
+        style="@style/WidgetTimetable2Text1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,24 +29,12 @@
         android:layout_marginBottom="4dp">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
             android:text="@string/widget_next_time"
-            android:textSize="16sp"
-            android:textColor="@color/colorWhite"
-            android:fontFamily="@font/nanum_myeongjo"/>
+            style="@style/WidgetTimetable2Text2"/>
 
         <TextView
             android:id="@+id/next_subject_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="@color/colorWhite"
-            android:fontFamily="@font/nanum_myeongjo"/>
+            style="@style/WidgetTimetable2Text2"/>
 
     </LinearLayout>
 </LinearLayout>

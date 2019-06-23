@@ -7,4 +7,5 @@
     android:layout_columnWeight="1"
     android:gravity="center"
     android:textColor="@color/colorWhite"
-    android:fontFamily="@font/nanum_myeongjo" />
+    android:fontFamily="@font/nanum_myeongjo"
+    android:background="@color/colorTransparent"/>

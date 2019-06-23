@@ -4,90 +4,27 @@
         <!--<item name="android:windowBackground">@drawable/background_splash</item>-->
     </style>
 
-    <style name="WhiteText" parent="@android:style/Widget.TextView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
-    </style>
-
-    <style name="GrayText" parent="@android:style/Widget.TextView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorGray</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
-    </style>
-
-    <style name="YellowText">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorYellow</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
-    </style>
-
-    <style name="CyanText">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorCyan</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
-    </style>
-
+    <!--기본 텍스트 스타일-->
     <style name="BlackText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
     </style>
-
-    <style name="QuoteText">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
-    </style>
-
-    <style name="CreditText">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
-    </style>
-
-    <style name="WidgetText">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
-    </style>
-
-    <style name="TimetableButton">
+    
+    <!--시간표 부분화면 스타일 모음-->
+    <style name="FragmentTimetableButton">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:background">@drawable/cyan_round_button</item>
-        <item name="android:stateListAnimator">@null</item>
     </style>
 
-    <style name="WidgetButton">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
-        <item name="android:stateListAnimator">@null</item>
-        <item name="android:background">@color/colorWhite</item>
-    </style>
-
-    <style name="TimetableEditText">
+    <style name="FragmentTimetableEditText">
         <item name="android:layout_margin">0.5dp</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">12sp</item>
@@ -98,18 +35,33 @@
         <item name="android:cursorVisible">false</item>
         <item name="android:background">@color/colorWhite</item>
     </style>
-
-    <style name="QuoteMarkImage">
-        <item name="android:layout_width">24dp</item>
-        <item name="android:layout_height">24dp</item>
-        <item name="android:layout_gravity">center</item>
+    
+    <!--시간표2 위젯 및 위젯 설정 화면 스타일 모음-->
+    <style name="WidgetTimetable2Text1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:fontFamily">@font/nanum_myeongjo</item>
     </style>
 
-    <style name="WhiteVerticalDivider">
+    <style name="WidgetTimetable2Text2">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:fontFamily">@font/nanum_myeongjo</item>
+    </style>
+    
+    <!--크레딧 화면 스타일 모음-->
+    <style name="ActivityCrditText">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">2dp</item>
-        <item name="android:layout_margin">8dp</item>
-        <item name="android:background">@color/colorWhite</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:fontFamily">@font/nanum_myeongjo</item>
     </style>
 
 </resources>

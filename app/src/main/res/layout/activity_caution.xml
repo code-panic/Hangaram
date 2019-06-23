@@ -27,7 +27,7 @@
                 android:id="@+id/caution_cancel_button"
                 android:layout_margin="8dp"
                 android:text="@string/timetable_cancel"
-                style="@style/TimetableButton"/>
+                style="@style/FragmentTimetableButton"/>
 
             <Button
                 android:id="@+id/caution_download_button"
@@ -35,7 +35,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/timetable_get"
-                style="@style/TimetableButton"/>
+                style="@style/FragmentTimetableButton"/>
 
         </LinearLayout>
     </LinearLayout>
