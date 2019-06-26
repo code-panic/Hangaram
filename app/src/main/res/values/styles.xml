@@ -37,24 +37,14 @@
     </style>
     
     <!--시간표2 위젯 및 위젯 설정 화면 스타일 모음-->
-    <style name="WidgetTimetable2Text1">
+    <style name="WidgetTimetable2Text">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorBlack</item>
         <item name="android:fontFamily">@font/nanum_myeongjo</item>
     </style>
 
-    <style name="WidgetTimetable2Text2">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:fontFamily">@font/nanum_myeongjo</item>
-    </style>
-    
     <!--크레딧 화면 스타일 모음-->
     <style name="ActivityCrditText">
         <item name="android:layout_width">match_parent</item>

@@ -127,7 +127,7 @@ public class Timetable2Provider extends AppWidgetProvider {
         cursor.moveToPosition(period);
         subjectArray = cursor.getString(dayOfWeek).split("\n");
 
-        updateViews.setTextViewText(R.id.next_subject_name, getPeriodName(subjectArray));
+        updateViews.setTextViewText(R.id.next_subject_name,  "다음시간\t\t\t"+ getPeriodName(subjectArray));
 
         /*변동사항 저장하기*/
         appWidgetManager.updateAppWidget(appWidgetId, updateViews);

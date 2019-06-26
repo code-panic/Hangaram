@@ -1,40 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorTranslucent"
+    android:gravity="center"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/this_subject_period"
-        android:layout_marginBottom="4dp"
-        android:textSize="20sp"
-        style="@style/WidgetTimetable2Text1"/>
+        style="@style/WidgetTimetable2Text"
+        android:layout_marginBottom="8dp"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/this_subject_name"
-        android:textSize="24sp"
-        style="@style/WidgetTimetable2Text1"/>
+        style="@style/WidgetTimetable2Text"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/this_subject_hint"
-        android:layout_marginBottom="4dp"
-        android:textSize="16sp"
-        style="@style/WidgetTimetable2Text1"/>
+        style="@style/WidgetTimetable2Text"
+        android:layout_marginBottom="8dp"
+        android:textSize="12sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="4dp">
-
-        <TextView
-            android:text="@string/widget_next_time"
-            style="@style/WidgetTimetable2Text2"/>
-
-        <TextView
-            android:id="@+id/next_subject_name"
-            style="@style/WidgetTimetable2Text2"/>
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/next_subject_name"
+        style="@style/WidgetTimetable2Text"
+        android:textSize="12sp"/>
 </LinearLayout>
