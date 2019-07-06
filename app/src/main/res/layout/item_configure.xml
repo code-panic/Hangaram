@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <!--배경 색상-->
+        <TextView
+            style="@style/ActivityConfigureText1"
+            android:text="배경색상" />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--흰색 라디오 버튼-->
+            <RadioButton
+                android:id="@+id/white_radio_button"
+                android:text="흰색"
+                android:checked="true"
+                style="@style/ActivityConfigureRadioButton" />
+
+
+            <!--검은색 라디오 버튼-->
+            <RadioButton
+                android:id="@+id/black_radio_button"
+                android:text="검은색"
+                style="@style/ActivityConfigureRadioButton" />
+
+        </RadioGroup>
+
+        <!--배경 투명도-->
+        <TextView
+            style="@style/ActivityConfigureText1"
+            android:layout_marginTop="16dp"
+            android:text="배경투명도" />
+
+        <!--투명도 시크바-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/transparent_percent_text"
+                style="@style/ActivityConfigureText2"
+                android:text="0%" />
+
+            <SeekBar
+                android:id="@+id/transparent_seek_bar"
+                style="@style/ActivityConfigurSeekBar" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/apply_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="적용하기"/>
+    </LinearLayout>
+</ScrollView>

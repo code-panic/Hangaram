@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/background_timetable2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorTranslucent"
+    android:orientation="vertical"
     android:gravity="center"
-    android:orientation="vertical">
+    android:padding="16dp"
+    android:background="@color/colorWhite">
 
     <TextView
         android:id="@+id/this_subject_period"
-        style="@style/WidgetTimetable2Text"
         android:layout_marginBottom="8dp"
-        android:textSize="12sp" />
+        android:text="1교시"
+        style="@style/WidgetTimetable2SmallText"/>
 
     <TextView
         android:id="@+id/this_subject_name"
-        style="@style/WidgetTimetable2Text"
-        android:textSize="24sp" />
+        android:text="기하와 벡터"
+        style="@style/WidgetTimetable2BigText"/>
 
     <TextView
         android:id="@+id/this_subject_hint"
-        style="@style/WidgetTimetable2Text"
         android:layout_marginBottom="8dp"
-        android:textSize="12sp" />
+        android:text="이현주/311호"
+        style="@style/WidgetTimetable2SmallText" />
 
     <TextView
         android:id="@+id/next_subject_name"
-        style="@style/WidgetTimetable2Text"
-        android:textSize="12sp"/>
+        android:text="다음시간  스포츠경기"
+        style="@style/WidgetTimetable2SmallText"/>
 </LinearLayout>

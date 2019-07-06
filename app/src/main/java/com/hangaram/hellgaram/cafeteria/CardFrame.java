@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +19,6 @@ import com.hangaram.hellgaram.datebase.DataBaseHelper;
 import com.hangaram.hellgaram.R;
 import com.hangaram.hellgaram.time.TimeGiver;
 
-import java.sql.Time;
-
 public class CardFrame extends Fragment {
     private static final String TAG = "CardFrame";
 
@@ -31,7 +28,7 @@ public class CardFrame extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.card_frame, container, false);
+        View view = inflater.inflate(R.layout.card_frame_cafeteria, container, false);
 
         final int dateGap = getArguments().getInt("dateGap");
 
@@ -39,7 +36,7 @@ public class CardFrame extends Fragment {
         mDatabase = mDataBaseHelper.getReadableDatabase();
 
         String[] args = {TimeGiver.getYear(dateGap), TimeGiver.getMonth(dateGap), TimeGiver.getDate(dateGap)};
-        Cursor cursor = mDatabase.rawQuery("select * from " + DataBaseHelper.TABLE_NAME_MEAL + " where year = ? and month = ? and date = ?", args);
+        Cursor cursor = mDatabase.rawQuery("select * from " + DataBaseHelper.TABLE_NAME_CAFETERIA + " where year = ? and month = ? and date = ?", args);
 
         RelativeLayout cardContainer = view.findViewById(R.id.card_layout_container);
 
@@ -57,7 +54,7 @@ public class CardFrame extends Fragment {
         /*급식정보를 받아온 경우 card_show 를 로드한다
         * 받지 못한 경우 card_update 를 로드한다*/
         if (cursor.getCount() > 0) {
-            View cardContent = inflater.inflate(R.layout.card_show, cardContainer,  true);
+            View cardContent = inflater.inflate(R.layout.content_show_cafeteria, cardContainer,  true);
 
             cursor.moveToFirst();
 
@@ -69,7 +66,6 @@ public class CardFrame extends Fragment {
             final String dinner = cursor.getString(cursor.getColumnIndex("dinner"));
 
             dateText.setText(dateString);
-
             cafeText.setText(lunch);
 
             tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -92,7 +88,7 @@ public class CardFrame extends Fragment {
                 }
             });
         } else {
-            final View cardContent = inflater.inflate(R.layout.card_update, cardContainer, true);
+            final View cardContent = inflater.inflate(R.layout.content_update_cafeteria, cardContainer, true);
 
             TextView dateText = cardContent.findViewById(R.id.card_update_date_text);
             Button downloadButton = cardContainer.findViewById(R.id.card_update_download_button);
@@ -107,6 +103,7 @@ public class CardFrame extends Fragment {
                 }
             });
         }
+
         return view;
     }
 }

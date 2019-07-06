@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:text="점심"
         android:textSize="24sp"
         android:textColor="@color/colorWhite"
         android:fontFamily="@font/nanum_myeongjo"/>
@@ -19,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:text=""
         android:textSize="16sp"
         android:textColor="@color/colorWhite"
         android:fontFamily="@font/nanum_myeongjo"/>

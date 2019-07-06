@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.hangaram.hellgaram.cafeteria.CafeFragment;
-import com.hangaram.hellgaram.setting.SettingFragment;
 import com.hangaram.hellgaram.timetable.CautionActivity;
 import com.hangaram.hellgaram.timetable.TimetableFragment;
 import com.hangaram.hellgaram.R;
@@ -24,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_CAUTION = 101;
 
     private TimetableFragment mTimeTableFragment = new TimetableFragment();
-    private SettingFragment mSettingFragment = new SettingFragment();
+    private BusFragment mBusFragment = new BusFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.replace(R.id.main_frame_layout,mTimeTableFragment).commit();
                         break;
                     case R.id.action_settings:
-                        fragmentTransaction.replace(R.id.main_frame_layout,mSettingFragment).commit();
+                        fragmentTransaction.replace(R.id.main_frame_layout,mBusFragment).commit();
                         break;
                 }
 

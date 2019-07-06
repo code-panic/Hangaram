@@ -110,7 +110,7 @@ public class CafeTask extends AsyncTask<Integer, Integer, Boolean> {
                         contentValues.put("lunch", lunchText.toString());
                         contentValues.put("dinner", dinnerText.toString());
 
-                        mDatabase.insert(DataBaseHelper.TABLE_NAME_MEAL, null, contentValues);
+                        mDatabase.insert(DataBaseHelper.TABLE_NAME_CAFETERIA, null, contentValues);
                     }
                 }
                 return true;

@@ -7,8 +7,10 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -88,6 +90,32 @@ public class Timetable2Provider extends AppWidgetProvider {
         Log.d(TAG, "tmpPeriod 값: " + tmpPeriod);
 
         RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_timetable2);
+
+        SharedPreferences pref = context.getSharedPreferences("widget" + appWidgetId, 0);
+
+        Log.d(TAG, "widget" + appWidgetId + "provider textColor: " + pref.getString("textColor", "Black"));
+
+        if (pref.getString("textColor", "Black").equals("white")) {
+            updateViews.setTextColor(R.id.this_subject_period, Color.WHITE);
+            updateViews.setTextColor(R.id.this_subject_name, Color.WHITE);
+            updateViews.setTextColor(R.id.this_subject_hint, Color.WHITE);
+            updateViews.setTextColor(R.id.next_subject_name, Color.WHITE);
+        } else {
+            updateViews.setTextColor(R.id.this_subject_period, Color.BLACK);
+            updateViews.setTextColor(R.id.this_subject_name, Color.BLACK);
+            updateViews.setTextColor(R.id.this_subject_hint, Color.BLACK);
+            updateViews.setTextColor(R.id.next_subject_name, Color.BLACK);
+        }
+
+        if (pref.getString("backgroundColor", "white").equals("white"))
+            updateViews.setInt(R.id.background_timetable2,
+                    "setBackgroundColor",
+                    Color.argb((int) (pref.getInt("transparent", 255) * 2.55), 255, 255, 255));
+        else
+            updateViews.setInt(R.id.background_timetable2,
+                    "setBackgroundColor",
+                    Color.argb((int) (pref.getInt("transparent", 255) * 2.55), 0, 0, 0));
+
         String[] subjectArray;
 
         /*
@@ -127,7 +155,7 @@ public class Timetable2Provider extends AppWidgetProvider {
         cursor.moveToPosition(period);
         subjectArray = cursor.getString(dayOfWeek).split("\n");
 
-        updateViews.setTextViewText(R.id.next_subject_name,  "다음시간\t\t\t"+ getPeriodName(subjectArray));
+        updateViews.setTextViewText(R.id.next_subject_name, "다음시간\t\t\t" + getPeriodName(subjectArray));
 
         /*변동사항 저장하기*/
         appWidgetManager.updateAppWidget(appWidgetId, updateViews);

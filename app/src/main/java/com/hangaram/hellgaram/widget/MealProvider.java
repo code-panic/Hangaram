@@ -1,6 +1,5 @@
 package com.hangaram.hellgaram.widget;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -8,10 +7,8 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -89,14 +86,14 @@ public class MealProvider extends AppWidgetProvider {
 
     private void updateWidget(Context context, int appWidgetId) {
         Log.d(TAG,"Working");
-        RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_meal);
+        RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_cafeteria);
 
         /*데이터베이스 준비하기*/
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         SQLiteDatabase database = dataBaseHelper.getReadableDatabase();
 
         String[] args = {TimeGiver.getYear(), TimeGiver.getMonth(), TimeGiver.getDate()};
-        Cursor cursor = database.rawQuery("SELECT * FROM " + DataBaseHelper.TABLE_NAME_MEAL
+        Cursor cursor = database.rawQuery("SELECT * FROM " + DataBaseHelper.TABLE_NAME_CAFETERIA
                 + " where year = ? and month = ? and date = ? ", args);
 
         cursor.moveToFirst();

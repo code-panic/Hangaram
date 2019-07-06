@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorWhite"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
 
     <TextView
-        android:gravity="center"
         android:id="@+id/card_show_date_text"
-        android:textSize="24sp"
+        style="@style/BlackText"
+        android:gravity="center"
         android:padding="16dp"
-        style="@style/BlackText"/>
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/card_show_cafe_text"
+        style="@style/BlackText"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:textSize="16sp"
         android:gravity="center"
-        style="@style/BlackText"/>
+        android:textSize="16sp" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/card_show_tab_layout"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        app:tabTextColor="@color/colorGray"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/colorCyan"
         app:tabSelectedTextColor="@color/colorBlack"
-        app:tabIndicatorColor="@color/colorCyan">
+        app:tabTextColor="@color/colorGray">
 
         <android.support.design.widget.TabItem
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/cafeteria_lunch" />
 
         <android.support.design.widget.TabItem
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/cafeteria_dinner" />
 
     </android.support.design.widget.TabLayout>

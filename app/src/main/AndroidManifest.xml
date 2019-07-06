@@ -46,6 +46,13 @@
             android:name=".timetable.CautionActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".widget.Timetable2Activity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
+
+
         <receiver android:name=".widget.MealProvider" android:label="@string/widget_meal_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

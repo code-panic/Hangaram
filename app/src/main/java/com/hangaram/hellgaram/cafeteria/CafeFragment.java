@@ -39,7 +39,6 @@ public class CafeFragment extends Fragment {
     }
 
     public void refresh(){
-        Log.d(TAG, "refresh");
         cafeAdapter.notifyDataSetChanged();
         mViewPager.setAdapter(cafeAdapter);
     }
