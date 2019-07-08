@@ -11,13 +11,13 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 
-public class BusTask extends AsyncTask<String, Void, Void> {
+public class BusTask extends AsyncTask<String, Void, Boolean> {
     private static final String TAG = "BusTask";
     private static final String SERVICE_KEY = "oMJ1n5M5PZvqvHTfSPehGbytfNmbgdwUDpD60PiYW7PWFf82YBRx25ryzUy4AXhxeJUdBqnQy5UVrVxuzhXk8g%3D%3D";
-
 
     private ArrayList<HashMap<String, String>> busList = new ArrayList<>();
 
@@ -42,13 +42,13 @@ public class BusTask extends AsyncTask<String, Void, Void> {
     private String arr2 = "";   /*두번째 버스 도착예정시간(분)*/
     private String sta2 = "";   /*두번째 버스 남은 버스정거장*/
 
-    private String lastUpdateTime = "";  /*마지막 업데이트 시간*/
-
     /*후처리를 다르게 하기 위한 콜백함수 선언*/
     private BusCall mBusCall;
 
     public interface BusCall {
         void onSuccess(ArrayList<HashMap<String, String>> busList);
+
+        void onFailure();
     }
 
     public BusTask(BusCall busCall) {
@@ -56,7 +56,7 @@ public class BusTask extends AsyncTask<String, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(String... stationName) {
+    protected Boolean doInBackground(String... stationName) {
         try {
             /*월촌중학교 정류장 아이디: 15148
              * 목동이대병원 정류장 아이디: 15154*/
@@ -65,14 +65,14 @@ public class BusTask extends AsyncTask<String, Void, Void> {
             if (stationName[0].equals("월촌중학교"))
                 arsId = "15148";
             else
-                arsId = " 15154";
+                arsId = "15154";
 
             URL url = new URL("http://ws.bus.go.kr/api/rest/stationinfo/"
                     + "getStationByUid?serviceKey=" + SERVICE_KEY
                     + "&arsId=" + arsId);
 
             /*아래 코드를 쓰지 않으면 오류가 터지므로 일단 써둔다*/
-            StrictMode.enableDefaults();
+//            StrictMode.enableDefaults();
 
             /*xml 파싱에 대한 객체 불러오기*/
             XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
@@ -155,8 +155,10 @@ public class BusTask extends AsyncTask<String, Void, Void> {
 
                     case XmlPullParser.END_TAG:
                         if (parser.getName().equals("itemList")) {
+                            /*데이터 가공*/
                             extractArrmsg();
 
+                            /*HashMap 에 저장*/
                             HashMap<String, String> hashMap = new HashMap<>();
 
                             hashMap.put("arr1", arr1);
@@ -169,41 +171,77 @@ public class BusTask extends AsyncTask<String, Void, Void> {
                             hashMap.put("isFullFlag2", isFullFlag2);
                             hashMap.put("rtNm", rtNm);
 
+                            /*마지막 업데이트 시간 저장하기*/
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.add(Calendar.DATE, 0);
+
+                            hashMap.put("lastUpdateTime", calendar.get(Calendar.HOUR) + "시 " + calendar.get(Calendar.MINUTE) + "분");
+
                             busList.add(hashMap);
                         }
                         break;
                 }
                 parserEvent = parser.next();
             }
-            return null;
+            return true;
 
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+
+        return false;
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(Boolean isSuccess) {
+        super.onPostExecute(isSuccess);
 
-        mBusCall.onSuccess(busList);
+        if (isSuccess)
+            mBusCall.onSuccess(busList);
+        else
+            mBusCall.onFailure();
     }
 
     /*
-    * arrmsg1 = 7분22초후[1번째 전]
-    * arr1 = 7
-    * sta1 = 1
-    * */
+     * arrmsg1 = 7분22초후[1번째 전]
+     * -> arr1 = 7
+     * -> sta1 = 1
+     *
+     * isFullFlag1 = 0
+     * -> isFullFlag1 = 여유
+     * */
     private void extractArrmsg() {
-
         /* <arrmsg1>7분22초후[1번째 전]</arrmsg1> */
-        arr1 = arrmsg1.substring(0, arrmsg1.indexOf("분") + 1);
-        sta1 = arrmsg1.substring(arrmsg1.indexOf("[")+ 1, arrmsg1.indexOf("번"));
+        if (arrmsg1.contains("분"))
+            arr1 = arrmsg1.substring(0, arrmsg1.indexOf("분") + 1);
+        else
+            arr1 = arrmsg1;
 
-        arr2 = arrmsg2.substring(0, arrmsg2.indexOf("분") + 1);
-        sta2 = arrmsg2.substring(arrmsg2.indexOf("[")+ 1, arrmsg2.indexOf("번"));
+        if (arrmsg2.contains("분"))
+            arr2 = arrmsg2.substring(0, arrmsg2.indexOf("분") + 1);
+        else
+            arr2 = arrmsg2;
+
+        if (arrmsg1.contains("[") && arrmsg1.contains("번"))
+            sta1 = arrmsg1.substring(arrmsg1.indexOf("[") + 1, arrmsg1.indexOf("번")) + "정거장";
+        else
+            sta1 = "정거장없음";
+
+        if (arrmsg2.contains("[") && arrmsg2.contains("번"))
+            sta2 = arrmsg2.substring(arrmsg2.indexOf("[") + 1, arrmsg2.indexOf("번")) + "정거장";
+        else
+            sta2 = "정거장없음";
+
+        if (isFullFlag1.equals("0"))
+            isFullFlag1 = "여유";
+        else
+            isFullFlag1 = "만석";
+
+        if (isFullFlag2.equals("0"))
+            isFullFlag2 = "여유";
+        else
+            isFullFlag2 = "만석";
     }
 }

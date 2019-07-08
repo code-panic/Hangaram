@@ -16,8 +16,7 @@
     <string name="timetable_get">가져오기</string>
     <string name="timetable_cancel">취소하기</string>
 
-    <string name="settings_quote">오늘의 명언</string>
-    <string name="settings_link">바로가기</string>
+    <string name="bus_update">버스정보를\n업데이트 할까요?</string>
 
     <string name="credit_credit">credit</string>
     <string name="credit_programmer">programmer</string>

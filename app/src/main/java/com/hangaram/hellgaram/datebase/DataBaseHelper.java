@@ -9,7 +9,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "DataBaseHelper";
 
     private static final String DATABASE_NAME = "HellgaramDatabase.db";
-    private static final int DATABASE_VERSION = 32;
+    private static final int DATABASE_VERSION = 33;
 
     public static final String TABLE_NAME_CAFETERIA = "cafeteria";
     public static final String TABLE_NAME_TIMETABLE = "timetable";

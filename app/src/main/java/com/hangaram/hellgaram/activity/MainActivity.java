@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.hangaram.hellgaram.bus.BusFragment;
 import com.hangaram.hellgaram.cafeteria.CafeFragment;
 import com.hangaram.hellgaram.timetable.CautionActivity;
 import com.hangaram.hellgaram.timetable.TimetableFragment;
