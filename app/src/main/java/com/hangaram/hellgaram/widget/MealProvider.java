@@ -7,8 +7,10 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -16,35 +18,19 @@ import com.hangaram.hellgaram.R;
 import com.hangaram.hellgaram.datebase.DataBaseHelper;
 import com.hangaram.hellgaram.time.TimeGiver;
 
-import java.util.Calendar;
-
 public class MealProvider extends AppWidgetProvider {
     private static final String TAG = "MealProvider";
 
     public static final String ACTION_CLICK = "CLICK_WIDGET_MEAL";
     private static final String ACTION_UPDATE = "UPDATE_WIDGET_MEAL";
 
-    private static boolean sIsLunch = true;
-
-    private AppWidgetManager mAppWidgetManager;
-    private int[] mAppWidgetIds;
 
     @Override
     public void onEnabled(Context context) {
         super.onEnabled(context);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-
-        /*보낼 인텐트 생성하기*/
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(ACTION_UPDATE), PendingIntent.FLAG_UPDATE_CURRENT);
-
-        /*알람매니저 설정하기*/
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        /*매일 12시 업데이트*/
+        WidgetManager.setAlaram(context, 0, 0, 0, ACTION_UPDATE);
     }
 
     @Override
@@ -53,19 +39,19 @@ public class MealProvider extends AppWidgetProvider {
 
         if (intent.getAction().equals(ACTION_UPDATE)) {
             updateAllWidgets(context);
-        } else if(intent.getAction().equals(ACTION_CLICK)) {
-            Log.d(TAG,"Uuuu");
-            sIsLunch = !sIsLunch;
-            //updateAllWidgets(context);
+        } else if (intent.getAction().equals(ACTION_CLICK)) {
+            SharedPreferences pref = context.getSharedPreferences("widget" + intent.getIntExtra("appWidgetId", 0), 0);
+            SharedPreferences.Editor editor = pref.edit();
+
+            editor.putBoolean("isLunch", !pref.getBoolean("isLunch", true)).apply();
+            updateAllWidgets(context);
+
         }
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
-
-        this.mAppWidgetManager = appWidgetManager;
-        this.mAppWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
 
         updateAllWidgets(context);
     }
@@ -80,14 +66,44 @@ public class MealProvider extends AppWidgetProvider {
 
     /*모든 위젯 업데이트 하기*/
     private void updateAllWidgets(Context context) {
-        for (int mAppWidgetId : mAppWidgetIds)
-            updateWidget(context, mAppWidgetId);
+        /*위젯 아이디 가져오기*/
+        int[] appWidgetIds = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, getClass()));
+
+        for (int appWidgetId : appWidgetIds) {
+            RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_cafeteria);
+
+            /*위젯 색깔바꾸기*/
+            SharedPreferences pref = context.getSharedPreferences("widget" + appWidgetId, 0);
+
+            if (pref.getInt("backgroundColor", Color.WHITE) == Color.WHITE)
+                changeWidgetColor(pref, updateViews, WidgetManager.WHITE, Color.BLACK);
+            else
+                changeWidgetColor(pref, updateViews, WidgetManager.BLACK, Color.WHITE);
+
+            /*위젯 텍스트 바꾸기*/
+            setWidgetText(context, updateViews, pref);
+
+            /*위젯 클릭 시 점심-> 저녁, 저녁->점심으로 변경*/
+            setClickListener(context, updateViews, appWidgetId);
+
+            /*변동사항 저장하기*/
+            AppWidgetManager.getInstance(context).updateAppWidget(appWidgetId, updateViews);
+        }
+
     }
 
-    private void updateWidget(Context context, int appWidgetId) {
-        Log.d(TAG,"Working");
-        RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_cafeteria);
+    /*위젯 색깔바꾸기*/
+    private void changeWidgetColor(SharedPreferences pref, RemoteViews updateViews, int backgroundColor, int textColor) {
+        updateViews.setTextColor(R.id.when_cafe_text, textColor);
+        updateViews.setTextColor(R.id.what_cafe_text, textColor);
 
+        updateViews.setInt(R.id.background_cafeteria,
+                "setBackgroundColor",
+                Color.argb(pref.getInt("transparent", 255), backgroundColor, backgroundColor, backgroundColor));
+    }
+
+    /*위젯 텍스트 바꾸기*/
+    private void setWidgetText(Context context, RemoteViews updateViews, SharedPreferences pref) {
         /*데이터베이스 준비하기*/
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         SQLiteDatabase database = dataBaseHelper.getReadableDatabase();
@@ -98,20 +114,22 @@ public class MealProvider extends AppWidgetProvider {
 
         cursor.moveToFirst();
 
-        if(sIsLunch) {
-            updateViews.setTextViewText(R.id.lunch_or_dinner_text, "점심");
-            updateViews.setTextViewText(R.id.meal_widget_cafe_text, cursor.getString(cursor.getColumnIndex("lunch")));
+        /*위젯 텍스트 바꾸기*/
+        if (pref.getBoolean("isLunch", true)) {
+            updateViews.setTextViewText(R.id.when_cafe_text, "점심");
+            updateViews.setTextViewText(R.id.what_cafe_text, cursor.getString(cursor.getColumnIndex("lunch")));
         } else {
-            updateViews.setTextViewText(R.id.lunch_or_dinner_text, "저녁");
-            updateViews.setTextViewText(R.id.meal_widget_cafe_text, cursor.getString(cursor.getColumnIndex("dinner")));
+            updateViews.setTextViewText(R.id.when_cafe_text, "저녁");
+            updateViews.setTextViewText(R.id.what_cafe_text, cursor.getString(cursor.getColumnIndex("dinner")));
         }
+    }
 
+    /*위젯 클릭 시 점심-> 저녁, 저녁->점심으로 변경*/
+    private void setClickListener(Context context, RemoteViews updateViews, int appWidgetId) {
         Intent intent = new Intent(context, MealProvider.class);
         intent.setAction(ACTION_CLICK);
+        intent.putExtra("appWidgetId", appWidgetId);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        updateViews.setOnClickPendingIntent(R.id.meal_widget_layout, pendingIntent);
-
-        /*변동사항 저장하기*/
-        mAppWidgetManager.updateAppWidget(appWidgetId, updateViews);
+        updateViews.setOnClickPendingIntent(R.id.background_cafeteria, pendingIntent);
     }
 }

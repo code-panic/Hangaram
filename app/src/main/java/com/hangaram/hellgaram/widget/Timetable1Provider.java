@@ -7,9 +7,10 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+import android.graphics.Color;
 import android.widget.RemoteViews;
 
 import com.hangaram.hellgaram.R;
@@ -21,22 +22,26 @@ public class Timetable1Provider extends AppWidgetProvider {
     private static final String TAG = "Timetable1Provider";
     private static final String ACTION_UPDATE = "UPDATE_WIDGET_TIMETABLE1";
 
+    /*위젯 색깔 바꾸기 용*/
+    private static final int WHITE = 255;
+    private static final int BLACK = 0;
+
     @Override
     public void onEnabled(Context context) {
         super.onEnabled(context);
 
         /*특정 시간마다 인텐트 보내기*/
-        for (int period = 0; period < PeriodGiver.sUpdateTimeArray.length; period++) {
+        for (int period = 0; period < WidgetManager.TIMETABLE_UPDATE_TIMES.length; period++) {
             Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.HOUR_OF_DAY, PeriodGiver.sUpdateTimeArray[period][0]);
-            calendar.set(Calendar.MINUTE, PeriodGiver.sUpdateTimeArray[period][1]);
+            calendar.set(Calendar.HOUR_OF_DAY, WidgetManager.TIMETABLE_UPDATE_TIMES[period][0]);
+            calendar.set(Calendar.MINUTE, WidgetManager.TIMETABLE_UPDATE_TIMES[period][1]);
             calendar.set(Calendar.SECOND, 0);
             calendar.set(Calendar.MILLISECOND, 0);
 
             /*보낼 인텐트 생성하기*/
-            Intent intent = new Intent(context, Timetable1Provider.class);
+            Intent intent = new Intent(context, Timetable2Provider.class);
             intent.setAction(ACTION_UPDATE);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, period, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             /*알람매니저 설정하기*/
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -50,10 +55,8 @@ public class Timetable1Provider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        if (intent.getAction().equals(ACTION_UPDATE)) {
-            Log.d(TAG, "업데이트를 시작합니다.");
+        if (intent.getAction().equals(ACTION_UPDATE))
             updateAllWidgets(context);
-        }
     }
 
     @Override
@@ -67,21 +70,53 @@ public class Timetable1Provider extends AppWidgetProvider {
     public void onDisabled(Context context) {
         super.onDisabled(context);
 
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(PendingIntent.getBroadcast(context, 0, new Intent(ACTION_UPDATE), PendingIntent.FLAG_UPDATE_CURRENT));
+        /*알람 예약 취소하기*/
+        for (int period = 0; period < WidgetManager.TIMETABLE_UPDATE_TIMES.length; period++) {
+            Intent intent = new Intent(context, Timetable2Provider.class);
+            intent.setAction(ACTION_UPDATE);
+
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            alarmManager.cancel(PendingIntent.getBroadcast(context, period, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+        }
     }
 
     /*모든 위젯 업데이트 하기*/
     private void updateAllWidgets(Context context) {
+        /*위젯 아이디 가져오기*/
         int[] appWidgetIds = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, getClass()));
-        for (int appWidgetId : appWidgetIds)
-            updateWidget(context, AppWidgetManager.getInstance(context), appWidgetId, PeriodGiver.getCurrentPeriod());
+
+        for (int appWidgetId : appWidgetIds) {
+            RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_timetable2);
+
+            /*위젯 색깔바꾸기*/
+            SharedPreferences pref = context.getSharedPreferences("widget" + appWidgetId, 0);
+
+            if (pref.getInt("backgroundColor", Color.WHITE) == Color.WHITE)
+                changeWidgetColor(pref, updateViews, WHITE, Color.BLACK);
+            else
+                changeWidgetColor(pref, updateViews, BLACK, Color.WHITE);
+
+            /*위젯 텍스트 설정*/
+            setWidgetText(context, updateViews);
+
+            /*변동사항 저장하기*/
+            AppWidgetManager.getInstance(context).updateAppWidget(appWidgetId, updateViews);
+        }
     }
 
-    private void updateWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId, int tmpPeriod) {
-        Log.d(TAG, "tmpPeriod 값: " + tmpPeriod);
+    private void changeWidgetColor(SharedPreferences pref, RemoteViews updateViews, int backgroundColor, int textColor) {
+        updateViews.setTextColor(R.id.this_subject_period, textColor);
+        updateViews.setTextColor(R.id.this_subject_name, textColor);
+        updateViews.setTextColor(R.id.this_subject_hint, textColor);
+        updateViews.setTextColor(R.id.next_subject_name, textColor);
 
-        RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_timetable1);
+        updateViews.setInt(R.id.background_timetable2,
+                "setBackgroundColor",
+                Color.argb(pref.getInt("transparent", 255), backgroundColor, backgroundColor, backgroundColor));
+    }
+
+    private void setWidgetText(Context context, RemoteViews updateViews) {
+        String[] subjectArray;
 
         /*
          * 월요일: 1
@@ -90,11 +125,6 @@ public class Timetable1Provider extends AppWidgetProvider {
          * 목요일: 4
          * 금요일: 5
          * */
-        int currentDayOfWeek = PeriodGiver.getDayOfWeek(tmpPeriod);
-        int currentPeriod = PeriodGiver.getPeriod(tmpPeriod);
-
-        Log.d(TAG, "dayOfWeek 값: " + currentDayOfWeek);
-        Log.d(TAG, "period 값: " + currentPeriod);
 
         /*데이터베이스 준비하기*/
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
@@ -102,20 +132,20 @@ public class Timetable1Provider extends AppWidgetProvider {
 
         Cursor cursor = database.rawQuery("SELECT * FROM " + DataBaseHelper.TABLE_NAME_TIMETABLE, null);
 
-        for (int period = 1; period < 7; period++) {
-            cursor.moveToPosition(period);
+        /*현재 과목교시 보여주기*/
+        updateViews.setTextViewText(R.id.this_subject_period, WidgetManager.getPeriodOfDay(0) + "교시");
 
-            for (int dayOfWeek = 1; dayOfWeek < 6; dayOfWeek++) {
-                Log.d(TAG, "period: " + period + " dayOfWeek: " + dayOfWeek + " content: " + cursor.getString(dayOfWeek));
-                RemoteViews item = new RemoteViews(context.getPackageName(), R.layout.item_timetable1_widget);
-                item.setTextViewText(R.id.timetable1_widget_item, cursor.getString(dayOfWeek));
-                updateViews.addView(R.id.timetable1_widget_grid_view, item);
-            }
-        }
+        /*현재 과목과 힌트 보여주기*/
+        cursor.moveToPosition(WidgetManager.getPeriodOfDay(0));
+        subjectArray = cursor.getString(WidgetManager.getDayOfWeek(0)).split("\n");
 
-        /*변동사항 저장하기*/
-        appWidgetManager.updateAppWidget(appWidgetId, updateViews);
+        updateViews.setTextViewText(R.id.this_subject_name, WidgetManager.getPeriodName(subjectArray));
+        updateViews.setTextViewText(R.id.this_subject_hint, WidgetManager.getPeriodHint(subjectArray));
+
+        /*다음 과목 보여주기*/
+        cursor.moveToPosition(WidgetManager.getPeriodOfDay(1));
+        subjectArray = cursor.getString(WidgetManager.getDayOfWeek(1)).split("\n");
+
+        updateViews.setTextViewText(R.id.next_subject_name, "다음시간\t\t\t" + WidgetManager.getPeriodName(subjectArray));
     }
 }
-
-

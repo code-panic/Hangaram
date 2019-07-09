@@ -11,7 +11,7 @@
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
     </style>
-    
+
     <!--시간표 부분화면 스타일 모음-->
     <style name="FragmentTimetableButton">
         <item name="android:layout_width">0dp</item>
@@ -35,9 +35,9 @@
         <item name="android:cursorVisible">false</item>
         <item name="android:background">@color/colorWhite</item>
     </style>
-    
-    <!--시간표2 위젯 및 위젯 설정 화면 스타일 모음-->
-    <style name="WidgetTimetable2BigText">
+
+    <!--시간표2 위젯 스타일 모음-->
+    <style name="WidgetTimetable2Text24">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
@@ -46,7 +46,44 @@
         <item name="android:fontFamily">@font/nanum_myeongjo</item>
     </style>
 
-    <style name="WidgetTimetable2SmallText">
+    <style name="WidgetTimetable2Text16">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:fontFamily">@font/nanum_myeongjo</item>
+    </style>
+
+    <style name="WidgetTimetable2Text12">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:fontFamily">@font/nanum_myeongjo</item>
+    </style>
+
+    <!--버스 위젯 스타일 모음-->
+    <style name="WidgetBusText24">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:fontFamily">@font/nanum_myeongjo</item>
+    </style>
+
+    <style name="WidgetBusText16">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:fontFamily">@font/nanum_myeongjo</item>
+    </style>
+
+    <style name="WidgetBusText12">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>

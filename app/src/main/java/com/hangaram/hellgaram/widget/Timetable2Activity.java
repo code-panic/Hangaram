@@ -20,6 +20,7 @@ import com.hangaram.hellgaram.R;
 
 public class Timetable2Activity extends Activity {
     private static final String TAG = "TimeTable2Activity";
+    private static final String ACTION_UPDATE = "UPDATE_WIDGET_TIMETABLE2";
 
     private int appWidgetId;
 
@@ -48,16 +49,17 @@ public class Timetable2Activity extends Activity {
         /*뷰 객체 가져오기*/
         getViewObjects();
 
+        /*뷰 리스너 설정하기*/
+        setViewListeners();
+
         /*위젯 아이디 가져오기*/
-        getWidgetId();
+        appWidgetId = getWidgetId();
 
         /*임시저장할 객체 생성하기*/
         setSharedPreferences();
-
-        /*뷰 리스너 설정하기*/
-        setViewListeners();
     }
 
+    /*뷰 객체 초기화하기*/
     private void getViewObjects() {
         backgroundWidget = findViewById(R.id.background_timetable2);
 
@@ -74,59 +76,53 @@ public class Timetable2Activity extends Activity {
         applyButton = findViewById(R.id.apply_button);
     }
 
-    private void getWidgetId() {
+    /*위젯 아이디 가져오기*/
+    private int getWidgetId() {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
 
         if (extras != null) {
-            appWidgetId = extras.getInt(
+            return extras.getInt(
                     AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
         }
+
+        return 0;
     }
 
+    /*임시저장을 위한 pref 초기화하기*/
     private void setSharedPreferences() {
         pref = getSharedPreferences("widget" + appWidgetId, 0);
         editor = pref.edit();
     }
 
+    /*리스너 초기화하기*/
     private void setViewListeners() {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int id) {
-                if (id == R.id.white_radio_button) {
-                    /*샘플 화면 바꾸기*/
-                    backgroundWidget.setBackgroundColor(Color.WHITE);
-                    backgroundWidget.getBackground().setAlpha(pref.getInt("transparent", 0));
-                    changeWidgetTextBlack();
-
-                    /*백그라운드 컬러 저장하기*/
-                    editor.putString("backgroundColor", "white").apply();
-                    editor.putString("textColor", "black").apply();
-                } else {
-                    /*샘플 화면 바꾸기*/
-                    backgroundWidget.setBackgroundColor(Color.BLACK);
-                    backgroundWidget.getBackground().setAlpha(pref.getInt("transparent", 0));
-                    changeWidgetTextWhite();
-
-                    /*백그라운드 컬러 저장하기*/
-                    editor.putString("backgroundColor", "black").apply();
-                    editor.putString("textColor", "white").apply();
-                }
+                if (id == R.id.white_radio_button)
+                    /* 하얀색 샘플 배경화면으로 바꾸기*/
+                    changeWidgetTextColor(Color.WHITE, Color.BLACK);
+                else
+                    /* 검은색 샘플 배경화면으로 바꾸기*/
+                    changeWidgetTextColor(Color.BLACK, Color.WHITE);
             }
         });
 
         transparentSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int percent, boolean b) {
-                /*투명도 저장하기*/
+                /*투명도 저장하기
+                 * 100% -> 0
+                 * 0% -> 255*/
                 editor.putInt("transparent", 255 - (int) (percent * 2.55)).apply();
 
-                Log.d(TAG, "투명도: " + pref.getInt("transparent", 0));
-
                 /*샘플 화면 바꾸기*/
-                backgroundWidget.getBackground().setAlpha(pref.getInt("transparent", 0));
+                backgroundWidget.getBackground().setAlpha(pref.getInt("transparent", 255));
                 transparentPercent.setText(percent + "%");
+
+                Log.d(TAG, appWidgetId + "투명도: " + pref.getInt("transparent", 255));
             }
 
             @Override
@@ -140,10 +136,14 @@ public class Timetable2Activity extends Activity {
             }
         });
 
+        /*창 닫기*/
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "widget" + appWidgetId + "activity");
+                /*위젯 업데이트 신호를 보낸다.*/
+                Intent intent = new Intent(getBaseContext(), Timetable2Provider.class);
+                intent.setAction(ACTION_UPDATE);
+                sendBroadcast(intent);
 
                 Intent resultValue = new Intent();
                 resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -153,17 +153,18 @@ public class Timetable2Activity extends Activity {
         });
     }
 
-    void changeWidgetTextWhite() {
-        thisSubjectPeriod.setTextColor(Color.WHITE);
-        thisSubjectName.setTextColor(Color.WHITE);
-        thisSubjectHint.setTextColor(Color.WHITE);
-        nextSubjectName.setTextColor(Color.WHITE);
-    }
+    /*샘플 위젯 색깔 바꾸*/
+    void changeWidgetTextColor(int backgroundColor, int textColor) {
+        backgroundWidget.setBackgroundColor(backgroundColor);
+        backgroundWidget.getBackground().setAlpha(pref.getInt("transparent", 255));
 
-    void changeWidgetTextBlack() {
-        thisSubjectPeriod.setTextColor(Color.BLACK);
-        thisSubjectName.setTextColor(Color.BLACK);
-        thisSubjectHint.setTextColor(Color.BLACK);
-        nextSubjectName.setTextColor(Color.BLACK);
+        thisSubjectPeriod.setTextColor(textColor);
+        thisSubjectName.setTextColor(textColor);
+        thisSubjectHint.setTextColor(textColor);
+        nextSubjectName.setTextColor(textColor);
+
+        /*백그라운드 컬러 저장하기*/
+        editor.putInt("backgroundColor", backgroundColor).apply();
+        editor.putInt("textColor", backgroundColor).apply();
     }
 }

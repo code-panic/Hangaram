@@ -3,30 +3,30 @@
     android:id="@+id/background_timetable2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/colorWhite"
     android:gravity="center"
-    android:padding="16dp"
-    android:background="@color/colorWhite">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/this_subject_period"
+        style="@style/WidgetTimetable2Text16"
         android:layout_marginBottom="8dp"
-        android:text="1교시"
-        style="@style/WidgetTimetable2SmallText"/>
+        android:text="1교시" />
 
     <TextView
         android:id="@+id/this_subject_name"
-        android:text="기하와 벡터"
-        style="@style/WidgetTimetable2BigText"/>
+        style="@style/WidgetTimetable2Text24"
+        android:text="기하와 벡터" />
 
     <TextView
         android:id="@+id/this_subject_hint"
+        style="@style/WidgetTimetable2Text16"
         android:layout_marginBottom="8dp"
-        android:text="이현주/311호"
-        style="@style/WidgetTimetable2SmallText" />
+        android:text="이현주/311호" />
 
     <TextView
         android:id="@+id/next_subject_name"
-        android:text="다음시간  스포츠경기"
-        style="@style/WidgetTimetable2SmallText"/>
+        style="@style/WidgetTimetable2Text12"
+        android:text="다음시간  스포츠경기" />
 </LinearLayout>

@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/background_timetable2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@color/colorWhite">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/stNm_text"
+        android:layout_marginBottom="8dp"
+        android:text="월촌중학교"
+        style="@style/WidgetBusText16"/>
+
+    <TextView
+        android:id="@+id/rtNm_text"
+        android:text="571"
+        style="@style/WidgetTimetable2Text24"/>
+
+    <TextView
+        android:id="@+id/arrmsg1_text"
+        android:layout_marginBottom="8dp"
+        android:text="5분/7정거장/여유"
+        style="@style/WidgetTimetable2Text16" />
+
+    <TextView
+        android:id="@+id/last_update_text"
+        android:text="업데이트 7/4 오후 3:25"
+        style="@style/WidgetTimetable2Text12"/>
+</LinearLayout>

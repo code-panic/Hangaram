@@ -34,8 +34,8 @@ public class TimetableFragment extends Fragment {
     private View mView;
     private TableLayout mTableLayout;
 
-    private int mRowCount = 7; //가로줄(행)
-    private int mColumnCount = 6; //세로줄(열)
+    private int mRowCount = 7; /*가로줄(행)*/
+    private int mColumnCount = 6; /*세로줄(열)*/
 
     private boolean mHangaramTimetableSet = false;
     private boolean mEdited = false;
@@ -44,7 +44,7 @@ public class TimetableFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_timetable, container, false);
 
-        //뷰 초기화 및 버튼 리스너 설정
+        /*뷰 초기화 및 버튼 리스너 설정*/
         init();
         locateEditTexts();
 
@@ -67,7 +67,7 @@ public class TimetableFragment extends Fragment {
     public void onPause() {
         super.onPause();
 
-        //저장하기
+        /*저장하기*/
         if (mEdited)
             saveData();
 
@@ -83,7 +83,7 @@ public class TimetableFragment extends Fragment {
         mDataBaseHelper = new DataBaseHelper(getContext());
         mDatabase = mDataBaseHelper.getReadableDatabase();
 
-        //편집 버튼 리스너
+        /*편집 버튼 리스너*/
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,11 +104,11 @@ public class TimetableFragment extends Fragment {
             }
         });
 
-        //한가람 시간표로 이동하는 버튼 리스너
+        /*한가람 시간표로 이동하는 버튼 리스너*/
         toHangaramTimetable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //한가람 시간표로 이동하기
+                /*한가람 시간표로 이동하기*/
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://xn--o39ai969f8llbkv0lb.xn--3e0b707e/"));
                 v.getContext().startActivity(intent);
             }
@@ -116,7 +116,7 @@ public class TimetableFragment extends Fragment {
     }
 
     private void locateEditTexts() {
-        //editText 를 인스턴스할 LayoutInflater 객체 생성하기
+        /*editText 를 인스턴스할 LayoutInflater 객체 생성하기*/
         LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         for (int row = 0; row < mRowCount; row++) {
@@ -126,13 +126,14 @@ public class TimetableFragment extends Fragment {
             for (int column = 0; column < mColumnCount; column++) {
                 EditText editText;
 
-                //editText 위치에 따라 인스턴스화 하기
                 /*
-                item_timetable1 : 채우기 용 editText
-                item_timetable2 : 요일 editText
-                item_timetable3 : 교시 editText
-                item_timetable4 : 과목 정보 editText
-                */
+                * editText 위치에 따라 인스턴스화 하기
+                *
+                * item_timetable1 : 채우기 용 editText
+                * item_timetable2 : 요일 editText
+                * item_timetable3 : 교시 editText
+                * item_timetable4 : 과목 정보 editText
+                * */
                 if (row == 0 && column == 0)
                     editText = (EditText) layoutInflater.inflate(R.layout.item_timetable1, tableRow, false);
                 else if (row == 0)
@@ -149,7 +150,7 @@ public class TimetableFragment extends Fragment {
     }
 
     private void setEditTextInfo() {
-        //데이터베이스에서 값을 읽어올 Cursor 가져오기
+        /*데이터베이스에서 값을 읽어올 Cursor 가져오기*/
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + DataBaseHelper.TABLE_NAME_TIMETABLE, null);
 
         for (int row = 0; row < mRowCount; row++) {
@@ -162,7 +163,7 @@ public class TimetableFragment extends Fragment {
             }
         }
 
-        //안드로이드 권장사항! 지우지 말자
+        /*안드로이드 권장사항! 지우지 말자*/
         cursor.close();
     }
 
@@ -181,14 +182,14 @@ public class TimetableFragment extends Fragment {
             /*id는 1부터 시작하기 때문에 row 에 1을 더해주어야 한다.*/
             String[] args = {row + 1 + ""};
             mDatabase.update(DataBaseHelper.TABLE_NAME_TIMETABLE, contentValues, "id = ?", args);
-
-            //완료됨을 알려주는 Toast 메세지 보내기
-            Toast.makeText(getContext(), "시간표가 저장되었습니다", Toast.LENGTH_SHORT).show();
         }
+
+        /*완료됨을 알려주는 Toast 메세지 보내기*/
+        Toast.makeText(getContext(), "시간표가 저장되었습니다", Toast.LENGTH_SHORT).show();
     }
 
+    /*한가람 시간표와 연동*/
     public void linkWithHangaramTimetable(JSONArray jsonArray) {
-
         try {
             for (int row = 1; row < mRowCount; row++) {
                 TableRow tableRow = (TableRow) mTableLayout.getChildAt(row);

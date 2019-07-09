@@ -21,6 +21,14 @@ public class BusTask extends AsyncTask<String, Void, Boolean> {
 
     private ArrayList<HashMap<String, String>> busList = new ArrayList<>();
 
+    private String stNm;
+
+    /*busList1: 월촌중학교 전용
+     *busList2: 목동이대병원 전용*/
+    public static ArrayList<HashMap<String, String>> busList1;
+    public static ArrayList<HashMap<String, String>> busList2;
+
+
     private String arrmsg1 = "";    /*첫번째 버스 도착정보*/
     private String arrmsg2 = "";    /*두번째 버스 도착정보*/
     private String busType1 = "";   /*첫번째 버스 타입 (0: 일반버스, 1: 저상버스, 2: 굴절버스)*/
@@ -47,12 +55,12 @@ public class BusTask extends AsyncTask<String, Void, Boolean> {
 
     public interface BusCall {
         void onSuccess(ArrayList<HashMap<String, String>> busList);
-
         void onFailure();
     }
 
-    public BusTask(BusCall busCall) {
+    public BusTask(BusCall busCall, String stNm) {
         mBusCall = busCall;
+        this.stNm = stNm;
     }
 
     @Override
@@ -62,7 +70,7 @@ public class BusTask extends AsyncTask<String, Void, Boolean> {
              * 목동이대병원 정류장 아이디: 15154*/
             String arsId;
 
-            if (stationName[0].equals("월촌중학교"))
+            if (stNm.equals("월촌중학교"))
                 arsId = "15148";
             else
                 arsId = "15154";
@@ -202,6 +210,9 @@ public class BusTask extends AsyncTask<String, Void, Boolean> {
             mBusCall.onSuccess(busList);
         else
             mBusCall.onFailure();
+
+        saveBusList(busList);
+
     }
 
     /*
@@ -243,5 +254,14 @@ public class BusTask extends AsyncTask<String, Void, Boolean> {
             isFullFlag2 = "여유";
         else
             isFullFlag2 = "만석";
+    }
+
+    /*busList 저장하기*/
+    private void saveBusList(ArrayList<HashMap<String, String>> busList) {
+        /*디폴트로 업데이트 창이 뜬다*/
+        if (stNm.equals("월촌중학교"))
+            busList1 = busList;
+        else if (stNm.equals("목동이대병원"))
+            busList2 = busList;
     }
 }

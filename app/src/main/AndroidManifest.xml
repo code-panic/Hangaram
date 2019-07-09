@@ -40,12 +40,14 @@
         </activity>
 
         <activity
-            android:name=".activity.CreditActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
             android:name=".timetable.CautionActivity"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".widget.MealActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
 
         <activity android:name=".widget.Timetable2Activity">
             <intent-filter>

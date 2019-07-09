@@ -21,11 +21,6 @@ import java.util.HashMap;
 public class BusFragment extends Fragment {
     private static final String TAG = "BusFragment";
 
-    /*busList1: 월촌중학교 전용
-     *busList2: 목동이대병원 전용*/
-    public static ArrayList<HashMap<String, String>> busList1;
-    public static ArrayList<HashMap<String, String>> busList2;
-
     private View view;
 
     private RelativeLayout contentContainer;
@@ -52,10 +47,10 @@ public class BusFragment extends Fragment {
                 * 버튼의 텍스트를 "업데이트"로 바꾼다.*/
                 stNm = tab.getText().toString();
 
-                if (stNm.equals("월촌중학교") && busList1 != null)
-                    inflateShowContent(inflater, busList1);
-                else if (stNm.equals("목동이대병원") && busList2 != null)
-                    inflateShowContent(inflater, busList2);
+                if (stNm.equals("월촌중학교") && BusTask.busList1 != null)
+                    inflateShowContent(inflater, BusTask.busList1);
+                else if (stNm.equals("목동이대병원") && BusTask.busList2 != null)
+                    inflateShowContent(inflater, BusTask.busList2);
                 else
                     inflateUpdateContent(inflater);
             }
@@ -79,7 +74,6 @@ public class BusFragment extends Fragment {
                     @Override
                     public void onSuccess(ArrayList<HashMap<String, String>> busList) {
                         inflateShowContent(inflater, busList);
-                        saveBusList(busList);
                     }
 
                     @Override
@@ -87,17 +81,17 @@ public class BusFragment extends Fragment {
                         inflateUpdateContent(inflater);
                         Toast.makeText(getContext(), "인터넷 연결을 확인해주세요", Toast.LENGTH_SHORT).show();
                     }
-                });
+                }, stNm);
 
-                busTask.execute(stNm);
+                busTask.execute();
             }
         });
 
         /*적절히 inflate 하기(직관성을 위해 일부러 함수흫 만들지 않음)*/
-        if (stNm.equals("월촌중학교") && busList1 != null)
-            inflateShowContent(inflater, busList1);
-        else if (stNm.equals("목동이대병원") && busList2 != null)
-            inflateShowContent(inflater, busList2);
+        if (stNm.equals("월촌중학교") && BusTask.busList1 != null)
+            inflateShowContent(inflater, BusTask.busList1);
+        else if (stNm.equals("목동이대병원") && BusTask.busList2 != null)
+            inflateShowContent(inflater, BusTask.busList2);
         else
             inflateUpdateContent(inflater);
 
@@ -134,12 +128,4 @@ public class BusFragment extends Fragment {
         updateButton.setText("업데이트");
     }
 
-    /*busList 저장하기*/
-    private void saveBusList(ArrayList<HashMap<String, String>> busList) {
-        /*디폴트로 업데이트 창이 뜬다*/
-        if (stNm.equals("월촌중학교"))
-            busList1 = busList;
-        else if (stNm.equals("목동이대병원"))
-            busList2 = busList;
-    }
 }
