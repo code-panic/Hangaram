@@ -25,7 +25,7 @@ class WidgetManager {
             {17, 10}
     };
 
-    public static void setAlaram(Context context, int hour, int minuate, int id, String action){
+    public static void setAlaram(Context context, int hour, int minuate, int id, String action) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minuate);
@@ -66,7 +66,7 @@ class WidgetManager {
         Calendar calendar = new GregorianCalendar();
         calendar.add(Calendar.DATE, 0);
 
-        if ((period >= 7 && calendar.get(Calendar.DAY_OF_WEEK) == 6) || !(calendar.get(Calendar.DAY_OF_WEEK) >= 1 && calendar.get(Calendar.DAY_OF_WEEK) <= 5))
+        if ((period >= 7 && calendar.get(Calendar.DAY_OF_WEEK) == 6) || calendar.get(Calendar.DAY_OF_WEEK) == 1 || calendar.get(Calendar.DAY_OF_WEEK) == 7)
             /*금요일 6교시 이후나 토요일, 일요일일때*/
             return 1;
         else if (period >= 7)
@@ -83,8 +83,11 @@ class WidgetManager {
         Calendar calendar = new GregorianCalendar();
         calendar.add(Calendar.DATE, 0);
 
-        if (period >= 7 || !(calendar.get(Calendar.DAY_OF_WEEK) >= 2 && calendar.get(Calendar.DAY_OF_WEEK) <= 6))
+        if ((period >= 7 && calendar.get(Calendar.DAY_OF_WEEK) == 6) || calendar.get(Calendar.DAY_OF_WEEK) == 1 || calendar.get(Calendar.DAY_OF_WEEK) == 7)
             /*6교시 이후나 토요일, 일요일일때*/
+            return 1 + periodGap;
+        else if (period >= 7)
+            /*6교시 이후(금요일 제외)*/
             return period - 6;
         else
             /*그 밖의 경우*/

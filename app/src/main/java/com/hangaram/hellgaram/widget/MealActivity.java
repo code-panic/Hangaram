@@ -147,7 +147,7 @@ public class MealActivity extends Activity {
         });
     }
 
-    /*샘플 위젯 색깔 바꾸*/
+    /*샘플 위젯 색깔 바꾸기*/
     void changeWidgetTextColor(int backgroundColor, int textColor) {
         backgroundWidget.setBackgroundColor(backgroundColor);
         backgroundWidget.getBackground().setAlpha(pref.getInt("transparent", 255));

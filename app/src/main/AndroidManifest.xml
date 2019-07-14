@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.hangaram.hellgaram">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -43,6 +44,12 @@
             android:name=".timetable.CautionActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".widget.BusActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
+
         <activity android:name=".widget.MealActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
@@ -55,6 +62,15 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name=".widget.BusProvider" android:label="@string/widget_bus_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="CLICK_WIDGET_BUS"/>
+                <action android:name="UPDATE_WIDGET_BUS" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/widget_bus_provider" />
+        </receiver>
 
         <receiver android:name=".widget.MealProvider" android:label="@string/widget_meal_name">
             <intent-filter>
@@ -83,6 +99,9 @@
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/widget_timetable2_provider" />
         </receiver>
+
+        <service
+            android:name=".widget.Timetable1Service" />
 
     </application>
 </manifest>

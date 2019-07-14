@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/timetable1_widget_grid_view"
+    android:id="@+id/widget_timetable1_grid"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
@@ -8,6 +8,6 @@
     android:columnCount="5"
     android:verticalSpacing="1dp"
     android:horizontalSpacing="1dp"
-    android:background="@color/colorWhite">
+    android:background="@color/colorBlack">
 
 </GridView>

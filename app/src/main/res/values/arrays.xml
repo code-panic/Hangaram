@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="st_array">
+        <item>월촌중학교</item>
+        <item>목동이대병원</item>
+    </string-array>
+
+    <string-array name="rt_array">
+        <item>양천01</item>
+        <item>양천02</item>
+        <item>571</item>
+        <item>603</item>
+        <item>674</item>
+        <item>6620</item>
+        <item>6624</item>
+        <item>6627</item>
+        <item>6637</item>
+        <item>700부천</item>
+    </string-array>
+</resources>

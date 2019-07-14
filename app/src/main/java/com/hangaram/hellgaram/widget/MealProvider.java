@@ -43,6 +43,8 @@ public class MealProvider extends AppWidgetProvider {
             SharedPreferences pref = context.getSharedPreferences("widget" + intent.getIntExtra("appWidgetId", 0), 0);
             SharedPreferences.Editor editor = pref.edit();
 
+            Log.d(TAG, "클린된 위젯의 appWidgetId - " + intent.getIntExtra("appWidgetId", 0));
+
             editor.putBoolean("isLunch", !pref.getBoolean("isLunch", true)).apply();
             updateAllWidgets(context);
 
@@ -129,7 +131,10 @@ public class MealProvider extends AppWidgetProvider {
         Intent intent = new Intent(context, MealProvider.class);
         intent.setAction(ACTION_CLICK);
         intent.putExtra("appWidgetId", appWidgetId);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         updateViews.setOnClickPendingIntent(R.id.background_cafeteria, pendingIntent);
+
+        Log.d(TAG, "클릭될 위젯의 appWidgetId - " + appWidgetId);
     }
 }

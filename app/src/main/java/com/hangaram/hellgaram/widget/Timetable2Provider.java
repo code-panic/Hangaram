@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.hangaram.hellgaram.R;
@@ -115,6 +116,7 @@ public class Timetable2Provider extends AppWidgetProvider {
 
         /*현재 과목과 힌트 보여주기*/
         cursor.moveToPosition(WidgetManager.getPeriodOfDay(0));
+        Log.d(TAG, WidgetManager.getPeriodOfDay(0) + "");
         subjectArray = cursor.getString(WidgetManager.getDayOfWeek(0)).split("\n");
 
         updateViews.setTextViewText(R.id.this_subject_name, WidgetManager.getPeriodName(subjectArray));

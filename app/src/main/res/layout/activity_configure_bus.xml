@@ -8,8 +8,40 @@
         layout="@layout/widget_bus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="64dp"
-        android:layout_marginHorizontal="40dp"/>
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="64dp" />
 
-    <include layout="@layout/item_configure" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            style="@style/ActivityConfigureBusText1"
+            android:text="정거장 및 버스 선택" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinner_st"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <Spinner
+                android:id="@+id/spinner_rt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <include
+        layout="@layout/item_configure" />
 </LinearLayout>

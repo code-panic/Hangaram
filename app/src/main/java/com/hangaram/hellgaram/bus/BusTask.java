@@ -183,7 +183,15 @@ public class BusTask extends AsyncTask<String, Void, Boolean> {
                             Calendar calendar = Calendar.getInstance();
                             calendar.add(Calendar.DATE, 0);
 
-                            hashMap.put("lastUpdateTime", calendar.get(Calendar.HOUR) + "시 " + calendar.get(Calendar.MINUTE) + "분");
+                            hashMap.put("month", (calendar.get(Calendar.MONTH) + 1) + "");
+                            hashMap.put("day", calendar.get(Calendar.DAY_OF_MONTH) + "");
+                            hashMap.put("hour", calendar.get(Calendar.HOUR) + "");
+                            hashMap.put("min", calendar.get(Calendar.MINUTE) + "");
+
+                            if (calendar.get(Calendar.AM_PM) == 0)
+                                hashMap.put("am_pm", "오전");
+                            else
+                                hashMap.put("am_pm", "오후");
 
                             busList.add(hashMap);
                         }
@@ -206,12 +214,12 @@ public class BusTask extends AsyncTask<String, Void, Boolean> {
     protected void onPostExecute(Boolean isSuccess) {
         super.onPostExecute(isSuccess);
 
+        saveBusList(busList);
+
         if (isSuccess)
             mBusCall.onSuccess(busList);
         else
             mBusCall.onFailure();
-
-        saveBusList(busList);
 
     }
 

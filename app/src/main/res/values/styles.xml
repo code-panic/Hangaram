@@ -118,6 +118,14 @@
         <item name="android:max">100</item>
     </style>
 
+    <!--버스위젯용 설정화면 스타일 모음-->
+    <style name="ActivityConfigureBusText1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
+    </style>
+
     <!--크레딧 화면 스타일 모음-->
     <style name="ActivityCrditText">
         <item name="android:layout_width">match_parent</item>

@@ -119,7 +119,7 @@ public class BusFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 0);
 
-        updateButton.setText("마지막 업데이트\t" + busList.get(0).get("lastUpdateTime"));
+        updateButton.setText("마지막 업데이트\t" + busList.get(0).get("hour") + "시 " + busList.get(0).get("min") + "분");
     }
 
     /*updateContent inflate 하기*/
