@@ -65,6 +65,8 @@ public class BusTask extends AsyncTask<String, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(String... stationName) {
+        Log.d(TAG, "doInBackGround is working");
+
         try {
             /*월촌중학교 정류장 아이디: 15148
              * 목동이대병원 정류장 아이디: 15154*/
@@ -80,7 +82,7 @@ public class BusTask extends AsyncTask<String, Void, Boolean> {
                     + "&arsId=" + arsId);
 
             /*아래 코드를 쓰지 않으면 오류가 터지므로 일단 써둔다*/
-//            StrictMode.enableDefaults();
+            StrictMode.enableDefaults();
 
             /*xml 파싱에 대한 객체 불러오기*/
             XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
@@ -213,6 +215,7 @@ public class BusTask extends AsyncTask<String, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean isSuccess) {
         super.onPostExecute(isSuccess);
+        Log.d(TAG, "doPostExecute is working");
 
         saveBusList(busList);
 
