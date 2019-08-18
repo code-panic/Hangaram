@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/item_text"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:layout_rowWeight="1"
-    android:layout_columnWeight="1"
+    android:id="@+id/subject_text"
+    android:layout_width="match_parent"
+    android:layout_height="96dp"
     android:background="@color/colorWhite"
     android:fontFamily="@font/nanum_myeongjo"
     android:gravity="center"
-    android:textColor="@color/colorBlack" />
+    android:textColor="@color/colorBlack"
+    android:textSize="8sp" />

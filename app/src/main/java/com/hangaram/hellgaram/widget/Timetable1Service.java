@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.GridView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -23,7 +24,6 @@ public class Timetable1Service extends RemoteViewsService {
     }
 
     private class GridFactory implements RemoteViewsFactory {
-
         private ArrayList<String> subjectList = new ArrayList<>();
 
         @Override
@@ -47,11 +47,11 @@ public class Timetable1Service extends RemoteViewsService {
         }
 
         @Override
-        public RemoteViews getViewAt(int pos) {
+        public RemoteViews getViewAt(int position) {
             RemoteViews updateViews = new RemoteViews(getBaseContext().getPackageName(), R.layout.item_timetable1_widget);
-            updateViews.setTextViewText(R.id.item_text, subjectList.get(pos));
-
-            Log.d(TAG, "pos" + pos + ": " + subjectList.get(pos));
+            updateViews.setTextViewText(R.id.subject_text, subjectList.get(position));
+            updateViews.setViewPadding(R.id.subject_text,0, );
+            Log.d(TAG, "position" + position + ": " + subjectList.get(position));
 
             return updateViews;
         }

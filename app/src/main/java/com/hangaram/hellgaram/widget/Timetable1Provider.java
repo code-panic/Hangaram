@@ -81,7 +81,6 @@ public class Timetable1Provider extends AppWidgetProvider {
         int[] appWidgetIds = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, getClass()));
 
         for (int appWidgetId : appWidgetIds) {
-
             RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_timetable1);
 
             Intent intent = new Intent(context,  Timetable1Service.class);
