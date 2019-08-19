@@ -11,13 +11,10 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.hangaram.hellgaram.R;
 import com.hangaram.hellgaram.datebase.DataBaseHelper;
-
-import java.util.Calendar;
 
 public class Timetable2Provider extends AppWidgetProvider {
     private static final String TAG = "Timetable2Provider";
@@ -112,19 +109,18 @@ public class Timetable2Provider extends AppWidgetProvider {
         Cursor cursor = database.rawQuery("SELECT * FROM " + DataBaseHelper.TABLE_NAME_TIMETABLE, null);
 
         /*현재 과목교시 보여주기*/
-        updateViews.setTextViewText(R.id.this_subject_period, WidgetManager.getPeriodOfDay(0) + "교시");
+        updateViews.setTextViewText(R.id.this_subject_period, WidgetManager.getNeedPeriod(0) + "교시");
 
         /*현재 과목과 힌트 보여주기*/
-        cursor.moveToPosition(WidgetManager.getPeriodOfDay(0));
-        Log.d(TAG, WidgetManager.getPeriodOfDay(0) + "");
-        subjectArray = cursor.getString(WidgetManager.getDayOfWeek(0)).split("\n");
+        cursor.moveToPosition(WidgetManager.getNeedPeriod(0));
+        subjectArray = cursor.getString(WidgetManager.getNeedDay(0)).split("\n");
 
         updateViews.setTextViewText(R.id.this_subject_name, WidgetManager.getPeriodName(subjectArray));
         updateViews.setTextViewText(R.id.this_subject_hint, WidgetManager.getPeriodHint(subjectArray));
 
         /*다음 과목 보여주기*/
-        cursor.moveToPosition(WidgetManager.getPeriodOfDay(1));
-        subjectArray = cursor.getString(WidgetManager.getDayOfWeek(1)).split("\n");
+        cursor.moveToPosition(WidgetManager.getNeedPeriod(1));
+        subjectArray = cursor.getString(WidgetManager.getNeedDay(1)).split("\n");
 
         updateViews.setTextViewText(R.id.next_subject_name, "다음시간\t\t\t" + WidgetManager.getPeriodName(subjectArray));
     }

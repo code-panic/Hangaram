@@ -4,13 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+    <GridLayout
         android:id="@+id/widget_timetable1_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:horizontalSpacing="1dp"
-        android:verticalSpacing="1dp"
         android:background="@color/colorBlack"
-        android:numColumns="5">
-    </GridView>
+        android:padding="0.5dp"
+        android:columnCount="5">
+
+    </GridLayout>
 </LinearLayout>

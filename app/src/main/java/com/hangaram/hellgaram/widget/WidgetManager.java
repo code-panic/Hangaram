@@ -60,7 +60,7 @@ class WidgetManager {
      * 월 1
      * 화 2..
      * */
-    public static int getDayOfWeek(int periodGap) {
+    public static int getNeedDay(int periodGap) {
         int period = getPeriodByTime(periodGap);
 
         Calendar calendar = new GregorianCalendar();
@@ -77,7 +77,7 @@ class WidgetManager {
             return calendar.get(Calendar.DAY_OF_WEEK) - 1;
     }
 
-    public static int getPeriodOfDay(int periodGap) {
+    public static int getNeedPeriod(int periodGap) {
         int period = getPeriodByTime(periodGap);
 
         Calendar calendar = new GregorianCalendar();

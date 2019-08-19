@@ -13,6 +13,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,10 +84,38 @@ public class Timetable1Provider extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_timetable1);
 
-            Intent intent = new Intent(context,  Timetable1Service.class);
-            intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
+            /*데이터베이스 준비하기*/
+            DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+            SQLiteDatabase database = dataBaseHelper.getReadableDatabase();
 
-            updateViews.setRemoteAdapter(appWidgetId, R.id.widget_timetable1_grid, intent);
+            Cursor cursor = database.rawQuery("SELECT * FROM " + DataBaseHelper.TABLE_NAME_TIMETABLE, null);
+
+            for (int row = 1; row < 7; row++) {
+                cursor.moveToPosition(row);
+
+                for (int column = 1; column < 6; column++) {
+                    RemoteViews subjectViews = new RemoteViews(context.getPackageName(), R.layout.item_timetable1_widget);
+                    subjectViews.setTextViewText(R.id.subject_text, cursor.getString(column));
+
+                    /*과목명에 공강이 있을 경우*/
+                    if (cursor.getString(column).contains("공강")) {
+                        subjectViews.setInt(R.id.subject_text, "setBackgroundColor", Color.rgb(145, 151, 181));
+                    }
+
+                    /*과목명에 담임이 있을 경우*/
+                    if (cursor.getString(column).contains("담임")) {
+                        subjectViews.setInt(R.id.subject_text, "setBackgroundColor", Color.rgb(172, 193, 137));
+                    }
+
+                    /*현재 가장 필요한 과목일 경우*/
+                    if (WidgetManager.getNeedPeriod(0) == row && WidgetManager.getNeedDay(0) == column) {
+                        subjectViews.setTextColor(R.id.subject_text, Color.WHITE);
+                        subjectViews.setInt(R.id.subject_text, "setBackgroundColor", Color.BLACK);
+                    }
+
+                    updateViews.addView(R.id.widget_timetable1_grid, subjectViews);
+                }
+            }
 
             AppWidgetManager.getInstance(context).updateAppWidget(appWidgetId, updateViews);
         }
