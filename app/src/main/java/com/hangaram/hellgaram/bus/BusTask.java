@@ -82,7 +82,7 @@ public class BusTask extends AsyncTask<String, Void, Boolean> {
                     + "&arsId=" + arsId);
 
             /*아래 코드를 쓰지 않으면 오류가 터지므로 일단 써둔다*/
-            StrictMode.enableDefaults();
+            //StrictMode.enableDefaults();
 
             /*xml 파싱에 대한 객체 불러오기*/
             XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
