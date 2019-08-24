@@ -84,6 +84,8 @@ public class Timetable1Provider extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_timetable1);
 
+            updateViews.removeAllViews(R.id.subject_text);
+
             /*데이터베이스 준비하기*/
             DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
             SQLiteDatabase database = dataBaseHelper.getReadableDatabase();
@@ -120,4 +122,5 @@ public class Timetable1Provider extends AppWidgetProvider {
             AppWidgetManager.getInstance(context).updateAppWidget(appWidgetId, updateViews);
         }
     }
+
 }

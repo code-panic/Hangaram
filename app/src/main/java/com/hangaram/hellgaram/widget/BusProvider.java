@@ -33,18 +33,18 @@ public class BusProvider extends AppWidgetProvider {
         else if (intent.getAction().equals(ACTION_CLICK)) {
             SharedPreferences pref = context.getSharedPreferences("widget" + intent.getIntExtra("appWidgetId", 0), 0);
 
-            Log.d(TAG, intent.getIntExtra("appWidgetId", 0) + " widget is clicked");
+            Log.d(TAG, intent.getIntExtra("appWidgetId", 0) + "위젝 클릭됨");
 
             BusTask busTask = new BusTask(new BusTask.BusCall() {
                 @Override
                 public void onSuccess(ArrayList<HashMap<String, String>> busList) {
-                    Log.d(TAG, intent.getIntExtra("appWidgetId", 0) + " widget's BusTask is successed");
+                    Log.d(TAG, intent.getIntExtra("appWidgetId", 0) + "위젯 버스업데이트 완료");
                     updateAllWidgets(context);
                 }
 
                 @Override
                 public void onFailure() {
-                    Log.d(TAG, intent.getIntExtra("appWidgetId", 0) + " widget's BusTask is failed");
+                    Log.d(TAG, intent.getIntExtra("appWidgetId", 0) + "위젯 버스업데이트 실패");
                     Toast.makeText(context, "인터넷 연결을 확인해주세요", Toast.LENGTH_SHORT).show();
                 }
             }, pref.getString("stNm", "월촌중학교"));
@@ -90,8 +90,6 @@ public class BusProvider extends AppWidgetProvider {
                 updateViews.setTextViewText(R.id.last_update_text, "");
             }
 
-            Log.d(TAG, appWidgetId + "widget is updating");
-
             /*클릭 리스너 설정하기*/
             setClickListener(context,updateViews, appWidgetId);
 
@@ -129,10 +127,11 @@ public class BusProvider extends AppWidgetProvider {
         }
     }
 
-    /*위젯 클릭 시 점심-> 저녁, 저녁->점심으로 변경*/
+
     private void setClickListener(Context context, RemoteViews updateViews, int appWidgetId) {
         Intent intent = new Intent(context, BusProvider.class);
         intent.setAction(ACTION_CLICK);
+
         intent.putExtra("appWidgetId", appWidgetId);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         updateViews.setOnClickPendingIntent(R.id.background_bus, pendingIntent);

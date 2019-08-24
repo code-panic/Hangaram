@@ -100,9 +100,5 @@
                 android:resource="@xml/widget_timetable2_provider" />
         </receiver>
 
-        <service
-            android:name=".widget.Timetable1Service"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
     </application>
 </manifest>
