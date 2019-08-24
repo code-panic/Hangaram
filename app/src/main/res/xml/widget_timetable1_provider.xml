@@ -3,6 +3,7 @@
     android:initialLayout="@layout/widget_timetable1"
     android:minWidth="220dp"
     android:minHeight="220dp"
+    android:previewImage="@drawable/timetable1"
     android:resizeMode="vertical|horizontal"
     android:updatePeriodMillis="1800000">
 </appwidget-provider>
