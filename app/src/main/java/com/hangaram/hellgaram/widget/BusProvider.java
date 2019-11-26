@@ -35,21 +35,19 @@ public class BusProvider extends AppWidgetProvider {
 
             Log.d(TAG, intent.getIntExtra("appWidgetId", 0) + "위젝 클릭됨");
 
-            BusTask busTask = new BusTask(new BusTask.BusCall() {
+            BusTask busTask = new BusTask();
+
+            busTask.updateBusList("15148", new BusTask.BusCall() {
                 @Override
                 public void onSuccess(ArrayList<HashMap<String, String>> busList) {
-                    Log.d(TAG, intent.getIntExtra("appWidgetId", 0) + "위젯 버스업데이트 완료");
                     updateAllWidgets(context);
                 }
 
                 @Override
                 public void onFailure() {
-                    Log.d(TAG, intent.getIntExtra("appWidgetId", 0) + "위젯 버스업데이트 실패");
                     Toast.makeText(context, "인터넷 연결을 확인해주세요", Toast.LENGTH_SHORT).show();
                 }
-            }, pref.getString("stNm", "월촌중학교"));
-
-            busTask.execute();
+            });
         }
     }
 
@@ -81,10 +79,10 @@ public class BusProvider extends AppWidgetProvider {
             updateViews.setTextViewText(R.id.stNm_text, pref.getString("stNm", "월촌중학교"));
             updateViews.setTextViewText(R.id.rtNm_text, pref.getString("rtNm", "양천01"));
 
-            if (pref.getString("stNm", "월촌중학교").equals("월촌중학교") && BusTask.busList1 != null)
-                setWidgetText(pref, updateViews, BusTask.busList1);
-            else if (pref.getString("stNm", "월촌중학교").equals("목동이대병원") && BusTask.busList2 != null)
-                setWidgetText(pref, updateViews, BusTask.busList2);
+            if (pref.getString("stNm", "월촌중학교").equals("월촌중학교") && BusTask.busInfoList15148 != null)
+                setWidgetText(pref, updateViews, BusTask.busInfoList15148);
+            else if (pref.getString("stNm", "월촌중학교").equals("목동이대병원") && BusTask.busInfoList15154 != null)
+                setWidgetText(pref, updateViews, BusTask.busInfoList15154);
             else {
                 updateViews.setTextViewText(R.id.arrmsg1_text, "위젯을 눌러 버스정보를 다운받아 주세요");
                 updateViews.setTextViewText(R.id.last_update_text, "");

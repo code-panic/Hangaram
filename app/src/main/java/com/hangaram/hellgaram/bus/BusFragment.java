@@ -47,10 +47,10 @@ public class BusFragment extends Fragment {
                 * 버튼의 텍스트를 "업데이트"로 바꾼다.*/
                 stNm = tab.getText().toString();
 
-                if (stNm.equals("월촌중학교") && BusTask.busList1 != null)
-                    inflateShowContent(inflater, BusTask.busList1);
-                else if (stNm.equals("목동이대병원") && BusTask.busList2 != null)
-                    inflateShowContent(inflater, BusTask.busList2);
+                if (stNm.equals("월촌중학교") && BusTask.busInfoList15148 != null)
+                    inflateShowContent(inflater, BusTask.busInfoList15148);
+                else if (stNm.equals("목동이대병원") && BusTask.busInfoList15154 != null)
+                    inflateShowContent(inflater, BusTask.busInfoList15154);
                 else
                     inflateUpdateContent(inflater);
             }
@@ -70,7 +70,9 @@ public class BusFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 /*버스 정보 불러오기*/
-                BusTask busTask = new BusTask(new BusTask.BusCall() {
+                BusTask busTask = new BusTask();
+
+                busTask.updateBusList("15148", new BusTask.BusCall() {
                     @Override
                     public void onSuccess(ArrayList<HashMap<String, String>> busList) {
                         inflateShowContent(inflater, busList);
@@ -81,17 +83,14 @@ public class BusFragment extends Fragment {
                         inflateUpdateContent(inflater);
                         Toast.makeText(getContext(), "인터넷 연결을 확인해주세요", Toast.LENGTH_SHORT).show();
                     }
-                }, stNm);
-
-                busTask.execute();
+                });
             }
         });
 
-        /*적절히 inflate 하기(직관성을 위해 일부러 함수흫 만들지 않음)*/
-        if (stNm.equals("월촌중학교") && BusTask.busList1 != null)
-            inflateShowContent(inflater, BusTask.busList1);
-        else if (stNm.equals("목동이대병원") && BusTask.busList2 != null)
-            inflateShowContent(inflater, BusTask.busList2);
+        if (stNm.equals("월촌중학교") && BusTask.busInfoList15148 != null)
+            inflateShowContent(inflater, BusTask.busInfoList15148);
+        else if (stNm.equals("목동이대병원") && BusTask.busInfoList15154 != null)
+            inflateShowContent(inflater, BusTask.busInfoList15154);
         else
             inflateUpdateContent(inflater);
 
@@ -116,10 +115,10 @@ public class BusFragment extends Fragment {
         contentContainer.addView(content);
 
         /*마지막 업데이트 시간 알려주기*/
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, 0);
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 0);
 
-        updateButton.setText("마지막 업데이트\t" + busList.get(0).get("hour") + "시 " + busList.get(0).get("min") + "분");
+        updateButton.setText("마지막 업데이트\t" + cal.get(Calendar.HOUR) + "시 " + cal.get(Calendar.MINUTE) + "분");
     }
 
     /*updateContent inflate 하기*/
@@ -127,5 +126,4 @@ public class BusFragment extends Fragment {
         inflater.inflate(R.layout.content_update_bus, contentContainer, true);
         updateButton.setText("업데이트");
     }
-
 }
