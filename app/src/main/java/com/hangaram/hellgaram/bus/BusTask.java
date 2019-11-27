@@ -20,6 +20,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import retrofit2.http.Tag;
 
 
 public class BusTask {
@@ -42,7 +43,7 @@ public class BusTask {
 
     public interface BusApi {
         @GET("getStationByUid")
-        Call<ResponseBody> getStationByUid(@Query(value = "serviceKey", encoded = true) String key, @Query("arsId") String arsId);
+        Call<ServiceResult> getStationByUid(@Query(value = "serviceKey", encoded = true) String key, @Query("arsId") String arsId);
     }
 
     public void updateBusList(final String arsId, final BusCall busCall) {
@@ -54,67 +55,73 @@ public class BusTask {
                 .build()
                 .create(BusTask.BusApi.class);
 
-        Call<ResponseBody> response = busApi.getStationByUid(SERVICE_KEY, arsId);
-        response.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                    factory.setNamespaceAware(true);
-                    XmlPullParser parser = factory.newPullParser();
+        try {
+            Response<ServiceResult> response = busApi.getStationByUid(SERVICE_KEY, arsId).execute();
+            Log.d(TAG, response.body().toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-                    Log.d(TAG, response.body().item);
-
-                    parser.setInput(new StringReader(response.body().string()));
-                    int eventType = parser.getEventType();
-
-                    HashMap<String, String> busInfo = new HashMap<String, String>() {{
-                        put("arrmsg1", null);
-                        put("arrmsg2", null);
-                        put("isFullFlag1", null);
-                        put("isFullFlag2", null);
-                        put("rtNm", null);
-                    }};
-
-                    /*  버스 정보 파싱하기  */
-                    while (eventType != XmlPullParser.END_DOCUMENT) {
-                        if (eventType == XmlPullParser.START_TAG) {
-                            if (busInfo.containsKey(parser.getName())) {
-                                String key = parser.getName();
-
-                                parser.next();
-                                busInfo.put(key, parser.getName());
-                            }
-                        } else if (eventType == XmlPullParser.END_TAG) {
-                            if (parser.getName().equals("itemList")) {
-                                busInfoList.add(busInfo);
-                                Log.d(TAG, "arrmsg1" + busInfo.get("arrmsg1") +"\narrmsg2" + busInfo.get("arrmsg2") +"\nisFullFlag1" + busInfo.get("isFullFlag1") +"IsFullFlag2" + busInfo.get("isFullFlag2"));
-                            }
-                        }
-
-                        eventType = parser.next();
-                    }
-
-                    /*  깊은 복사? 얕은 복사?   */
-                    if(arsId.equals("15148")) {
-                        busInfoList15148 = busInfoList;
-                    } else if (arsId.equals("15154")) {
-                        busInfoList15154 = busInfoList;
-                    }
-
-                    busCall.onSuccess(busInfoList);
-                } catch (XmlPullParserException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                busCall.onFailure();
-            }
-        });
+        //        response.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                try {
+//                    XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+//                    factory.setNamespaceAware(true);
+//                    XmlPullParser parser = factory.newPullParser();
+//
+//                    Log.d(TAG, response.body().item);
+//
+//                    parser.setInput(new StringReader(response.body().string()));
+//                    int eventType = parser.getEventType();
+//
+//                    HashMap<String, String> busInfo = new HashMap<String, String>() {{
+//                        put("arrmsg1", null);
+//                        put("arrmsg2", null);
+//                        put("isFullFlag1", null);
+//                        put("isFullFlag2", null);
+//                        put("rtNm", null);
+//                    }};
+//
+//                    /*  버스 정보 파싱하기  */
+//                    while (eventType != XmlPullParser.END_DOCUMENT) {
+//                        if (eventType == XmlPullParser.START_TAG) {
+//                            if (busInfo.containsKey(parser.getName())) {
+//                                String key = parser.getName();
+//
+//                                parser.next();
+//                                busInfo.put(key, parser.getName());
+//                            }
+//                        } else if (eventType == XmlPullParser.END_TAG) {
+//                            if (parser.getName().equals("itemList")) {
+//                                busInfoList.add(busInfo);
+//                                Log.d(TAG, "arrmsg1" + busInfo.get("arrmsg1") +"\narrmsg2" + busInfo.get("arrmsg2") +"\nisFullFlag1" + busInfo.get("isFullFlag1") +"IsFullFlag2" + busInfo.get("isFullFlag2"));
+//                            }
+//                        }
+//
+//                        eventType = parser.next();
+//                    }
+//
+//                    /*  깊은 복사? 얕은 복사?   */
+//                    if(arsId.equals("15148")) {
+//                        busInfoList15148 = busInfoList;
+//                    } else if (arsId.equals("15154")) {
+//                        busInfoList15154 = busInfoList;
+//                    }
+//
+//                    busCall.onSuccess(busInfoList);
+//                } catch (XmlPullParserException ex) {
+//                    ex.printStackTrace();
+//                } catch (IOException ex) {
+//                    ex.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                busCall.onFailure();
+//            }
+//        });
     }
 
     public static String getArrmsg (String arrmsg) {
