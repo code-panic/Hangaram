@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
@@ -35,9 +34,7 @@ public class BusProvider extends AppWidgetProvider {
 
             Log.d(TAG, intent.getIntExtra("appWidgetId", 0) + "위젝 클릭됨");
 
-            BusTask busTask = new BusTask();
-
-            busTask.updateBusList("15148", new BusTask.BusCall() {
+            BusTask busTask = new BusTask(new BusTask.BusCallBack() {
                 @Override
                 public void onSuccess(ArrayList<HashMap<String, String>> busList) {
                     updateAllWidgets(context);
@@ -48,6 +45,8 @@ public class BusProvider extends AppWidgetProvider {
                     Toast.makeText(context, "인터넷 연결을 확인해주세요", Toast.LENGTH_SHORT).show();
                 }
             });
+
+            busTask.execute("15148");
         }
     }
 

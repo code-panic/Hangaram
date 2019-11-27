@@ -6,12 +6,13 @@ import org.simpleframework.xml.Root;
 
 import java.util.List;
 
-@Root(strict = false)
-public class ServiceResult {
-    @ElementList
-    private List<itemList> itemList;
+@Root(name="ServiceResult", strict = false)
+public class BusInfo {
 
-    public List<itemList> getItemList() {
-        return itemList;
+    @Element
+    public MsgBody msgBody;
+
+    public MsgBody getMsgBody() {
+        return msgBody;
     }
 }

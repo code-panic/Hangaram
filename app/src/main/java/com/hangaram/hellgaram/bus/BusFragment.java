@@ -70,9 +70,7 @@ public class BusFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 /*버스 정보 불러오기*/
-                BusTask busTask = new BusTask();
-
-                busTask.updateBusList("15148", new BusTask.BusCall() {
+                BusTask busTask = new BusTask(new BusTask.BusCallBack() {
                     @Override
                     public void onSuccess(ArrayList<HashMap<String, String>> busList) {
                         inflateShowContent(inflater, busList);
@@ -84,6 +82,8 @@ public class BusFragment extends Fragment {
                         Toast.makeText(getContext(), "인터넷 연결을 확인해주세요", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+                busTask.execute("15148");
             }
         });
 

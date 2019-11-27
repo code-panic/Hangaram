@@ -3,21 +3,21 @@ package com.hangaram.hellgaram.bus;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
-@Root
-public class itemList {
-    @Element
+@Root(name = "itemList", strict = false)
+public class ItemList {
+    @Element(name="arrmsg1")
     private String arrmsg1;
 
-    @Element
+    @Element(name="arrmsg2")
     private String arrmsg2;
 
-    @Element
+    @Element(name="isFullFlag1")
     private String isFullFlag1;
 
-    @Element
+    @Element(name="isFullFlag2")
     private String isFullFlag2;
 
-    @Element
+    @Element(name="rtNm")
     private String rtNm;
 
     public String getArrmsg1() {
