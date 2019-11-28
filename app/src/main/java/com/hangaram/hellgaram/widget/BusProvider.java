@@ -13,10 +13,12 @@ import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.hangaram.hellgaram.R;
-import com.hangaram.hellgaram.bus.BusTask;
+import com.hangaram.hellgaram.station.StationTask;
+import com.hangaram.hellgaram.station.simplexml.BusInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class BusProvider extends AppWidgetProvider {
     private static final String TAG = "BusProvider";
@@ -34,9 +36,9 @@ public class BusProvider extends AppWidgetProvider {
 
             Log.d(TAG, intent.getIntExtra("appWidgetId", 0) + "위젝 클릭됨");
 
-            BusTask busTask = new BusTask(new BusTask.BusCallBack() {
+            StationTask busTask = new StationTask(new StationTask.BusCallBack() {
                 @Override
-                public void onSuccess(ArrayList<HashMap<String, String>> busList) {
+                public void onSuccess(List<BusInfo> busList) {
                     updateAllWidgets(context);
                 }
 
@@ -78,10 +80,10 @@ public class BusProvider extends AppWidgetProvider {
             updateViews.setTextViewText(R.id.stNm_text, pref.getString("stNm", "월촌중학교"));
             updateViews.setTextViewText(R.id.rtNm_text, pref.getString("rtNm", "양천01"));
 
-            if (pref.getString("stNm", "월촌중학교").equals("월촌중학교") && BusTask.busInfoList15148 != null)
-                setWidgetText(pref, updateViews, BusTask.busInfoList15148);
-            else if (pref.getString("stNm", "월촌중학교").equals("목동이대병원") && BusTask.busInfoList15154 != null)
-                setWidgetText(pref, updateViews, BusTask.busInfoList15154);
+            if (pref.getString("stNm", "월촌중학교").equals("월촌중학교") && StationTask.busInfoList15148 != null)
+                setWidgetText(pref, updateViews, StationTask.busInfoList15148);
+            else if (pref.getString("stNm", "월촌중학교").equals("목동이대병원") && StationTask.busInfoList15154 != null)
+                setWidgetText(pref, updateViews, StationTask.busInfoList15154);
             else {
                 updateViews.setTextViewText(R.id.arrmsg1_text, "위젯을 눌러 버스정보를 다운받아 주세요");
                 updateViews.setTextViewText(R.id.last_update_text, "");
@@ -107,19 +109,19 @@ public class BusProvider extends AppWidgetProvider {
     }
 
 
-    private void setWidgetText(SharedPreferences pref, RemoteViews updateViews, ArrayList<HashMap<String, String>> busList) {
+    private void setWidgetText(SharedPreferences pref, RemoteViews updateViews, List<BusInfo> busList) {
         for (int pos = 0; pos < busList.size(); pos++) {
-            if (busList.get(pos).get("rtNm").equals(pref.getString("rtNm", "양천01"))) {
-                updateViews.setTextViewText(R.id.arrmsg1_text,
-                        busList.get(pos).get("arr1") + "/"
-                                + busList.get(pos).get("sta1") + "/"
-                                + busList.get(pos).get("isFullFlag1"));
+            if (busList.get(pos).getRtNm().equals(pref.getString("rtNm", "양천01"))) {
+//                updateViews.setTextViewText(R.id.arrmsg1_text,
+//                        busList.get(pos).get("arr1") + "/"
+//                                + busList.get(pos).get("sta1") + "/"
+//                                + busList.get(pos).get("isFullFlag1"));
 
-                /*업데이트 7/4 오루 3:14*/
-                updateViews.setTextViewText(R.id.last_update_text, "업데이트\t\t"
-                        + busList.get(pos).get("month") + "/" + busList.get(0).get("day") + "\t"
-                        + busList.get(pos).get("am_pm") + "\t"
-                        + busList.get(pos).get("hour") + ":" + busList.get(0).get("min"));
+//                /*업데이트 7/4 오루 3:14*/
+//                updateViews.setTextViewText(R.id.last_update_text, "업데이트\t\t"
+//                        + busList.get(pos).get("month") + "/" + busList.get(0).get("day") + "\t"
+//                        + busList.get(pos).get("am_pm") + "\t"
+//                        + busList.get(pos).get("hour") + ":" + busList.get(0).get("min"));
             }
         }
     }

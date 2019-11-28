@@ -1,11 +1,15 @@
-package com.hangaram.hellgaram.bus;
+package com.hangaram.hellgaram.station;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.hangaram.hellgaram.station.simplexml.BusInfo;
+import com.hangaram.hellgaram.station.simplexml.StationInfo;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -14,7 +18,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 
-public class BusTask extends AsyncTask<String, Void, Void> {
+public class StationTask extends AsyncTask<String, Void, Void> {
     private static final String TAG = "BusTask";
 
     private final String SERVICE_URL = "http://ws.bus.go.kr/api/rest/stationinfo/";
@@ -22,23 +26,23 @@ public class BusTask extends AsyncTask<String, Void, Void> {
 
     /*  busList15148: 월촌중학교 전용
      *  busList15154: 목동이대병원 전용 */
-    public static ArrayList<HashMap<String, String>> busInfoList15148;
-    public static ArrayList<HashMap<String, String>> busInfoList15154;
+    public static List<BusInfo> busInfoList15148;
+    public static List<BusInfo> busInfoList15154;
 
     private BusCallBack busCallBack;
 
     public interface BusCallBack {
-        void onSuccess(ArrayList<HashMap<String, String>> busList);
+        void onSuccess(List<BusInfo> busInfoList);
         void onFailure();
     }
 
-    public BusTask (BusCallBack busCallBack) {
+    public StationTask(BusCallBack busCallBack) {
         this.busCallBack = busCallBack;
     }
 
     public interface BusApi {
         @GET("getStationByUid")
-        Call<BusInfo> getStationByUid(@Query(value = "serviceKey", encoded = true) String key, @Query("arsId") String arsId);
+        Call<StationInfo> getStationByUid(@Query(value = "serviceKey", encoded = true) String key, @Query("arsId") String arsId);
     }
 
     @Override
@@ -48,11 +52,19 @@ public class BusTask extends AsyncTask<String, Void, Void> {
                     .baseUrl(SERVICE_URL)
                     .addConverterFactory(SimpleXmlConverterFactory.create())
                     .build()
-                    .create(BusTask.BusApi.class);
+                    .create(StationTask.BusApi.class);
 
-            Call<BusInfo> busInfoCall = busApi.getStationByUid(SERVICE_KEY, arsId[0]);
+            Call<StationInfo> busInfoCall = busApi.getStationByUid(SERVICE_KEY, arsId[0]);
+            List<BusInfo> busInfoList = busInfoCall.execute().body().getMsgBody().getItemLists();
 
-            Log.d(TAG, busInfoCall.execute().body().getMsgBody().getItemLists().get(0).getArrmsg1());
+            busCallBack.onSuccess(busInfoList);
+
+            if(arsId[0].equals("15148")) {
+
+                busInfoList15148 = busInfoList;
+            } else if (arsId[0].equals("15154")){
+                busInfoList15154 = busInfoList;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

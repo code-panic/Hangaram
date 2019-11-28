@@ -1,24 +1,23 @@
-package com.hangaram.hellgaram.bus;
+package com.hangaram.hellgaram.station;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hangaram.hellgaram.R;
+import com.hangaram.hellgaram.station.simplexml.BusInfo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
-public class BusAdapter extends RecyclerView.Adapter<BusAdapter.BusHolder> {
+public class StationAdapter extends RecyclerView.Adapter<StationAdapter.BusHolder> {
     private static final  String TAG = "BusAdapter";
 
-    private ArrayList<HashMap<String,String>> busInfoList;
+    private List<BusInfo> busInfoList;
 
-    public BusAdapter(ArrayList<HashMap<String,String>> busList) {
-        busInfoList = busList;
+    public StationAdapter(List<BusInfo> busInfoList) {
+        this.busInfoList = busInfoList;
     }
 
     public static class BusHolder extends RecyclerView.ViewHolder {
@@ -47,12 +46,12 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.BusHolder> {
     /*데이터 바인딩*/
     @Override
     public void onBindViewHolder(BusHolder busHolder, int position) {
-        HashMap<String,String> busInfo = busInfoList.get(position);
+        BusInfo busInfo = busInfoList.get(position);
 
         /*ex)571   #14분 #7정거장 #여유*/
-        busHolder.rtNmText.setText(busInfo.get("rtNm"));
-        busHolder.arrmsg1Text.setText(getArrmsgText(busInfo.get("arrmsg1"), busInfo.get("isFullFlag1")));
-        busHolder.arrmsg2Text.setText(getArrmsgText(busInfo.get("arrmsg2"), busInfo.get("isFullFlag2")));
+        busHolder.rtNmText.setText(busInfo.getRtNm());
+        busHolder.arrmsg1Text.setText(getBusInfoText(busInfo.getArrmsg1(), busInfo.getIsFullFlag1()));
+        busHolder.arrmsg2Text.setText(getBusInfoText(busInfo.getArrmsg2(), busInfo.getIsFullFlag2()));
     }
 
     /*아이템 개수 반환*/
@@ -61,9 +60,9 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.BusHolder> {
         return busInfoList.size();
     }
 
-    private String getArrmsgText (String arrmsg, String isFullFlag) {
-        return "#" + BusTask.getArrmsg(arrmsg) + "\t"
-                + "#" + BusTask.getStamsg(arrmsg) + "\t"
-                + "#" + BusTask.getFullFlag(isFullFlag);
+    private String getBusInfoText(String arrmsg, String isFullFlag) {
+        return "#" + StationTask.getArrmsg(arrmsg) + "\t"
+                + "#" + StationTask.getStamsg(arrmsg) + "\t"
+                + "#" + StationTask.getFullFlag(isFullFlag);
     }
 }

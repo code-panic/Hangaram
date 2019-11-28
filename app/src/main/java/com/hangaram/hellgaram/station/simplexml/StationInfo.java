@@ -1,13 +1,10 @@
-package com.hangaram.hellgaram.bus;
+package com.hangaram.hellgaram.station.simplexml;
 
 import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
-import java.util.List;
-
 @Root(name="ServiceResult", strict = false)
-public class BusInfo {
+public class StationInfo {
 
     @Element
     public MsgBody msgBody;

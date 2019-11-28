@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.hangaram.hellgaram.bus.BusFragment;
+import com.hangaram.hellgaram.station.StationFragment;
 import com.hangaram.hellgaram.cafeteria.CafeFragment;
 import com.hangaram.hellgaram.timetable.CautionActivity;
 import com.hangaram.hellgaram.timetable.TimetableFragment;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_CAUTION = 101;
 
     private TimetableFragment mTimeTableFragment = new TimetableFragment();
-    private BusFragment mBusFragment = new BusFragment();
+    private StationFragment mBusFragment = new StationFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

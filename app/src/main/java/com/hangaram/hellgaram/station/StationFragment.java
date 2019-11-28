@@ -1,10 +1,11 @@
-package com.hangaram.hellgaram.bus;
+package com.hangaram.hellgaram.station;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,12 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.hangaram.hellgaram.R;
+import com.hangaram.hellgaram.station.simplexml.BusInfo;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
+import java.util.List;
 
-public class BusFragment extends Fragment {
+public class StationFragment extends Fragment {
     private static final String TAG = "BusFragment";
 
     private View view;
@@ -27,7 +28,7 @@ public class BusFragment extends Fragment {
     private TabLayout tabLayout;
     private Button updateButton;
 
-    private String stNm = "월촌중학교";
+    private String arsId = "15148";
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
@@ -42,17 +43,26 @@ public class BusFragment extends Fragment {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                /*탭이 선택되면
-                * 탭의 텍스트에 따라 적절히 inflate 를 하고
-                * 버튼의 텍스트를 "업데이트"로 바꾼다.*/
-                stNm = tab.getText().toString();
+                /*  월촌중학교 : 15148
+                *   목동이대병원 : 15154  */
+                inflateDefault(inflater);
+                Log.d(TAG, "1");
 
-                if (stNm.equals("월촌중학교") && BusTask.busInfoList15148 != null)
-                    inflateShowContent(inflater, BusTask.busInfoList15148);
-                else if (stNm.equals("목동이대병원") && BusTask.busInfoList15154 != null)
-                    inflateShowContent(inflater, BusTask.busInfoList15154);
-                else
-                    inflateUpdateContent(inflater);
+                if (tab.getText().toString().equals("월촌중학교")) {
+                    Log.d(TAG, "2");
+                    arsId = "15148";
+
+                    if (StationTask.busInfoList15148 != null) {
+                        Log.d(TAG, "3");
+                        inflateTopic(inflater, StationTask.busInfoList15148);
+                    }
+                } else if (tab.getText().toString().equals("목동이대병원")) {
+                    arsId = "15154";
+
+                    if (StationTask.busInfoList15154 != null) {
+                        inflateTopic(inflater, StationTask.busInfoList15154);
+                    }
+                }
             }
 
             @Override
@@ -70,36 +80,42 @@ public class BusFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 /*버스 정보 불러오기*/
-                BusTask busTask = new BusTask(new BusTask.BusCallBack() {
+                StationTask busTask = new StationTask(new StationTask.BusCallBack() {
                     @Override
-                    public void onSuccess(ArrayList<HashMap<String, String>> busList) {
-                        inflateShowContent(inflater, busList);
+                    public void onSuccess(List<BusInfo> busList) {
+                        inflateTopic(inflater, busList);
                     }
 
                     @Override
                     public void onFailure() {
-                        inflateUpdateContent(inflater);
+                        inflateDefault(inflater);
                         Toast.makeText(getContext(), "인터넷 연결을 확인해주세요", Toast.LENGTH_SHORT).show();
                     }
                 });
 
-                busTask.execute("15148");
+                busTask.execute(arsId);
             }
         });
 
-        if (stNm.equals("월촌중학교") && BusTask.busInfoList15148 != null)
-            inflateShowContent(inflater, BusTask.busInfoList15148);
-        else if (stNm.equals("목동이대병원") && BusTask.busInfoList15154 != null)
-            inflateShowContent(inflater, BusTask.busInfoList15154);
+        if (arsId.equals("15148") && StationTask.busInfoList15148 != null)
+            inflateTopic(inflater, StationTask.busInfoList15148);
+        else if (arsId.equals("15154") && StationTask.busInfoList15154 != null)
+            inflateTopic(inflater, StationTask.busInfoList15154);
         else
-            inflateUpdateContent(inflater);
+            inflateDefault(inflater);
 
         return view;
     }
 
-    /*showContent inflate 하기*/
-    private void inflateShowContent(LayoutInflater inflater, ArrayList<HashMap<String, String>> busList) {
-        View content = inflater.inflate(R.layout.content_show_bus, contentContainer, false);
+    /*  defaultContent inflate 하기   */
+    private void inflateDefault(LayoutInflater inflater) {
+        inflater.inflate(R.layout.content_update_bus, contentContainer, true);
+        updateButton.setText("업데이트");
+    }
+
+    /*  topicContent inflate 하기  */
+    private void inflateTopic(LayoutInflater inflater, List<BusInfo> busList) {
+        final View content = inflater.inflate(R.layout.content_show_bus, contentContainer, false);
 
         /*recyclerView 초기화*/
         RecyclerView itemContainer = content.findViewById(R.id.bus_container);
@@ -107,23 +123,22 @@ public class BusFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         itemContainer.setLayoutManager(layoutManager);
 
-        BusAdapter busAdapter = new BusAdapter(busList);
-        itemContainer.setAdapter(busAdapter);
+        StationAdapter stationAdapter = new StationAdapter(busList);
+        itemContainer.setAdapter(stationAdapter);
 
         /*content 추가하가*/
-        contentContainer.removeAllViews();
-        contentContainer.addView(content);
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                contentContainer.removeAllViews();
+                contentContainer.addView(content);
+            }
+        });
 
         /*마지막 업데이트 시간 알려주기*/
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, 0);
 
         updateButton.setText("마지막 업데이트\t" + cal.get(Calendar.HOUR) + "시 " + cal.get(Calendar.MINUTE) + "분");
-    }
-
-    /*updateContent inflate 하기*/
-    private void inflateUpdateContent(LayoutInflater inflater) {
-        inflater.inflate(R.layout.content_update_bus, contentContainer, true);
-        updateButton.setText("업데이트");
     }
 }

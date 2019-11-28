@@ -22,7 +22,7 @@
     <TextView
         android:id="@+id/arrmsg1_text"
         android:layout_marginBottom="8dp"
-        android:text="5분/7정거장/여유"
+        android:text="/5분 / 정거장여유"
         style="@style/WidgetTimetable2Text16" />
 
     <TextView

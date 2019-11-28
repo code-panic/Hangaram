@@ -1,10 +1,10 @@
-package com.hangaram.hellgaram.bus;
+package com.hangaram.hellgaram.station.simplexml;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 @Root(name = "itemList", strict = false)
-public class ItemList {
+public class BusInfo {
     @Element(name="arrmsg1")
     private String arrmsg1;
 

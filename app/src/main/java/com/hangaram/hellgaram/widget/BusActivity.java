@@ -6,24 +6,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RemoteViews;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hangaram.hellgaram.R;
-import com.hangaram.hellgaram.bus.BusTask;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class BusActivity extends Activity {
     private static final String TAG = "BusActivity";
