@@ -33,7 +33,7 @@
             android:textSize="16sp"
             android:layout_gravity="center"
             android:stateListAnimator="@null"
-            android:background="@drawable/cyan_round_button"/>
+            android:background="@drawable/button_fill_cyan"/>
 
     </LinearLayout>
 

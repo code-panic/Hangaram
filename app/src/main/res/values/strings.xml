@@ -33,7 +33,4 @@
     <string name="widget_timetable1_name">시간표 위젯1</string>
     <string name="widget_timetable2_name">시간표 위젯2</string>
     <string name="widget_next_time">다음 시간</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

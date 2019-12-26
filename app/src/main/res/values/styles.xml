@@ -9,7 +9,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
+        <item name="android:fontFamily">@font/spoqa_regular</item>
     </style>
 
     <!--시간표 부분화면 스타일 모음-->
@@ -19,9 +19,9 @@
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
+        <item name="android:fontFamily">@font/spoqa_regular</item>
         <item name="android:stateListAnimator">@null</item>
-        <item name="android:background">@drawable/cyan_round_button</item>
+        <item name="android:background">@drawable/button_fill_cyan</item>
     </style>
 
     <style name="FragmentTimetableEditText">
@@ -29,7 +29,7 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
+        <item name="android:fontFamily">@font/spoqa_regular</item>
         <item name="android:clickable">false</item>
         <item name="android:focusable">false</item>
         <item name="android:cursorVisible">false</item>
@@ -64,47 +64,19 @@
         <item name="android:fontFamily">@font/nanum_myeongjo</item>
     </style>
 
-    <!--버스 위젯 스타일 모음-->
-    <style name="WidgetBusText24">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:fontFamily">@font/nanum_myeongjo</item>
-    </style>
-
-    <style name="WidgetBusText16">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:fontFamily">@font/nanum_myeongjo</item>
-    </style>
-
-    <style name="WidgetBusText12">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:fontFamily">@font/nanum_myeongjo</item>
-    </style>
-
     <!--위젯용 설정 화면 -->
     <style name="ActivityConfigureText1">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
+        <item name="android:fontFamily">@font/spoqa_regular</item>
     </style>
 
     <style name="ActivityConfigureText2">
         <item name="android:layout_width">100dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
+        <item name="android:fontFamily">@font/spoqa_regular</item>
     </style>
 
     <style name="ActivityConfigureRadioButton">
@@ -112,27 +84,12 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="ActivityConfigurSeekBar">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:max">100</item>
-    </style>
-
     <!--버스위젯용 설정화면 스타일 모음-->
     <style name="ActivityConfigureBusText1">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
-    </style>
-
-    <!--크레딧 화면 스타일 모음-->
-    <style name="ActivityCrditText">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:fontFamily">@font/nanum_myeongjo</item>
+        <item name="android:fontFamily">@font/spoqa_regular</item>
     </style>
 
 </resources>

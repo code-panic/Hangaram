@@ -1,32 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/background_bus"
+    android:id="@+id/bus_widget"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/background_widget"
     android:gravity="center"
-    android:padding="16dp"
-    android:background="@color/colorWhite">
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/stNm_text"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/station_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/spoqa_regular"
         android:text="월촌중학교"
-        style="@style/WidgetBusText16"/>
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="8sp" />
 
     <TextView
-        android:id="@+id/rtNm_text"
+        android:id="@+id/bus_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/spoqa_bold"
         android:text="571"
-        style="@style/WidgetTimetable2Text24"/>
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/arrmsg1_text"
-        android:layout_marginBottom="8dp"
-        android:text="/5분 / 정거장여유"
-        style="@style/WidgetTimetable2Text16" />
+        android:id="@+id/arrive_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/spoqa_bold"
+        android:text="#5분 #3정거장 #여유"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="8sp" />
 
     <TextView
-        android:id="@+id/last_update_text"
-        android:text="업데이트 7/4 오후 3:25"
-        style="@style/WidgetTimetable2Text12"/>
+        android:id="@+id/update_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/spoqa_regular"
+        android:text="10월 7, 2019 11:56"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="8sp" />
 </LinearLayout>

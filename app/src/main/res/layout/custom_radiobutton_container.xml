@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/spoqa_bold"
+        android:text="Color"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp" />
+
+    <RadioGroup
+        android:id="@+id/custom_radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableLeft="@drawable/custom_radiobutton"
+            android:drawablePadding="8dp"
+            android:text="White"
+            android:textColor="@color/colorBlack" />
+
+        <RadioButton
+            android:id="@+id/black"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableLeft="@drawable/custom_radiobutton"
+            android:drawablePadding="8dp"
+            android:text="Black"
+            android:textColor="@color/colorBlack" />
+    </RadioGroup>
+</merge>

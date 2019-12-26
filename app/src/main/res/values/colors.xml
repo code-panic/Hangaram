@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorWhite">#ffffff</color>
-    <color name="colorGray">#d7d7d7</color>
-    <color name="colorYellow">#ffdf57</color>
+    <color name="colorWhite">#fcfbfc</color>
     <color name="colorCyanLight">#80d8c9</color>
     <color name="colorCyan">#00cfaf</color>
-    <color name="colorBlack">#000000</color>
-    <color name="colorTranslucent">#104d4d4d</color>
+    <color name="colorBlack">#393E46</color>
 </resources>

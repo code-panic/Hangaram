@@ -1,32 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/background_timetable2"
+    android:id="@+id/timetable2_widget"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/background_widget"
     android:gravity="center"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/this_subject_period"
-        style="@style/WidgetTimetable2Text16"
-        android:layout_marginBottom="8dp"
-        android:text="1교시" />
+        android:id="@+id/subject_period"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/spoqa_regular"
+        android:text="1교시"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="8sp" />
 
     <TextView
-        android:id="@+id/this_subject_name"
-        style="@style/WidgetTimetable2Text24"
+        android:id="@+id/subject_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/spoqa_bold"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
         android:text="기하와 벡터" />
 
     <TextView
-        android:id="@+id/this_subject_hint"
-        style="@style/WidgetTimetable2Text16"
-        android:layout_marginBottom="8dp"
-        android:text="이현주/311호" />
+        android:id="@+id/subject_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/spoqa_bold"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="8sp"
+        android:text="이현주 - 311호" />
 
     <TextView
         android:id="@+id/next_subject_name"
-        style="@style/WidgetTimetable2Text12"
-        android:text="다음시간  스포츠경기" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/spoqa_regular"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="8sp"
+        android:text="다음시간\t\t\t\t\t스포츠경기" />
 </LinearLayout>

@@ -1,35 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/background_cafeteria"
+    android:id="@+id/cafeteria_widget"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/background_widget"
     android:gravity="center"
-    android:orientation="vertical"
-    android:padding="16dp">
-
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/when_cafe_text"
+        android:id="@+id/cafeteria_state"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/nanum_myeongjo"
+        android:fontFamily="@font/spoqa_bold"
         android:gravity="center"
-        android:padding="12dp"
-        android:text="점심"
-        android:textColor="@color/colorBlack"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/what_cafe_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nanum_myeongjo"
-        android:gravity="center"
-        android:lineSpacingExtra="1dp"
-        android:text="찹쌀밥\n감자양파국\n김피등갈비찜\n버섯굴소스볶음\n콩나물무\n동치미\n자두"
+        android:padding="8dp"
+        android:text="Lunch"
         android:textColor="@color/colorBlack"
         android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/cafeteria_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/spoqa_regular"
+        android:gravity="center"
+        android:lineHeight="18sp"
+        android:text="찹쌀밥\n감자양파국\n김피등갈비찜\n버섯굴소스볶음\n콩나물무\n동치미\n자두"
+        android:textColor="@color/colorBlack"
+        android:textSize="12sp" />
 </LinearLayout>
 
 

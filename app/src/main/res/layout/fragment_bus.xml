@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 app:tabIndicatorColor="@color/colorCyan"
                 app:tabSelectedTextColor="@color/colorBlack"
-                app:tabTextColor="@color/colorGray">
+                app:tabTextColor="@color/colorBlack">
 
                 <android.support.design.widget.TabItem
                     android:layout_width="match_parent"
@@ -51,6 +51,7 @@
         android:layout_width="240dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/cyan_round_button"
+        android:fontFamily="@font/spoqa_regular"
+        android:background="@drawable/button_fill_cyan"
         android:text="업데이트" />
 </LinearLayout>

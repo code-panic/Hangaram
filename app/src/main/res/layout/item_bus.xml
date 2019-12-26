@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:fontFamily="@font/spoqa_han_sans_regular"
+        android:fontFamily="@font/spoqa_regular"
         android:gravity="center"
         android:text="571"
         android:textColor="@color/colorBlack"
@@ -27,7 +27,7 @@
             android:id="@+id/bus_arrmsg1_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/spoqa_han_sans_regular"
+            android:fontFamily="@font/spoqa_regular"
             android:text="#곧 도착  #0정거장   #만석"
             android:textColor="@color/colorBlack"
             android:textSize="12sp" />
@@ -36,7 +36,7 @@
             android:id="@+id/bus_arrmsg2_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/spoqa_han_sans_regular"
+            android:fontFamily="@font/spoqa_regular"
             android:text="#14분  #7정거장   #여유"
             android:textColor="@color/colorGray"
             android:textSize="12sp" />
