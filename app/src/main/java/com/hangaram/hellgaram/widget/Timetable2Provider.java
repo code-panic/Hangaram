@@ -70,7 +70,7 @@ public class Timetable2Provider extends AppWidgetProvider {
         int[] appWidgetIds = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, getClass()));
 
         for (int appWidgetId : appWidgetIds) {
-            RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_timetable2);
+            RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_timetable_2);
 
             /*위젯 색깔바꾸기*/
             SharedPreferences pref = context.getSharedPreferences("widget" + appWidgetId, 0);

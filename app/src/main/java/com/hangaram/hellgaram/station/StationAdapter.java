@@ -37,7 +37,7 @@ public class StationAdapter extends RecyclerView.Adapter<StationAdapter.BusHolde
     /*BusHolder 와 View 객체 연결*/
     @Override
     public BusHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LinearLayout view = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bus, parent, false);
+        LinearLayout view = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_bus_item, parent, false);
 
         BusHolder busHolder = new BusHolder(view);
         return busHolder;

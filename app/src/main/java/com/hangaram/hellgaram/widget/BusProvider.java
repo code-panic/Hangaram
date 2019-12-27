@@ -22,7 +22,8 @@ import java.util.List;
 
 public class BusProvider extends AppWidgetProvider {
     private static final String TAG = "BusProvider";
-    public static final String ACTION_CLICK = "CLICK_WIDGET_BUS";
+
+    private static final String ACTION_CLICK = "CLICK_WIDGET_BUS";
     private static final String ACTION_UPDATE = "UPDATE_WIDGET_BUS";
 
     @Override
@@ -98,10 +99,10 @@ public class BusProvider extends AppWidgetProvider {
     }
 
     private void changeWidgetColor(SharedPreferences pref, RemoteViews updateViews, int backgroundColor, int textColor) {
-        updateViews.setTextColor(R.id.stNm_text, textColor);
-        updateViews.setTextColor(R.id.rtNm_text, textColor);
-        updateViews.setTextColor(R.id.arrmsg1_text, textColor);
-        updateViews.setTextColor(R.id.last_update_text, textColor);
+        updateViews.setTextColor(R.id.station_name, textColor);
+        updateViews.setTextColor(R.id.bus_name, textColor);
+        updateViews.setTextColor(R.id.arrive_info, textColor);
+        updateViews.setTextColor(R.id.update_time_info, textColor);
 
         updateViews.setInt(R.id.background_bus,
                 "setBackgroundColor",

@@ -4,29 +4,16 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.ClipData;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.net.Uri;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.RemoteViews;
-import android.widget.TextView;
 
 import com.hangaram.hellgaram.R;
 import com.hangaram.hellgaram.datebase.DataBaseHelper;
-
-import java.util.ArrayList;
-import java.util.Calendar;
 
 public class Timetable1Provider extends AppWidgetProvider {
     private static final String TAG = "Timetable1Provider";
@@ -82,7 +69,7 @@ public class Timetable1Provider extends AppWidgetProvider {
         int[] appWidgetIds = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, getClass()));
 
         for (int appWidgetId : appWidgetIds) {
-            RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_timetable1);
+            RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_timetable_1);
 
             updateViews.removeAllViews(R.id.subject_text);
 
@@ -96,7 +83,7 @@ public class Timetable1Provider extends AppWidgetProvider {
                 cursor.moveToPosition(row);
 
                 for (int column = 1; column < 6; column++) {
-                    RemoteViews subjectViews = new RemoteViews(context.getPackageName(), R.layout.item_timetable1_widget);
+                    RemoteViews subjectViews = new RemoteViews(context.getPackageName(), R.layout.widget_timetable_1_item);
                     subjectViews.setTextViewText(R.id.subject_text, cursor.getString(column));
 
                     /*과목명에 공강이 있을 경우*/

@@ -3,15 +3,15 @@
     <item
         android:id="@+id/action_cafeteria"
         android:title="@string/menu_cafeteria"
-        android:icon="@drawable/ic_cafeteria"/>
+        android:icon="@drawable/icon_cafeteria"/>
 
     <item
         android:id="@+id/action_timetable"
         android:title="@string/menu_timetable"
-        android:icon="@drawable/ic_timetable"/>
+        android:icon="@drawable/icon_timetable"/>
 
     <item
         android:id="@+id/action_settings"
         android:title="버스"
-        android:icon="@drawable/ic_bus"/>
+        android:icon="@drawable/icon_bus"/>
 </menu>

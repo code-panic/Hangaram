@@ -109,13 +109,13 @@ public class StationFragment extends Fragment {
 
     /*  defaultContent inflate 하기   */
     private void inflateDefault(LayoutInflater inflater) {
-        inflater.inflate(R.layout.content_update_bus, contentContainer, true);
+        inflater.inflate(R.layout.fragment_bus_default, contentContainer, true);
         updateButton.setText("업데이트");
     }
 
     /*  topicContent inflate 하기  */
     private void inflateTopic(LayoutInflater inflater, List<BusInfo> busList) {
-        final View content = inflater.inflate(R.layout.content_show_bus, contentContainer, false);
+        final View content = inflater.inflate(R.layout.fragment_bus_updated, contentContainer, false);
 
         /*recyclerView 초기화*/
         RecyclerView itemContainer = content.findViewById(R.id.bus_container);

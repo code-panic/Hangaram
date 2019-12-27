@@ -135,13 +135,13 @@ public class TimetableFragment extends Fragment {
                 * item_timetable4 : 과목 정보 editText
                 * */
                 if (row == 0 && column == 0)
-                    editText = (EditText) layoutInflater.inflate(R.layout.item_timetable1, tableRow, false);
+                    editText = (EditText) layoutInflater.inflate(R.layout.fragment_timetable_item_1, tableRow, false);
                 else if (row == 0)
-                    editText = (EditText) layoutInflater.inflate(R.layout.item_timetable2, tableRow, false);
+                    editText = (EditText) layoutInflater.inflate(R.layout.fragment_timetable_item_2, tableRow, false);
                 else if (column == 0)
-                    editText = (EditText) layoutInflater.inflate(R.layout.item_timetable3, tableRow, false);
+                    editText = (EditText) layoutInflater.inflate(R.layout.fragment_timetable_item_3, tableRow, false);
                 else
-                    editText = (EditText) layoutInflater.inflate(R.layout.item_timetable4, tableRow, false);
+                    editText = (EditText) layoutInflater.inflate(R.layout.fragment_timetable_item_4, tableRow, false);
 
                 tableRow.addView(editText);
             }

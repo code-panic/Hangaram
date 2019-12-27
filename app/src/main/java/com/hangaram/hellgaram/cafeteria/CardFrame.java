@@ -28,7 +28,7 @@ public class CardFrame extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.card_frame_cafeteria, container, false);
+        View view = inflater.inflate(R.layout.fragment_cafeteria_card, container, false);
 
         final int dateGap = getArguments().getInt("dateGap");
 
@@ -54,7 +54,7 @@ public class CardFrame extends Fragment {
         /*급식정보를 받아온 경우 card_show 를 로드한다
         * 받지 못한 경우 card_update 를 로드한다*/
         if (cursor.getCount() > 0) {
-            View cardContent = inflater.inflate(R.layout.content_show_cafeteria, cardContainer,  true);
+            View cardContent = inflater.inflate(R.layout.fragment_cafeteria_updated, cardContainer,  true);
 
             cursor.moveToFirst();
 
@@ -88,7 +88,7 @@ public class CardFrame extends Fragment {
                 }
             });
         } else {
-            final View cardContent = inflater.inflate(R.layout.content_update_cafeteria, cardContainer, true);
+            final View cardContent = inflater.inflate(R.layout.fragment_cafeteria_default, cardContainer, true);
 
             TextView dateText = cardContent.findViewById(R.id.card_update_date_text);
             Button downloadButton = cardContainer.findViewById(R.id.card_update_download_button);

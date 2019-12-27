@@ -18,7 +18,7 @@ public class CustomSeekbarContainer extends LinearLayout {
         super(context);
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.custom_seekbar_container, this);
+        View view = inflater.inflate(R.layout.widget_custom_seekbar, this);
 
         mTitleTextView = view.findViewById(R.id.title_textview);
         mCustomSeekBar = view.findViewById(R.id.custom_seekbar);

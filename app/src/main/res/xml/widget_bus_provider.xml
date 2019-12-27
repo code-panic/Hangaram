@@ -4,6 +4,6 @@
     android:initialLayout="@layout/widget_bus"
     android:minWidth="146dp"
     android:minHeight="72dp"
-    android:previewImage="@drawable/bus"
+    android:previewImage="@drawable/widget_sample_bus"
     android:resizeMode="vertical|horizontal"
     android:updatePeriodMillis="1800000" />
