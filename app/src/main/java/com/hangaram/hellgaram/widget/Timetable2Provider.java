@@ -89,12 +89,12 @@ public class Timetable2Provider extends AppWidgetProvider {
     }
 
     private void changeWidgetColor(SharedPreferences pref, RemoteViews updateViews, int backgroundColor, int textColor) {
-        updateViews.setTextColor(R.id.this_subject_period, textColor);
-        updateViews.setTextColor(R.id.this_subject_name, textColor);
-        updateViews.setTextColor(R.id.this_subject_hint, textColor);
+        updateViews.setTextColor(R.id.subject_period, textColor);
+        updateViews.setTextColor(R.id.subject_name, textColor);
+        updateViews.setTextColor(R.id.subject_desc, textColor);
         updateViews.setTextColor(R.id.next_subject_name, textColor);
 
-        updateViews.setInt(R.id.background_timetable2,
+        updateViews.setInt(R.id.background,
                 "setBackgroundColor",
                 Color.argb(pref.getInt("transparent", 255), backgroundColor, backgroundColor, backgroundColor));
     }
@@ -109,14 +109,14 @@ public class Timetable2Provider extends AppWidgetProvider {
         Cursor cursor = database.rawQuery("SELECT * FROM " + DataBaseHelper.TABLE_NAME_TIMETABLE, null);
 
         /*현재 과목교시 보여주기*/
-        updateViews.setTextViewText(R.id.this_subject_period, WidgetManager.getNeedPeriod(0) + "교시");
+        updateViews.setTextViewText(R.id.subject_period, WidgetManager.getNeedPeriod(0) + "교시");
 
         /*현재 과목과 힌트 보여주기*/
         cursor.moveToPosition(WidgetManager.getNeedPeriod(0));
         subjectArray = cursor.getString(WidgetManager.getNeedDay(0)).split("\n");
 
-        updateViews.setTextViewText(R.id.this_subject_name, WidgetManager.getPeriodName(subjectArray));
-        updateViews.setTextViewText(R.id.this_subject_hint, WidgetManager.getPeriodHint(subjectArray));
+        updateViews.setTextViewText(R.id.subject_name, WidgetManager.getPeriodName(subjectArray));
+        updateViews.setTextViewText(R.id.subject_desc, WidgetManager.getPeriodHint(subjectArray));
 
         /*다음 과목 보여주기*/
         cursor.moveToPosition(WidgetManager.getNeedPeriod(1));

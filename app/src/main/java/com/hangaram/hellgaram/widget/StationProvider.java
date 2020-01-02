@@ -16,11 +16,9 @@ import com.hangaram.hellgaram.R;
 import com.hangaram.hellgaram.station.StationTask;
 import com.hangaram.hellgaram.station.simplexml.BusInfo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class BusProvider extends AppWidgetProvider {
+public class StationProvider extends AppWidgetProvider {
     private static final String TAG = "BusProvider";
 
     private static final String ACTION_CLICK = "CLICK_WIDGET_BUS";
@@ -66,7 +64,7 @@ public class BusProvider extends AppWidgetProvider {
         int[] appWidgetIds = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, getClass()));
 
         for (int appWidgetId : appWidgetIds) {
-            RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_bus);
+            RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_station);
 
             /*pref 변수 초기화*/
             SharedPreferences pref = context.getSharedPreferences("widget" + appWidgetId, 0);
@@ -78,16 +76,16 @@ public class BusProvider extends AppWidgetProvider {
                 changeWidgetColor(pref, updateViews, WidgetManager.BLACK, Color.WHITE);
 
             /*위젯 텍스트 설정*/
-            updateViews.setTextViewText(R.id.stNm_text, pref.getString("stNm", "월촌중학교"));
-            updateViews.setTextViewText(R.id.rtNm_text, pref.getString("rtNm", "양천01"));
+            updateViews.setTextViewText(R.id.station_name, pref.getString("stNm", "월촌중학교"));
+            updateViews.setTextViewText(R.id.bus_name, pref.getString("rtNm", "양천01"));
 
             if (pref.getString("stNm", "월촌중학교").equals("월촌중학교") && StationTask.busInfoList15148 != null)
                 setWidgetText(pref, updateViews, StationTask.busInfoList15148);
             else if (pref.getString("stNm", "월촌중학교").equals("목동이대병원") && StationTask.busInfoList15154 != null)
                 setWidgetText(pref, updateViews, StationTask.busInfoList15154);
             else {
-                updateViews.setTextViewText(R.id.arrmsg1_text, "위젯을 눌러 버스정보를 다운받아 주세요");
-                updateViews.setTextViewText(R.id.last_update_text, "");
+                updateViews.setTextViewText(R.id.arrive_info, "위젯을 눌러 버스정보를 다운받아 주세요");
+                updateViews.setTextViewText(R.id.update_time, "");
             }
 
             /*클릭 리스너 설정하기*/
@@ -102,9 +100,9 @@ public class BusProvider extends AppWidgetProvider {
         updateViews.setTextColor(R.id.station_name, textColor);
         updateViews.setTextColor(R.id.bus_name, textColor);
         updateViews.setTextColor(R.id.arrive_info, textColor);
-        updateViews.setTextColor(R.id.update_time_info, textColor);
+        updateViews.setTextColor(R.id.update_time, textColor);
 
-        updateViews.setInt(R.id.background_bus,
+        updateViews.setInt(R.id.background,
                 "setBackgroundColor",
                 Color.argb(pref.getInt("transparent", 255), backgroundColor, backgroundColor, backgroundColor));
     }
@@ -129,11 +127,11 @@ public class BusProvider extends AppWidgetProvider {
 
 
     private void setClickListener(Context context, RemoteViews updateViews, int appWidgetId) {
-        Intent intent = new Intent(context, BusProvider.class);
+        Intent intent = new Intent(context, StationProvider.class);
         intent.setAction(ACTION_CLICK);
 
         intent.putExtra("appWidgetId", appWidgetId);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        updateViews.setOnClickPendingIntent(R.id.background_bus, pendingIntent);
+        updateViews.setOnClickPendingIntent(R.id.background, pendingIntent);
     }
 }

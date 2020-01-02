@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.hangaram.hellgaram">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -18,16 +17,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
 
-        <activity
-            android:name=".activity.SplashActivity"
-            android:theme="@style/SplashTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".main.MainActivity">
             <intent-filter android:label="htc">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -44,13 +34,13 @@
             android:name=".timetable.CautionActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".widget.BusActivity">
+        <activity android:name=".widget.StationActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".widget.MealActivity">
+        <activity android:name=".widget.CafeteriaActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
             </intent-filter>
@@ -62,24 +52,24 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".widget.BusProvider" android:label="@string/widget_bus_name">
+        <receiver android:name=".widget.StationProvider" android:label="@string/widget_bus_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="CLICK_WIDGET_BUS"/>
                 <action android:name="UPDATE_WIDGET_BUS" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
-                android:resource="@xml/widget_bus_provider" />
+                android:resource="@xml/widget_station_provider" />
         </receiver>
 
-        <receiver android:name=".widget.MealProvider" android:label="@string/widget_meal_name">
+        <receiver android:name=".widget.CafeteriaProvider" android:label="@string/widget_meal_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="CLICK_WIDGET_MEAL"/>
                 <action android:name="UPDATE_WIDGET_MEAL" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
-                android:resource="@xml/widget_meal_provider" />
+                android:resource="@xml/widget_cafeteria_provider" />
         </receiver>
 
         <receiver android:name=".widget.Timetable1Provider" android:label="@string/widget_timetable1_name">

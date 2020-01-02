@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cafeteria_widget"
+    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_widget"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingVertical="12dp">
 
     <TextView
-        android:id="@+id/cafeteria_state"
+        android:id="@+id/cafeteriaStateTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/spoqa_bold"
         android:gravity="center"
-        android:padding="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Lunch"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorBlack255"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/cafeteria_menu"
+        android:id="@+id/cafeteriaMenuTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/spoqa_regular"
         android:gravity="center"
-        android:lineHeight="18sp"
         android:text="찹쌀밥\n감자양파국\n김피등갈비찜\n버섯굴소스볶음\n콩나물무\n동치미\n자두"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorBlack255"
         android:textSize="12sp" />
 </LinearLayout>
 

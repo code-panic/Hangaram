@@ -29,8 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabIndicatorColor="@color/colorCyan"
-                app:tabSelectedTextColor="@color/colorBlack"
-                app:tabTextColor="@color/colorBlack">
+                app:tabSelectedTextColor="@color/colorBlack255"
+                app:tabTextColor="@color/colorBlack255">
 
                 <android.support.design.widget.TabItem
                     android:layout_width="match_parent"

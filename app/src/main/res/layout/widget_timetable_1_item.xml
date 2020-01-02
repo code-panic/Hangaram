@@ -9,5 +9,5 @@
     android:background="@color/colorWhite"
     android:fontFamily="@font/nanum_myeongjo"
     android:gravity="center"
-    android:textColor="@color/colorBlack"
+    android:textColor="@color/colorBlack255"
     android:textSize="12sp" />

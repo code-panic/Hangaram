@@ -21,6 +21,6 @@
         android:background="@color/colorWhite"
         app:itemIconTint="@drawable/background_navigation"
         app:itemTextColor="@drawable/background_navigation"
-        app:menu="@menu/bottom_navigation_menu"
+        app:menu="@menu/menu_bottom_navigation"
         app:elevation="0dp"/>
 </LinearLayout>

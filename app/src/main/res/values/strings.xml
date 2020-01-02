@@ -18,12 +18,6 @@
 
     <string name="bus_update">버스정보를\n업데이트 할까요?</string>
 
-    <string name="credit_credit">credit</string>
-    <string name="credit_programmer">programmer</string>
-    <string name="first_programmer">박현수</string>
-    <string name="credit_designer">designer</string>
-    <string name="first_designer">박민호</string>
-
     <string name="timetable_caution">한가람 시간표의 정보를 가져오시겠습니까?\n기존의 정보는 삭제됩니다.</string>
 
     <string name="widget_bus_name">버스 위젯</string>

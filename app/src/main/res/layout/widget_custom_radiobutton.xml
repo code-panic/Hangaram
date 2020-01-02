@@ -8,7 +8,7 @@
         android:fontFamily="@font/spoqa_bold"
         android:text="Color"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorBlack255"
         android:textSize="16sp" />
 
     <RadioGroup
@@ -19,7 +19,7 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/white"
+            android:id="@+id/whiteRadioButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -28,10 +28,10 @@
             android:drawableLeft="@drawable/custom_radiobutton"
             android:drawablePadding="8dp"
             android:text="White"
-            android:textColor="@color/colorBlack" />
+            android:textColor="@color/colorBlack255" />
 
         <RadioButton
-            android:id="@+id/black"
+            android:id="@+id/blackRadioButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -39,6 +39,6 @@
             android:drawableLeft="@drawable/custom_radiobutton"
             android:drawablePadding="8dp"
             android:text="Black"
-            android:textColor="@color/colorBlack" />
+            android:textColor="@color/colorBlack255" />
     </RadioGroup>
 </merge>

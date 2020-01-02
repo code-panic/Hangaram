@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/timetable2_widget"
+    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_widget"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingVertical="8dp">
 
     <TextView
         android:id="@+id/subject_period"
@@ -15,7 +16,7 @@
         android:fontFamily="@font/spoqa_regular"
         android:text="1교시"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorBlack255"
         android:textSize="8sp" />
 
     <TextView
@@ -23,10 +24,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/spoqa_bold"
+        android:text="기하와 벡터"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        android:text="기하와 벡터" />
+        android:textColor="@color/colorBlack255"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/subject_desc"
@@ -34,18 +35,18 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:fontFamily="@font/spoqa_bold"
+        android:text="#이현주 #311호"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack"
-        android:textSize="8sp"
-        android:text="이현주 - 311호" />
+        android:textColor="@color/colorBlack255"
+        android:textSize="8sp" />
 
     <TextView
         android:id="@+id/next_subject_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/spoqa_regular"
+        android:text="next 스포츠경기"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack"
-        android:textSize="8sp"
-        android:text="다음시간\t\t\t\t\t스포츠경기" />
+        android:textColor="@color/colorBlack255"
+        android:textSize="8sp" />
 </LinearLayout>

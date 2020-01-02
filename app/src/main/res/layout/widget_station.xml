@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/bus_widget"
+    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_widget"
     android:gravity="center"
+    android:paddingVertical="8dp"
     android:orientation="vertical">
 
     <TextView
@@ -15,7 +16,7 @@
         android:fontFamily="@font/spoqa_regular"
         android:text="월촌중학교"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorBlack255"
         android:textSize="8sp" />
 
     <TextView
@@ -25,7 +26,7 @@
         android:fontFamily="@font/spoqa_bold"
         android:text="571"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorBlack255"
         android:textSize="16sp" />
 
     <TextView
@@ -36,16 +37,16 @@
         android:fontFamily="@font/spoqa_bold"
         android:text="#5분 #3정거장 #여유"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorBlack255"
         android:textSize="8sp" />
 
     <TextView
-        android:id="@+id/update_time_info"
+        android:id="@+id/update_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/spoqa_regular"
-        android:text="10월 7, 2019 11:56"
+        android:text="10 : 21 DEC 25 2019"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorBlack255"
         android:textSize="8sp" />
 </LinearLayout>

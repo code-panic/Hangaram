@@ -32,7 +32,7 @@ public class StationFragment extends Fragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_bus, container, false);
+        view = inflater.inflate(R.layout.fragment_station, container, false);
 
         /*뷰 객체 초기화*/
         contentContainer = view.findViewById(R.id.container_content_bus);
@@ -109,13 +109,13 @@ public class StationFragment extends Fragment {
 
     /*  defaultContent inflate 하기   */
     private void inflateDefault(LayoutInflater inflater) {
-        inflater.inflate(R.layout.fragment_bus_default, contentContainer, true);
+        inflater.inflate(R.layout.fragment_station_default, contentContainer, true);
         updateButton.setText("업데이트");
     }
 
     /*  topicContent inflate 하기  */
     private void inflateTopic(LayoutInflater inflater, List<BusInfo> busList) {
-        final View content = inflater.inflate(R.layout.fragment_bus_updated, contentContainer, false);
+        final View content = inflater.inflate(R.layout.fragment_station_updated, contentContainer, false);
 
         /*recyclerView 초기화*/
         RecyclerView itemContainer = content.findViewById(R.id.bus_container);

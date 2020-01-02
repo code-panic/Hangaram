@@ -3,24 +3,24 @@
     <!--시크바 배경-->
     <item android:id="@android:id/background">
         <shape android:shape="line">    <!--선 : 길이6dp -->
-            <stroke android:width="2dp" android:color="#30393E46" />
+            <stroke android:width="2dp" android:color="@color/colorBlack72" />
         </shape>
     </item>
 
-    <!-- 시크바 배경2 -->
-    <item android:id="@android:id/secondaryProgress">
-        <clip>
-            <shape android:shape="line">
-                <stroke android:width="2dp" android:color="#B2CCFF" />
-            </shape>
-        </clip>
-    </item>
+<!--    &lt;!&ndash; 시크바 배경2 &ndash;&gt;-->
+<!--    <item android:id="@android:id/secondaryProgress">-->
+<!--        <clip>-->
+<!--            <shape android:shape="line">-->
+<!--                <stroke android:width="2dp" android:color="#B2CCFF" />-->
+<!--            </shape>-->
+<!--        </clip>-->
+<!--    </item>-->
 
     <!-- 시크바 프로그래스 -->
     <item android:id="@android:id/progress" >
         <clip>
             <shape android:shape="line">
-                <stroke android:width="2dp" android:color="#393E46" />
+                <stroke android:width="2dp" android:color="@color/colorBlack255" />
             </shape>
         </clip>
     </item>

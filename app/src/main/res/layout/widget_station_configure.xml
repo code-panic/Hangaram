@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack144"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/widget_station"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="80dp"
+        android:layout_marginVertical="48dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_configure">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="80dp"
+            android:paddingTop="36dp"
+            android:paddingRight="80dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/spoqa_bold"
+                android:text="Bus"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack255"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp">
+
+                <Spinner
+                    android:id="@+id/StationSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                </Spinner>
+
+                <Spinner
+                    android:id="@+id/BusSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                </Spinner>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/spoqa_bold"
+                android:text="Color"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack255"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/colorRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/whiteRadioButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableLeft="@drawable/custom_radiobutton"
+                    android:drawablePadding="8dp"
+                    android:text="White"
+                    android:textColor="@color/colorBlack255" />
+
+                <RadioButton
+                    android:id="@+id/blackRadioButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/custom_radiobutton"
+                    android:drawablePadding="8dp"
+                    android:text="Black"
+                    android:textColor="@color/colorBlack255" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/spoqa_bold"
+                android:text="Blur"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack255"
+                android:textSize="16sp" />
+
+            <SeekBar
+                android:id="@+id/BlurSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:max="255"
+                android:progress="50"
+                android:progressDrawable="@drawable/custom_seekbar"
+                android:thumb="@drawable/custom_seekbar_thumb" />
+
+            <TextView
+                android:id="@+id/BlurValueTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/spoqa_regular"
+                android:text="12"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack255"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/spoqa_bold"
+                android:text="Transparent"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack255"
+                android:textSize="16sp" />
+
+            <SeekBar
+                android:id="@+id/transparentSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:max="255"
+                android:progress="50"
+                android:progressDrawable="@drawable/custom_seekbar"
+                android:thumb="@drawable/custom_seekbar_thumb" />
+
+            <TextView
+                android:id="@+id/transparentValueTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/spoqa_regular"
+                android:text="12"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack255"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/applyButton"
+                android:layout_width="120dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:background="@drawable/background_widget_configure_button"
+                android:fontFamily="@font/spoqa_regular"
+                android:text="Create"
+                android:textColor="@color/colorBlack255"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

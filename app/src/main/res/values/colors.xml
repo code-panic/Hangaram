@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorWhite">#fcfbfc</color>
+    <color name="colorWhite144">#80fcfbfc</color>
+
     <color name="colorCyanLight">#80d8c9</color>
     <color name="colorCyan">#00cfaf</color>
-    <color name="colorBlack">#393E46</color>
+
+    <color name="colorBlack255">#393E46</color>
+    <color name="colorBlack144">#80393E46</color>
+    <color name="colorBlack72">#40393E46</color>
+
 </resources>
