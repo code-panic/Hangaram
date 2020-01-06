@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="st_array">
+    <string-array name="station_array">
         <item>월촌중학교</item>
         <item>목동이대병원</item>
     </string-array>
 
-    <string-array name="rt_array">
+    <string-array name="bus_array">
         <item>양천01</item>
         <item>양천02</item>
         <item>571</item>

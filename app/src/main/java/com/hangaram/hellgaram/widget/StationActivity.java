@@ -23,112 +23,85 @@ public class StationActivity extends Activity {
 
     private int appWidgetId;
 
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
-
-    private LinearLayout backgroundWidget;
-
-    private TextView stationNameText;
-    private TextView busNameText;
-    private TextView arriveInfoText;
-    private TextView updateTimeText;
-
-    private Spinner stationSpinner;
-    private Spinner busSpinner;
-
-    private RadioGroup colorRadioGroup;
-
-    private TextView transparentPercent;
-    private SeekBar transparentSeekBar;
-
-    private Button applyButton;
+    private SharedPreferences storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /* xml 파일 로딩 */
         setContentView(R.layout.widget_station_configure);
 
-        /*뷰 객체 가져오기*/
-        getViewObjects();
+        /* 뷰 객체 선언 및 초기화 */
+        final LinearLayout backgroundLinearLayout = findViewById(R.id.backgroundLinearLayout);
 
-        /*위젯 아이디 가져오기*/
-        appWidgetId = getWidgetId();
+        final TextView stationNameTextView = findViewById(R.id.stationNameTextView);
+        final TextView busNameTextView = findViewById(R.id.busNameTextView);
+        final TextView arriveInfoTextView = findViewById(R.id.arriveInfoTextView);
+        final TextView updateTimeTextView = findViewById(R.id.updateTimeTextView);
 
-        /*임시저장할 객체 생성하기*/
-        setSharedPreferences();
+        final Spinner stationSpinner = findViewById(R.id.StationSpinner);
+        final Spinner busSpinner = findViewById(R.id.BusSpinner);
 
-        /*뷰 리스너 설정하기*/
-        setViewListeners();
+        final RadioGroup colorRadioGroup = findViewById(R.id.colorRadioGroup);
 
-        /*스피너 어댑터 설정하기*/
-        setSpinner();
-    }
+        final SeekBar transparentSeekBar = findViewById(R.id.transparentSeekBar);
+        final TextView transparentValueTextView = findViewById(R.id.transparentValueTextView);
 
-    /*뷰 객체 초기화하기*/
-    private void getViewObjects() {
-        backgroundWidget = findViewById(R.id.background);
+        final Button applyButton = findViewById(R.id.applyButton);
 
-        stationNameText = findViewById(R.id.station_name);
-        busNameText = findViewById(R.id.bus_name);
-        arriveInfoText = findViewById(R.id.arrive_info);
-        updateTimeText = findViewById(R.id.update_time);
-
-        stationSpinner = findViewById(R.id.StationSpinner);
-        busSpinner = findViewById(R.id.BusSpinner);
-
-        colorRadioGroup = findViewById(R.id.colorRadioGroup);
-
-        transparentSeekBar = findViewById(R.id.transparentSeekBar);
-        transparentPercent = findViewById(R.id.transparentValueTextView);
-
-        applyButton = findViewById(R.id.applyButton);
-    }
-
-    /*위젯 아이디 가져오기*/
-    private int getWidgetId() {
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
+        /* 위젯 아이디 가져오기 */
+        Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
-            return extras.getInt(
+                appWidgetId = extras.getInt(
                     AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
         }
 
-        return 0;
-    }
+        storage = getSharedPreferences("widget" + appWidgetId, 0);
 
-    /*임시저장을 위한 pref 초기화하기*/
-    private void setSharedPreferences() {
-        pref = getSharedPreferences("widget" + appWidgetId, 0);
-        editor = pref.edit();
-    }
+        /* 스피너 리스트 설정 */
+        ArrayAdapter stationAdapter = ArrayAdapter.createFromResource(this, R.array.station_array, android.R.layout.simple_spinner_item);
+        stationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        stationSpinner.setAdapter(stationAdapter);
+        stationSpinner.setSelection(0);
 
-    /*리스너 초기화하기*/
-    private void setViewListeners() {
+        ArrayAdapter busAdapter = ArrayAdapter.createFromResource(this, R.array.bus_array, android.R.layout.simple_spinner_item);
+        busAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        busSpinner.setAdapter(busAdapter);
+        busSpinner.setSelection(0);
+
+        /* 컬러 라디오그룹 리스너 설정 */
         colorRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int id) {
-                if (id == R.id.whiteRadioButton)
-                    /* 하얀색 샘플 배경화면으로 바꾸기*/
-                    changeWidgetTextColor(Color.WHITE, Color.BLACK);
-                else
-                    /* 검은색 샘플 배경화면으로 바꾸기*/
-                    changeWidgetTextColor(Color.BLACK, Color.WHITE);
+                if (id == R.id.whiteRadioButton) {
+                    backgroundLinearLayout.setBackgroundColor(Color.WHITE);
+                    backgroundLinearLayout.getBackground().setAlpha(transparentSeekBar.getProgress());
+
+                    stationNameTextView.setTextColor(Color.BLACK);
+                    busNameTextView.setTextColor(Color.BLACK);
+                    arriveInfoTextView.setTextColor(Color.BLACK);
+                    updateTimeTextView.setTextColor(Color.BLACK);
+                } else if (id == R.id.blackRadioButton) {
+                    backgroundLinearLayout.setBackgroundColor(Color.BLACK);
+                    backgroundLinearLayout.getBackground().setAlpha(transparentSeekBar.getProgress());
+
+                    stationNameTextView.setTextColor(Color.WHITE);
+                    busNameTextView.setTextColor(Color.WHITE);
+                    arriveInfoTextView.setTextColor(Color.WHITE);
+                    updateTimeTextView.setTextColor(Color.WHITE);
+                }
             }
         });
 
+        /* 투명도 시크바 리스너 설정 */
         transparentSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int percent, boolean b) {
-                /*투명도 저장하기
-                 * 100% -> 0
-                 * 0% -> 255*/
-                editor.putInt("transparent", 255 - percent).apply();
-
-                /*샘플 화면 바꾸기*/
-                backgroundWidget.getBackground().setAlpha(pref.getInt("transparent", 255));
-                transparentPercent.setText(percent + "%");
+                backgroundLinearLayout.getBackground().setAlpha(percent);
+                transparentValueTextView.setText(percent);
             }
 
             @Override
@@ -142,15 +115,22 @@ public class StationActivity extends Activity {
             }
         });
 
-        /*창 닫기*/
+        /* 위젯 정보 적용하기 */
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*정거장 및 버스 정보 위젯에 저장하기*/
-                editor.putString("stNm", stationSpinner.getSelectedItem().toString()).apply();
-                editor.putString("rtNm", busSpinner.getSelectedItem().toString()).apply();
+                /* 위젯 정보 저장하기 */
+                storage.edit().putString("stationName", stationSpinner.getSelectedItem().toString()).apply();
+                storage.edit().putString("busName", busSpinner.getSelectedItem().toString()).apply();
+                storage.edit().putInt("backgroundTransparentValue", transparentSeekBar.getProgress()).apply();
 
-                /*위젯 업데이트 신호를 보낸다.*/
+                if(colorRadioGroup.getCheckedRadioButtonId() == R.id.whiteRadioButton)
+                    storage.edit().putString("backgroundColorValue", "white").apply();
+                else if (colorRadioGroup.getCheckedRadioButtonId() == R.id.blackRadioButton)
+                    storage.edit().putString("backgroundColorValue", "b;acl").apply();
+
+
+                /* 위젯 업데이트 신호를 보낸다. */
                 Intent intent = new Intent(getBaseContext(), StationProvider.class);
                 intent.setAction(ACTION_UPDATE);
                 sendBroadcast(intent);
@@ -161,36 +141,5 @@ public class StationActivity extends Activity {
                 finish();
             }
         });
-    }
-
-    private void setSpinner(){
-        ArrayAdapter stAdapter = ArrayAdapter.createFromResource(this,
-                R.array.st_array, android.R.layout.simple_spinner_item);
-
-        stAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        stationSpinner.setAdapter(stAdapter);
-        stationSpinner.setSelection(0);
-
-        ArrayAdapter rtAdapter = ArrayAdapter.createFromResource(this,
-                R.array.rt_array, android.R.layout.simple_spinner_item);
-
-        rtAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        busSpinner.setAdapter(rtAdapter);
-        busSpinner.setSelection(0);
-    }
-
-    /*샘플 위젯 색깔 바꾸기*/
-    void changeWidgetTextColor(int backgroundColor, int textColor) {
-        backgroundWidget.setBackgroundColor(backgroundColor);
-        backgroundWidget.getBackground().setAlpha(pref.getInt("transparent", 255));
-
-        stationNameText.setTextColor(textColor);
-        busNameText.setTextColor(textColor);
-        arriveInfoText.setTextColor(textColor);
-        updateTimeText.setTextColor(textColor);
-
-        /*백그라운드 컬러 저장하기*/
-        editor.putInt("backgroundColor", backgroundColor).apply();
-        editor.putInt("textColor", backgroundColor).apply();
     }
 }

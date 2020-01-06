@@ -168,9 +168,10 @@
                 android:layout_width="120dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="80dp"
                 android:background="@drawable/background_widget_configure_button"
                 android:fontFamily="@font/spoqa_regular"
-                android:text="Create"
+                android:text="Apply"
                 android:textColor="@color/colorBlack255"
                 android:textSize="12sp" />
         </LinearLayout>

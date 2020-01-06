@@ -57,7 +57,7 @@ public class CafeteriaActivity extends Activity {
 
     /*뷰 객체 초기화하기*/
     private void getViewObjects() {
-        backgroundWidget = findViewById(R.id.background);
+        backgroundWidget = findViewById(R.id.backgroundLinearLayout);
 
         cafeteriaStateTextView = findViewById(R.id.cafeteriaStateTextView);
         cafeteriaMenuTextView = findViewById(R.id.cafeteriaMenuTextView);

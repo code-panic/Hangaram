@@ -99,7 +99,7 @@ public class CafeteriaProvider extends AppWidgetProvider {
         updateViews.setTextColor(R.id.cafeteriaStateTextView, textColor);
         updateViews.setTextColor(R.id.cafeteriaMenuTextView, textColor);
 
-        updateViews.setInt(R.id.background,
+        updateViews.setInt(R.id.backgroundLinearLayout,
                 "setBackgroundColor",
                 Color.argb(pref.getInt("transparent", 255), backgroundColor, backgroundColor, backgroundColor));
     }
@@ -133,7 +133,7 @@ public class CafeteriaProvider extends AppWidgetProvider {
         intent.putExtra("appWidgetId", appWidgetId);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        updateViews.setOnClickPendingIntent(R.id.background, pendingIntent);
+        updateViews.setOnClickPendingIntent(R.id.backgroundLinearLayout, pendingIntent);
 
         Log.d(TAG, "클릭될 위젯의 appWidgetId - " + appWidgetId);
     }

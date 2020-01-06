@@ -94,7 +94,7 @@ public class Timetable2Provider extends AppWidgetProvider {
         updateViews.setTextColor(R.id.subject_desc, textColor);
         updateViews.setTextColor(R.id.next_subject_name, textColor);
 
-        updateViews.setInt(R.id.background,
+        updateViews.setInt(R.id.backgroundLinearLayout,
                 "setBackgroundColor",
                 Color.argb(pref.getInt("transparent", 255), backgroundColor, backgroundColor, backgroundColor));
     }

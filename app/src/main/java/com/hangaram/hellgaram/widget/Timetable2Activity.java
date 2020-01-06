@@ -10,9 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RemoteViews;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -61,7 +59,7 @@ public class Timetable2Activity extends Activity {
 
     /*뷰 객체 초기화하기*/
     private void getViewObjects() {
-        backgroundWidget = findViewById(R.id.background);
+        backgroundWidget = findViewById(R.id.backgroundLinearLayout);
 
         thisSubjectPeriod = findViewById(R.id.subject_period);
         thisSubjectName = findViewById(R.id.subject_name);

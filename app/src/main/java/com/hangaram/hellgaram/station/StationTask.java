@@ -21,8 +21,8 @@ import retrofit2.http.Query;
 public class StationTask extends AsyncTask<String, Void, Void> {
     private static final String TAG = "BusTask";
 
-    private final String SERVICE_URL = "http://ws.bus.go.kr/api/rest/stationinfo/";
-    private final String SERVICE_KEY = "oMJ1n5M5PZvqvHTfSPehGbytfNmbgdwUDpD60PiYW7PWFf82YBRx25ryzUy4AXhxeJUdBqnQy5UVrVxuzhXk8g%3D%3D";
+    private static final String SERVICE_URL = "http://ws.bus.go.kr/api/rest/stationinfo/";
+    private static final String SERVICE_KEY = "oMJ1n5M5PZvqvHTfSPehGbytfNmbgdwUDpD60PiYW7PWFf82YBRx25ryzUy4AXhxeJUdBqnQy5UVrVxuzhXk8g%3D%3D";
 
     /*  busList15148: 월촌중학교 전용
      *  busList15154: 목동이대병원 전용 */
@@ -60,7 +60,6 @@ public class StationTask extends AsyncTask<String, Void, Void> {
             busCallBack.onSuccess(busInfoList);
 
             if(arsId[0].equals("15148")) {
-
                 busInfoList15148 = busInfoList;
             } else if (arsId[0].equals("15154")){
                 busInfoList15154 = busInfoList;

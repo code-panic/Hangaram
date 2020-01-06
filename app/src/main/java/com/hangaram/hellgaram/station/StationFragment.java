@@ -54,13 +54,13 @@ public class StationFragment extends Fragment {
 
                     if (StationTask.busInfoList15148 != null) {
                         Log.d(TAG, "3");
-                        inflateTopic(inflater, StationTask.busInfoList15148);
+                        inflateUpdated(inflater, StationTask.busInfoList15148);
                     }
                 } else if (tab.getText().toString().equals("목동이대병원")) {
                     arsId = "15154";
 
                     if (StationTask.busInfoList15154 != null) {
-                        inflateTopic(inflater, StationTask.busInfoList15154);
+                        inflateUpdated(inflater, StationTask.busInfoList15154);
                     }
                 }
             }
@@ -83,7 +83,7 @@ public class StationFragment extends Fragment {
                 StationTask busTask = new StationTask(new StationTask.BusCallBack() {
                     @Override
                     public void onSuccess(List<BusInfo> busList) {
-                        inflateTopic(inflater, busList);
+                        inflateUpdated(inflater, busList);
                     }
 
                     @Override
@@ -98,9 +98,9 @@ public class StationFragment extends Fragment {
         });
 
         if (arsId.equals("15148") && StationTask.busInfoList15148 != null)
-            inflateTopic(inflater, StationTask.busInfoList15148);
+            inflateUpdated(inflater, StationTask.busInfoList15148);
         else if (arsId.equals("15154") && StationTask.busInfoList15154 != null)
-            inflateTopic(inflater, StationTask.busInfoList15154);
+            inflateUpdated(inflater, StationTask.busInfoList15154);
         else
             inflateDefault(inflater);
 
@@ -114,7 +114,7 @@ public class StationFragment extends Fragment {
     }
 
     /*  topicContent inflate 하기  */
-    private void inflateTopic(LayoutInflater inflater, List<BusInfo> busList) {
+    private void inflateUpdated(LayoutInflater inflater, List<BusInfo> busList) {
         final View content = inflater.inflate(R.layout.fragment_station_updated, contentContainer, false);
 
         /*recyclerView 초기화*/
