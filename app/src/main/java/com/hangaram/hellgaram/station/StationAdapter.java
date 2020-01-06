@@ -50,8 +50,8 @@ public class StationAdapter extends RecyclerView.Adapter<StationAdapter.BusHolde
 
         /*ex)571   #14분 #7정거장 #여유*/
         busHolder.rtNmText.setText(busInfo.getBusName());
-        busHolder.arrmsg1Text.setText(getBusInfoText(busInfo.getFirstBusArriveInfo(), busInfo.getIsFullFlag1()));
-        busHolder.arrmsg2Text.setText(getBusInfoText(busInfo.getSecondBusArriveInfo(), busInfo.getIsFullFlag2()));
+//        busHolder.arrmsg1Text.setText(getBusInfoText(busInfo.getFirstBusArriveInfo(), busInfo.getIsFullFlag1()));
+//        busHolder.arrmsg2Text.setText(getBusInfoText(busInfo.getSecondBusArriveInfo(), busInfo.getIsFullFlag2()));
     }
 
     /*아이템 개수 반환*/

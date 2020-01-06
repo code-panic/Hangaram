@@ -18,6 +18,10 @@
         android:usesCleartextTraffic="true">
 
         <activity android:name=".main.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <intent-filter android:label="htc">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -27,7 +31,6 @@
                     android:pathPrefix="/hgrapp"
                     android:scheme="htc" />
             </intent-filter>
-
         </activity>
 
         <activity

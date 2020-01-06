@@ -18,12 +18,10 @@ import android.widget.TextView;
 import com.hangaram.hellgaram.R;
 
 public class StationActivity extends Activity {
-    private static final String TAG = "BusActivity";
+    private static final String TAG = "StationActivity";
     private static final String ACTION_UPDATE = "UPDATE_WIDGET_BUS";
 
     private int appWidgetId;
-
-    private SharedPreferences storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +57,7 @@ public class StationActivity extends Activity {
                     AppWidgetManager.INVALID_APPWIDGET_ID);
         }
 
-        storage = getSharedPreferences("widget" + appWidgetId, 0);
+        final SharedPreferences storage = getSharedPreferences("widget" + appWidgetId, 0);
 
         /* 스피너 리스트 설정 */
         ArrayAdapter stationAdapter = ArrayAdapter.createFromResource(this, R.array.station_array, android.R.layout.simple_spinner_item);
@@ -101,7 +99,7 @@ public class StationActivity extends Activity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int percent, boolean b) {
                 backgroundLinearLayout.getBackground().setAlpha(percent);
-                transparentValueTextView.setText(percent);
+                transparentValueTextView.setText(percent + "");
             }
 
             @Override
@@ -127,8 +125,7 @@ public class StationActivity extends Activity {
                 if(colorRadioGroup.getCheckedRadioButtonId() == R.id.whiteRadioButton)
                     storage.edit().putString("backgroundColorValue", "white").apply();
                 else if (colorRadioGroup.getCheckedRadioButtonId() == R.id.blackRadioButton)
-                    storage.edit().putString("backgroundColorValue", "b;acl").apply();
-
+                    storage.edit().putString("backgroundColorValue", "black").apply();
 
                 /* 위젯 업데이트 신호를 보낸다. */
                 Intent intent = new Intent(getBaseContext(), StationProvider.class);

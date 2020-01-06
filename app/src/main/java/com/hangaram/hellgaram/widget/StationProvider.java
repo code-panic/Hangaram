@@ -68,18 +68,29 @@ public class StationProvider extends AppWidgetProvider {
             SharedPreferences storage = context.getSharedPreferences("widget" + appWidgetId, 0);
 
             /* 위젯 뷰 컬러 설정 */
-            if (storage.getString("backgroundColorValue", "white").equals("white"))
-                changeWidgetColor(storage, updateViews, WidgetManager.WHITE, Color.BLACK);
-            else
-                changeWidgetColor(storage, updateViews, WidgetManager.BLACK, Color.WHITE);
+            if (storage.getString("backgroundColorValue", "white").equals("white")) {
+                updateViews.setTextColor(R.id.stationNameTextView, Color.BLACK);
+                updateViews.setTextColor(R.id.busNameTextView, Color.BLACK);
+                updateViews.setTextColor(R.id.arriveInfoTextView, Color.BLACK);
+                updateViews.setTextColor(R.id.updateTimeTextView, Color.BLACK);
+
+                updateViews.setInt(R.id.backgroundLinearLayout, "setBackgroundColor", Color.argb(storage.getInt("backgroundTransparentValue", 255), 255, 255,255));
+            } else if (storage.getString("backgroundColorValue", "white").equals("black")){
+                updateViews.setTextColor(R.id.stationNameTextView, Color.WHITE);
+                updateViews.setTextColor(R.id.busNameTextView, Color.WHITE);
+                updateViews.setTextColor(R.id.arriveInfoTextView, Color.WHITE);
+                updateViews.setTextColor(R.id.updateTimeTextView, Color.WHITE);
+
+                updateViews.setInt(R.id.backgroundLinearLayout, "setBackgroundColor", Color.argb(storage.getInt("backgroundTransparentValue", 255), 255, 255,255));
+            }
 
             /* 위젯 텍스트 설정 */
-            updateViews.setTextViewText(R.id.stationNameTextView, storage.getString("stNm", "월촌중학교"));
-            updateViews.setTextViewText(R.id.busNameTextView, storage.getString("rtNm", "양천01"));
+            updateViews.setTextViewText(R.id.stationNameTextView, storage.getString("stationName", "월촌중학교"));
+            updateViews.setTextViewText(R.id.busNameTextView, storage.getString("busName", "양천01"));
 
-            if (storage.getString("stNm", "월촌중학교").equals("월촌중학교") && StationTask.busInfoList15148 != null)
+            if (storage.getString("stationName", "월촌중학교").equals("월촌중학교") && StationTask.busInfoList15148 != null)
                 setWidgetText(storage, updateViews, StationTask.busInfoList15148);
-            else if (storage.getString("stNm", "월촌중학교").equals("목동이대병원") && StationTask.busInfoList15154 != null)
+            else if (storage.getString("stationName", "월촌중학교").equals("목동이대병원") && StationTask.busInfoList15154 != null)
                 setWidgetText(storage, updateViews, StationTask.busInfoList15154);
             else {
                 updateViews.setTextViewText(R.id.arriveInfoTextView, "위젯을 눌러 버스정보를 다운받아 주세요");
@@ -99,30 +110,19 @@ public class StationProvider extends AppWidgetProvider {
         }
     }
 
-    private void changeWidgetColor(SharedPreferences pref, RemoteViews updateViews, int backgroundColor, int textColor) {
-        updateViews.setTextColor(R.id.stationNameTextView, textColor);
-        updateViews.setTextColor(R.id.busNameTextView, textColor);
-        updateViews.setTextColor(R.id.arriveInfoTextView, textColor);
-        updateViews.setTextColor(R.id.updateTimeTextView, textColor);
-
-        updateViews.setInt(R.id.backgroundLinearLayout,
-                "setBackgroundColor",
-                Color.argb(pref.getInt("transparent", 255), backgroundColor, backgroundColor, backgroundColor));
-    }
-
 
     private void setWidgetText(SharedPreferences pref, RemoteViews updateViews, List<BusInfo> busList) {
         for (int i = 0; i < busList.size(); i++) {
             if (busList.get(i).getBusName().equals(pref.getString("busName", "양천01"))) {
                 updateViews.setTextViewText(R.id.arriveInfoTextView,
-                        busList.get(i).getFirstBusArriveInfo() + "/"
-                                + busList.get(i).getFirstBusArriveInfo());
+                        "#" + busList.get(i).getFirstBusArriveInfo() +
+                                "#" + busList.get(i).getFirstBusArriveInfo());
 
-                /*업데이트 7/4 오루 3:14*/
-                updateViews.setTextViewText(R.id.updateTimeTextView, "업데이트\t\t"
-                        + busList.get(i).get("month") + "/" + busList.get(0).get("day") + "\t"
-                        + busList.get(i).get("am_pm") + "\t"
-                        + busList.get(i).get("hour") + ":" + busList.get(0).get("min"));
+//                /*업데이트 7/4 오루 3:14*/
+//                updateViews.setTextViewText(R.id.updateTimeTextView, "업데이트\t\t"
+//                        + busList.get(i).get("month") + "/" + busList.get(0).get("day") + "\t"
+//                        + busList.get(i).get("am_pm") + "\t"
+//                        + busList.get(i).get("hour") + ":" + busList.get(0).get("min"));
             }
         }
     }
